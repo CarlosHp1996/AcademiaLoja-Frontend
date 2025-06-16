@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Perfil - Power Rock Supplements</title>
+    <link rel="stylesheet" href="/public/css/style.css">
+    <link rel="stylesheet" href="/public/css/profile.css">
+    <link rel="stylesheet" href="/public/css/whatsapp-button.css">
+    <!-- Estilos para dropdown e notificações -->
+    <link rel="stylesheet" href="/public/css/auth-dropdown.css">
+    <link rel="stylesheet" href="/public/css/auth-notifications.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body data-required-role="User">
+<!-- Header -->
+<header class="header">
+    <div class="container">
+        <div class="header-left">
+            <a href="/public/html/index.html" class="logo">
+                <img src="/assets/images/logoLoja.png" alt="Logo Power Rock" class="logo-img">
+            </a>
+            <div class="search-container">
+                <input type="search" placeholder="Encontre o produto ideal para você!" class="search-input">
+            </div>
+            <button class="mobile-menu-btn" aria-label="Abrir menu">
+                <span class="menu-icon"></span>
+            </button>
+        </div>
+        <div class="header-right">
+    <a href="/public/html/cart.html" class="cart-link">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-badge"></span>
+    </a>
+    <div class="user-dropdown">
+        <button class="user-icon-btn" aria-label="Conta">
+            <i class="fas fa-user"></i>
+        </button>
+        <div class="dropdown-menu">
+            <!-- Dropdown menu será preenchido via JavaScript -->
+        </div>
+    </div>
+</div>
+    </div>
+</header>
+
+    <!-- Subheader -->
+<section class="subheader">
+    <div class="container">
+        <nav class="subheader-nav">
+            <ul class="menu-list">
+                <li class="menu-item">
+    <a href="/public/html/products.html" class="nav-link">
+        Produtos
+        <i class="fas fa-chevron-down" style="margin-left: 6px; font-size: 0.85em;"></i>
+    </a>
+    <ul class="submenu">
+        <li><a href="/public/html/products.html" class="nav-link">Whey Protein</a></li>
+        <li><a href="/public/html/products.html" class="nav-link">Hipercalórico</a></li>
+        <li><a href="/public/html/products.html" class="nav-link">Creatina</a></li>
+        <li><a href="/public/html/products.html" class="nav-link">Pré Treino</a></li>
+        <li><a href="/public/html/products.html" class="nav-link">Vitaminas</a></li>
+    </ul>                   
+</li>
+                <li class="menu-item">
+                    <a href="/public/html/goals.html" class="nav-link">Objetivo 
+                        <i class="fas fa-chevron-down" style="margin-left: 6px; font-size: 0.85em;"></i>
+                    </a>
+                    <ul class="submenu">
+                        <li><a href="/public/html/goals.html" class="nav-link">Massa Muscular</a></li>
+                        <li><a href="/public/html/goals.html" class="nav-link">Energia</a></li>
+                        <li><a href="/public/html/goals.html" class="nav-link">Bem Estar</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item">
+                    <a href="/public/html/accessories.html" class="nav-link">Acessórios
+                        <i class="fas fa-chevron-down" style="margin-left: 6px; font-size: 0.85em;"></i>
+                    </a>
+                    <ul class="submenu">
+                        <li><a href="/public/html/accessories.html" class="nav-link">Camisetas</a></li>
+                        <li><a href="/public/html/accessories.html" class="nav-link">Garrafas</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item">
+                    <a href="/public/html/brands.html" class="nav-link">Marcas
+                        <i class="fas fa-chevron-down" style="margin-left: 6px; font-size: 0.85em;"></i>
+                    </a>
+                    <ul class="submenu">
+                        <li><a href="/public/html/brands.html" class="nav-link">Growth</a></li>
+                        <li><a href="/public/html/brands.html" class="nav-link">Black Skull</a></li>
+                        <li><a href="/public/html/brands.html" class="nav-link">Integral Médica</a></li>
+                        <li><a href="/public/html/brands.html" class="nav-link">Ftw</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item">
+                    <a href="/public/html/contact.html" class="nav-link">Contato</a>                   
+                </li>
+                <li class="menu-item">
+                    <a href="/public/html/returns.html" class="nav-link">Trocas e Devoluções</a>                   
+                </li>
+            </ul>
+        </nav>
+    </div>
+</section>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <div class="profile-container">
+                <div class="profile-sidebar">
+                    <div class="user-info">
+                        <div class="user-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <h2 class="user-name">Carlos Henrique</h2>
+                        <p class="user-email">carlos@email.com</p>
+                    </div>
+                    <nav class="profile-nav">
+                        <ul>
+                            <li class="active">
+                                <a href="/public/html/profile.html">
+                                    <i class="fas fa-user-circle"></i>
+                                    Meu Perfil
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/public/html/dashboard.html">
+                                    <i class="fas fa-chart-line"></i>
+                                    Meus Pedidos
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/public/html/wishlist.html">
+                                    <i class="fas fa-heart"></i>
+                                    Lista de Desejos
+                                </a>
+                            </li>                                                    
+                            <li class="logout">
+                                <a href="#" id="logoutBtn">
+                                    <i class="fas fa-sign-out-alt"></i>
+                                    Sair
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="profile-content">
+                    <div class="profile-header">
+                        <h1 class="profile-title">Meu Perfil</h1>
+                        <p class="profile-subtitle">Gerencie suas informações pessoais</p>
+                    </div>
+
+                    <div class="profile-section">
+                        <h2 class="section-title">Informações Pessoais</h2>
+                        <form id="profileForm" class="profile-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="name">Nome Completo</label>
+                                    <input type="text" id="name" name="name" value="Carlos Henrique" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="cpf">CPF</label>
+                                    <input type="text" id="cpf" name="cpf" value="123.456.789-00" required>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="email">E-mail</label>
+                                    <input type="email" id="email" name="email" value="carlos@email.com" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone">Telefone</label>
+                                    <input type="tel" id="phone" name="phone" value="(11) 98765-4321" required>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="birthdate">Data de Nascimento</label>
+                                    <input type="date" id="birthdate" name="birthdate" value="1990-01-01" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="gender">Gênero</label>
+                                    <select id="gender" name="gender">
+                                        <option value="male">Masculino</option>
+                                        <option value="female">Feminino</option>
+                                        <option value="other">Outro</option>
+                                        <option value="prefer_not_to_say">Prefiro não informar</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary">
+                                    Salvar Alterações
+                                    <i class="fas fa-save"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="profile-section">
+                        <h2 class="section-title">Endereço Principal</h2>
+                        <form id="addressForm" class="profile-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="cep">CEP</label>
+                                    <input type="text" id="cep" name="cep" value="01234-567" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="street">Rua</label>
+                                    <input type="text" id="street" name="street" value="Rua das Flores" required>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="number">Número</label>
+                                    <input type="text" id="number" name="number" value="123" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="complement">Complemento</label>
+                                    <input type="text" id="complement" name="complement" value="Apto 45">
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="neighborhood">Bairro</label>
+                                    <input type="text" id="neighborhood" name="neighborhood" value="Centro" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="city">Cidade</label>
+                                    <input type="text" id="city" name="city" value="São Paulo" required>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="state">Estado</label>
+                                    <select id="state" name="state" required>
+                                        <option value="SP" selected>São Paulo</option>
+                                        <option value="RJ">Rio de Janeiro</option>
+                                        <option value="MG">Minas Gerais</option>
+                                        <!-- Outros estados aqui -->
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="country">País</label>
+                                    <input type="text" id="country" name="country" value="Brasil" required>
+                                </div>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary">
+                                    Salvar Endereço
+                                    <i class="fas fa-save"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="profile-section">
+                        <h2 class="section-title">Alterar Senha</h2>
+                        <form id="passwordForm" class="profile-form">
+                            <div class="form-group">
+                                <label for="currentPassword">Senha Atual</label>
+                                <div class="password-input">
+                                    <input type="password" id="currentPassword" name="currentPassword" required>
+                                    <button type="button" class="toggle-password">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="newPassword">Nova Senha</label>
+                                <div class="password-input">
+                                    <input type="password" id="newPassword" name="newPassword" required>
+                                    <button type="button" class="toggle-password">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="confirmNewPassword">Confirmar Nova Senha</label>
+                                <div class="password-input">
+                                    <input type="password" id="confirmNewPassword" name="confirmNewPassword" required>
+                                    <button type="button" class="toggle-password">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary">
+                                    Alterar Senha
+                                    <i class="fas fa-key"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <a href="/public/html/index.html" class="logo">
+                        <span class="logo-power">Power Rock</span>
+                        <span class="logo-supps">Supplements</span>
+                    </a>
+                    <p class="footer-description">
+                        Sua loja especializada em suplementos de alta performance para atletas e entusiastas do fitness.
+                    </p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/profile.php?id=61575757384725" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/powerrocksupplements/" class="social-link"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3 class="footer-title">Categorias</h3>
+                    <ul class="footer-links">
+                        <li><a href="/public/html/products.html">Proteínas</a></li>
+                        <li><a href="/public/html/products.html">Pré-Treino</a></li>
+                        <li><a href="/public/html/products.html">Creatina</a></li>
+                        <li><a href="/public/html/products.html">Vitaminas</a></li>
+                        <li><a href="/public/html/accessories.html">Acessórios</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3 class="footer-title">Informações</h3>
+                    <ul class="footer-links">
+                        <li><a href="/about">Sobre Nós</a></li>
+                        <li><a href="/shipping">Entrega</a></li>
+                        <li><a href="/privacy">Política de Privacidade</a></li>
+                        <li><a href="/terms">Termos e Condições</a></li>
+                        <li><a href="/public/html/contact.html">Contato</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3 class="footer-title">Contato</h3>
+                    <ul class="contact-info">
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Av. Paulista, 1000 - São Paulo</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <span>(11) 99999-9999</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <span>contato@powerrocksupplements.com.br</span>
+                        </li>
+                    </ul>
+                    <div class="payment-methods">
+                        <h4 class="payment-title">Formas de Pagamento</h4>
+                        <div class="payment-icons">
+                            <div class="payment-icon"></div>
+                            <div class="payment-icon"></div>
+                            <div class="payment-icon"></div>
+                            <div class="payment-icon"></div>
+                            <div class="payment-icon"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                © 2025 Power Rock Supplements. Todos os direitos reservados.
+            </div>
+        </div>
+    </footer>
+
+    <script src="/public/js/profile.js"></script>
+     <!-- WhatsApp Button -->
+    <script src="/public/js/whatsapp-button.js"></script>
+        <!-- Scripts de autenticação - ORDEM IMPORTA! -->
+    <script src="/public/js/auth-service.js"></script>
+    <script src="/public/js/auth-notifications.js"></script>
+    <script src="/public/js/auth-integration.js"></script>
+</body>
+</html> 

@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marcas - Power Rock Supplements</title>
+    <link rel="stylesheet" href="/public/css/style.css">
+    <link rel="stylesheet" href="/public/css/brands.css">
+    <link rel="stylesheet" href="/public/css/whatsapp-button.css">
+    <!-- Estilos para dropdown e notificações -->
+    <link rel="stylesheet" href="/public/css/auth-dropdown.css">
+    <link rel="stylesheet" href="/public/css/auth-notifications.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Estilos adicionados para fundo preto e letras laranjas nos cards de marca */
+        .brand-card.custom-style {
+            background-color: #000000; /* Fundo preto */
+            color: #FFA500; /* Letras laranjas */
+            border: 1px solid #FFA500; /* Borda laranja opcional */
+        }
+        .brand-card.custom-style .brand-name,
+        .brand-card.custom-style .brand-description,
+        .brand-card.custom-style .stat-label,
+        .brand-card.custom-style .stat-value {
+            color: #FFA500; /* Letras laranjas */
+        }
+        .brand-card.custom-style .brand-logo img {
+            /* Opcional: ajustar filtro se o logo não contrastar bem */
+            /* filter: brightness(0) invert(1) sepia(1) saturate(5) hue-rotate(30deg); */
+        }
+        .brand-card.custom-style .btn-primary {
+            background-color: #FFA500; /* Botão laranja */
+            color: #000000; /* Texto preto no botão */
+            border: none;
+        }
+        .brand-card.custom-style .btn-primary:hover {
+            background-color: #cc8400; /* Laranja mais escuro no hover */
+        }
+         .brand-card.custom-style .brand-stats {
+            border-top: 1px solid #FFA500; /* Linha divisória laranja */
+        }
+        .brand-card.custom-style .stat:not(:last-child) {
+            border-right: 1px solid #FFA500; /* Linha divisória laranja */
+        }
+    </style>
+</head>
+<body>
+<!-- Header -->
+<header class="header">
+    <div class="container">
+        <div class="header-left">
+            <a href="/public/html/index.html" class="logo">
+                <img src="/assets/images/logoLoja.png" alt="Logo Power Rock" class="logo-img">
+            </a>
+            <div class="search-container">
+                <input type="search" placeholder="Encontre o produto ideal para você!" class="search-input">
+            </div>
+            <button class="mobile-menu-btn" aria-label="Abrir menu">
+                <span class="menu-icon"></span>
+            </button>
+        </div>
+        <div class="header-right">
+            <a href="/public/html/cart.html" class="cart-link">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-badge" style="display: none;"></span> <!-- Badge inicialmente oculto -->
+            </a>
+            <div class="user-dropdown">
+                <button class="user-icon-btn" aria-label="Conta">
+                    <i class="fas fa-user"></i>
+                </button>
+                <div class="dropdown-menu">
+                    <!-- Dropdown menu será preenchido via JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Subheader -->
+<section class="subheader">
+     <div class="container">
+        <nav class="subheader-nav">
+            <ul class="menu-list">
+                <li class="menu-item">
+                    <a href="/public/html/products.html" class="nav-link">
+                        Produtos
+                        <i class="fas fa-chevron-down" style="margin-left: 6px; font-size: 0.85em;"></i>
+                    </a>
+                    <ul class="submenu">
+                        <li><a href="/public/html/products.html?CategoryIds=GUID_WHEY" class="nav-link">Whey Protein</a></li>
+                        <li><a href="/public/html/products.html?CategoryIds=GUID_HIPER" class="nav-link">Hipercalórico</a></li>
+                        <li><a href="/public/html/products.html?CategoryIds=GUID_CREATINA" class="nav-link">Creatina</a></li>
+                        <li><a href="/public/html/products.html?CategoryIds=GUID_PRETREINO" class="nav-link">Pré Treino</a></li>
+                        <li><a href="/public/html/products.html?CategoryIds=GUID_VITAMINAS" class="nav-link">Vitaminas</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item">
+                    <a href="/public/html/goals.html" class="nav-link">Objetivo
+                        <i class="fas fa-chevron-down" style="margin-left: 6px; font-size: 0.85em;"></i>
+                    </a>
+                    <ul class="submenu" id="goals-submenu">
+                        <li><a href="/public/html/products.html?ObjectiveIds=4" class="nav-link">Massa Muscular</a></li>
+                        <li><a href="/public/html/products.html?ObjectiveIds=7" class="nav-link">Energia</a></li>
+                        <li><a href="/public/html/products.html?ObjectiveIds=8" class="nav-link">Bem Estar</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item">
+                    <a href="/public/html/accessories.html" class="nav-link">Acessórios
+                        <i class="fas fa-chevron-down" style="margin-left: 6px; font-size: 0.85em;"></i>
+                    </a>
+                    <ul class="submenu" id="accessories-submenu">
+                        <li><a href="/public/html/accessories.html?AccessoryIds=1" class="nav-link">Camisetas</a></li>
+                        <li><a href="/public/html/accessories.html?AccessoryIds=2" class="nav-link">Garrafas</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item">
+                    <a href="/public/html/brands.html" class="nav-link">Marcas
+                        <i class="fas fa-chevron-down" style="margin-left: 6px; font-size: 0.85em;"></i>
+                    </a>
+                    <ul class="submenu" id="brands-submenu">
+                         <li><a href="/public/html/products.html?BrandIds=3" class="nav-link">Growth</a></li> <!-- ID EnumBrand -->
+                         <li><a href="/public/html/products.html?BrandIds=6" class="nav-link">Black Skull</a></li> <!-- ID EnumBrand -->
+                         <li><a href="/public/html/products.html?BrandIds=5" class="nav-link">Integral Médica</a></li> <!-- ID EnumBrand -->
+                         <li><a href="/public/html/products.html?BrandIds=1" class="nav-link">Max Titanium</a></li> <!-- ID EnumBrand -->
+                    </ul>
+                </li>
+                <li class="menu-item">
+                    <a href="/public/html/contact.html" class="nav-link">Contato</a>
+                </li>
+                <li class="menu-item">
+                    <a href="/public/html/returns.html" class="nav-link">Trocas e Devoluções</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</section>
+
+<!-- Main Content -->
+<main class="main">
+    <div class="container">
+        <div class="brands-header">
+            <h1 class="page-title">Nossas Marcas</h1>
+            <p class="page-description">Conheça as melhores marcas de suplementos do mercado</p>
+        </div>
+
+        <div class="brands-grid" id="brands-grid-container">
+            <!-- Cards de marcas serão carregados dinamicamente ou mapeados aqui -->
+            <!-- Exemplo de card com a nova classe de estilo e data attribute para ID -->
+            <div class="brand-card custom-style" data-brand-id="1"> <!-- ID MaxTitan -->
+                <div class="brand-logo">
+                    <img src="/assets/images/brands/max-titanium.png" alt="Max Titanium">
+                </div>
+                <div class="brand-info">
+                    <h2 class="brand-name">Max Titanium</h2>
+                    <p class="brand-description">Uma das maiores marcas de suplementos do Brasil, conhecida pela qualidade e inovação.</p>
+                    <div class="brand-stats">
+                        <div class="stat">
+                            <span class="stat-value">150+</span>
+                            <span class="stat-label">Produtos</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">4.8</span>
+                            <span class="stat-label">Avaliação</span>
+                        </div>
+                    </div>
+                    <a href="#" class="btn btn-primary">
+                        Ver Produtos
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="brand-card custom-style" data-brand-id="5"> <!-- ID IntegralMedica -->
+                <div class="brand-logo">
+                    <img src="/assets/images/brands/integral-medica.png" alt="Integral Médica">
+                </div>
+                <div class="brand-info">
+                    <h2 class="brand-name">Integral Médica</h2>
+                    <p class="brand-description">Marca líder em suplementos alimentares, com produtos de alta qualidade e preço acessível.</p>
+                     <div class="brand-stats">
+                        <div class="stat">
+                            <span class="stat-value">200+</span>
+                            <span class="stat-label">Produtos</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">4.7</span>
+                            <span class="stat-label">Avaliação</span>
+                        </div>
+                    </div>
+                    <a href="#" class="btn btn-primary">
+                        Ver Produtos
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+             <div class="brand-card custom-style" data-brand-id="3"> <!-- ID Growth -->
+                <div class="brand-logo">
+                    <img src="/assets/images/brands/growth.png" alt="Growth">
+                </div>
+                <div class="brand-info">
+                    <h2 class="brand-name">Growth</h2>
+                    <p class="brand-description">Marca premium de suplementos, focada em produtos de alta qualidade e performance.</p>
+                     <div class="brand-stats">
+                        <div class="stat">
+                            <span class="stat-value">100+</span>
+                            <span class="stat-label">Produtos</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">4.9</span>
+                            <span class="stat-label">Avaliação</span>
+                        </div>
+                    </div>
+                    <a href="#" class="btn btn-primary">
+                        Ver Produtos
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+             <div class="brand-card custom-style" data-brand-id="10"> <!-- ID Dymatize -->
+                <div class="brand-logo">
+                    <img src="/assets/images/brands/dymatize.png" alt="Dymatize">
+                </div>
+                <div class="brand-info">
+                    <h2 class="brand-name">Dymatize</h2>
+                    <p class="brand-description">Marca internacional reconhecida pela qualidade e sabor incomparável dos seus produtos.</p>
+                     <div class="brand-stats">
+                        <div class="stat">
+                            <span class="stat-value">80+</span>
+                            <span class="stat-label">Produtos</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">4.8</span>
+                            <span class="stat-label">Avaliação</span>
+                        </div>
+                    </div>
+                    <a href="#" class="btn btn-primary">
+                        Ver Produtos
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+             <div class="brand-card custom-style" data-brand-id="6"> <!-- ID BlackSkull -->
+                 <div class="brand-logo">
+                     <img src="/assets/images/brands/black-skull.png" alt="Black Skull">
+                 </div>
+                 <div class="brand-info">
+                     <h2 class="brand-name">Black Skull</h2>
+                     <p class="brand-description">Marca conhecida por seus produtos hardcore e foco em resultados extremos.</p>
+                     <div class="brand-stats">
+                         <div class="stat">
+                             <span class="stat-value">90+</span>
+                             <span class="stat-label">Produtos</span>
+                         </div>
+                         <div class="stat">
+                             <span class="stat-value">4.6</span>
+                             <span class="stat-label">Avaliação</span>
+                         </div>
+                     </div>
+                     <a href="#" class="btn btn-primary">
+                         Ver Produtos
+                         <i class="fas fa-arrow-right"></i>
+                     </a>
+                 </div>
+             </div>
+
+            <!-- Adicionar mais cards conforme necessário, seguindo o padrão -->
+
+        </div>
+
+        <!-- Seção de Destaques e Benefícios mantidas como estavam -->
+         <section class="featured-brands">
+             <h2 class="section-title">Marcas em Destaque</h2>
+             <div class="featured-brands-slider">
+                 <!-- Conteúdo do slider -->
+             </div>
+         </section>
+         <section class="benefits-section">
+             <h2 class="section-title">Por que Comprar Conosco?</h2>
+             <div class="benefits-grid">
+                 <!-- Conteúdo dos benefícios -->
+             </div>
+         </section>
+
+    </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+    <!-- Conteúdo do footer -->
+</footer>
+
+<script src="/public/js/brands.js"></script>
+<!-- WhatsApp Button -->
+<script src="/public/js/whatsapp-button.js"></script>
+<!-- Scripts de autenticação - ORDEM IMPORTA! -->
+<script src="/public/js/auth-service.js"></script>
+<script src="/public/js/auth-notifications.js"></script>
+<script src="/public/js/auth-integration.js"></script> <!-- Inclui a lógica do carrinho -->
+</body>
+</html>

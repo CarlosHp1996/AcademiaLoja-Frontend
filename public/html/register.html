@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro - Power Rock Supplements</title>
+    <link rel="stylesheet" href="/public/css/style.css">
+    <link rel="stylesheet" href="/public/css/auth.css">
+    <link rel="stylesheet" href="/public/css/whatsapp-button.css">
+    <!-- Estilos para dropdown e notificações -->
+    <link rel="stylesheet" href="/public/css/auth-dropdown.css">
+    <link rel="stylesheet" href="/public/css/auth-notifications.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+<!-- Header -->
+<header class="header">
+    <div class="container">
+        <div class="header-left">
+            <a href="/public/html/index.html" class="logo">
+                <img src="/assets/images/logoLoja.png" alt="Logo Power Rock" class="logo-img">
+            </a>
+            <div class="search-container">
+                <input type="search" placeholder="Encontre o produto ideal para você!" class="search-input">
+            </div>
+            <button class="mobile-menu-btn" aria-label="Abrir menu">
+                <span class="menu-icon"></span>
+            </button>
+        </div>
+        <div class="header-right">
+    <a href="/public/html/cart.html" class="cart-link">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-badge"></span>
+    </a>
+    <div class="user-dropdown">
+        <button class="user-icon-btn" aria-label="Conta">
+            <i class="fas fa-user"></i>
+        </button>
+        <div class="dropdown-menu">
+            <!-- Dropdown menu será preenchido via JavaScript -->
+        </div>
+    </div>
+</div>
+    </div>
+</header>
+
+    <!-- Subheader -->
+<section class="subheader">
+    <div class="container">
+        <nav class="subheader-nav">
+            <ul class="menu-list">
+                <li class="menu-item">
+    <a href="/public/html/products.html" class="nav-link">
+        Produtos
+        <i class="fas fa-chevron-down" style="margin-left: 6px; font-size: 0.85em;"></i>
+    </a>
+    <ul class="submenu">
+        <li><a href="/public/html/products.html" class="nav-link">Whey Protein</a></li>
+        <li><a href="/public/html/products.html" class="nav-link">Hipercalórico</a></li>
+        <li><a href="/public/html/products.html" class="nav-link">Creatina</a></li>
+        <li><a href="/public/html/products.html" class="nav-link">Pré Treino</a></li>
+        <li><a href="/public/html/products.html" class="nav-link">Vitaminas</a></li>
+    </ul>                   
+</li>
+                <li class="menu-item">
+                    <a href="/public/html/goals.html" class="nav-link">Objetivo 
+                        <i class="fas fa-chevron-down" style="margin-left: 6px; font-size: 0.85em;"></i>
+                    </a>
+                    <ul class="submenu">
+                        <li><a href="/public/html/goals.html" class="nav-link">Massa Muscular</a></li>
+                        <li><a href="/public/html/goals.html" class="nav-link">Energia</a></li>
+                        <li><a href="/public/html/goals.html" class="nav-link">Bem Estar</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item">
+                    <a href="/public/html/accessories.html" class="nav-link">Acessórios
+                        <i class="fas fa-chevron-down" style="margin-left: 6px; font-size: 0.85em;"></i>
+                    </a>
+                    <ul class="submenu">
+                        <li><a href="/public/html/accessories.html" class="nav-link">Camisetas</a></li>
+                        <li><a href="/public/html/accessories.html" class="nav-link">Garrafas</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item">
+                    <a href="/public/html/brands.html" class="nav-link">Marcas
+                        <i class="fas fa-chevron-down" style="margin-left: 6px; font-size: 0.85em;"></i>
+                    </a>
+                    <ul class="submenu">
+                        <li><a href="/public/html/brands.html" class="nav-link">Growth</a></li>
+                        <li><a href="/public/html/brands.html" class="nav-link">Black Skull</a></li>
+                        <li><a href="/public/html/brands.html" class="nav-link">Integral Médica</a></li>
+                        <li><a href="/public/html/brands.html" class="nav-link">Ftw</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item">
+                    <a href="/public/html/contact.html" class="nav-link">Contato</a>                   
+                </li>
+                <li class="menu-item">
+                    <a href="/public/html/returns.html" class="nav-link">Trocas e Devoluções</a>                   
+                </li>
+            </ul>
+        </nav>
+    </div>
+</section>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <div class="auth-container">
+                <div class="auth-box">
+                    <h1 class="auth-title">Criar Conta</h1>
+                    <p class="auth-subtitle">Cadastre-se para começar a comprar</p>
+                    
+                    <form id="registerForm" class="auth-form">
+                        <div class="form-group">
+                            <label for="name">Nome completo</label>
+                            <input type="text" id="name" name="name" required placeholder="Seu nome completo">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">E-mail</label>
+                            <input type="email" id="email" name="email" required placeholder="Seu melhor e-mail">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="password">Senha</label>
+                            <div class="password-input">
+                                <input type="password" id="password" name="password" required placeholder="Crie uma senha forte">
+                                <button type="button" class="toggle-password">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirmar senha</label>
+                            <div class="password-input">
+                                <input type="password" id="confirmPassword" name="confirmPassword" required placeholder="Confirme sua senha">
+                                <button type="button" class="toggle-password">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="form-options">
+                            <label class="terms-check">
+                                <input type="checkbox" name="terms" required>
+                                <span>Eu concordo com os <a href="/terms">Termos de Uso</a> e <a href="/privacy">Política de Privacidade</a></span>
+                            </label>
+                        </div>
+
+                        <button type="submit" class="auth-button">
+                            Criar conta
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </form>
+
+                    <div class="auth-separator">
+                        <span>ou</span>
+                    </div>
+
+                    <div class="social-login">
+                        <button class="social-button google">
+                            <i class="fab fa-google"></i>
+                            Continuar com Google
+                        </button>
+                    </div>
+
+                    <p class="auth-redirect">
+                        Já tem uma conta? <a href="/public/html/login.html">Faça login</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <a href="/public/html/index.html" class="logo">
+                        <span class="logo-power">Power Rock</span>
+                        <span class="logo-supps">Supplements</span>
+                    </a>
+                    <p class="footer-description">
+                        Sua loja especializada em suplementos de alta performance para atletas e entusiastas do fitness.
+                    </p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/profile.php?id=61575757384725" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/powerrocksupplements/" class="social-link"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3 class="footer-title">Categorias</h3>
+                    <ul class="footer-links">
+                        <li><a href="/public/html/products.html">Proteínas</a></li>
+                        <li><a href="/public/html/products.html">Pré-Treino</a></li>
+                        <li><a href="/public/html/products.html">Creatina</a></li>
+                        <li><a href="/public/html/products.html">Vitaminas</a></li>
+                        <li><a href="/public/html/accessories.html">Acessórios</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3 class="footer-title">Informações</h3>
+                    <ul class="footer-links">
+                        <li><a href="/about">Sobre Nós</a></li>
+                        <li><a href="/shipping">Entrega</a></li>
+                        <li><a href="/privacy">Política de Privacidade</a></li>
+                        <li><a href="/terms">Termos e Condições</a></li>
+                        <li><a href="/public/html/contact.html">Contato</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3 class="footer-title">Contato</h3>
+                    <ul class="contact-info">
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Av. Paulista, 1000 - São Paulo</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <span>(11) 99999-9999</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <span>contato@powerrocksupplements.com.br</span>
+                        </li>
+                    </ul>
+                    <div class="payment-methods">
+                        <h4 class="payment-title">Formas de Pagamento</h4>
+                        <div class="payment-icons">
+                            <div class="payment-icon"></div>
+                            <div class="payment-icon"></div>
+                            <div class="payment-icon"></div>
+                            <div class="payment-icon"></div>
+                            <div class="payment-icon"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                © 2025 Power Rock Supplements. Todos os direitos reservados.
+            </div>
+        </div>
+    </footer>
+
+    <script src="/public/js/auth.js"></script>
+     <!-- WhatsApp Button -->
+    <script src="/public/js/whatsapp-button.js"></script>
+        <!-- Scripts de autenticação - ORDEM IMPORTA! -->
+    <script src="/public/js/auth-service.js"></script>
+    <script src="/public/js/auth-notifications.js"></script>
+    <script src="/public/js/auth-integration.js"></script>
+</body>
+</html> 

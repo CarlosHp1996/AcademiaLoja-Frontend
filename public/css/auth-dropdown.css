@@ -1,0 +1,117 @@
+/* Estilos para o dropdown de autenticação */
+.user-dropdown {
+    position: relative;
+    margin-left: 20px;
+}
+
+.user-icon-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.user-icon-btn i {
+    font-size: 18px;
+    color: black; /* Ícone preto para contraste */
+}
+
+.user-icon-btn:hover {
+    background-color: black;
+}
+
+.user-icon-btn:hover i {
+    color: #fff; /* Ícone branco ao passar o mouse */
+}
+
+.user-icon-btn.authenticated {
+    background-color: #ff6600; /* Cor laranja secundária */
+    color: white;
+}
+
+.user-icon-btn.authenticated:hover {
+    background-color: black;
+}
+
+.user-icon-btn i {
+    font-size: 18px;
+    color: white; /* Cor primária preta */
+}
+
+.user-icon-btn.authenticated i {
+    color: white;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 50px;
+    right: 0;
+    width: 220px;
+    background-color: black;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    padding: 12px 0;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+}
+
+.dropdown-menu.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 10px 20px;
+    color: #f97316;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+.dropdown-menu a:hover {
+    
+    color: #ff6600; /* Cor laranja secundária */
+    background-color: #f0f0f0;
+    border-radius: 8px; 
+    font-weight: 500;
+
+
+}
+
+.user-info {
+    padding: 12px 20px;
+    border-bottom: 1px solid #f0f0f0;
+    margin-bottom: 8px;
+}
+
+.user-info span {
+    font-weight: 600;
+    color: #f97316;
+    font-size: 14px;
+}
+
+.dropdown-separator {
+    height: 1px;
+    background-color: #f0f0f0;
+    margin: 8px 0;
+}
+
+.logout-btn {
+    color: #ff3b30 !important;
+    font-weight: 500;
+}
+
+.logout-btn:hover {
+    background-color: #fff5f5 !important;
+}

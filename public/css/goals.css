@@ -1,0 +1,320 @@
+/* Estilos para a página de objetivos */
+.goals-header {
+    text-align: center;
+    margin-bottom: 4rem;
+    padding: 2rem 0;
+}
+
+.page-title {
+    font-size: 2.5rem;
+    color: #fff;
+    margin-bottom: 1rem;
+}
+
+.page-description {
+    font-size: 1.125rem;
+    color: #fff;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Grid de Objetivos */
+.goals-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+.goal-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.goal-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.goal-icon {
+    width: 80px;
+    height: 80px;
+    background: #f8f9fa;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+}
+
+.goal-icon i {
+    font-size: 2rem;
+    color: #f97316;
+}
+
+.goal-card h2 {
+    font-size: 1.5rem;
+    color: #fff;
+    margin-bottom: 1rem;
+}
+
+.goal-card p {
+    font-size: 0.875rem;
+    color: #fff;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+}
+
+.goal-benefits {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.5rem 0;
+    text-align: left;
+}
+
+.goal-benefits li {
+    font-size: 0.875rem;
+    color: #fff;
+    margin-bottom: 0.5rem;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.goal-benefits li::before {
+    content: "•";
+    color: #f97316;
+    position: absolute;
+    left: 0;
+}
+
+/* Produtos em Destaque */
+.featured-products {
+    margin-bottom: 4rem;
+}
+
+.section-title {
+    font-size: 2rem;
+    color: #fff;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.products-slider {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.product-card {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+}
+
+.product-image {
+    position: relative;
+    height: 200px;
+}
+
+.product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: #f97316;
+    color: #fff;
+    padding: 0.25rem 0.75rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.product-info {
+    padding: 1.5rem;
+}
+
+.product-info h3 {
+    font-size: 1.25rem;
+    color: #fff;
+    margin: 0 0 0.5rem 0;
+}
+
+.product-rating {
+    color: #ffc107;
+    margin-bottom: 0.5rem;
+}
+
+.product-rating span {
+    color: #fff;
+    margin-left: 0.5rem;
+}
+
+.product-price {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 1rem;
+}
+
+/* Guia de Objetivos */
+.goals-guide {
+    margin-bottom: 4rem;
+}
+
+.guide-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: center;
+}
+
+.guide-text h3 {
+    font-size: 1.75rem;
+    color: #fff;
+    margin-bottom: 1rem;
+}
+
+.guide-text p {
+    font-size: 1rem;
+    color: #fff;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.guide-tips {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.5rem 0;
+}
+
+.guide-tips li {
+    font-size: 1rem;
+    color: #fff;
+    margin-bottom: 0.5rem;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.guide-tips li::before {
+    content: "✓";
+    color: #f97316;
+    position: absolute;
+    left: 0;
+}
+
+.guide-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+}
+
+/* Botões */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s;
+    cursor: pointer;
+    border: none;
+}
+
+.btn-primary {
+    background: #f97316;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background: #f97316;
+}
+
+.btn-outline {
+    background: transparent;
+    border: 2px solid #f97316;
+    color: #f97316;
+}
+
+.btn-outline:hover {
+    background: #f97316;
+    color: #fff;
+}
+
+/* Responsividade */
+@media (max-width: 1024px) {
+    .goals-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+
+    .guide-content {
+        grid-template-columns: 1fr;
+    }
+
+    .guide-image {
+        order: -1;
+    }
+}
+
+@media (max-width: 768px) {
+    .page-title {
+        font-size: 2rem;
+    }
+
+    .goals-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .products-slider {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+}
+
+@media (max-width: 480px) {
+    .page-title {
+        font-size: 1.75rem;
+    }
+
+    .page-description {
+        font-size: 1rem;
+    }
+
+    .goal-icon {
+        width: 60px;
+        height: 60px;
+    }
+
+    .goal-icon i {
+        font-size: 1.5rem;
+    }
+
+    .goal-card h2 {
+        font-size: 1.25rem;
+    }
+
+    .product-image {
+        height: 150px;
+    }
+
+    .guide-text h3 {
+        font-size: 1.5rem;
+    }
+} 

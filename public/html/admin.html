@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Administrativo - Power Rock Supplements</title>
+    <!-- CSS Original -->
+    <link rel="stylesheet" href="/public/css/style.css">
+    <link rel="stylesheet" href="/public/css/admin.css">
+    <link rel="stylesheet" href="/public/css/whatsapp-button.css">
+    <link rel="stylesheet" href="/public/css/auth-dropdown.css">
+    <link rel="stylesheet" href="/public/css/auth-notifications.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Estilo para indicar carregamento */
+        #admin-content-area.loading::after {
+            content: 'Carregando...';
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 200px;
+            font-size: 1.2em;
+            color: #555;
+        }
+    </style>
+</head>
+<body data-required-role="Admin">
+<!-- Header (Mantido do original) -->
+<header class="header">
+    <div class="container">
+        <div class="header-left">
+            <a href="/public/html/index.html" class="logo">
+                <img src="/assets/images/logoLoja.png" alt="Logo Power Rock" class="logo-img">
+            </a>
+            <div class="search-container">
+                <input type="search" placeholder="Encontre o produto ideal para você!" class="search-input">
+            </div>
+            <button class="mobile-menu-btn" aria-label="Abrir menu">
+                <span class="menu-icon"></span>
+            </button>
+        </div>
+        <div class="header-right">
+            <a href="/public/html/cart.html" class="cart-link">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-badge"></span>
+            </a>
+            <div class="user-dropdown">
+                <button class="user-icon-btn" aria-label="Conta">
+                    <i class="fas fa-user"></i>
+                </button>
+                <div class="dropdown-menu">
+                    <!-- Preenchido via auth-integration.js -->
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Subheader (Mantido do original) -->
+<section class="subheader">
+    <div class="container">
+        <nav class="subheader-nav">
+            <ul class="menu-list">
+                 <li class="menu-item">
+                    <a href="/public/html/products.html" class="nav-link">
+                        Produtos
+                        <i class="fas fa-chevron-down" style="margin-left: 6px; font-size: 0.85em;"></i>
+                    </a>
+                    <ul class="submenu">
+                        <li><a href="/public/html/products.html?category=Whey%20Protein" class="nav-link">Whey Protein</a></li>
+                        <li><a href="/public/html/products.html?category=Hipercalorico" class="nav-link">Hipercalórico</a></li>
+                        <li><a href="/public/html/products.html?category=Creatina" class="nav-link">Creatina</a></li>
+                        <li><a href="/public/html/products.html?category=Pre%20Treino" class="nav-link">Pré Treino</a></li>
+                        <li><a href="/public/html/products.html?category=Vitaminas" class="nav-link">Vitaminas</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item">
+                    <a href="/public/html/goals.html" class="nav-link">Objetivo
+                        <i class="fas fa-chevron-down" style="margin-left: 6px; font-size: 0.85em;"></i>
+                    </a>
+                    <ul class="submenu">
+                        <li><a href="/public/html/goals.html?objective=Massa%20Muscular" class="nav-link">Massa Muscular</a></li>
+                        <li><a href="/public/html/goals.html?objective=Energia" class="nav-link">Energia</a></li>
+                        <li><a href="/public/html/goals.html?objective=Bem%20Estar" class="nav-link">Bem Estar</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item">
+                    <a href="/public/html/accessories.html" class="nav-link">Acessórios
+                        <i class="fas fa-chevron-down" style="margin-left: 6px; font-size: 0.85em;"></i>
+                    </a>
+                    <ul class="submenu">
+                        <li><a href="/public/html/accessories.html?accessory=Camisetas" class="nav-link">Camisetas</a></li>
+                        <li><a href="/public/html/accessories.html?accessory=Garrafas" class="nav-link">Garrafas</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item">
+                    <a href="/public/html/brands.html" class="nav-link">Marcas
+                        <i class="fas fa-chevron-down" style="margin-left: 6px; font-size: 0.85em;"></i>
+                    </a>
+                    <ul class="submenu">
+                        <li><a href="/public/html/brands.html?brand=Growth" class="nav-link">Growth</a></li>
+                        <li><a href="/public/html/brands.html?brand=Black%20Skull" class="nav-link">Black Skull</a></li>
+                        <li><a href="/public/html/brands.html?brand=Integral%20Medica" class="nav-link">Integral Médica</a></li>
+                        <li><a href="/public/html/brands.html?brand=Ftw" class="nav-link">Ftw</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item">
+                    <a href="/public/html/contact.html" class="nav-link">Contato</a>
+                </li>
+                <li class="menu-item">
+                    <a href="/public/html/returns.html" class="nav-link">Trocas e Devoluções</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</section>
+
+<!-- Admin Content -->
+<div class="admin-container">
+        <aside id="adminSidebar" class="admin-sidebar">
+            <div class="sidebar-header">
+                <h3>Painel Admin</h3>
+                <button id="sidebarToggle" class="sidebar-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="#dashboard" data-section="dashboard"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a></li>
+                    <li><a href="#products" data-section="products"><i class="fas fa-box"></i> <span>Produtos</span></a></li>
+                    <li><a href="#users" data-section="users"><i class="fas fa-users"></i> <span>Usuários</span></a></li>
+                    <li><a href="#orders" data-section="orders"><i class="fas fa-shopping-cart"></i> <span>Pedidos</span></a></li>
+                    <li><a href="#payments" data-section="payments"><i class="fas fa-credit-card"></i> <span>Pagamentos</span></a></li>
+                    <li><a href="#tracking" data-section="tracking"><i class="fas fa-truck"></i> <span>Rastreios</span></a></li>
+                    <li><a href="#settings" data-section="settings"><i class="fas fa-cog"></i> <span>Configurações</span></a></li>
+                    <li><a href="/public/html/index.html"><i class="fas fa-store"></i> <span>Ver Loja</span></a></li>
+                </ul>
+            </nav>
+        </aside>
+        <main class="admin-main">
+            <header class="admin-header">
+                <h1>Dashboard</h1>
+                <div class="admin-user-info">
+                    <div class="admin-user-dropdown">
+                        
+                    </div>
+                </div>
+            </header>
+            <div id="admin-content-area"></div>
+        </main>
+    </div>
+
+<!-- Modals (Serão carregados junto com o conteúdo principal) -->
+<div id="modalContainer"></div>
+
+<!-- Scripts -->
+<!-- Scripts de autenticação e gerais (Mantidos do original) -->
+<script src="/public/js/auth-service.js"></script>
+<script src="/public/js/auth-notifications.js"></script>
+<script src="/public/js/auth-integration.js"></script>
+<script src="/public/js/whatsapp-button.js"></script>
+<script src="/public/js/admin/admin.js"></script> <!-- Script original para sidebar toggle, etc -->
+<script src="/public/js/admin/admin_spa.js"></script>
+
+<!-- Novo Script para carregamento SPA -->
+<!-- <script src="/public/js/admin/admin_spa_loader.js"></script> -->
+
+</body>
+</html>
+

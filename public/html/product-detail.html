@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whey Protein Isolate Premium 900g - Power Rock Supplements</title>    
+    <link rel="stylesheet" href="/public/css/style.css">
+    <link rel="stylesheet" href="/public/css/whatsapp-button.css">
+    <!-- Estilos para dropdown e notificações -->
+    <link rel="stylesheet" href="/public/css/auth-dropdown.css">
+    <link rel="stylesheet" href="/public/css/auth-notifications.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+<!-- Header -->
+<header class="header">
+    <div class="container">
+        <div class="header-left">
+            <a href="/public/html/index.html" class="logo">
+                <img src="/assets/images/logoLoja.png" alt="Logo Power Rock" class="logo-img">
+            </a>
+            <div class="search-container">
+                <input type="search" placeholder="Encontre o produto ideal para você!" class="search-input">
+            </div>
+            <button class="mobile-menu-btn" aria-label="Abrir menu">
+                <span class="menu-icon"></span>
+            </button>
+        </div>
+        <div class="header-right">
+    <a href="/public/html/cart.html" class="cart-link">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-badge"></span>
+    </a>
+    <div class="user-dropdown">
+        <button class="user-icon-btn" aria-label="Conta">
+            <i class="fas fa-user"></i>
+        </button>
+        <div class="dropdown-menu">
+            <!-- Dropdown menu será preenchido via JavaScript -->
+        </div>
+    </div>
+</div>
+    </div>
+</header>
+
+<!-- Subheader -->
+<section class="subheader">
+    <div class="container">
+        <nav class="subheader-nav">
+            <ul class="menu-list">
+                <li class="menu-item">
+    <a href="/public/html/products.html" class="nav-link">
+        Produtos
+        <i class="fas fa-chevron-down" style="margin-left: 6px; font-size: 0.85em;"></i>
+    </a>
+    <ul class="submenu">
+        <li><a href="/public/html/products.html" class="nav-link">Whey Protein</a></li>
+        <li><a href="/public/html/products.html" class="nav-link">Hipercalórico</a></li>
+        <li><a href="/public/html/products.html" class="nav-link">Creatina</a></li>
+        <li><a href="/public/html/products.html" class="nav-link">Pré Treino</a></li>
+        <li><a href="/public/html/products.html" class="nav-link">Vitaminas</a></li>
+    </ul>                   
+</li>
+                <li class="menu-item">
+                    <a href="/public/html/goals.html" class="nav-link">Objetivo 
+                        <i class="fas fa-chevron-down" style="margin-left: 6px; font-size: 0.85em;"></i>
+                    </a>
+                    <ul class="submenu">
+                        <li><a href="/public/html/goals.html" class="nav-link">Massa Muscular</a></li>
+                        <li><a href="/public/html/goals.html" class="nav-link">Energia</a></li>
+                        <li><a href="/public/html/goals.html" class="nav-link">Bem Estar</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item">
+                    <a href="/public/html/accessories.html" class="nav-link">Acessórios
+                        <i class="fas fa-chevron-down" style="margin-left: 6px; font-size: 0.85em;"></i>
+                    </a>
+                    <ul class="submenu">
+                         <li><a href="/public/html/accessories.html" class="nav-link">Camisetas</a></li>
+                        <li><a href="/public/html/accessories.html" class="nav-link">Garrafas</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item">
+                    <a href="/public/html/brands.html" class="nav-link">Marcas
+                        <i class="fas fa-chevron-down" style="margin-left: 6px; font-size: 0.85em;"></i>
+                    </a>
+                    <ul class="submenu">
+                        <li><a href="/public/html/brands.html" class="nav-link">Growth</a></li>
+                        <li><a href="/public/html/brands.html" class="nav-link">Black Skull</a></li>
+                        <li><a href="/public/html/brands.html" class="nav-link">Integral Médica</a></li>
+                        <li><a href="/public/html/brands.html" class="nav-link">Ftw</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item">
+                    <a href="/public/html/contact.html" class="nav-link">Contato</a>                   
+                </li>
+                <li class="menu-item">
+                    <a href="/public/html/returns.html" class="nav-link">Trocas e Devoluções</a>                   
+                </li>
+            </ul>
+        </nav>
+    </div>
+</section>
+
+    <main class="main">
+    <div class="container">
+        <!-- Breadcrumbs -->
+        <div class="breadcrumbs">
+            <a href="home.html">Home</a>
+            <i class="fas fa-chevron-right"></i>
+            <a href="#">Produtos</a>
+            <i class="fas fa-chevron-right"></i>
+            <span id="breadcrumb-product-name">Produto</span>
+        </div>
+
+        <!-- Product Detail -->
+        <div class="product-detail">
+            <!-- Product Images -->
+            <div class="product-images">
+                <div class="product-main-image">
+                    <img src="https://via.placeholder.com/400x400" alt="Imagem do Produto" id="main-product-image">
+                </div>
+                <div class="product-thumbnails" id="product-thumbnails">
+                    <!-- Thumbnails serão preenchidas via JS -->
+                </div>
+            </div>
+
+            <!-- Product Info -->
+            <div class="product-info">
+                <h1 class="product-title" id="product-title">Carregando...</h1>
+
+                <div class="product-meta">
+                    <div class="product-rating" id="product-rating">
+                        <!-- Avaliação será preenchida via JS -->
+                    </div>
+                    <span class="stock-status" id="stock-status"></span>
+                </div>
+
+                <div class="product-price" id="product-price">
+                    <!-- Preço será preenchido via JS -->
+                </div>
+
+                <div class="product-options" id="flavor-options-container" style="display:none;">
+                    <label>Sabor</label>
+                    <div class="flavor-options" id="flavor-options">
+                        <!-- Opções de sabor via JS -->
+                    </div>
+                </div>
+
+                <div class="product-options" id="size-options-container" style="display:none;">
+                    <label>Tamanho</label>
+                    <select class="size-select" id="size-select">
+                        <!-- Opções de tamanho via JS -->
+                    </select>
+                </div>
+
+                <div class="product-options">
+                    <label>Quantidade</label>
+                    <div class="quantity-selector">
+                        <button class="quantity-btn minus">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                        <input type="number" value="1" min="1" class="quantity-input">
+                        <button class="quantity-btn plus">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-actions">
+                    <button class="add-to-cart-btn">
+                        <i class="fas fa-shopping-cart"></i>
+                        Adicionar ao Carrinho
+                    </button>
+                    <button class="wishlist-btn">
+                        <i class="far fa-heart"></i>
+                    </button>
+                </div>
+
+                <div class="shipping-calculator">
+                    <h3>
+                        <i class="fas fa-truck"></i>
+                        Calcular Frete
+                    </h3>
+                    <div class="shipping-form">
+                        <input type="text" placeholder="Digite seu CEP" class="shipping-input">
+                        <button class="shipping-btn">Calcular</button>
+                    </div>
+                </div>
+
+                <div class="product-benefits" id="product-benefits">
+                    <!-- Benefícios via JS se desejar -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Product Tabs -->
+        <div class="product-tabs">
+            <div class="tabs-header">
+                <button class="tab-btn active" data-tab="description">Descrição</button>
+                <button class="tab-btn" data-tab="nutrition">Informação Nutricional</button>
+                <button class="tab-btn" data-tab="benefits">Benefícios</button>
+                <button class="tab-btn" data-tab="reviews">Avaliações</button>
+            </div>
+            <div class="tabs-content">
+                <div class="tab-panel active" id="description">
+                    <p id="product-description"></p>
+                </div>
+                <div class="tab-panel" id="nutrition">
+                    <p id="product-nutrition">Informações nutricionais serão exibidas aqui.</p>
+                </div>
+                <div class="tab-panel" id="benefits">
+                    <p id="product-benefits-tab">Benefícios do produto serão exibidos aqui.</p>
+                </div>
+                <div class="tab-panel" id="reviews">
+                    <p id="product-reviews">Avaliações dos clientes serão exibidas aqui.</p>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <a href="/public/html/index.html" class="logo">
+                        <span class="logo-power">Power Rock</span>
+                        <span class="logo-supps">Supplements</span>
+                    </a>
+                    <p class="footer-description">
+                        Sua loja especializada em suplementos de alta performance para atletas e entusiastas do fitness.
+                    </p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/profile.php?id=61575757384725" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/powerrocksupplements/" class="social-link"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3 class="footer-title">Categorias</h3>
+                    <ul class="footer-links">
+                        <li><a href="/public/html/products.html">Proteínas</a></li>
+                        <li><a href="/public/html/products.html">Pré-Treino</a></li>
+                        <li><a href="/public/html/products.html">Creatina</a></li>
+                        <li><a href="/public/html/products.html">Vitaminas</a></li>
+                        <li><a href="/public/html/accessories.html">Acessórios</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3 class="footer-title">Informações</h3>
+                    <ul class="footer-links">
+                        <li><a href="/about">Sobre Nós</a></li>
+                        <li><a href="/shipping">Entrega</a></li>
+                        <li><a href="/privacy">Política de Privacidade</a></li>
+                        <li><a href="/terms">Termos e Condições</a></li>
+                        <li><a href="/public/html/contact.html">Contato</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3 class="footer-title">Contato</h3>
+                    <ul class="contact-info">
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Av. Paulista, 1000 - São Paulo</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <span>(11) 99999-9999</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <span>contato@powerrocksupplements.com.br</span>
+                        </li>
+                    </ul>
+                    <div class="payment-methods">
+                        <h4 class="payment-title">Formas de Pagamento</h4>
+                        <div class="payment-icons">
+                            <div class="payment-icon"></div>
+                            <div class="payment-icon"></div>
+                            <div class="payment-icon"></div>
+                            <div class="payment-icon"></div>
+                            <div class="payment-icon"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                © 2025 Power Rock Supplements. Todos os direitos reservados.
+            </div>
+        </div>
+    </footer>
+
+    <script src="/src/js/product-detail.js"></script>
+     <!-- WhatsApp Button -->
+    <script src="/public/js/whatsapp-button.js"></script>
+        <!-- Scripts de autenticação - ORDEM IMPORTA! -->
+    <script src="/public/js/auth-service.js"></script>
+    <script src="/public/js/auth-notifications.js"></script>
+    <script src="/public/js/auth-integration.js"></script>
+</body>
+</html>
