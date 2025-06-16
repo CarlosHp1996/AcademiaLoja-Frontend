@@ -107,9 +107,9 @@
     <div class="container">
         <!-- Breadcrumbs -->
         <div class="breadcrumbs">
-            <a href="home.html">Home</a>
+            <a href="index.html">Home</a>
             <i class="fas fa-chevron-right"></i>
-            <a href="#">Produtos</a>
+            <a href="products.html">Produtos</a>
             <i class="fas fa-chevron-right"></i>
             <span id="breadcrumb-product-name">Produto</span>
         </div>
@@ -142,7 +142,7 @@
                 </div>
 
                 <div class="product-options" id="flavor-options-container" style="display:none;">
-                    <label>Sabor</label>
+                    <label class="sabor-label" for="flavor-options">Sabor</label>
                     <div class="flavor-options" id="flavor-options">
                         <!-- Opções de sabor via JS -->
                     </div>
@@ -155,27 +155,13 @@
                     </select>
                 </div>
 
-                <div class="product-options">
-                    <label>Quantidade</label>
-                    <div class="quantity-selector">
-                        <button class="quantity-btn minus">
-                            <i class="fas fa-minus"></i>
-                        </button>
-                        <input type="number" value="1" min="1" class="quantity-input">
-                        <button class="quantity-btn plus">
-                            <i class="fas fa-plus"></i>
-                        </button>
-                    </div>
-                </div>
-
                 <div class="product-actions">
-                    <button class="add-to-cart-btn">
-                        <i class="fas fa-shopping-cart"></i>
-                        Adicionar ao Carrinho
-                    </button>
-                    <button class="wishlist-btn">
-                        <i class="far fa-heart"></i>
-                    </button>
+                    <div class="quantity-selector">
+                        <button class="quantity-btn minus">-</button>
+                        <input type="text" class="quantity-input" value="1" readonly>
+                        <button class="quantity-btn plus">+</button>
+                    </div>
+                    <button class="add-to-cart-btn">COMPRAR</button>
                 </div>
 
                 <div class="shipping-calculator">
