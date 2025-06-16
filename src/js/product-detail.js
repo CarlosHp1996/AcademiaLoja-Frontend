@@ -313,14 +313,14 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
 
     // Wishlist
-    function setupWishlist() {
-        document.querySelector(".wishlist-btn").addEventListener("click", function () {
-            const icon = this.querySelector("i");
-            icon.classList.toggle("far");
-            icon.classList.toggle("fas");
-            alert(icon.classList.contains("fas") ? "Produto adicionado aos favoritos!" : "Produto removido dos favoritos!");
-        });
-    }
+    // function setupWishlist() {
+    //     document.querySelector(".wishlist-btn").addEventListener("click", function () {
+    //         const icon = this.querySelector("i");
+    //         icon.classList.toggle("far");
+    //         icon.classList.toggle("fas");
+    //         alert(icon.classList.contains("fas") ? "Produto adicionado aos favoritos!" : "Produto removido dos favoritos!");
+    //     });
+    // }
 
     // Cálculo de Frete
     function setupShippingCalculator() {
@@ -452,7 +452,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     setupQuantityControls();
     setupTabs();
     setupAddToCart();
-    setupWishlist();
+    //setupWishlist();
     setupShippingCalculator();
     renderRelatedProducts(); // Chamar a função para renderizar produtos relacionados
 });

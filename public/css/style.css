@@ -412,7 +412,7 @@ img {
         grid-template-columns: repeat(4, 1fr);
     }
     .product-title {
-        font-size: 2rem;
+        font-size: 1rem;
     }
 }
 
@@ -700,7 +700,6 @@ img {
 .product-info {
     background-color: var(--color-black);
     border-radius: 0.5rem;
-    padding: 1.5rem;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
@@ -747,7 +746,7 @@ img {
 .rating-count,
 .product-reviews {
     font-size: 0.875rem;
-    color: var(--color-zinc-400);
+    color: var(--color-zinc-300);
     margin-left: 0.5rem;
 }
 
@@ -755,13 +754,19 @@ img {
 .stock-status {
     background-color: var(--color-orange);
     color: var(--color-white);
-    font-size: 0.75rem;
+    font-size: 1rem;
     padding: 0.25rem 0.5rem;
     border-radius: 0.25rem;
 }
 
 .product-price {
     margin-bottom: 1.5rem;
+}
+
+.product-price,
+.product-current-price {
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 .old-price,
@@ -852,15 +857,6 @@ img {
     font-size: 0.875rem;
 }
 
-.quantity-selector {
-    display: flex;
-    align-items: center;
-    border: 1px solid var(--color-zinc-700);
-    border-radius: 0.375rem;
-}
-
-
-
 .quantity-btn.minus {
     border-radius: 0.375rem 0 0 0.375rem;
 }
@@ -870,44 +866,49 @@ img {
 }
 
 .quantity-input {
-    width: 4rem;
-    height: 2.5rem;
+    width: 48px;
+    height: 48px;
     text-align: center;
     border: none;
-    border-left: 1px solid var(--color-zinc-700);
-    border-right: 1px solid var(--color-zinc-700);
-    background-color: var(--color-zinc-900);
-    color: var(--color-white);
+    background: transparent;
+    color: #111;
+    font-size: 1.2rem;
+    font-weight: 600;
+    outline: none;
+    box-shadow: none;
+    pointer-events: none;
 }
 
 .product-actions {
     display: flex;
     gap: 1rem;
+    align-items: center;
     margin-bottom: 1.5rem;
+    width: 100%;
 }
 
 .add-to-cart-btn {
-    flex: 1;
+    flex: 2;
+    height: 48px;
+    border-radius: 999px;
+    background-color: var(--color-orange);
+    color: var(--color-black);
+    border: none;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0.75rem 1rem;
-    background-color: var(--color-orange);
-    color: var(--color-white);
-    border: none;
-    border-radius: 0.375rem;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.2s;
+    padding: 0 2rem;
 }
 
-.add-to-cart-btn:hover {
-    background-color: var(--color-orange-dark);
-}
-
-.add-to-cart-btn i {
-    margin-right: 0.5rem;
+.add-to-cart-btn:hover,
+.add-to-cart-btn:active,
+.add-to-cart-btn.selected {
+    background-color: #f8f9fa;
+    color: #f97316;
 }
 
 .wishlist-btn {
@@ -1050,13 +1051,13 @@ img {
 }
 
 .tab-panel p {
-    color: var(--color-zinc-400);
+    color: var(--color-zinc-300);
     margin-bottom: 1rem;
 }
 
 /* Nutritional Table */
 .nutritional-table {
-    border: 1px solid var(--color-zinc-800);
+    border: 1px solid var(--color-zinc-300);
     border-radius: 0.5rem;
     overflow: hidden;
 }
@@ -1065,7 +1066,7 @@ img {
     display: grid;
     grid-template-columns: 1fr 1fr;
     padding: 1rem;
-    border-bottom: 1px solid var(--color-zinc-800);
+    border-bottom: 1px solid var(--color-zinc-300);
 }
 
 .nutritional-row:last-child {
@@ -1178,7 +1179,7 @@ img {
 }
 
 .more-reviews-btn:hover {
-    background-color: var(--color-zinc-800);
+    background-color: var(--color-zinc-300);
 }
 
 /* Products Grid */
@@ -1555,7 +1556,7 @@ img {
         grid-template-columns: repeat(4, 1fr);
     }
     .product-title {
-        font-size: 2rem;
+        font-size: 3rem;
     }
 }
 
@@ -1678,16 +1679,21 @@ img {
 }
 
 .quantity-btn {
-    height: 1.75rem;
-    width: 1.75rem;
-    background-color: transparent;
-    border: 1px solid var(--color-zinc-700);
-    color: var(--color-orange-dark);
+    width: 48px;
+    height: 48px;
+    background: transparent;
+    border: none;
+    color: #111;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    font-size: 0.875rem;
+    margin: 0;
+    box-shadow: none;
+    transition: background 0.2s;
 }
 
 .quantity-btn:first-child {
@@ -1696,18 +1702,6 @@ img {
 
 .quantity-btn:last-child {
     border-radius: 0 0.25rem 0.25rem 0;
-}
-
-.quantity-input {
-    height: 1.75rem;
-    width: 2.5rem;
-    border: 1px solid var(--color-zinc-700);
-    border-left: none;
-    border-right: none;
-    background-color: var(--color-zinc-900);
-    color: var(--color-white);
-    text-align: center;
-    font-size: 0.75rem;
 }
 
 .quantity-input::-webkit-inner-spin-button,
@@ -1941,6 +1935,14 @@ img {
     background-color: var(--color-orange-dark);
 }
 
+.product-options .sabor-label {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
 /* Ajustes nas Media Queries Existentes */
 @media (max-width: 640px) {
     .cart-item {
@@ -2024,7 +2026,7 @@ img {
 
 /* Status do estoque */
 .stock-status .in-stock {
-    color: #27ae60;
+    color: black;
     font-weight: 500;
 }
 
@@ -2062,57 +2064,51 @@ img {
 
 /* Estilos para opções de sabor */
 .flavor-options {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 20px;
-    display: block;
-    margin-bottom: 1px;
-    font-weight: bold;
-    color: #f97316;
-    width: 100px;
-    border: 1px solid #18181b;
-    border-radius: 4px;
-    font-size: 1em;
-    background-color: #18181b;
-}
-
-/* Estilize o select para esconder a seta nativa e adicionar uma customizada */
-.flavor-options {
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
-    border-radius: 6px;
+    border-radius: 999px;
     min-width: 220px;
     height: 48px;
     font-size: 1.1rem;
-    padding: 0 1.2rem 0 2.5rem; /* espaço à esquerda para a seta */
-    color: #222;
-    cursor: pointer;
-    position: relative;
-    background: #18181b;
-    color: #ff6600;
+    padding: 0 2.5rem 0 1.2rem; /* espaço à direita para a seta */
+    background: var(--color-orange);
+    color: #111;
+    border: none;
     cursor: pointer;
     transition: border-color 0.2s;
+    font-weight: 600;
+    box-shadow: none;
+    outline: none;
+    width: 100%;
 }
 
 /* Container para posicionar a seta */
 #flavor-options {
     position: relative;
     display: inline-block;
+    width: 50%;
 }
 
-/* Seta customizada */
-#flavor-options::before {
+/* Seta customizada à direita */
+#flavor-options::after {
     content: "▼";
     position: absolute;
-    left: 16px; /* Mais à esquerda */
+    right: 22px;
     top: 50%;
     transform: translateY(-50%);
-    color: #ff6600;
-    font-size: 1rem;
+    color: #111;
+    font-size: 1.1rem;
     pointer-events: none;
     z-index: 2;
+}
+
+/* Remove qualquer sombra ou botão atrás */
+.flavor-options:focus {
+    outline: none;
+    border: none;
+    box-shadow: none;
+    background: var(--color-orange);
 }
 
 /* Aumenta o tamanho do dropdown e deixa o cursor pointer */
@@ -2162,37 +2158,20 @@ img {
 
 /* Estilos para controles de quantidade */
 .quantity-selector {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-top: 8px;
-}
-
-.quantity-btn {
-    width: 40px;
-    height: 40px;
-    border: 1px solid #ddd;
-    background: white;
-    border-radius: 5px;
-    cursor: pointer;
+    flex: 1;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.3s ease;
+    background: var(--color-orange);
+    border-radius: 999px;
+    padding: 0;
+    height: 48px;
+    min-width: 140px;
+    max-width: 220px;
 }
 
-.quantity-btn:hover {
-    background-color: #f8f9fa;
-    border-color: #007bff;
-}
-
-.quantity-input {
-    width: 60px;
-    height: 40px;
-    text-align: center;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 16px;
+.quantity-btn:active {
+    background: rgba(0,0,0,0.07);
 }
 
 /* Estilos para as abas de conteúdo */
@@ -2217,8 +2196,8 @@ img {
 }
 
 .tab-btn.active {
-    border-bottom-color: #007bff;
-    color: #007bff;
+    border-bottom-color: black;
+    color: black;
 }
 
 .tab-panel {
@@ -2244,12 +2223,12 @@ img {
 
 .nutrition-table td:first-child {
     font-weight: 500;
-    color: #333;
+    color: --color-zinc-300;
 }
 
 .nutrition-table td:last-child {
     text-align: right;
-    color: #666;
+    color: --color-zinc-300;
 }
 
 /* Lista de benefícios */
@@ -2292,7 +2271,7 @@ img {
 
 .reviewer-name {
     font-weight: 500;
-    color: #333;
+    color: --color-zinc-300;
 }
 
 .review-stars {
