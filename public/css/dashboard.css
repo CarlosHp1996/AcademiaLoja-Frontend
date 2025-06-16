@@ -1,0 +1,331 @@
+/* Dashboard Filters */
+.dashboard-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background-color: var(--color-white);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.search-filter {
+    flex: 1;
+    min-width: 250px;
+    display: flex;
+    gap: 0.5rem;
+}
+
+.search-filter input {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--color-gray-200);
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+.search-btn {
+    padding: 0.75rem 1rem;
+    background-color: var(--color-orange);
+    color: var(--color-white);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.search-btn:hover {
+    background-color: var(--color-orange-dark);
+}
+
+.filter-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.filter-group label {
+    font-size: 0.9rem;
+    color: var(--color-gray-700);
+}
+
+.filter-group select {
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--color-gray-200);
+    border-radius: 4px;
+    font-size: 0.9rem;
+    background-color: var(--color-white);
+    cursor: pointer;
+}
+
+/* Orders Container */
+.orders-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.order-card {
+    background-color: var(--color-white);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: var(--color-gray-50);
+    border-bottom: 1px solid var(--color-gray-200);
+}
+
+.order-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.order-number {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--color-gray-900);
+}
+
+.order-date {
+    font-size: 0.9rem;
+    color: var(--color-gray-600);
+}
+
+.order-status {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.order-status i {
+    font-size: 1rem;
+}
+
+.order-status.pending {
+    background-color: var(--color-yellow-100);
+    color: var(--color-yellow-800);
+}
+
+.order-status.processing {
+    background-color: var(--color-blue-100);
+    color: var(--color-blue-800);
+}
+
+.order-status.shipped {
+    background-color: var(--color-purple-100);
+    color: var(--color-purple-800);
+}
+
+.order-status.delivered {
+    background-color: rgba(249, 115, 22, 0.2); /* Light orange background */
+    color: var(--color-orange-dark);
+}
+
+.order-status.cancelled {
+    background-color: var(--color-red-100);
+    color: var(--color-red-800);
+}
+
+.order-items {
+    padding: 1rem;
+}
+
+.order-item {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    border-bottom: 1px solid var(--color-gray-200);
+}
+
+.order-item:last-child {
+    border-bottom: none;
+}
+
+.item-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.item-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.item-name {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--color-gray-900);
+}
+
+.item-variant {
+    font-size: 0.9rem;
+    color: var(--color-gray-600);
+}
+
+.item-quantity {
+    font-size: 0.9rem;
+    color: var(--color-gray-600);
+}
+
+.item-price {
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--color-gray-900);
+}
+
+.order-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: var(--color-gray-50);
+    border-top: 1px solid var(--color-gray-200);
+}
+
+.order-total {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+    color: var(--color-gray-700);
+}
+
+.order-total strong {
+    font-size: 1.1rem;
+    color: var(--color-gray-900);
+}
+
+.order-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+/* Pagination */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 2rem;
+}
+
+.pagination-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--color-gray-200);
+    border-radius: 4px;
+    background-color: var(--color-white);
+    color: var(--color-gray-700);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.pagination-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.pagination-btn:not(:disabled):hover {
+    background-color: var(--color-gray-50);
+    border-color: var(--color-gray-300);
+}
+
+.pagination-pages {
+    display: flex;
+    gap: 0.25rem;
+}
+
+.pagination-page {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--color-gray-200);
+    border-radius: 4px;
+    background-color: var(--color-white);
+    color: var(--color-gray-700);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.pagination-page:hover {
+    background-color: var(--color-gray-50);
+    border-color: var(--color-gray-300);
+}
+
+.pagination-page.active {
+    background-color: var(--color-orange);
+    border-color: var(--color-orange);
+    color: var(--color-white);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .dashboard-filters {
+        flex-direction: column;
+    }
+
+    .search-filter {
+        width: 100%;
+    }
+
+    .filter-group {
+        width: 100%;
+    }
+
+    .filter-group select {
+        flex: 1;
+    }
+
+    .order-item {
+        flex-direction: column;
+    }
+
+    .item-image {
+        width: 100%;
+        height: 200px;
+    }
+
+    .order-footer {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .order-actions {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .order-actions .btn {
+        width: 100%;
+    }
+} 

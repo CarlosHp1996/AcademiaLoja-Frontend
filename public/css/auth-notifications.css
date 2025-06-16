@@ -1,0 +1,91 @@
+/**
+ * Estilos para notificações de segurança e feedback ao usuário
+ */
+
+.auth-notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    max-width: 350px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    padding: 16px;
+    z-index: 9999;
+    display: flex;
+    align-items: flex-start;
+    transform: translateY(-20px);
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.auth-notification.show {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.auth-notification-icon {
+    margin-right: 12px;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.auth-notification-content {
+    flex: 1;
+}
+
+.auth-notification-title {
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: #333;
+}
+
+.auth-notification-message {
+    font-size: 14px;
+    color: #666;
+    margin: 0;
+}
+
+.auth-notification-close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: #999;
+    padding: 0;
+    margin-left: 8px;
+}
+
+/* Tipos de notificação */
+.auth-notification.success .auth-notification-icon {
+    color: #10b981;
+}
+
+.auth-notification.error .auth-notification-icon {
+    color: #ef4444;
+}
+
+.auth-notification.warning .auth-notification-icon {
+    color: #f59e0b;
+}
+
+.auth-notification.info .auth-notification-icon {
+    color: #3b82f6;
+}
+
+/* Animação de saída */
+.auth-notification.hide {
+    transform: translateY(-20px);
+    opacity: 0;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .auth-notification {
+        left: 20px;
+        right: 20px;
+        max-width: none;
+    }
+}

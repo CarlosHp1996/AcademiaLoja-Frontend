@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Objetivos - Academia Loja</title>
+    <link rel="stylesheet" href="/public/css/style.css">
+    <link rel="stylesheet" href="/public/css/goals.css">
+    <link rel="stylesheet" href="/public/css/whatsapp-button.css">
+    <!-- Estilos para dropdown e notificações -->
+    <link rel="stylesheet" href="/public/css/auth-dropdown.css">
+    <link rel="stylesheet" href="/public/css/auth-notifications.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Estilos adicionados para fundo preto e letras laranjas nos cards de objetivo */
+        .goal-card.custom-style {
+            background-color: #000000; /* Fundo preto */
+            color: #FFA500; /* Letras laranjas */
+            border: 1px solid #FFA500; /* Borda laranja opcional */
+        }
+        .goal-card.custom-style h2,
+        .goal-card.custom-style p,
+        .goal-card.custom-style .goal-benefits li {
+            color: #FFA500; /* Letras laranjas */
+        }
+        .goal-card.custom-style .goal-icon i {
+            color: #FFA500; /* Ícone laranja */
+        }
+        .goal-card.custom-style .btn-primary {
+            background-color: #FFA500; /* Botão laranja */
+            color: #000000; /* Texto preto no botão */
+            border: none;
+        }
+        .goal-card.custom-style .btn-primary:hover {
+            background-color: #cc8400; /* Laranja mais escuro no hover */
+        }
+    </style>
+</head>
+<body>
+<!-- Header -->
+<header class="header">
+    <div class="container">
+        <div class="header-left">
+            <a href="/public/html/index.html" class="logo">
+                <img src="/assets/images/logoLoja.png" alt="Logo Power Rock" class="logo-img">
+            </a>
+            <div class="search-container">
+                <input type="search" placeholder="Encontre o produto ideal para você!" class="search-input">
+            </div>
+            <button class="mobile-menu-btn" aria-label="Abrir menu">
+                <span class="menu-icon"></span>
+            </button>
+        </div>
+        <div class="header-right">
+            <a href="/public/html/cart.html" class="cart-link">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-badge" style="display: none;"></span> <!-- Badge inicialmente oculto -->
+            </a>
+            <div class="user-dropdown">
+                <button class="user-icon-btn" aria-label="Conta">
+                    <i class="fas fa-user"></i>
+                </button>
+                <div class="dropdown-menu">
+                    <!-- Dropdown menu será preenchido via JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Subheader -->
+<section class="subheader">
+    <div class="container">
+        <nav class="subheader-nav">
+            <ul class="menu-list">
+                <li class="menu-item">
+                    <a href="/public/html/products.html" class="nav-link">
+                        Produtos
+                        <i class="fas fa-chevron-down" style="margin-left: 6px; font-size: 0.85em;"></i>
+                    </a>
+                    <ul class="submenu">
+                        <li><a href="/public/html/products.html?CategoryIds=GUID_WHEY" class="nav-link">Whey Protein</a></li> <!-- Substituir GUID_WHEY pelo ID real -->
+                        <li><a href="/public/html/products.html?CategoryIds=GUID_HIPER" class="nav-link">Hipercalórico</a></li> <!-- Substituir GUID_HIPER pelo ID real -->
+                        <li><a href="/public/html/products.html?CategoryIds=GUID_CREATINA" class="nav-link">Creatina</a></li> <!-- Substituir GUID_CREATINA pelo ID real -->
+                        <li><a href="/public/html/products.html?CategoryIds=GUID_PRETREINO" class="nav-link">Pré Treino</a></li> <!-- Substituir GUID_PRETREINO pelo ID real -->
+                        <li><a href="/public/html/products.html?CategoryIds=GUID_VITAMINAS" class="nav-link">Vitaminas</a></li> <!-- Substituir GUID_VITAMINAS pelo ID real -->
+                    </ul>
+                </li>
+                <li class="menu-item">
+                    <a href="/public/html/goals.html" class="nav-link">Objetivo
+                        <i class="fas fa-chevron-down" style="margin-left: 6px; font-size: 0.85em;"></i>
+                    </a>
+                    <ul class="submenu" id="goals-submenu">
+                        <!-- Objetivos serão carregados dinamicamente aqui -->
+                        <li><a href="/public/html/products.html?ObjectiveIds=4" class="nav-link">Massa Muscular</a></li> <!-- Exemplo com ID do Enum -->
+                        <li><a href="/public/html/products.html?ObjectiveIds=7" class="nav-link">Energia</a></li> <!-- Exemplo com ID do Enum -->
+                        <li><a href="/public/html/products.html?ObjectiveIds=8" class="nav-link">Bem Estar</a></li> <!-- Exemplo com ID do Enum -->
+                    </ul>
+                </li>
+                <li class="menu-item">
+                    <a href="/public/html/accessories.html" class="nav-link">Acessórios
+                        <i class="fas fa-chevron-down" style="margin-left: 6px; font-size: 0.85em;"></i>
+                    </a>
+                    <ul class="submenu" id="accessories-submenu">
+                         <!-- Acessórios serão carregados dinamicamente aqui -->
+                        <li><a href="/public/html/accessories.html?AccessoryIds=1" class="nav-link">Camisetas</a></li> <!-- Exemplo com ID do Enum -->
+                        <li><a href="/public/html/accessories.html?AccessoryIds=2" class="nav-link">Garrafas</a></li> <!-- Exemplo com ID do Enum -->
+                    </ul>
+                </li>
+                <li class="menu-item">
+                    <a href="/public/html/brands.html" class="nav-link">Marcas
+                        <i class="fas fa-chevron-down" style="margin-left: 6px; font-size: 0.85em;"></i>
+                    </a>
+                    <ul class="submenu" id="brands-submenu">
+                        <!-- Marcas serão carregadas dinamicamente aqui -->
+                         <li><a href="/public/html/brands.html?BrandIds=1" class="nav-link">Growth</a></li> <!-- Exemplo com ID do Enum -->
+                         <li><a href="/public/html/brands.html?BrandIds=2" class="nav-link">Black Skull</a></li> <!-- Exemplo com ID do Enum -->
+                         <li><a href="/public/html/brands.html?BrandIds=3" class="nav-link">Integral Médica</a></li> <!-- Exemplo com ID do Enum -->
+                         <li><a href="/public/html/brands.html?BrandIds=4" class="nav-link">Ftw</a></li> <!-- Exemplo com ID do Enum -->
+                    </ul>
+                </li>
+                <li class="menu-item">
+                    <a href="/public/html/contact.html" class="nav-link">Contato</a>
+                </li>
+                <li class="menu-item">
+                    <a href="/public/html/returns.html" class="nav-link">Trocas e Devoluções</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</section>
+
+<main class="main-content">
+    <div class="container">
+        <section class="goals-header">
+            <h1 class="page-title">Encontre o Suporte Ideal para Seus Objetivos</h1>
+            <p class="page-description">
+                Descubra produtos específicos para cada objetivo de treino e suplementação.
+                Nossa seleção especializada ajuda você a alcançar seus objetivos de forma mais eficiente.
+            </p>
+        </section>
+
+        <section class="goals-grid" id="goals-grid-container">
+            <!-- Cards de objetivos serão carregados dinamicamente aqui -->
+            <!-- Exemplo de card com a nova classe de estilo e data attribute para ID -->
+            <div class="goal-card custom-style" data-objective-id="4">
+                <div class="goal-icon">
+                    <i class="fas fa-dumbbell"></i>
+                </div>
+                <h2>Ganho de Massa Muscular</h2>
+                <p>Suplementos ideais para aumentar a massa muscular e força.</p>
+                <ul class="goal-benefits">
+                    <li>Proteínas de alta qualidade</li>
+                    <li>Creatina e aminoácidos</li>
+                    <li>Pré-treino para energia</li>
+                </ul>
+                <a href="#" class="btn btn-primary">Ver Produtos</a> <!-- Link será tratado pelo JS -->
+            </div>
+
+             <div class="goal-card custom-style" data-objective-id="1"> <!-- ID Emagrecimento -->
+                <div class="goal-icon">
+                    <i class="fas fa-fire"></i>
+                </div>
+                <h2>Queima de Gordura</h2>
+                <p>Produtos que auxiliam na redução de gordura corporal.</p>
+                <ul class="goal-benefits">
+                    <li>Termogênicos naturais</li>
+                    <li>Suplementos para metabolismo</li>
+                    <li>Produtos para definição</li>
+                </ul>
+                 <a href="#" class="btn btn-primary">Ver Produtos</a>
+            </div>
+
+             <div class="goal-card custom-style" data-objective-id="7"> <!-- ID MelhoraDeDesempenho -->
+                <div class="goal-icon">
+                    <i class="fas fa-running"></i>
+                </div>
+                <h2>Performance e Energia</h2>
+                <p>Suplementos para melhorar a performance e disposição.</p>
+                <ul class="goal-benefits">
+                    <li>Pré-treino energético</li>
+                    <li>BCAA para recuperação</li>
+                    <li>Eletrólitos e hidratação</li>
+                </ul>
+                 <a href="#" class="btn btn-primary">Ver Produtos</a>
+            </div>
+
+             <div class="goal-card custom-style" data-objective-id="8"> <!-- ID MelhoraDeSaude -->
+                <div class="goal-icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <h2>Saúde e Bem-estar</h2>
+                <p>Produtos para manter a saúde e qualidade de vida.</p>
+                <ul class="goal-benefits">
+                    <li>Vitaminas e minerais</li>
+                    <li>Ômega 3 e antioxidantes</li>
+                    <li>Suplementos naturais</li>
+                </ul>
+                 <a href="#" class="btn btn-primary">Ver Produtos</a>
+            </div>
+            <!-- Outros cards serão adicionados dinamicamente ou podem ser mapeados aqui -->
+
+        </section>
+
+        <!-- Seções de Produtos em Destaque e Guia mantidas como estavam -->
+        <section class="featured-products">
+             <h2 class="section-title">Produtos em Destaque por Objetivo</h2>
+             <div class="products-slider">
+                 <!-- Conteúdo do slider -->
+             </div>
+        </section>
+        <section class="goals-guide">
+             <h2 class="section-title">Guia de Objetivos</h2>
+             <div class="guide-content">
+                 <!-- Conteúdo do guia -->
+             </div>
+        </section>
+
+    </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+    <!-- Conteúdo do footer -->
+</footer>
+
+<script src="/public/js/goals.js"></script>
+<!-- WhatsApp Button -->
+<script src="/public/js/whatsapp-button.js"></script>
+<!-- Scripts de autenticação - ORDEM IMPORTA! -->
+<script src="/public/js/auth-service.js"></script>
+<script src="/public/js/auth-notifications.js"></script>
+<script src="/public/js/auth-integration.js"></script> <!-- Inclui a lógica do carrinho -->
+</body>
+</html>

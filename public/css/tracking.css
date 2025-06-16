@@ -1,0 +1,276 @@
+/* Tracking Container */
+.tracking-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* Tracking Section */
+.tracking-section {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+}
+
+.section-title {
+    font-size: 1.25rem;
+    color: #333;
+    margin-bottom: 1.5rem;
+}
+
+/* Tracking Status */
+.tracking-status {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.status-icon {
+    width: 64px;
+    height: 64px;
+    background: #f0f9ff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.status-icon i {
+    font-size: 2rem;
+    color: #0284c7;
+}
+
+.status-info h2 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.status-info p {
+    color: #666;
+}
+
+/* Tracking Progress */
+.tracking-progress {
+    position: relative;
+}
+
+.progress-bar {
+    height: 4px;
+    background: #e5e7eb;
+    border-radius: 2px;
+    margin: 2rem 0;
+    position: relative;
+}
+
+.progress {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: #0284c7;
+    border-radius: 2px;
+    transition: width 0.3s ease;
+}
+
+.progress-steps {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    margin-top: -12px;
+}
+
+.step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+.step-icon {
+    width: 24px;
+    height: 24px;
+    background: #fff;
+    border: 2px solid #e5e7eb;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+}
+
+.step-icon i {
+    font-size: 0.75rem;
+    color: #9ca3af;
+}
+
+.step-label {
+    font-size: 0.875rem;
+    color: #666;
+    text-align: center;
+}
+
+.step.completed .step-icon {
+    background: #0284c7;
+    border-color: #0284c7;
+}
+
+.step.completed .step-icon i {
+    color: #fff;
+}
+
+.step.completed .step-label {
+    color: #0284c7;
+}
+
+.step.active .step-icon {
+    background: #fff;
+    border-color: #0284c7;
+}
+
+.step.active .step-icon i {
+    color: #0284c7;
+}
+
+.step.active .step-label {
+    color: #0284c7;
+    font-weight: 500;
+}
+
+/* Tracking Timeline */
+.tracking-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.timeline-item {
+    display: flex;
+    gap: 1.5rem;
+    position: relative;
+}
+
+.timeline-item:not(:last-child)::before {
+    content: '';
+    position: absolute;
+    left: 85px;
+    top: 24px;
+    bottom: -24px;
+    width: 2px;
+    background: #e5e7eb;
+}
+
+.timeline-date {
+    min-width: 85px;
+    text-align: right;
+}
+
+.timeline-date .date {
+    display: block;
+    font-size: 0.875rem;
+    color: #333;
+    font-weight: 500;
+}
+
+.timeline-date .time {
+    display: block;
+    font-size: 0.75rem;
+    color: #666;
+}
+
+.timeline-content {
+    flex: 1;
+}
+
+.timeline-content h3 {
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 0.25rem;
+}
+
+.timeline-content p {
+    font-size: 0.875rem;
+    color: #666;
+    margin-bottom: 0.25rem;
+}
+
+.timeline-content .location {
+    font-size: 0.75rem;
+    color: #0284c7;
+}
+
+/* Delivery Info */
+.delivery-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.info-group h3 {
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.info-group p {
+    font-size: 0.875rem;
+    color: #666;
+    margin-bottom: 0.5rem;
+}
+
+/* Tracking Actions */
+.tracking-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .tracking-status {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .status-icon {
+        margin-bottom: 1rem;
+    }
+
+    .progress-steps {
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .step {
+        flex: 1 1 calc(50% - 1rem);
+        min-width: 120px;
+    }
+
+    .timeline-item {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .timeline-item:not(:last-child)::before {
+        left: 12px;
+        top: 24px;
+        bottom: -24px;
+    }
+
+    .timeline-date {
+        min-width: auto;
+        text-align: left;
+        padding-left: 2rem;
+    }
+
+    .tracking-actions {
+        flex-direction: column;
+    }
+
+    .tracking-actions .btn {
+        width: 100%;
+    }
+} 

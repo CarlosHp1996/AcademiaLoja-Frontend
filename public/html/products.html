@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produtos - Power Rock Supplements</title>
+    <link rel="stylesheet" href="/public/css/style.css">
+    <link rel="stylesheet" href="/public/css/products.css">
+    <link rel="stylesheet" href="/public/css/whatsapp-button.css">
+    <!-- Estilos para dropdown e notificações -->
+    <link rel="stylesheet" href="/public/css/auth-dropdown.css">
+    <link rel="stylesheet" href="/public/css/auth-notifications.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+<!-- Header -->
+<header class="header">
+    <div class="container">
+        <div class="header-left">
+            <a href="/public/html/index.html" class="logo">
+                <img src="/assets/images/logoLoja.png" alt="Logo Power Rock" class="logo-img">
+            </a>
+            <div class="search-container">
+                <input type="search" placeholder="Encontre o produto ideal para você!" class="search-input">
+            </div>
+            <button class="mobile-menu-btn" aria-label="Abrir menu">
+                <span class="menu-icon"></span>
+            </button>
+        </div>
+        <div class="header-right">
+    <a href="/public/html/cart.html" class="cart-link">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-badge"></span>
+    </a>
+    <div class="user-dropdown">
+        <button class="user-icon-btn" aria-label="Conta">
+            <i class="fas fa-user"></i>
+        </button>
+        <div class="dropdown-menu">
+            <!-- Dropdown menu será preenchido via JavaScript -->
+        </div>
+    </div>
+</div>
+    </div>
+</header>
+
+    <!-- Subheader -->
+<section class="subheader">
+    <div class="container">
+        <nav class="subheader-nav">
+            <ul class="menu-list">
+                <li class="menu-item">
+    <a href="/public/html/products.html" class="nav-link">
+        Produtos
+        <i class="fas fa-chevron-down" style="margin-left: 6px; font-size: 0.85em;"></i>
+    </a>
+    <ul class="submenu">
+        <li><a href="/public/html/products.html" class="nav-link">Whey Protein</a></li>
+        <li><a href="/public/html/products.html" class="nav-link">Hipercalórico</a></li>
+        <li><a href="/public/html/products.html" class="nav-link">Creatina</a></li>
+        <li><a href="/public/html/products.html" class="nav-link">Pré Treino</a></li>
+        <li><a href="/public/html/products.html" class="nav-link">Vitaminas</a></li>
+    </ul>                   
+</li>
+                <li class="menu-item">
+                    <a href="/public/html/goals.html" class="nav-link">Objetivo 
+                        <i class="fas fa-chevron-down" style="margin-left: 6px; font-size: 0.85em;"></i>
+                    </a>
+                    <ul class="submenu">
+                        <li><a href="/public/html/goals.html" class="nav-link">Massa Muscular</a></li>
+                        <li><a href="/public/html/goals.html" class="nav-link">Energia</a></li>
+                        <li><a href="/public/html/goals.html" class="nav-link">Bem Estar</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item">
+                    <a href="/public/html/accessories.html" class="nav-link">Acessórios
+                        <i class="fas fa-chevron-down" style="margin-left: 6px; font-size: 0.85em;"></i>
+                    </a>
+                    <ul class="submenu">
+                        <li><a href="/public/html/accessories.html" class="nav-link">Camisetas</a></li>
+                        <li><a href="/public/html/accessories.html" class="nav-link">Garrafas</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item">
+                    <a href="/public/html/brands.html" class="nav-link">Marcas
+                        <i class="fas fa-chevron-down" style="margin-left: 6px; font-size: 0.85em;"></i>
+                    </a>
+                    <ul class="submenu">
+                        <li><a href="/public/html/brands.html" class="nav-link">Growth</a></li>
+                        <li><a href="/public/html/brands.html" class="nav-link">Black Skull</a></li>
+                        <li><a href="/public/html/brands.html" class="nav-link">Integral Médica</a></li>
+                        <li><a href="/public/html/brands.html" class="nav-link">Ftw</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item">
+                    <a href="/public/html/contact.html" class="nav-link">Contato</a>                   
+                </li>
+                <li class="menu-item">
+                    <a href="/public/html/returns.html" class="nav-link">Trocas e Devoluções</a>                   
+                </li>
+            </ul>
+        </nav>
+    </div>
+</section>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <div class="products-container">
+                <!-- Filtros -->
+                <aside class="filters-sidebar">
+                    <div class="filters-header">
+                        <h2>Filtros</h2>
+                        <button id="clearFilters" class="btn-text">Limpar Filtros</button>
+                    </div>
+
+                    <div class="filter-group">
+                        <h3>Categorias</h3>
+                        <div class="filter-options">
+                             <label class="checkbox-container">
+                                <input type="checkbox" name="category" value="wheyProtein">
+                                <span class="checkmark"></span>
+                                Whey Protein
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" name="category" value="proteinas">
+                                <span class="checkmark"></span>
+                                Proteínas
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" name="category" value="creatina">
+                                <span class="checkmark"></span>
+                                Creatina
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" name="category" value="barraDeProteina">
+                                <span class="checkmark"></span>
+                                Barra de Proteína
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" name="category" value="glutamina">
+                                <span class="checkmark"></span>
+                                Glutamina
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" name="category" value="hiperCalorico">
+                                <span class="checkmark"></span>
+                                Hiper Calórico
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" name="category" value="preTreino">
+                                <span class="checkmark"></span>
+                                Pré-Treinos
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" name="category" value="aminoacidos">
+                                <span class="checkmark"></span>
+                                Aminoácidos
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" name="category" value="vitaminas">
+                                <span class="checkmark"></span>
+                                Vitaminas
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" name="category" value="termogenicos">
+                                <span class="checkmark"></span>
+                                Termogênicos
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <h3>Sabores</h3>
+                        <div class="filter-options">
+                            <label class="checkbox-container">
+                                <input type="checkbox" name="flavor" value="chocolate">
+                                <span class="checkmark"></span>
+                                Chocolate
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" name="flavor" value="morango">
+                                <span class="checkmark"></span>
+                                Morango
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" name="flavor" value="baunilha">
+                                <span class="checkmark"></span>
+                                Baunilha
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" name="flavor" value="cookies">
+                                <span class="checkmark"></span>
+                                Cookies
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" name="flavor" value="frutasVermelhas">
+                                <span class="checkmark"></span>
+                                Frutas Vermelhas
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" name="flavor" value="limao">
+                                <span class="checkmark"></span>
+                                Limão
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" name="flavor" value="semSabor">
+                                <span class="checkmark"></span>
+                                Sem Sabor
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <h3>Marcas</h3>
+                        <div class="filter-options">
+                            <label class="checkbox-container">
+                                <input type="checkbox" name="brand" value="maxTitanium">
+                                <span class="checkmark"></span>
+                                Max Titanium
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" name="brand" value="integralMedica">
+                                <span class="checkmark"></span>
+                                Integral Médica
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" name="brand" value="growth">
+                                <span class="checkmark"></span>
+                                Growth
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" name="brand" value="probiotica">
+                                <span class="checkmark"></span>
+                                Probiótica
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" name="brand" value="blackSkull">
+                                <span class="checkmark"></span>
+                                Black Skull
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" name="brand" value="ftw">
+                                <span class="checkmark"></span>
+                                Ftw
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <h3>Preço</h3>
+                        <div class="price-range">
+                            <div class="price-inputs">
+                                <input type="number" id="minPrice" placeholder="Min" min="0">
+                                <span>até</span>
+                                <input type="number" id="maxPrice" placeholder="Max" min="0">
+                            </div>
+                            <button id="applyPriceFilter" class="btn btn-primary">Aplicar</button>
+                        </div>
+                    </div>
+
+                    <button id="applyFilters" class="btn btn-primary">
+                        Aplicar Filtros
+                        <i class="fas fa-filter"></i>
+                    </button>
+                </aside>
+
+                <!-- Lista de Produtos -->
+                <div class="products-content">
+                    <div class="products-header">
+                        <h1 class="page-title">Todos os Produtos</h1>
+                        <div class="products-actions">
+                            <div class="sort-options enhanced-sort">
+                                <label for="sortBy">Ordenar por:</label>
+                                <select id="sortBy">
+                                    <option value="relevance">Relevância</option>
+                                    <option value="price-asc">Menor Preço</option>
+                                    <option value="price-desc">Maior Preço</option>
+                                    <option value="name-asc">A-Z</option>
+                                    <option value="name-desc">Z-A</option>
+                                </select>
+                            </div>
+                            <!-- <div class="view-options">
+                                <button class="view-btn active" data-view="grid">
+                                    <i class="fas fa-th-large"></i>
+                                </button>
+                                <button class="view-btn" data-view="list">
+                                    <i class="fas fa-list"></i>
+                                </button>
+                            </div> -->
+                        </div>
+                    </div>
+
+                    <div class="products-grid">                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <a href="/public/html/index.html" class="logo">
+                        <span class="logo-power">Power Rock</span>
+                        <span class="logo-supps">Supplements</span>
+                    </a>
+                    <p class="footer-description">
+                        Sua loja especializada em suplementos de alta performance para atletas e entusiastas do fitness.
+                    </p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/profile.php?id=61575757384725" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/powerrocksupplements/" class="social-link"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3 class="footer-title">Categorias</h3>
+                    <ul class="footer-links">
+                        <li><a href="/public/html/products.html">Proteínas</a></li>
+                        <li><a href="/public/html/products.html">Pré-Treino</a></li>
+                        <li><a href="/public/html/products.html">Creatina</a></li>
+                        <li><a href="/public/html/products.html">Vitaminas</a></li>
+                        <li><a href="/public/html/accessories.html">Acessórios</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3 class="footer-title">Informações</h3>
+                    <ul class="footer-links">
+                        <li><a href="/about">Sobre Nós</a></li>
+                        <li><a href="/shipping">Entrega</a></li>
+                        <li><a href="/privacy">Política de Privacidade</a></li>
+                        <li><a href="/terms">Termos e Condições</a></li>
+                        <li><a href="/public/html/contact.html">Contato</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3 class="footer-title">Contato</h3>
+                    <ul class="contact-info">
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Av. Paulista, 1000 - São Paulo</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <span>(11) 99999-9999</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <span>contato@powerrocksupplements.com.br</span>
+                        </li>
+                    </ul>
+                    <div class="payment-methods">
+                        <h4 class="payment-title">Formas de Pagamento</h4>
+                        <div class="payment-icons">
+                            <div class="payment-icon"></div>
+                            <div class="payment-icon"></div>
+                            <div class="payment-icon"></div>
+                            <div class="payment-icon"></div>
+                            <div class="payment-icon"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                © 2025 Power Rock Supplements. Todos os direitos reservados.
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Button -->
+    <script src="/public/js/whatsapp-button.js"></script>
+    <script src="/public/js/products.js"></script>
+        <!-- Scripts de autenticação - ORDEM IMPORTA! -->
+    <script src="/public/js/auth-service.js"></script>
+    <script src="/public/js/auth-notifications.js"></script>
+    <script src="/public/js/auth-integration.js"></script>
+</body>
+</html>

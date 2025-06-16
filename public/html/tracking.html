@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rastreamento do Pedido - Power Rock Supplements</title>
+    <link rel="stylesheet" href="/public/css/style.css">
+    <link rel="stylesheet" href="/public/css/profile.css">
+    <link rel="stylesheet" href="/public/css/tracking.css">
+    <link rel="stylesheet" href="/public/css/whatsapp-button.css">
+    <!-- Estilos para dropdown e notificações -->
+    <link rel="stylesheet" href="/public/css/auth-dropdown.css">
+    <link rel="stylesheet" href="/public/css/auth-notifications.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body data-required-role="User">
+  <!-- Header -->
+<header class="header">
+    <div class="container">
+        <div class="header-left">
+            <a href="/public/html/index.html" class="logo">
+                <img src="/assets/images/logoLoja.png" alt="Logo Power Rock" class="logo-img">
+            </a>
+            <div class="search-container">
+                <input type="search" placeholder="Encontre o produto ideal para você!" class="search-input">
+            </div>
+            <button class="mobile-menu-btn" aria-label="Abrir menu">
+                <span class="menu-icon"></span>
+            </button>
+        </div>
+        <div class="header-right">
+    <a href="/public/html/cart.html" class="cart-link">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-badge"></span>
+    </a>
+    <div class="user-dropdown">
+        <button class="user-icon-btn" aria-label="Conta">
+            <i class="fas fa-user"></i>
+        </button>
+        <div class="dropdown-menu">
+            <!-- Dropdown menu será preenchido via JavaScript -->
+        </div>
+    </div>
+</div>
+    </div>
+</header>
+
+    <!-- Subheader -->
+<section class="subheader">
+    <div class="container">
+        <nav class="subheader-nav">
+            <ul class="menu-list">
+                <li class="menu-item">
+    <a href="/public/html/products.html" class="nav-link">
+        Produtos
+        <i class="fas fa-chevron-down" style="margin-left: 6px; font-size: 0.85em;"></i>
+    </a>
+    <ul class="submenu">
+        <li><a href="/public/html/products.html" class="nav-link">Whey Protein</a></li>
+        <li><a href="/public/html/products.html" class="nav-link">Hipercalórico</a></li>
+        <li><a href="/public/html/products.html" class="nav-link">Creatina</a></li>
+        <li><a href="/public/html/products.html" class="nav-link">Pré Treino</a></li>
+        <li><a href="/public/html/products.html" class="nav-link">Vitaminas</a></li>
+    </ul>                   
+</li>
+                <li class="menu-item">
+                    <a href="/public/html/goals.html" class="nav-link">Objetivo 
+                        <i class="fas fa-chevron-down" style="margin-left: 6px; font-size: 0.85em;"></i>
+                    </a>
+                    <ul class="submenu">
+                        <li><a href="/public/html/goals.html" class="nav-link">Massa Muscular</a></li>
+                        <li><a href="/public/html/goals.html" class="nav-link">Energia</a></li>
+                        <li><a href="/public/html/goals.html" class="nav-link">Bem Estar</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item">
+                    <a href="/public/html/accessories.html" class="nav-link">Acessórios
+                        <i class="fas fa-chevron-down" style="margin-left: 6px; font-size: 0.85em;"></i>
+                    </a>
+                    <ul class="submenu">
+                        <li><a href="/public/html/accessories.html" class="nav-link">Camisetas</a></li>
+                        <li><a href="/public/html/accessories.html" class="nav-link">Garrafas</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item">
+                    <a href="/public/html/brands.html" class="nav-link">Marcas
+                        <i class="fas fa-chevron-down" style="margin-left: 6px; font-size: 0.85em;"></i>
+                    </a>
+                    <ul class="submenu">
+                        <li><a href="/public/html/brands.html" class="nav-link">Growth</a></li>
+                        <li><a href="/public/html/brands.html" class="nav-link">Black Skull</a></li>
+                        <li><a href="/public/html/brands.html" class="nav-link">Integral Médica</a></li>
+                        <li><a href="/public/html/brands.html" class="nav-link">Ftw</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item">
+                    <a href="/public/html/contact.html" class="nav-link">Contato</a>                   
+                </li>
+                <li class="menu-item">
+                    <a href="/public/html/returns.html" class="nav-link">Trocas e Devoluções</a>                   
+                </li>
+            </ul>
+        </nav>
+    </div>
+</section>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <div class="profile-container">
+                <div class="profile-sidebar">
+                    <div class="user-info">
+                        <div class="user-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <h2 class="user-name">Carlos Henrique</h2>
+                        <p class="user-email">carlos@email.com</p>
+                    </div>
+                    <nav class="profile-nav">
+                        <ul>
+                            <li>
+                                <a href="/public/html/profile.html">
+                                    <i class="fas fa-user-circle"></i>
+                                    Meu Perfil
+                                </a>
+                            </li>
+                            <li class="active">
+                                <a href="/public/html/dashboard.html">
+                                    <i class="fas fa-chart-line"></i>
+                                    Minhas Compras
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/public/html/wishlist.html">
+                                    <i class="fas fa-heart"></i>
+                                    Lista de Desejos
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/public/html/addresses.html">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    Endereços
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/public/html/payment-methods.html">
+                                    <i class="fas fa-credit-card"></i>
+                                    Formas de Pagamento
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/public/html/settings.html">
+                                    <i class="fas fa-cog"></i>
+                                    Configurações
+                                </a>
+                            </li>
+                            <li class="logout">
+                                <a href="#" id="logoutBtn">
+                                    <i class="fas fa-sign-out-alt"></i>
+                                    Sair
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="profile-content">
+                    <div class="profile-header">
+                        <div class="header-actions">
+                            <a href="/public/html/order-details.html?id=12345" class="btn btn-outline">
+                                <i class="fas fa-arrow-left"></i>
+                                Voltar para Detalhes do Pedido
+                            </a>
+                        </div>
+                        <h1 class="profile-title">Rastreamento do Pedido #12345</h1>
+                        <p class="profile-subtitle">Código de Rastreio: BR123456789BR</p>
+                    </div>
+
+                    <div class="tracking-container">
+                        <!-- Status do Rastreamento -->
+                        <section class="tracking-section">
+                            <div class="tracking-status">
+                                <div class="status-icon">
+                                    <i class="fas fa-truck"></i>
+                                </div>
+                                <div class="status-info">
+                                    <h2>Em Transporte</h2>
+                                    <p>Previsão de Entrega: 17/05/2023</p>
+                                </div>
+                            </div>
+                            <div class="tracking-progress">
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 75%"></div>
+                                </div>
+                                <div class="progress-steps">
+                                    <div class="step completed">
+                                        <div class="step-icon">
+                                            <i class="fas fa-check"></i>
+                                        </div>
+                                        <div class="step-label">Pedido Confirmado</div>
+                                    </div>
+                                    <div class="step completed">
+                                        <div class="step-icon">
+                                            <i class="fas fa-check"></i>
+                                        </div>
+                                        <div class="step-label">Em Processamento</div>
+                                    </div>
+                                    <div class="step active">
+                                        <div class="step-icon">
+                                            <i class="fas fa-truck"></i>
+                                        </div>
+                                        <div class="step-label">Em Transporte</div>
+                                    </div>
+                                    <div class="step">
+                                        <div class="step-icon">
+                                            <i class="fas fa-home"></i>
+                                        </div>
+                                        <div class="step-label">Entregue</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Histórico de Atualizações -->
+                        <section class="tracking-section">
+                            <h2 class="section-title">Histórico de Atualizações</h2>
+                            <div class="tracking-timeline">
+                                <div class="timeline-item">
+                                    <div class="timeline-date">
+                                        <span class="date">16/05/2023</span>
+                                        <span class="time">09:15</span>
+                                    </div>
+                                    <div class="timeline-content">
+                                        <h3>Objeto em trânsito</h3>
+                                        <p>Objeto saiu para entrega ao destinatário</p>
+                                        <p class="location">São Paulo - SP</p>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-date">
+                                        <span class="date">16/05/2023</span>
+                                        <span class="time">07:30</span>
+                                    </div>
+                                    <div class="timeline-content">
+                                        <h3>Objeto recebido na unidade de distribuição</h3>
+                                        <p>Objeto recebido na unidade de distribuição</p>
+                                        <p class="location">São Paulo - SP</p>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-date">
+                                        <span class="date">15/05/2023</span>
+                                        <span class="time">16:45</span>
+                                    </div>
+                                    <div class="timeline-content">
+                                        <h3>Objeto em trânsito</h3>
+                                        <p>Objeto em trânsito - por unidade de logística integrada</p>
+                                        <p class="location">São Paulo - SP</p>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-date">
+                                        <span class="date">15/05/2023</span>
+                                        <span class="time">14:30</span>
+                                    </div>
+                                    <div class="timeline-content">
+                                        <h3>Objeto postado</h3>
+                                        <p>Objeto postado após o horário limite da unidade</p>
+                                        <p class="location">São Paulo - SP</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Informações da Entrega -->
+                        <section class="tracking-section">
+                            <h2 class="section-title">Informações da Entrega</h2>
+                            <div class="delivery-info">
+                                <div class="info-group">
+                                    <h3>Endereço de Entrega</h3>
+                                    <p>Carlos Henrique</p>
+                                    <p>Rua das Flores, 123</p>
+                                    <p>Bairro: Centro</p>
+                                    <p>São Paulo - SP</p>
+                                    <p>CEP: 01234-567</p>
+                                </div>
+                                <div class="info-group">
+                                    <h3>Transportadora</h3>
+                                    <p>Correios</p>
+                                    <p>Serviço: PAC</p>
+                                    <p>Prazo de Entrega: 3-5 dias úteis</p>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Ações -->
+                        <section class="tracking-section">
+                            <div class="tracking-actions">
+                                <button class="btn btn-primary" id="notifyDelivery">
+                                    <i class="fas fa-bell"></i>
+                                    Notificar Chegada
+                                </button>
+                                <button class="btn btn-outline" id="contactSupport">
+                                    <i class="fas fa-headset"></i>
+                                    Falar com Atendente
+                                </button>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <a href="/public/html/index.html" class="logo">
+                        <span class="logo-power">Power Rock</span>
+                        <span class="logo-supps">Supplements</span>
+                    </a>
+                    <p class="footer-description">
+                        Sua loja especializada em suplementos de alta performance para atletas e entusiastas do fitness.
+                    </p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/profile.php?id=61575757384725" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/powerrocksupplements/" class="social-link"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3 class="footer-title">Categorias</h3>
+                    <ul class="footer-links">
+                        <li><a href="/public/html/products.html">Proteínas</a></li>
+                        <li><a href="/public/html/products.html">Pré-Treino</a></li>
+                        <li><a href="/public/html/products.html">Creatina</a></li>
+                        <li><a href="/public/html/products.html">Vitaminas</a></li>
+                        <li><a href="/public/html/accessories.html">Acessórios</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3 class="footer-title">Informações</h3>
+                    <ul class="footer-links">
+                        <li><a href="/about">Sobre Nós</a></li>
+                        <li><a href="/shipping">Entrega</a></li>
+                        <li><a href="/privacy">Política de Privacidade</a></li>
+                        <li><a href="/terms">Termos e Condições</a></li>
+                        <li><a href="/public/html/contact.html">Contato</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3 class="footer-title">Contato</h3>
+                    <ul class="contact-info">
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Av. Paulista, 1000 - São Paulo</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <span>(11) 99999-9999</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <span>contato@powerrocksupplements.com.br</span>
+                        </li>
+                    </ul>
+                    <div class="payment-methods">
+                        <h4 class="payment-title">Formas de Pagamento</h4>
+                        <div class="payment-icons">
+                            <div class="payment-icon"></div>
+                            <div class="payment-icon"></div>
+                            <div class="payment-icon"></div>
+                            <div class="payment-icon"></div>
+                            <div class="payment-icon"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                © 2025 Power Rock Supplements. Todos os direitos reservados.
+            </div>
+        </div>
+    </footer>
+
+    <script src="/public/js/tracking.js"></script>
+     <!-- WhatsApp Button -->
+    <script src="/public/js/whatsapp-button.js"></script>
+        <!-- Scripts de autenticação - ORDEM IMPORTA! -->
+    <script src="/public/js/auth-service.js"></script>
+    <script src="/public/js/auth-notifications.js"></script>
+    <script src="/public/js/auth-integration.js"></script>
+</body>
+</html> 
