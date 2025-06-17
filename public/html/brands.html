@@ -77,9 +77,9 @@
     </div>
 </header>
 
-<!-- Subheader -->
+ <!-- Subheader -->
 <section class="subheader">
-     <div class="container">
+    <div class="container">
         <nav class="subheader-nav">
             <ul class="menu-list">
                 <li class="menu-item">
@@ -88,48 +88,38 @@
                         <i class="fas fa-chevron-down" style="margin-left: 6px; font-size: 0.85em;"></i>
                     </a>
                     <ul class="submenu">
-                        <li><a href="/public/html/products.html?CategoryIds=GUID_WHEY" class="nav-link">Whey Protein</a></li>
-                        <li><a href="/public/html/products.html?CategoryIds=GUID_HIPER" class="nav-link">Hipercalórico</a></li>
-                        <li><a href="/public/html/products.html?CategoryIds=GUID_CREATINA" class="nav-link">Creatina</a></li>
-                        <li><a href="/public/html/products.html?CategoryIds=GUID_PRETREINO" class="nav-link">Pré Treino</a></li>
-                        <li><a href="/public/html/products.html?CategoryIds=GUID_VITAMINAS" class="nav-link">Vitaminas</a></li>
-                    </ul>
+                        <!-- Itens serão populados dinamicamente via JavaScript -->
+                    </ul>                   
                 </li>
                 <li class="menu-item">
-                    <a href="/public/html/goals.html" class="nav-link">Objetivo
+                    <a href="/public/html/goals.html" class="nav-link">Objetivo 
                         <i class="fas fa-chevron-down" style="margin-left: 6px; font-size: 0.85em;"></i>
                     </a>
-                    <ul class="submenu" id="goals-submenu">
-                        <li><a href="/public/html/products.html?ObjectiveIds=4" class="nav-link">Massa Muscular</a></li>
-                        <li><a href="/public/html/products.html?ObjectiveIds=7" class="nav-link">Energia</a></li>
-                        <li><a href="/public/html/products.html?ObjectiveIds=8" class="nav-link">Bem Estar</a></li>
+                    <ul class="submenu">
+                        <!-- Itens serão populados dinamicamente via JavaScript -->
                     </ul>
                 </li>
                 <li class="menu-item">
                     <a href="/public/html/accessories.html" class="nav-link">Acessórios
                         <i class="fas fa-chevron-down" style="margin-left: 6px; font-size: 0.85em;"></i>
                     </a>
-                    <ul class="submenu" id="accessories-submenu">
-                        <li><a href="/public/html/accessories.html?AccessoryIds=1" class="nav-link">Camisetas</a></li>
-                        <li><a href="/public/html/accessories.html?AccessoryIds=2" class="nav-link">Garrafas</a></li>
+                    <ul class="submenu">
+                        <!-- Itens serão populados dinamicamente via JavaScript -->
                     </ul>
                 </li>
                 <li class="menu-item">
                     <a href="/public/html/brands.html" class="nav-link">Marcas
                         <i class="fas fa-chevron-down" style="margin-left: 6px; font-size: 0.85em;"></i>
                     </a>
-                    <ul class="submenu" id="brands-submenu">
-                         <li><a href="/public/html/products.html?BrandIds=3" class="nav-link">Growth</a></li> <!-- ID EnumBrand -->
-                         <li><a href="/public/html/products.html?BrandIds=6" class="nav-link">Black Skull</a></li> <!-- ID EnumBrand -->
-                         <li><a href="/public/html/products.html?BrandIds=5" class="nav-link">Integral Médica</a></li> <!-- ID EnumBrand -->
-                         <li><a href="/public/html/products.html?BrandIds=1" class="nav-link">Max Titanium</a></li> <!-- ID EnumBrand -->
+                    <ul class="submenu">
+                        <!-- Itens serão populados dinamicamente via JavaScript -->
                     </ul>
                 </li>
                 <li class="menu-item">
-                    <a href="/public/html/contact.html" class="nav-link">Contato</a>
+                    <a href="/public/html/contact.html" class="nav-link">Contato</a>                   
                 </li>
                 <li class="menu-item">
-                    <a href="/public/html/returns.html" class="nav-link">Trocas e Devoluções</a>
+                    <a href="/public/html/returns.html" class="nav-link">Trocas e Devoluções</a>                   
                 </li>
             </ul>
         </nav>
@@ -293,6 +283,8 @@
     <!-- Conteúdo do footer -->
 </footer>
 
+<!-- Script de navegação - DEVE SER CARREGADO PRIMEIRO -->
+    <script src="/public/js/navigation-enums.js"></script>
 <script src="/public/js/brands.js"></script>
 <!-- WhatsApp Button -->
 <script src="/public/js/whatsapp-button.js"></script>
