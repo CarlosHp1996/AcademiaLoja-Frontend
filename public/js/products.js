@@ -20,6 +20,8 @@ document.addEventListener('DOMContentLoaded', function() {
         categories: [],
         flavors: [],
         brands: [],
+        objectives: [],
+        accessories: [],
         price: { min: null, max: null },
         page: 1,
         pageSize: 20
@@ -40,6 +42,87 @@ document.addEventListener('DOMContentLoaded', function() {
         return localStorage.getItem('authToken');
     }
 
+    // Função para ler parâmetros da URL e aplicar filtros iniciais
+    function initializeFiltersFromUrl() {
+        const urlParams = new URLSearchParams(window.location.search);
+        
+        // Aplicar filtros baseados nos parâmetros da URL
+        const categoryIds = urlParams.get('CategoryIds');
+        const objectiveIds = urlParams.get('ObjectiveIds');
+        const accessoryIds = urlParams.get('AccessoryIds');
+        const brandIds = urlParams.get('BrandIds');
+
+        if (categoryIds) {
+            // Pode ser múltiplos IDs separados por vírgula
+            const categoryArray = categoryIds.split(',');
+            filters.categories = categoryArray;
+        }
+
+        if (objectiveIds) {
+            const objectiveArray = objectiveIds.split(',');
+            filters.objectives = objectiveArray;
+        }
+
+        if (accessoryIds) {
+            const accessoryArray = accessoryIds.split(',');
+            filters.accessories = accessoryArray;
+        }
+
+        if (brandIds) {
+            const brandArray = brandIds.split(',');
+            filters.brands = brandArray;
+        }
+
+        // Aplicar outros parâmetros se existirem
+        const minPrice = urlParams.get('MinPrice');
+        const maxPrice = urlParams.get('MaxPrice');
+        const page = urlParams.get('Page');
+
+        if (minPrice) {
+            filters.price.min = parseFloat(minPrice);
+            if (minPriceInput) minPriceInput.value = minPrice;
+        }
+
+        if (maxPrice) {
+            filters.price.max = parseFloat(maxPrice);
+            if (maxPriceInput) maxPriceInput.value = maxPrice;
+        }
+
+        if (page) {
+            filters.page = parseInt(page);
+        }
+    }
+
+    // Função para marcar checkboxes baseados nos filtros ativos
+    function updateCheckboxesFromFilters() {
+        // Aguardar um pouco para garantir que os checkboxes foram criados
+        setTimeout(() => {
+            // Marcar categorias
+            filters.categories.forEach(categoryId => {
+                const checkbox = document.querySelector(`input[name="category"][value="${categoryId}"]`);
+                if (checkbox) checkbox.checked = true;
+            });
+
+            // Marcar objetivos (assumindo que você adicionará este tipo de filtro)
+            filters.objectives.forEach(objectiveId => {
+                const checkbox = document.querySelector(`input[name="objective"][value="${objectiveId}"]`);
+                if (checkbox) checkbox.checked = true;
+            });
+
+            // Marcar acessórios
+            filters.accessories.forEach(accessoryId => {
+                const checkbox = document.querySelector(`input[name="accessory"][value="${accessoryId}"]`);
+                if (checkbox) checkbox.checked = true;
+            });
+
+            // Marcar marcas
+            filters.brands.forEach(brandId => {
+                const checkbox = document.querySelector(`input[name="brand"][value="${brandId}"]`);
+                if (checkbox) checkbox.checked = true;
+            });
+        }, 500);
+    }
+
     // Carregar filtros dinamicamente
     async function loadFilters() {
         const headers = {
@@ -55,6 +138,9 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!response.ok) throw new Error('Erro ao carregar filtros');
             const filtersData = await response.json();
             updateFilterOptions(filtersData);
+            
+            // Após carregar os filtros, marcar os checkboxes baseados na URL
+            updateCheckboxesFromFilters();
         } catch (error) {
             console.error('Erro ao carregar filtros:', error);
             showNotification('Erro ao carregar opções de filtro.', 'error');
@@ -66,15 +152,17 @@ document.addEventListener('DOMContentLoaded', function() {
         const categoriesContainer = document.querySelector('.filter-group[data-filter="categories"] .filter-options');
         const flavorsContainer = document.querySelector('.filter-group[data-filter="sabores"] .filter-options');
         const brandsContainer = document.querySelector('.filter-group[data-filter="marcas"] .filter-options');
+        const objectivesContainer = document.querySelector('.filter-group[data-filter="objectives"] .filter-options');
+        const accessoriesContainer = document.querySelector('.filter-group[data-filter="accessories"] .filter-options');
 
         // Atualizar preços mínimo e máximo
         if (filtersData.minPrice !== undefined && filtersData.maxPrice !== undefined) {
-            minPriceInput.placeholder = `R$ ${filtersData.minPrice.toFixed(2).replace('.', ',')}`;
-            maxPriceInput.placeholder = `R$ ${filtersData.maxPrice.toFixed(2).replace('.', ',')}`;
+            if (minPriceInput) minPriceInput.placeholder = `R$ ${filtersData.minPrice.toFixed(2).replace('.', ',')}`;
+            if (maxPriceInput) maxPriceInput.placeholder = `R$ ${filtersData.maxPrice.toFixed(2).replace('.', ',')}`;
         }
 
         // Atualizar categorias
-        if (filtersData.availableCategories) {
+        if (filtersData.availableCategories && categoriesContainer) {
             categoriesContainer.innerHTML = filtersData.availableCategories.map(category => `
                 <label class="checkbox-container">
                     <input type="checkbox" name="category" value="${category.value}">
@@ -85,7 +173,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         // Atualizar sabores
-        if (filtersData.availableFlavors) {
+        if (filtersData.availableFlavors && flavorsContainer) {
             flavorsContainer.innerHTML = filtersData.availableFlavors.map(flavor => `
                 <label class="checkbox-container">
                     <input type="checkbox" name="flavor" value="${flavor.value}">
@@ -96,12 +184,34 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         // Atualizar marcas
-        if (filtersData.availableBrands) {
+        if (filtersData.availableBrands && brandsContainer) {
             brandsContainer.innerHTML = filtersData.availableBrands.map(brand => `
                 <label class="checkbox-container">
                     <input type="checkbox" name="brand" value="${brand.value}">
                     <span class="checkmark"></span>
                     ${brand.value} (${brand.productCount})
+                </label>
+            `).join('');
+        }
+
+        // Atualizar objetivos (se disponível)
+        if (filtersData.availableObjectives && objectivesContainer) {
+            objectivesContainer.innerHTML = filtersData.availableObjectives.map(objective => `
+                <label class="checkbox-container">
+                    <input type="checkbox" name="objective" value="${objective.value}">
+                    <span class="checkmark"></span>
+                    ${objective.value} (${objective.productCount})
+                </label>
+            `).join('');
+        }
+
+        // Atualizar acessórios (se disponível)
+        if (filtersData.availableAccessories && accessoriesContainer) {
+            accessoriesContainer.innerHTML = filtersData.availableAccessories.map(accessory => `
+                <label class="checkbox-container">
+                    <input type="checkbox" name="accessory" value="${accessory.value}">
+                    <span class="checkmark"></span>
+                    ${accessory.value} (${accessory.productCount})
                 </label>
             `).join('');
         }
@@ -134,6 +244,16 @@ document.addEventListener('DOMContentLoaded', function() {
                                 filters.brands.push(filterValue);
                             }
                             break;
+                        case 'objective':
+                            if (!filters.objectives.includes(filterValue)) {
+                                filters.objectives.push(filterValue);
+                            }
+                            break;
+                        case 'accessory':
+                            if (!filters.accessories.includes(filterValue)) {
+                                filters.accessories.push(filterValue);
+                            }
+                            break;
                     }
                 } else {
                     switch(filterType) {
@@ -145,6 +265,12 @@ document.addEventListener('DOMContentLoaded', function() {
                             break;
                         case 'brand': 
                             filters.brands = filters.brands.filter(item => item !== filterValue);
+                            break;
+                        case 'objective':
+                            filters.objectives = filters.objectives.filter(item => item !== filterValue);
+                            break;
+                        case 'accessory':
+                            filters.accessories = filters.accessories.filter(item => item !== filterValue);
                             break;
                     }
                 }
@@ -180,6 +306,16 @@ document.addEventListener('DOMContentLoaded', function() {
                                 filters.brands.push(filterValue);
                             }
                             break;
+                        case 'objective':
+                            if (!filters.objectives.includes(filterValue)) {
+                                filters.objectives.push(filterValue);
+                            }
+                            break;
+                        case 'accessory':
+                            if (!filters.accessories.includes(filterValue)) {
+                                filters.accessories.push(filterValue);
+                            }
+                            break;
                     }
                 } else {
                     switch(filterType) {
@@ -192,6 +328,12 @@ document.addEventListener('DOMContentLoaded', function() {
                         case 'brand': 
                             filters.brands = filters.brands.filter(item => item !== filterValue);
                             break;
+                        case 'objective':
+                            filters.objectives = filters.objectives.filter(item => item !== filterValue);
+                            break;
+                        case 'accessory':
+                            filters.accessories = filters.accessories.filter(item => item !== filterValue);
+                            break;
                     }
                 }
 
@@ -201,42 +343,54 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         // Evento para inputs de preço - aplicar em tempo real com debounce
-        minPriceInput.addEventListener('input', function() {
-            const minPrice = this.value ? parseFloat(this.value.replace(',', '.')) : null;
-            filters.price.min = minPrice;
-            debounceApplyFilters(500); // Delay maior para inputs de preço
-        });
+        if (minPriceInput) {
+            minPriceInput.addEventListener('input', function() {
+                const minPrice = this.value ? parseFloat(this.value.replace(',', '.')) : null;
+                filters.price.min = minPrice;
+                debounceApplyFilters(500); // Delay maior para inputs de preço
+            });
+        }
 
-        maxPriceInput.addEventListener('input', function() {
-            const maxPrice = this.value ? parseFloat(this.value.replace(',', '.')) : null;
-            filters.price.max = maxPrice;
-            debounceApplyFilters(500); // Delay maior para inputs de preço
-        });
+        if (maxPriceInput) {
+            maxPriceInput.addEventListener('input', function() {
+                const maxPrice = this.value ? parseFloat(this.value.replace(',', '.')) : null;
+                filters.price.max = maxPrice;
+                debounceApplyFilters(500); // Delay maior para inputs de preço
+            });
+        }
 
         // Manter o botão de aplicar preço para quem preferir clicar
-        applyPriceFilterBtn.addEventListener('click', function() {
-            const minPrice = minPriceInput.value ? parseFloat(minPriceInput.value.replace(',', '.')) : null;
-            const maxPrice = maxPriceInput.value ? parseFloat(maxPriceInput.value.replace(',', '.')) : null;
-            filters.price.min = minPrice;
-            filters.price.max = maxPrice;
-            filters.page = 1;
-            applyFilters();
-        });
+        if (applyPriceFilterBtn) {
+            applyPriceFilterBtn.addEventListener('click', function() {
+                const minPrice = minPriceInput.value ? parseFloat(minPriceInput.value.replace(',', '.')) : null;
+                const maxPrice = maxPriceInput.value ? parseFloat(maxPriceInput.value.replace(',', '.')) : null;
+                filters.price.min = minPrice;
+                filters.price.max = maxPrice;
+                filters.page = 1;
+                applyFilters();
+            });
+        }
 
         // Manter o botão aplicar filtros (agora pode ser usado para refresh manual)
-        applyFiltersBtn.addEventListener('click', function() {
-            filters.page = 1;
-            applyFilters();
-        });
+        if (applyFiltersBtn) {
+            applyFiltersBtn.addEventListener('click', function() {
+                filters.page = 1;
+                applyFilters();
+            });
+        }
 
         // Evento para limpar filtros
-        clearFiltersBtn.addEventListener('click', clearFilters);
+        if (clearFiltersBtn) {
+            clearFiltersBtn.addEventListener('click', clearFilters);
+        }
 
         // Evento para ordenação - aplicar em tempo real
-        sortBySelect.addEventListener('change', function() {
-            filters.page = 1;
-            debounceApplyFilters(100); // Delay menor para sort
-        });
+        if (sortBySelect) {
+            sortBySelect.addEventListener('change', function() {
+                filters.page = 1;
+                debounceApplyFilters(100); // Delay menor para sort
+            });
+        }
 
         // Eventos para botões de visualização
         viewButtons.forEach(button => {
@@ -253,10 +407,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
         });
-
-        // Carregar filtros e produtos iniciais
-        loadFilters();
-        applyFilters();
     }
 
     // Aplicar filtros e buscar produtos da API
@@ -283,6 +433,12 @@ document.addEventListener('DOMContentLoaded', function() {
         if (filters.brands.length > 0) {
             filters.brands.forEach(brand => params.append('BrandIds', brand));
         }
+        if (filters.objectives.length > 0) {
+            filters.objectives.forEach(obj => params.append('ObjectiveIds', obj));
+        }
+        if (filters.accessories.length > 0) {
+            filters.accessories.forEach(acc => params.append('AccessoryIds', acc));
+        }
         if (filters.price.min !== null) {
             params.append('MinPrice', filters.price.min);
         }
@@ -292,7 +448,7 @@ document.addEventListener('DOMContentLoaded', function() {
         params.append('IsActive', 'true');
 
         // Mapear ordenação
-        const sortBy = sortBySelect.value;
+        const sortBy = sortBySelect ? sortBySelect.value : 'relevance';
         let sortByParam = 'Name';
         let sortDirection = 'asc';
 
@@ -356,6 +512,8 @@ document.addEventListener('DOMContentLoaded', function() {
             categories: [],
             flavors: [],
             brands: [],
+            objectives: [],
+            accessories: [],
             price: { min: null, max: null },
             page: 1,
             pageSize: 20
@@ -366,9 +524,14 @@ document.addEventListener('DOMContentLoaded', function() {
             checkbox.checked = false;
         });
         
-        minPriceInput.value = '';
-        maxPriceInput.value = '';
-        sortBySelect.value = 'relevance';
+        if (minPriceInput) minPriceInput.value = '';
+        if (maxPriceInput) maxPriceInput.value = '';
+        if (sortBySelect) sortBySelect.value = 'relevance';
+        
+        // Limpar URL
+        const url = new URL(window.location);
+        url.search = '';
+        window.history.replaceState({}, document.title, url.pathname);
         
         // Aplicar filtros limpos
         applyFilters();
@@ -549,6 +712,21 @@ document.addEventListener('DOMContentLoaded', function() {
         document.head.appendChild(notificationStyles);
     }
 
-    // Inicializar
-    initEvents();
+    // Função de inicialização principal
+    function initialize() {
+        // 1. Ler parâmetros da URL primeiro
+        initializeFiltersFromUrl();
+        
+        // 2. Inicializar eventos
+        initEvents();
+        
+        // 3. Carregar filtros e aplicar (isso vai marcar os checkboxes e buscar produtos)
+        loadFilters().then(() => {
+            // 4. Aplicar filtros após carregar (para buscar produtos com os filtros da URL)
+            applyFilters();
+        });
+    }
+
+    // Inicializar tudo
+    initialize();
 });
