@@ -24,7 +24,8 @@ document.addEventListener('DOMContentLoaded', function() {
         accessories: [],
         price: { min: null, max: null },
         page: 1,
-        pageSize: 20
+        pageSize: 20,
+        name: null, // Novo parâmetro para busca por nome
     };
 
     // Debounce para evitar muitas requisições
@@ -51,6 +52,11 @@ document.addEventListener('DOMContentLoaded', function() {
         const objectiveIds = urlParams.get('ObjectiveIds');
         const accessoryIds = urlParams.get('AccessoryIds');
         const brandIds = urlParams.get('BrandIds');
+        const searchName = urlParams.get('Name');
+
+        if (searchName) {
+            filters.name = searchName;
+        }
 
         if (categoryIds) {
             // Pode ser múltiplos IDs separados por vírgula
@@ -423,6 +429,10 @@ document.addEventListener('DOMContentLoaded', function() {
         const params = new URLSearchParams();
         params.append('Page', filters.page);
         params.append('PageSize', filters.pageSize);
+        
+        if (filters.name) {
+            params.append('Name', filters.name);
+        }
 
         if (filters.categories.length > 0) {
             filters.categories.forEach(cat => params.append('CategoryIds', cat));
@@ -516,7 +526,8 @@ document.addEventListener('DOMContentLoaded', function() {
             accessories: [],
             price: { min: null, max: null },
             page: 1,
-            pageSize: 20
+            pageSize: 20,
+            name: '',
         };
         
         // Desmarcar todos os checkboxes
