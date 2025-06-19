@@ -487,6 +487,11 @@ document.addEventListener("DOMContentLoaded", () => {
                         <input type="file" id="productImage" name="ImageUrl" accept="image/*" class="form-control">
                         ${isEditing && product.imageUrl ? `<div class="current-img-container"><img src="${product.imageUrl}" alt="Imagem atual" width="50" class="current-img"></div>` : ""}
                     </div>
+                    <div class="form-group col-md-4">
+                        <label for="nutritionalInfo">Informação Nutricional:</label>
+                        <input type="file" id="nutritionalInfo" name="NutritionalInfo" accept="image/*" class="form-control">
+                        ${isEditing && product.nutritionalInfo ? `<div class="current-img-container"><img src="${product?.nutritionalInfo}" alt="Tabela Nutricional" width="50" class="current-img"></div>` : ""}
+                    </div>
                     <div class="form-group col-md-6 form-check-group">
                         <div class="form-check">
                             <input type="checkbox" id="productIsActive" name="IsActive" class="form-check-input" ${isEditing ? (product.isActive ? "checked" : "") : "checked"}>

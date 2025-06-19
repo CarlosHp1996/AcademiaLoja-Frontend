@@ -51,7 +51,9 @@ document.addEventListener("DOMContentLoaded", async function () {
                 description: data.value.description,
                 stockQuantity: data.value.stockQuantity || 0,
                 attributes: data.value.attributes || [], // This is an array of attribute objects
-                categoryId: data.value.categoryId
+                categoryId: data.value.categoryId,
+                benefit: data.value.benefit || "Benefício não disponível",
+                nutritionalInfo: data.value.nutritionalInfo || "Tabela não disponível",
             };
         } else {
             alert("Produto não encontrado!" );
@@ -239,7 +241,30 @@ document.addEventListener("DOMContentLoaded", async function () {
     function loadTabContent(tabId) {
         switch (tabId) {
             case "nutrition":
-                document.getElementById("product-nutrition").innerHTML = `
+            // Verifica se existe informação nutricional do produto
+            let nutritionContent = '';
+            
+            if (produto.nutritionalInfo && produto.nutritionalInfo.trim() !== '' && produto.nutritionalInfo !== "Tabela não disponível") {
+                // Se nutritionalInfo contém uma URL de imagem
+                if (produto.nutritionalInfo.startsWith('http') || produto.nutritionalInfo.includes('.jpg') || produto.nutritionalInfo.includes('.png') || produto.nutritionalInfo.includes('.jpeg') || produto.nutritionalInfo.includes('.webp')) {
+                    nutritionContent = `
+                        <h4 class="product-content">Informações Nutricionais</h4>
+                        <div class="nutrition-image-container">
+                            <img src="${produto.nutritionalInfo}" alt="Tabela Nutricional" class="nutrition-image" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                        </div>
+                    `;
+                } else {
+                    // Se nutritionalInfo contém texto, exibe como texto
+                    nutritionContent = `
+                        <h4>Informações Nutricionais</h4>
+                        <div class="nutrition-text">
+                            ${produto.nutritionalInfo}
+                        </div>
+                    `;
+                }
+            } else {
+                // Fallback para a tabela padrão se não houver informação do backend
+                nutritionContent = `
                     <h4>Informações Nutricionais</h4>
                     <table class="nutrition-table">
                         <tr><td>Porção</td><td>30g (1 scoop)</td></tr>
@@ -249,7 +274,10 @@ document.addEventListener("DOMContentLoaded", async function () {
                         <tr><td>Gorduras</td><td>1g</td></tr>
                     </table>
                 `;
-                break;
+            }
+            
+            document.getElementById("product-nutrition").innerHTML = nutritionContent;
+            break;
             case "benefits":
                 document.getElementById("product-benefits-tab").innerHTML = `
                     <h4>Principais Benefícios</h4>
@@ -366,8 +394,8 @@ document.addEventListener("DOMContentLoaded", async function () {
                 console.log("Produtos:", data.value.products);
                 
                 // Filtrar o produto atual da lista e retornar apenas produtos diferentes
-                //const filteredProducts = data.value.products.filter(p => p.id !== produto.id);
-                const filteredProducts = data.value.products;
+                const filteredProducts = data.value.products.filter(p => p.id !== produto.id);
+                //const filteredProducts = data.value.products;
                 console.log("Produtos após filtro:", filteredProducts.length);
                 console.log("Produtos filtrados:", filteredProducts);
                 
