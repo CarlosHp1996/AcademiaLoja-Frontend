@@ -3,17 +3,11 @@ document.addEventListener("DOMContentLoaded", function() {
     initializeGoalsPage();
 });
 
-const API_BASE_URL = "https://localhost:4242/api"; // Ajuste se necessário
+//const API_BASE_URL = "https://localhost:4242/api";
 
 function initializeGoalsPage() {
     // Adicionar eventos de clique nos cards de objetivos
     initializeGoalCards();
-
-    // Carregar dinamicamente os objetivos no submenu (opcional, mas bom para consistência)
-    // loadObjectivesSubmenu();
-
-    // Se houver outras inicializações como sliders, etc.
-    // initializeFeaturedProductsSlider();
 }
 
 // Função para inicializar os cards de objetivos
@@ -38,59 +32,46 @@ function initializeGoalCards() {
         if (viewProductsBtn && objectiveId) {
             viewProductsBtn.addEventListener("click", function(e) {
                 e.preventDefault(); // Prevenir comportamento padrão do link
-                // Redirecionar para a página de produtos com o filtro de objetivo
-                window.location.href = `/public/html/products.html?ObjectiveIds=${objectiveId}`;
+                
+                // Obter o nome do objetivo baseado no ID
+                const objectiveName = getObjectiveNameById(objectiveId);
+                
+                // Redirecionar para a página de produtos com o filtro de objetivo e título
+                const url = `/public/html/products.html?ObjectiveIds=${objectiveId}&title=${encodeURIComponent(objectiveName)}`;
+                window.location.href = url;
             });
         }
     });
 }
 
-// Função para carregar objetivos no submenu (exemplo)
-/*
-async function loadObjectivesSubmenu() {
-    const submenu = document.getElementById("goals-submenu");
-    if (!submenu) return;
-
-    // Aqui você faria uma chamada API para buscar os objetivos se necessário
-    // Exemplo: const objectives = await fetch(`${API_BASE_URL}/Objectives/get`).then(res => res.json());
-    // Por enquanto, vamos usar os que já estão no HTML como exemplo
-
-    // Limpar submenu existente (se houver)
-    // submenu.innerHTML = '';
-
-    // Adicionar itens (exemplo baseado no Enum)
-    const objectivesMap = {
-        1: "Emagrecimento",
-        2: "Hipertrofia",
-        3: "Definição",
-        4: "Aumento De Massa Muscular",
-        5: "Ganho De Peso",
-        6: "Aumento De Forca",
-        7: "Melhora De Desempenho",
-        8: "Melhora De Saude",
-        9: "Melhora De Recuperacao",
-        10: "Melhora De Imunidade"
-    };
-
-    for (const id in objectivesMap) {
-        const li = document.createElement("li");
-        const a = document.createElement("a");
-        a.href = `/public/html/products.html?ObjectiveIds=${id}`;
-        a.className = "nav-link";
-        a.textContent = objectivesMap[id];
-        li.appendChild(a);
-        submenu.appendChild(li);
+// Função para obter o nome do objetivo baseado no ID
+function getObjectiveNameById(objectiveId) {
+    // Usar os enums do navigation-enums.js se disponível
+    if (window.NavigationEnums && window.NavigationEnums.ObjectiveDisplayNames) {
+        // Encontrar a chave do enum baseada no ID
+        const enumKey = Object.keys(window.NavigationEnums.EnumObjective).find(
+            key => window.NavigationEnums.EnumObjective[key] == objectiveId
+        );
+        
+        if (enumKey && window.NavigationEnums.ObjectiveDisplayNames[enumKey]) {
+            return window.NavigationEnums.ObjectiveDisplayNames[enumKey];
+        }
     }
+    
+    // Fallback para mapeamento manual caso os enums não estejam disponíveis
+    const objectiveMap = {
+        Emagrecimento: 1,
+        Hipertrofia: 2,
+        Definicao: 3,
+        AumentoDeMassaMuscular: 4,
+        GanhoDePeso: 5,
+        AumentoDeForca: 6,
+        MelhoraDeDesempenho: 7,
+        MelhoraDeSaude: 8,
+        MelhoraDeRecuperacao: 9,
+        MelhoraDeImunidade: 10,
+        SaudeEBemEstar: 11
+    };
+    
+    return objectiveMap[objectiveId] || "Objetivos";
 }
-*/
-
-// Manter funções de exemplo se forem usadas em outras partes da página
-/*
-function initializeFeaturedProductsSlider() { ... }
-function initializeProductButtons() { ... }
-function addToCart(product) { ... }
-function showAddToCartFeedback(button) { ... }
-function updateCartCounter() { ... }
-function filterGoals(searchTerm) { ... }
-*/
-
