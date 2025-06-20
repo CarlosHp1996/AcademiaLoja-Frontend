@@ -12,6 +12,30 @@
     <link rel="stylesheet" href="/public/css/auth-notifications.css">
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Estilos adicionados para fundo preto e letras laranjas nos cards de acessório */
+        .accessory-card.custom-style {
+            background-color: #000000; /* Fundo preto */
+            color: #FFA500; /* Letras laranjas */
+            border: 1px solid #FFA500; /* Borda laranja opcional */
+        }
+        .accessory-card.custom-style h2,
+        .accessory-card.custom-style p,
+        .accessory-card.custom-style .accessory-benefits li {
+            color: #FFA500; /* Letras laranjas */
+        }
+        .accessory-card.custom-style .accessory-icon i {
+            color: #FFA500; /* Ícone laranja */
+        }
+        .accessory-card.custom-style .btn-primary {
+            background-color: #FFA500; /* Botão laranja */
+            color: #000000; /* Texto preto no botão */
+            border: none;
+        }
+        .accessory-card.custom-style .btn-primary:hover {
+            background-color: #cc8400; /* Laranja mais escuro no hover */
+        }
+    </style>
 </head>
 <body>
 <!-- Header -->
@@ -60,7 +84,7 @@
                     </ul>                   
                 </li>
                 <li class="menu-item">
-                    <a href="/public/html/goals.html" class="nav-link">Objetivo 
+                    <a href="/public/html/accessories.html" class="nav-link">Acessório 
                         <i class="fas fa-chevron-down" style="margin-left: 6px; font-size: 0.85em;"></i>
                     </a>
                     <ul class="submenu">
@@ -94,347 +118,93 @@
     </div>
 </section>
 
-    <main class="main-content">
-        <div class="container">
-            <div class="accessories-container">
-                <!-- Filtros -->
-                <aside class="filters-sidebar">
-                    <div class="filters-header">
-                        <h2>Filtros</h2>
-                        <button id="clearFilters" class="btn-text">Limpar Filtros</button>
-                    </div>
+<main class="main-content">
+    <div class="container">
+        <section class="accessories-header">
+            <h1 class="page-title">Encontre o Acessório Ideal para Você</h1>
+            <p class="page-description">
+                Descubra acessórios para seu treino e suplementação.                
+            </p>
+        </section>
 
-                    <div class="filter-group">
-                        <h3>Categorias</h3>
-                        <div class="filter-options">
-                            <label class="checkbox-container">
-                                <input type="checkbox" name="category" value="camisetas">
-                                <span class="checkmark"></span>
-                                Camisetas
-                            </label>
-                            <label class="checkbox-container">
-                                <input type="checkbox" name="category" value="luvas">
-                                <span class="checkmark"></span>
-                                Luvas
-                            </label>
-                            <label class="checkbox-container">
-                                <input type="checkbox" name="category" value="coqueteleiras">
-                                <span class="checkmark"></span>
-                                Coqueteleiras
-                            </label>
-                            <label class="checkbox-container">
-                                <input type="checkbox" name="category" value="mochilas">
-                                <span class="checkmark"></span>
-                                Mochilas
-                            </label>
-                            <label class="checkbox-container">
-                                <input type="checkbox" name="category" value="toalhas">
-                                <span class="checkmark"></span>
-                                Toalhas
-                            </label>
-                        </div>
-                    </div>
-
-                    <div class="filter-group">
-                        <h3>Cores</h3>
-                        <div class="filter-options">
-                            <label class="checkbox-container">
-                                <input type="checkbox" name="color" value="preto">
-                                <span class="checkmark"></span>
-                                Preto
-                            </label>
-                            <label class="checkbox-container">
-                                <input type="checkbox" name="color" value="branco">
-                                <span class="checkmark"></span>
-                                Branco
-                            </label>
-                            <label class="checkbox-container">
-                                <input type="checkbox" name="color" value="vermelho">
-                                <span class="checkmark"></span>
-                                Vermelho
-                            </label>
-                            <label class="checkbox-container">
-                                <input type="checkbox" name="color" value="azul">
-                                <span class="checkmark"></span>
-                                Azul
-                            </label>
-                            <label class="checkbox-container">
-                                <input type="checkbox" name="color" value="cinza">
-                                <span class="checkmark"></span>
-                                Cinza
-                            </label>
-                        </div>
-                    </div>
-
-                    <div class="filter-group">
-                        <h3>Tamanhos</h3>
-                        <div class="filter-options">
-                            <label class="checkbox-container">
-                                <input type="checkbox" name="size" value="p">
-                                <span class="checkmark"></span>
-                                P
-                            </label>
-                            <label class="checkbox-container">
-                                <input type="checkbox" name="size" value="m">
-                                <span class="checkmark"></span>
-                                M
-                            </label>
-                            <label class="checkbox-container">
-                                <input type="checkbox" name="size" value="g">
-                                <span class="checkmark"></span>
-                                G
-                            </label>
-                            <label class="checkbox-container">
-                                <input type="checkbox" name="size" value="gg">
-                                <span class="checkmark"></span>
-                                GG
-                            </label>
-                            <label class="checkbox-container">
-                                <input type="checkbox" name="size" value="unico">
-                                <span class="checkmark"></span>
-                                Único
-                            </label>
-                        </div>
-                    </div>
-
-                    <div class="filter-group">
-                        <h3>Modelos</h3>
-                        <div class="filter-options">
-                            <label class="checkbox-container">
-                                <input type="checkbox" name="model" value="regata">
-                                <span class="checkmark"></span>
-                                Regata
-                            </label>
-                            <label class="checkbox-container">
-                                <input type="checkbox" name="model" value="manga-curta">
-                                <span class="checkmark"></span>
-                                Manga Curta
-                            </label>
-                            <label class="checkbox-container">
-                                <input type="checkbox" name="model" value="manga-longa">
-                                <span class="checkmark"></span>
-                                Manga Longa
-                            </label>
-                            <label class="checkbox-container">
-                                <input type="checkbox" name="model" value="standard">
-                                <span class="checkmark"></span>
-                                Standard
-                            </label>
-                            <label class="checkbox-container">
-                                <input type="checkbox" name="model" value="premium">
-                                <span class="checkmark"></span>
-                                Premium
-                            </label>
-                        </div>
-                    </div>
-
-                    <div class="filter-group">
-                        <h3>Marcas</h3>
-                        <div class="filter-options">
-                            <label class="checkbox-container">
-                                <input type="checkbox" name="brand" value="power-rock">
-                                <span class="checkmark"></span>
-                                Power Rock
-                            </label>
-                            <label class="checkbox-container">
-                                <input type="checkbox" name="brand" value="growth">
-                                <span class="checkmark"></span>
-                                Growth
-                            </label>
-                            <label class="checkbox-container">
-                                <input type="checkbox" name="brand" value="black-skull">
-                                <span class="checkmark"></span>
-                                Black Skull
-                            </label>
-                            <label class="checkbox-container">
-                                <input type="checkbox" name="brand" value="integral-medica">
-                                <span class="checkmark"></span>
-                                Integral Médica
-                            </label>
-                        </div>
-                    </div>
-
-                    <div class="filter-group">
-                        <h3>Preço</h3>
-                        <div class="price-range">
-                            <div class="price-inputs">
-                                <input type="number" id="minPrice" placeholder="Min" min="0">
-                                <span>até</span>
-                                <input type="number" id="maxPrice" placeholder="Max" min="0">
-                            </div>
-                            <button id="applyPriceFilter" class="btn btn-sm">Aplicar</button>
-                        </div>
-                    </div>
-
-                    <button id="applyFilters" class="btn btn-primary">
-                        Aplicar Filtros
-                        <i class="fas fa-filter"></i>
-                    </button>
-                </aside>
-
-                <!-- Conteúdo Principal -->
-                <div class="accessories-content">
-                    <section class="accessories-header">
-                        <h1 class="page-title">Acessórios</h1>
-                        <div class="sort-options">
-                            <label for="sortBy">Ordenar por:</label>
-                            <select id="sortBy">
-                                <option value="relevance">Relevância</option>
-                                <option value="price-asc">Menor Preço</option>
-                                <option value="price-desc">Maior Preço</option>
-                                <option value="name-asc">A-Z</option>
-                                <option value="name-desc">Z-A</option>
-                            </select>
-                        </div>
-                    </section>
-
-                    <section class="accessories-grid">
-                        <div class="accessory-card">
-                            <div class="accessory-image">
-                                <img src="/assets/images/accessories/tshirt.jpg" alt="Camiseta">
-                                <div class="product-actions">
-                                    <button class="action-btn wishlist-btn">
-                                        <i class="far fa-heart"></i>
-                                    </button>
-                                    <button class="action-btn quickview-btn">
-                                        <i class="fas fa-eye"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="accessory-info">
-                                <div class="accessory-category">Camisetas</div>
-                                <h3 class="accessory-title">Camiseta Fitness Power Rock</h3>
-                                <div class="accessory-rating">
-                                    <div class="stars">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star-half-alt"></i>
-                                    </div>
-                                    <span class="rating-count">(18)</span>
-                                </div>
-                                <div class="accessory-price">
-                                    <span class="current-price">R$ 49,90</span>
-                                </div>
-                                <button class="btn btn-primary add-to-cart">
-                                    Adicionar ao Carrinho
-                                    <i class="fas fa-shopping-cart"></i>
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="accessory-card">
-                            <div class="accessory-image">
-                                <img src="/assets/images/accessories/shaker.jpg" alt="Coqueteleira">
-                                <div class="product-actions">
-                                    <button class="action-btn wishlist-btn">
-                                        <i class="far fa-heart"></i>
-                                    </button>
-                                    <button class="action-btn quickview-btn">
-                                        <i class="fas fa-eye"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="accessory-info">
-                                <div class="accessory-category">Coqueteleiras</div>
-                                <h3 class="accessory-title">Coqueteleira Power Rock 600ml</h3>
-                                <div class="accessory-rating">
-                                    <div class="stars">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                    </div>
-                                    <span class="rating-count">(12)</span>
-                                </div>
-                                <div class="accessory-price">
-                                    <span class="current-price">R$ 29,90</span>
-                                    <span class="old-price">R$ 39,90</span>
-                                    <span class="discount">-25%</span>
-                                </div>
-                                <button class="btn btn-primary add-to-cart">
-                                    Adicionar ao Carrinho
-                                    <i class="fas fa-shopping-cart"></i>
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="accessory-card">
-                            <div class="accessory-image">
-                                <img src="/assets/images/accessories/gloves.jpg" alt="Luvas">
-                                <div class="product-actions">
-                                    <button class="action-btn wishlist-btn">
-                                        <i class="far fa-heart"></i>
-                                    </button>
-                                    <button class="action-btn quickview-btn">
-                                        <i class="fas fa-eye"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="accessory-info">
-                                <div class="accessory-category">Luvas</div>
-                                <h3 class="accessory-title">Luvas de Treino Power Rock</h3>
-                                <div class="accessory-rating">
-                                    <div class="stars">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                    <span class="rating-count">(24)</span>
-                                </div>
-                                <div class="accessory-price">
-                                    <span class="current-price">R$ 59,90</span>
-                                </div>
-                                <button class="btn btn-primary add-to-cart">
-                                    Adicionar ao Carrinho
-                                    <i class="fas fa-shopping-cart"></i>
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="accessory-card">
-                            <div class="accessory-image">
-                                <img src="/assets/images/accessories/towel.jpg" alt="Toalha">
-                                <div class="product-actions">
-                                    <button class="action-btn wishlist-btn">
-                                        <i class="far fa-heart"></i>
-                                    </button>
-                                    <button class="action-btn quickview-btn">
-                                        <i class="fas fa-eye"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="accessory-info">
-                                <div class="accessory-category">Toalhas</div>
-                                <h3 class="accessory-title">Toalha de Treino Power Rock</h3>
-                                <div class="accessory-rating">
-                                    <div class="stars">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                    </div>
-                                    <span class="rating-count">(8)</span>
-                                </div>
-                                <div class="accessory-price">
-                                    <span class="current-price">R$ 39,90</span>
-                                </div>
-                                <button class="btn btn-primary add-to-cart">
-                                    Adicionar ao Carrinho
-                                    <i class="fas fa-shopping-cart"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </section>
+        <section class="accessories-grid" id="accessories-grid-container">
+            <!-- Cards de acessórios serão carregados dinamicamente aqui -->
+            <!-- Exemplo de card com a nova classe de estilo e data attribute para ID -->
+            <div class="accessory-card custom-style" data-accessory-id="1">
+                <div class="accessory-icon">
+                    <i class="fas fa-dumbbell"></i>
                 </div>
+                <h2>Camisetas</h2>
+                <p>Camisetas para o seu treino.</p>
+                <ul class="accessory-benefits">
+                    <li>Inverno</li>
+                    <li>Verão</li>
+                    <li>Regatas</li>
+                </ul>
+                <a href="#" class="btn btn-primary">Ver Acessórios</a> <!-- Link será tratado pelo JS -->
             </div>
-        </div>
-    </main>
+
+             <div class="accessory-card custom-style" data-accessory-id="1"> <!-- ID Emagrecimento -->
+                <div class="accessory-icon">
+                    <i class="fas fa-fire"></i>
+                </div>
+                <h2>Queima de Gordura</h2>
+                <p>Produtos que auxiliam na redução de gordura corporal.</p>
+                <ul class="accessory-benefits">
+                    <li>Termogênicos naturais</li>
+                    <li>Suplementos para metabolismo</li>
+                    <li>Produtos para definição</li>
+                </ul>
+                 <a href="#" class="btn btn-primary">Ver AAcessório</a>
+            </div>
+
+             <div class="accessory-card custom-style" data-accessory-id="7"> <!-- ID MelhoraDeDesempenho -->
+                <div class="accessory-icon">
+                    <i class="fas fa-running"></i>
+                </div>
+                <h2>Performance e Energia</h2>
+                <p>Suplementos para melhorar a performance e disposição.</p>
+                <ul class="accessory-benefits">
+                    <li>Pré-treino energético</li>
+                    <li>BCAA para recuperação</li>
+                    <li>Eletrólitos e hidratação</li>
+                </ul>
+                 <a href="#" class="btn btn-primary">Ver Acessório</a>
+            </div>
+
+             <div class="accessory-card custom-style" data-accessory-id="8"> <!-- ID MelhoraDeSaude -->
+                <div class="accessory-icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <h2>Saúde e Bem-estar</h2>
+                <p>Produtos para manter a saúde e qualidade de vida.</p>
+                <ul class="accessory-benefits">
+                    <li>Vitaminas e minerais</li>
+                    <li>Ômega 3 e antioxidantes</li>
+                    <li>Suplementos naturais</li>
+                </ul>
+                 <a href="#" class="btn btn-primary">Ver Acessório</a>
+            </div>
+            <!-- Outros cards serão adicionados dinamicamente ou podem ser mapeados aqui -->
+
+        </section>
+
+        <!-- Seções de Produtos em Destaque e Guia mantidas como estavam -->
+        <section class="featured-products">
+             <h2 class="section-title">Produtos em Destaque por Acessório</h2>
+             <div class="products-slider">
+                 <!-- Conteúdo do slider -->
+             </div>
+        </section>
+        <section class="accessories-guide">
+             <h2 class="section-title">Guia de Acessórios</h2>
+             <div class="guide-content">
+                 <!-- Conteúdo do guia -->
+             </div>
+        </section>
+
+    </div>
+</main>
 
     <!-- Footer -->
     <footer class="footer">
@@ -443,7 +213,7 @@
                 <div class="footer-column">
                     <a href="/public/html/index.html" class="logo">
                         <span class="logo-power">Power Rock</span>
-                        <span class="logo-supps">Supplements</span>
+                        <span class="logo-supps">supplements</span>
                     </a>
                     <p class="footer-description">
                         Sua loja especializada em suplementos de alta performance para atletas e entusiastas do fitness.
