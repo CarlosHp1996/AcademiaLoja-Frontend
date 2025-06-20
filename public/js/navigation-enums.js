@@ -193,7 +193,8 @@ function getUrlParams() {
         CategoryIds: urlParams.get('CategoryIds'),
         ObjectiveIds: urlParams.get('ObjectiveIds'),
         AccessoryIds: urlParams.get('AccessoryIds'),
-        BrandIds: urlParams.get('BrandIds')
+        BrandIds: urlParams.get('BrandIds'),
+        title: urlParams.get('title') // Adicionado para capturar o título personalizado
     };
 }
 
@@ -218,6 +219,47 @@ function buildApiUrl(baseUrl = 'https://localhost:4242/api/Product/get') {
     return queryParams.length > 0 ? `${baseUrl}?${queryParams.join('&')}` : baseUrl;
 }
 
+// Função para atualizar título da página com base nos filtros
+function updatePageTitle() {
+    const params = getUrlParams();
+    const titleElement = document.querySelector('.page-title');
+    
+    if (!titleElement) return;
+    
+    // Se há um título personalizado na URL, usá-lo
+    if (params.title) {
+        titleElement.textContent = decodeURIComponent(params.title);
+        return;
+    }
+    
+    // Caso contrário, gerar título baseado nos filtros
+    let title = "Todos os Produtos";
+    
+    if (params.CategoryIds) {
+        const categoryKey = Object.keys(EnumCategory).find(key => EnumCategory[key] == params.CategoryIds);
+        if (categoryKey) {
+            title = CategoryDisplayNames[categoryKey];
+        }
+    } else if (params.ObjectiveIds) {
+        const objectiveKey = Object.keys(EnumObjective).find(key => EnumObjective[key] == params.ObjectiveIds);
+        if (objectiveKey) {
+            title = ObjectiveDisplayNames[objectiveKey];
+        }
+    } else if (params.AccessoryIds) {
+        const accessoryKey = Object.keys(EnumAccessory).find(key => EnumAccessory[key] == params.AccessoryIds);
+        if (accessoryKey) {
+            title = AccessoryDisplayNames[accessoryKey];
+        }
+    } else if (params.BrandIds) {
+        const brandKey = Object.keys(EnumBrand).find(key => EnumBrand[key] == params.BrandIds);
+        if (brandKey) {
+            title = BrandDisplayNames[brandKey];
+        }
+    }
+    
+    titleElement.textContent = title;
+}
+
 // Exportar para uso global
 window.NavigationEnums = {
     EnumCategory,
@@ -231,6 +273,7 @@ window.NavigationEnums = {
     generateFilterUrl,
     getUrlParams,
     buildApiUrl,
+    updatePageTitle, // Nova função exportada
     initializeNavigation
 };
 

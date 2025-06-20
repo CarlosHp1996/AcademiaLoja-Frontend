@@ -99,6 +99,11 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // Atualizar título da página baseado nos parâmetros da URL
+    if (window.NavigationEnums && window.NavigationEnums.updatePageTitle) {
+        window.NavigationEnums.updatePageTitle();
+    }
+
     // Função para marcar checkboxes baseados nos filtros ativos
     function updateCheckboxesFromFilters() {
         // Aguardar um pouco para garantir que os checkboxes foram criados
@@ -581,7 +586,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         ${product.oldPrice ? `<span class="text-sm text-gray-400 line-through">R$ ${product.oldPrice.toFixed(2).replace('.', ',')}</span>` : ''}
                     </div>
                     <button class="add-to-cart mt-3 w-full bg-orange-500 text-white py-2 rounded hover:bg-orange-600 transition-colors duration-300" data-product-id="${product.id}">
-                        Adicionar ao Carrinho
+                        COMPRAR
                     </button>
                 </div>
             `;
