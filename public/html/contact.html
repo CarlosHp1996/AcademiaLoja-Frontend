@@ -10,7 +10,10 @@
     <!-- Estilos para dropdown e notificações -->
     <link rel="stylesheet" href="/public/css/auth-dropdown.css">
     <link rel="stylesheet" href="/public/css/auth-notifications.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 <!-- Header -->
@@ -28,23 +31,23 @@
             </button>
         </div>
         <div class="header-right">
-    <a href="/public/html/cart.html" class="cart-link">
-        <i class="fas fa-shopping-cart"></i>
-        <span class="cart-badge"></span>
-    </a>
-    <div class="user-dropdown">
-        <button class="user-icon-btn" aria-label="Conta">
-            <i class="fas fa-user"></i>
-        </button>
-        <div class="dropdown-menu">
-            <!-- Dropdown menu será preenchido via JavaScript -->
+            <a href="/public/html/cart.html" class="cart-link">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-badge"></span>
+            </a>
+            <div class="user-dropdown">
+                <button class="user-icon-btn" aria-label="Conta">
+                    <i class="fas fa-user"></i>
+                </button>
+                <div class="dropdown-menu">
+                    <!-- Dropdown menu será preenchido via JavaScript -->
+                </div>
+            </div>
         </div>
-    </div>
-</div>
     </div>
 </header>
 
- <!-- Subheader -->
+<!-- Subheader -->
 <section class="subheader">
     <div class="container">
         <nav class="subheader-nav">
@@ -59,7 +62,7 @@
                     </ul>                   
                 </li>
                 <li class="menu-item">
-                    <a href="/public/html/goals.html" class="nav-link">Objetivo 
+                    <a href="/public/html/goals.html" class="nav-link">Objetivos 
                         <i class="fas fa-chevron-down" style="margin-left: 6px; font-size: 0.85em;"></i>
                     </a>
                     <ul class="submenu">
@@ -93,134 +96,382 @@
     </div>
 </section>
 
-    <main class="main-content">
-        <div class="container">
-            <section class="contact-header">
-                <h1 class="page-title">Entre em Contato Conosco</h1>
-                <p class="page-description">
-                    Estamos aqui para ajudar! Entre em contato conosco através de qualquer um dos meios abaixo.
-                </p>
-            </section>
-
-            <section class="contact-info">
-                <div class="contact-method">
-                    <i class="fas fa-phone"></i>
-                    <h3>Telefone</h3>
-                    <p>(11) 99999-9999</p>
-                </div>
-                <div class="contact-method">
-                    <i class="fas fa-envelope"></i>
-                    <h3>Email</h3>
-                    <p>contato@academialoja.com</p>
-                </div>
-                <div class="contact-method">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <h3>Endereço</h3>
-                    <p>Rua Exemplo, 123 - São Paulo, SP</p>
-                </div>
-            </section>
-
-            <section class="contact-form">
-                <h2 class="section-title">Envie uma Mensagem</h2>
-                <form action="#" method="post">
-                    <div class="form-group">
-                        <label for="name">Nome</label>
-                        <input type="text" id="name" name="name" required>
+<main class="main-content">
+    <div class="container">
+        <!-- Modern Contact Hero Section -->
+        <section class="contact-hero-modern">
+            <!-- Animated Background Elements -->
+            <div class="contact-bg-elements">
+                <div class="floating-element element-1"></div>
+                <div class="floating-element element-2"></div>
+                <div class="floating-element element-3"></div>
+                <div class="floating-element element-4"></div>
+                <div class="floating-element element-5"></div>
+            </div>
+            
+            <!-- Gradient Overlays -->
+            <div class="contact-gradient-overlay"></div>
+            <div class="contact-radial-overlay"></div>
+            
+            <!-- Background Pattern -->
+            <div class="contact-pattern-bg"></div>
+            
+            <!-- Content Container -->
+            <div class="container contact-container">
+                <div class="contact-content-modern">
+                    <!-- Badge -->
+                    <div class="contact-badge">
+                        <i class="fas fa-headset"></i>
+                        <span>Suporte Especializado</span>
                     </div>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Mensagem</label>
-                        <textarea id="message" name="message" rows="5" required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Enviar</button>
-                </form>
-            </section>
-        </div>
-    </main>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-column">
-                    <a href="/public/html/index.html" class="logo">
-                        <span class="logo-power">Power Rock</span>
-                        <span class="logo-supps">Supplements</span>
-                    </a>
-                    <p class="footer-description">
-                        Sua loja especializada em suplementos de alta performance para atletas e entusiastas do fitness.
+                    
+                    <!-- Main Title -->
+                    <h1 class="contact-title-modern">
+                        Estamos aqui para 
+                        <span class="contact-highlight">
+                            <span class="highlight-text">ajudar você</span>
+                            <div class="highlight-underline"></div>
+                        </span>
+                    </h1>
+                    
+                    <!-- Subtitle -->
+                    <p class="contact-subtitle-modern">
+                        Nossa equipe especializada está pronta para esclarecer suas dúvidas, 
+                        ajudar na escolha dos produtos ideais e oferecer o melhor suporte.
                     </p>
-                    <div class="social-links">
-                        <a href="https://www.facebook.com/profile.php?id=61575757384725" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                        <a href="https://www.instagram.com/powerrocksupplements/" class="social-link"><i class="fab fa-instagram"></i></a>
+                    
+                    <!-- Stats -->
+                    <div class="contact-stats">
+                        <div class="stat-item">
+                            <div class="stat-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-number">24h</div>
+                                <div class="stat-label">Resposta</div>
+                            </div>
+                        </div>
+                        <div class="stat-divider"></div>
+                        <div class="stat-item">
+                            <div class="stat-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-number">10k+</div>
+                                <div class="stat-label">Atendimentos</div>
+                            </div>
+                        </div>
+                        <div class="stat-divider"></div>
+                        <div class="stat-item">
+                            <div class="stat-icon">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-number">4.9</div>
+                                <div class="stat-label">Avaliação</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="footer-column">
-                    <h3 class="footer-title">Categorias</h3>
-                    <ul class="footer-links">
-                        <li><a href="/public/html/products.html">Proteínas</a></li>
-                        <li><a href="/public/html/products.html">Pré-Treino</a></li>
-                        <li><a href="/public/html/products.html">Creatina</a></li>
-                        <li><a href="/public/html/products.html">Vitaminas</a></li>
-                        <li><a href="/public/html/accessories.html">Acessórios</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3 class="footer-title">Informações</h3>
-                    <ul class="footer-links">
-                        <li><a href="/about">Sobre Nós</a></li>
-                        <li><a href="/shipping">Entrega</a></li>
-                        <li><a href="/privacy">Política de Privacidade</a></li>
-                        <li><a href="/terms">Termos e Condições</a></li>
-                        <li><a href="/public/html/contact.html">Contato</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3 class="footer-title">Contato</h3>
-                    <ul class="contact-info">
-                        <li>
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>Av. Paulista, 1000 - São Paulo</span>
-                        </li>
-                        <li>
+                
+                <!-- Side Visual Element -->
+                <div class="contact-visual">
+                    <div class="visual-circle-contact">
+                        <div class="circle-content">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                    </div>
+                    <div class="visual-contacts">
+                        <div class="contact-icon contact-1">
                             <i class="fas fa-phone"></i>
-                            <span>(11) 99999-9999</span>
-                        </li>
-                        <li>
+                        </div>
+                        <div class="contact-icon contact-2">
                             <i class="fas fa-envelope"></i>
-                            <span>contato@powerrocksupplements.com.br</span>
-                        </li>
-                    </ul>
-                    <div class="payment-methods">
-                        <h4 class="payment-title">Formas de Pagamento</h4>
-                        <div class="payment-icons">
-                            <div class="payment-icon"></div>
-                            <div class="payment-icon"></div>
-                            <div class="payment-icon"></div>
-                            <div class="payment-icon"></div>
-                            <div class="payment-icon"></div>
+                        </div>
+                        <div class="contact-icon contact-3">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <div class="contact-icon contact-4">
+                            <i class="fas fa-map-marker-alt"></i>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="copyright">
-                © 2025 Power Rock Supplements. Todos os direitos reservados.
+        </section>
+
+        <!-- Contact Methods Section -->
+        <section class="contact-methods-section">
+            <div class="section-header">
+                <h2 class="section-title">Como Falar Conosco</h2>
+                <p class="section-subtitle">Escolha a forma mais conveniente para entrar em contato</p>
+            </div>
+
+            <div class="contact-methods-grid">
+                <div class="contact-method-card">
+                    <div class="method-icon">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <h3>WhatsApp</h3>
+                    <p>Atendimento rápido e direto pelo WhatsApp</p>
+                    <div class="method-info">
+                        <span>(11) 99999-9999</span>
+                    </div>
+                    <button class="btn-contact-method">
+                        <span>Conversar Agora</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <div class="contact-method-card">
+                    <div class="method-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3>Email</h3>
+                    <p>Envie sua dúvida por email e receba uma resposta detalhada</p>
+                    <div class="method-info">
+                        <span>contato@powerrocksupplements.com.br</span>
+                    </div>
+                    <button class="btn-contact-method">
+                        <span>Enviar Email</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <div class="contact-method-card">
+                    <div class="method-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <h3>Telefone</h3>
+                    <p>Ligue para nossa central de atendimento</p>
+                    <div class="method-info">
+                        <span>(11) 99999-9999</span>
+                    </div>
+                    <button class="btn-contact-method">
+                        <span>Ligar Agora</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <div class="contact-method-card">
+                    <div class="method-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>Localização</h3>
+                    <p>Visite nossa loja física</p>
+                    <div class="method-info">
+                        <span>Av. Paulista, 1000 - São Paulo, SP</span>
+                    </div>
+                    <button class="btn-contact-method">
+                        <span>Ver no Mapa</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Form Section -->
+        <section class="contact-form-section">
+            <div class="form-container">
+                <div class="form-header">
+                    <h2>Envie sua Mensagem</h2>
+                    <p>Preencha o formulário abaixo e nossa equipe entrará em contato em até 24 horas</p>
+                </div>
+
+                <form class="modern-contact-form" action="#" method="post">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Nome Completo</label>
+                            <input type="text" id="name" name="name" required>
+                            <div class="form-icon">
+                                <i class="fas fa-user"></i>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                            <div class="form-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="phone">Telefone</label>
+                            <input type="tel" id="phone" name="phone">
+                            <div class="form-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Assunto</label>
+                            <select id="subject" name="subject" required>
+                                <option value="">Selecione um assunto</option>
+                                <option value="duvida-produto">Dúvida sobre Produto</option>
+                                <option value="pedido">Pedido</option>
+                                <option value="suporte">Suporte Técnico</option>
+                                <option value="sugestao">Sugestão</option>
+                                <option value="outro">Outro</option>
+                            </select>
+                            <div class="form-icon">
+                                <i class="fas fa-tag"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="message">Mensagem</label>
+                        <textarea id="message" name="message" rows="6" required placeholder="Descreva sua dúvida ou mensagem..."></textarea>
+                        <div class="form-icon">
+                            <i class="fas fa-comment"></i>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-submit-form">
+                        <span class="btn-text">Enviar Mensagem</span>
+                        <div class="btn-icon">
+                            <i class="fas fa-paper-plane"></i>
+                        </div>
+                        <div class="btn-glow"></div>
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq-section">
+            <div class="section-header">
+                <h2 class="section-title">Perguntas Frequentes</h2>
+                <p class="section-subtitle">Encontre respostas rápidas para as dúvidas mais comuns</p>
+            </div>
+
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Como escolher o suplemento ideal?</h3>
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Nossa equipe especializada pode ajudar você a escolher o suplemento ideal baseado em seus objetivos, rotina de treino e necessidades específicas.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Qual o prazo de entrega?</h3>
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>O prazo de entrega varia de acordo com sua localização. Para São Paulo capital, entregamos em até 24h. Para outras regiões, de 2 a 5 dias úteis.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Posso trocar ou devolver produtos?</h3>
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Sim! Você tem até 7 dias para trocar ou devolver produtos, desde que estejam lacrados e em perfeitas condições.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Como acompanhar meu pedido?</h3>
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Após a confirmação do pagamento, você receberá um código de rastreamento por email para acompanhar seu pedido em tempo real.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-column">
+                <a href="/public/html/index.html" class="logo">
+                    <span class="logo-power">Power Rock</span>
+                    <span class="logo-supps">Supplements</span>
+                </a>
+                <p class="footer-description">
+                    Sua loja especializada em suplementos de alta performance para atletas e entusiastas do fitness.
+                </p>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/profile.php?id=61575757384725" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/powerrocksupplements/" class="social-link"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3 class="footer-title">Categorias</h3>
+                <ul class="footer-links">
+                    <li><a href="/public/html/products.html">Proteínas</a></li>
+                    <li><a href="/public/html/products.html">Pré-Treino</a></li>
+                    <li><a href="/public/html/products.html">Creatina</a></li>
+                    <li><a href="/public/html/products.html">Vitaminas</a></li>
+                    <li><a href="/public/html/accessories.html">Acessórios</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3 class="footer-title">Informações</h3>
+                <ul class="footer-links">
+                    <li><a href="/about">Sobre Nós</a></li>
+                    <li><a href="/shipping">Entrega</a></li>
+                    <li><a href="/privacy">Política de Privacidade</a></li>
+                    <li><a href="/terms">Termos e Condições</a></li>
+                    <li><a href="/public/html/contact.html">Contato</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3 class="footer-title">Contato</h3>
+                <ul class="contact-info">
+                    <li>
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Av. Paulista, 1000 - São Paulo</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-phone"></i>
+                        <span>(11) 99999-9999</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-envelope"></i>
+                        <span>contato@powerrocksupplements.com.br</span>
+                    </li>
+                </ul>
+                <div class="payment-methods">
+                    <h4 class="payment-title">Formas de Pagamento</h4>
+                    <div class="payment-icons">
+                        <div class="payment-icon"></div>
+                        <div class="payment-icon"></div>
+                        <div class="payment-icon"></div>
+                        <div class="payment-icon"></div>
+                        <div class="payment-icon"></div>
+                    </div>
+                </div>
             </div>
         </div>
-    </footer>
+        <div class="copyright">
+            © 2025 Power Rock Supplements. Todos os direitos reservados.
+        </div>
+    </div>
+</footer>
 
-    <!-- Script de navegação - DEVE SER CARREGADO PRIMEIRO -->
-    <script src="/public/js/navigation-enums.js"></script>
-    <!-- Script da barra de pesquisa -->
-    <script src="/public/js/search-bar.js"></script>
-      <!-- WhatsApp Button -->
-    <script src="/public/js/whatsapp-button.js"></script>
-        <!-- Scripts de autenticação - ORDEM IMPORTA! -->
-    <script src="/public/js/auth-service.js"></script>
-    <script src="/public/js/auth-notifications.js"></script>
-    <script src="/public/js/auth-integration.js"></script>
+<!-- Script de navegação - DEVE SER CARREGADO PRIMEIRO -->
+<script src="/public/js/navigation-enums.js"></script>
+<!-- Script da barra de pesquisa -->
+<script src="/public/js/search-bar.js"></script>
+<!-- WhatsApp Button -->
+<script src="/public/js/whatsapp-button.js"></script>
+<!-- Scripts de autenticação - ORDEM IMPORTA! -->
+<script src="/public/js/auth-service.js"></script>
+<script src="/public/js/auth-notifications.js"></script>
+<script src="/public/js/auth-integration.js"></script>
+<!-- Contact Page Script -->
+<script src="/public/js/contact.js"></script>
 </body>
-</html> 
+</html>
