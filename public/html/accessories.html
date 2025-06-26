@@ -10,32 +10,10 @@
     <!-- Estilos para dropdown e notificações -->
     <link rel="stylesheet" href="/public/css/auth-dropdown.css">
     <link rel="stylesheet" href="/public/css/auth-notifications.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        /* Estilos adicionados para fundo preto e letras laranjas nos cards de acessório */
-        .accessory-card.custom-style {
-            background-color: #000000; /* Fundo preto */
-            color: #FFA500; /* Letras laranjas */
-            border: 1px solid #FFA500; /* Borda laranja opcional */
-        }
-        .accessory-card.custom-style h2,
-        .accessory-card.custom-style p,
-        .accessory-card.custom-style .accessory-benefits li {
-            color: #FFA500; /* Letras laranjas */
-        }
-        .accessory-card.custom-style .accessory-icon i {
-            color: #FFA500; /* Ícone laranja */
-        }
-        .accessory-card.custom-style .btn-primary {
-            background-color: #FFA500; /* Botão laranja */
-            color: #000000; /* Texto preto no botão */
-            border: none;
-        }
-        .accessory-card.custom-style .btn-primary:hover {
-            background-color: #cc8400; /* Laranja mais escuro no hover */
-        }
-    </style>
 </head>
 <body>
 <!-- Header -->
@@ -53,23 +31,23 @@
             </button>
         </div>
         <div class="header-right">
-    <a href="/public/html/cart.html" class="cart-link">
-        <i class="fas fa-shopping-cart"></i>
-        <span class="cart-badge"></span>
-    </a>
-    <div class="user-dropdown">
-        <button class="user-icon-btn" aria-label="Conta">
-            <i class="fas fa-user"></i>
-        </button>
-        <div class="dropdown-menu">
-            <!-- Dropdown menu será preenchido via JavaScript -->
+            <a href="/public/html/cart.html" class="cart-link">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-badge"></span>
+            </a>
+            <div class="user-dropdown">
+                <button class="user-icon-btn" aria-label="Conta">
+                    <i class="fas fa-user"></i>
+                </button>
+                <div class="dropdown-menu">
+                    <!-- Dropdown menu será preenchido via JavaScript -->
+                </div>
+            </div>
         </div>
-    </div>
-</div>
     </div>
 </header>
 
- <!-- Subheader -->
+<!-- Subheader -->
 <section class="subheader">
     <div class="container">
         <nav class="subheader-nav">
@@ -84,7 +62,7 @@
                     </ul>                   
                 </li>
                 <li class="menu-item">
-                    <a href="/public/html/accessories.html" class="nav-link">Acessório 
+                    <a href="/public/html/goals.html" class="nav-link">Objetivos 
                         <i class="fas fa-chevron-down" style="margin-left: 6px; font-size: 0.85em;"></i>
                     </a>
                     <ul class="submenu">
@@ -119,174 +97,498 @@
 </section>
 
 <main class="main-content">
-    <div class="container">
-        <section class="accessories-header">
-            <h1 class="page-title">Encontre o Acessório Ideal para Você</h1>
-            <p class="page-description">
-                Descubra acessórios para seu treino e suplementação.                
-            </p>
-        </section>
-
-        <section class="accessories-grid" id="accessories-grid-container">
-            <!-- Cards de acessórios serão carregados dinamicamente aqui -->
-            <!-- Exemplo de card com a nova classe de estilo e data attribute para ID -->
-            <div class="accessory-card custom-style" data-accessory-id="1">
-                <div class="accessory-icon">
-                    <i class="fas fa-dumbbell"></i>
-                </div>
-                <h2>Camisetas</h2>
-                <p>Camisetas para o seu treino.</p>
-                <ul class="accessory-benefits">
-                    <li>Inverno</li>
-                    <li>Verão</li>
-                    <li>Regatas</li>
-                </ul>
-                <a href="#" class="btn btn-primary">Ver Acessórios</a> <!-- Link será tratado pelo JS -->
-            </div>
-
-             <div class="accessory-card custom-style" data-accessory-id="1"> <!-- ID Emagrecimento -->
-                <div class="accessory-icon">
-                    <i class="fas fa-fire"></i>
-                </div>
-                <h2>Queima de Gordura</h2>
-                <p>Produtos que auxiliam na redução de gordura corporal.</p>
-                <ul class="accessory-benefits">
-                    <li>Termogênicos naturais</li>
-                    <li>Suplementos para metabolismo</li>
-                    <li>Produtos para definição</li>
-                </ul>
-                 <a href="#" class="btn btn-primary">Ver AAcessório</a>
-            </div>
-
-             <div class="accessory-card custom-style" data-accessory-id="7"> <!-- ID MelhoraDeDesempenho -->
-                <div class="accessory-icon">
-                    <i class="fas fa-running"></i>
-                </div>
-                <h2>Performance e Energia</h2>
-                <p>Suplementos para melhorar a performance e disposição.</p>
-                <ul class="accessory-benefits">
-                    <li>Pré-treino energético</li>
-                    <li>BCAA para recuperação</li>
-                    <li>Eletrólitos e hidratação</li>
-                </ul>
-                 <a href="#" class="btn btn-primary">Ver Acessório</a>
-            </div>
-
-             <div class="accessory-card custom-style" data-accessory-id="8"> <!-- ID MelhoraDeSaude -->
-                <div class="accessory-icon">
-                    <i class="fas fa-heart"></i>
-                </div>
-                <h2>Saúde e Bem-estar</h2>
-                <p>Produtos para manter a saúde e qualidade de vida.</p>
-                <ul class="accessory-benefits">
-                    <li>Vitaminas e minerais</li>
-                    <li>Ômega 3 e antioxidantes</li>
-                    <li>Suplementos naturais</li>
-                </ul>
-                 <a href="#" class="btn btn-primary">Ver Acessório</a>
-            </div>
-            <!-- Outros cards serão adicionados dinamicamente ou podem ser mapeados aqui -->
-
-        </section>
-
-        <!-- Seções de Produtos em Destaque e Guia mantidas como estavam -->
-        <section class="featured-products">
-             <h2 class="section-title">Produtos em Destaque por Acessório</h2>
-             <div class="products-slider">
-                 <!-- Conteúdo do slider -->
-             </div>
-        </section>
-        <section class="accessories-guide">
-             <h2 class="section-title">Guia de Acessórios</h2>
-             <div class="guide-content">
-                 <!-- Conteúdo do guia -->
-             </div>
-        </section>
-
-    </div>
-</main>
-
-    <!-- Footer -->
-    <footer class="footer">
         <div class="container">
-            <div class="footer-grid">
-                <div class="footer-column">
-                    <a href="/public/html/index.html" class="logo">
-                        <span class="logo-power">Power Rock</span>
-                        <span class="logo-supps">supplements</span>
-                    </a>
-                    <p class="footer-description">
-                        Sua loja especializada em suplementos de alta performance para atletas e entusiastas do fitness.
-                    </p>
-                    <div class="social-links">
-                        <a href="https://www.facebook.com/profile.php?id=61575757384725" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                        <a href="https://www.instagram.com/powerrocksupplements/" class="social-link"><i class="fab fa-instagram"></i></a>
+            <!-- Modern Accessories Hero Section -->
+    <section class="accessories-hero-modern">
+        <!-- Animated Background Elements -->
+        <div class="accessories-bg-elements">
+            <div class="floating-element element-1"></div>
+            <div class="floating-element element-2"></div>
+            <div class="floating-element element-3"></div>
+            <div class="floating-element element-4"></div>
+            <div class="floating-element element-5"></div>
+            <div class="floating-element element-6"></div>
+        </div>
+        
+        <!-- Gradient Overlays -->
+        <div class="accessories-gradient-overlay"></div>
+        <div class="accessories-radial-overlay"></div>
+        
+        <!-- Background Pattern -->
+        <div class="accessories-pattern-bg"></div>
+        
+        <!-- Content Container -->
+        <div class="container accessories-container">
+            <div class="accessories-content-modern">
+                <!-- Badge -->
+                <!-- <div class="accessories-badge">
+                    <i class="fas fa-dumbbell"></i>
+                    <span>Equipamentos Premium</span>
+                </div> -->
+                
+                <!-- Main Title -->
+                <h1 class="accessories-title-modern">
+                    Acessórios para
+                    <span class="accessories-highlight">
+                        <span class="highlight-text">seu treino</span>
+                        <div class="highlight-underline"></div>
+                    </span>
+                    perfeito
+                </h1>
+                
+                <!-- Subtitle -->
+                <p class="accessories-subtitle-modern">
+                    Eleve seu desempenho com nossos acessórios premium para academia. 
+                    Qualidade, durabilidade e estilo em cada produto para maximizar seus resultados.
+                </p>
+                
+                <!-- Stats -->
+                <div class="accessories-stats">
+                    <div class="stat-item">
+                        <div class="stat-icon">
+                            <i class="fas fa-box"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-number">500+</div>
+                            <div class="stat-label">Produtos</div>
+                        </div>
                     </div>
-                </div>
-                <div class="footer-column">
-                    <h3 class="footer-title">Categorias</h3>
-                    <ul class="footer-links">
-                        <li><a href="/public/html/products.html">Proteínas</a></li>
-                        <li><a href="/public/html/products.html">Pré-Treino</a></li>
-                        <li><a href="/public/html/products.html">Creatina</a></li>
-                        <li><a href="/public/html/products.html">Vitaminas</a></li>
-                        <li><a href="/public/html/accessories.html">Acessórios</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3 class="footer-title">Informações</h3>
-                    <ul class="footer-links">
-                        <li><a href="/about">Sobre Nós</a></li>
-                        <li><a href="/shipping">Entrega</a></li>
-                        <li><a href="/privacy">Política de Privacidade</a></li>
-                        <li><a href="/terms">Termos e Condições</a></li>
-                        <li><a href="/public/html/contact.html">Contato</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3 class="footer-title">Contato</h3>
-                    <ul class="contact-info">
-                        <li>
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>Av. Paulista, 1000 - São Paulo</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-phone"></i>
-                            <span>(11) 99999-9999</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-envelope"></i>
-                            <span>contato@powerrocksupplements.com.br</span>
-                        </li>
-                    </ul>
-                    <div class="payment-methods">
-                        <h4 class="payment-title">Formas de Pagamento</h4>
-                        <div class="payment-icons">
-                            <div class="payment-icon"></div>
-                            <div class="payment-icon"></div>
-                            <div class="payment-icon"></div>
-                            <div class="payment-icon"></div>
-                            <div class="payment-icon"></div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <div class="stat-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-number">98%</div>
+                            <div class="stat-label">Satisfação</div>
+                        </div>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <div class="stat-icon">
+                            <i class="fas fa-shipping-fast"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-number">24h</div>
+                            <div class="stat-label">Entrega</div>
                         </div>
                     </div>
                 </div>
+                
+                <!-- Action Buttons -->
+                <div class="accessories-actions-modern">
+                    <button class="btn-primary-accessories">
+                        <span class="btn-text">Explorar Acessórios</span>
+                        <div class="btn-icon">
+                            <i class="fas fa-arrow-down"></i>
+                        </div>
+                        <div class="btn-glow"></div>
+                    </button>
+                    
+                    <button class="btn-secondary-accessories">
+                        <div class="btn-icon-secondary">
+                            <i class="fas fa-play"></i>
+                        </div>
+                        <span class="btn-text">Ver Catálogo</span>
+                    </button>
+                </div>
+                
+                <!-- Trust Indicators -->
+                <div class="accessories-trust">
+                    <div class="trust-item">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Qualidade Garantida</span>
+                    </div>
+                    <div class="trust-item">
+                        <i class="fas fa-award"></i>
+                        <span>Marcas Premium</span>
+                    </div>
+                    <div class="trust-item">
+                        <i class="fas fa-tools"></i>
+                        <span>Durabilidade Superior</span>
+                    </div>
+                </div>
             </div>
-            <div class="copyright">
-                © 2025 Power Rock Supplements. Todos os direitos reservados.
+            
+            <!-- Side Visual Element -->
+            <div class="accessories-visual">
+                <div class="visual-circle-accessories">
+                    <div class="circle-content">
+                        <i class="fas fa-dumbbell"></i>
+                    </div>
+                </div>
+                <div class="visual-accessories">
+                    <div class="accessory-icon-animated accessory-1">
+                        <i class="fas fa-tshirt"></i>
+                    </div>
+                    <div class="accessory-icon-animated accessory-2">
+                        <i class="fas fa-bottle-water"></i>
+                    </div>
+                    <div class="accessory-icon-animated accessory-3">
+                        <i class="fas fa-hand-paper"></i>
+                    </div>
+                    <div class="accessory-icon-animated accessory-4">
+                        <i class="fas fa-blender"></i>
+                    </div>
+                    <div class="accessory-icon-animated accessory-5">
+                        <i class="fas fa-tape"></i>
+                    </div>
+                    <div class="accessory-icon-animated accessory-6">
+                        <i class="fas fa-socks"></i>
+                    </div>
+                </div>
+                <!-- <div class="floating-card-modern">
+                    <div class="card-icon">
+                        <i class="fas fa-medal"></i>
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title">Qualidade Premium</span>
+                        <span class="card-subtitle">Equipamentos Profissionais</span>
+                    </div>
+                </div> -->
             </div>
         </div>
-    </footer>
+        
+        <!-- Scroll Indicator -->
+        <div class="scroll-indicator-accessories">
+            <div class="scroll-text">Explore nossos acessórios</div>
+            <div class="scroll-arrow">
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </div>
+    </section>
 
-    <!-- Script de navegação - DEVE SER CARREGADO PRIMEIRO -->
-    <script src="/public/js/navigation-enums.js"></script>
-    <!-- Script da barra de pesquisa -->
-    <script src="/public/js/search-bar.js"></script>
-    <!-- WhatsApp Button -->
-    <script src="/public/js/whatsapp-button.js"></script>
-    <script src="/public/js/accessories.js"></script>
-        <!-- Scripts de autenticação - ORDEM IMPORTA! -->
-    <script src="/public/js/auth-service.js"></script>
-    <script src="/public/js/auth-notifications.js"></script>
-    <script src="/public/js/auth-integration.js"></script>
+        <!-- Accessories Grid -->
+        <section class="accessories-section">
+            <div class="section-header">
+                <h2 class="section-title">Nossos Acessórios</h2>
+                <!-- <p class="section-subtitle">Encontre tudo que você precisa para maximizar seus resultados</p> -->
+            </div>
+
+            <div class="accessories-grid" id="accessories-grid-container">
+                <!-- Camisetas -->
+                <div class="accessory-card" data-accessory-id="1">
+                    <div class="card-header">
+                        <div class="accessory-icon">
+                            <i class="fas fa-tshirt"></i>
+                        </div>
+                        <div class="card-badge">Popular</div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Camisetas</h3>
+                        <p class="card-description">Camisetas premium para treino com tecnologia dry-fit</p>
+                        <ul class="card-features">
+                            <li><i class="fas fa-check"></i> Tecido respirável</li>
+                            <li><i class="fas fa-check"></i> Secagem rápida</li>
+                            <li><i class="fas fa-check"></i> Vários tamanhos</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn-explore" data-accessory="camisetas">
+                            <a href="#" class="btn btn-accessory">Ver Acessórios</a>
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Garrafas -->
+                <div class="accessory-card" data-accessory-id="2">
+                    <div class="card-header">
+                        <div class="accessory-icon">
+                            <i class="fas fa-bottle-water"></i>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Garrafas</h3>
+                        <p class="card-description">Garrafas térmicas de alta qualidade para hidratação</p>
+                        <ul class="card-features">
+                            <li><i class="fas fa-check"></i> Aço inoxidável</li>
+                            <li><i class="fas fa-check"></i> Isolamento térmico</li>
+                            <li><i class="fas fa-check"></i> 500ml - 1L</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn-explore" data-accessory="garrafas">
+                            <a href="#" class="btn btn-accessory">Ver Acessórios</a>
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Shakeiras -->
+                <div class="accessory-card" data-accessory-id="3">
+                    <div class="card-header">
+                        <div class="accessory-icon">
+                            <i class="fas fa-blender"></i>
+                        </div>
+                        <div class="card-badge">Essencial</div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Shakeiras</h3>
+                        <p class="card-description">Shakeiras profissionais para seus suplementos</p>
+                        <ul class="card-features">
+                            <li><i class="fas fa-check"></i> Sistema anti-vazamento</li>
+                            <li><i class="fas fa-check"></i> Mistura perfeita</li>
+                            <li><i class="fas fa-check"></i> Compartimentos extras</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn-explore" data-accessory="shakeiras">
+                            <a href="#" class="btn btn-accessory">Ver Acessórios</a>
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Luvas -->
+                <div class="accessory-card" data-accessory-id="4">
+                    <div class="card-header">
+                        <div class="accessory-icon">
+                            <i class="fas fa-hand-paper"></i>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Luvas</h3>
+                        <p class="card-description">Luvas de treino para proteção e melhor pegada</p>
+                        <ul class="card-features">
+                            <li><i class="fas fa-check"></i> Proteção total</li>
+                            <li><i class="fas fa-check"></i> Grip antiderrapante</li>
+                            <li><i class="fas fa-check"></i> Ventilação superior</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn-explore" data-accessory="luvas">
+                            <a href="#" class="btn btn-accessory">Ver Acessórios</a>
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Cintos -->
+                <!-- <div class="accessory-card" data-accessory-id="5">
+                    <div class="card-header">
+                        <div class="accessory-icon">
+                            <i class="fas fa-user-shield"></i>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Cintos</h3>
+                        <p class="card-description">Cintos de segurança para levantamento de peso</p>
+                        <ul class="card-features">
+                            <li><i class="fas fa-check"></i> Suporte lombar</li>
+                            <li><i class="fas fa-check"></i> Couro genuíno</li>
+                            <li><i class="fas fa-check"></i> Ajuste personalizado</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn-explore" data-accessory="cintos">
+                            <a href="#" class="btn btn-accessory">Ver Acessórios</a>
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div> -->
+
+                <!-- Faixas -->
+                <div class="accessory-card" data-accessory-id="6">
+                    <div class="card-header">
+                        <div class="accessory-icon">
+                            <i class="fas fa-tape"></i>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Faixas</h3>
+                        <p class="card-description">Faixas elásticas para alongamento e exercícios</p>
+                        <ul class="card-features">
+                            <li><i class="fas fa-check"></i> Múltiplas resistências</li>
+                            <li><i class="fas fa-check"></i> Material durável</li>
+                            <li><i class="fas fa-check"></i> Exercícios variados</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn-explore" data-accessory="faixas">
+                            <a href="#" class="btn btn-accessory">Ver Acessórios</a>
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Meias -->
+                <div class="accessory-card" data-accessory-id="7">
+                    <div class="card-header">
+                        <div class="accessory-icon">
+                            <i class="fas fa-socks"></i>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Meias</h3>
+                        <p class="card-description">Meias esportivas com tecnologia de compressão</p>
+                        <ul class="card-features">
+                            <li><i class="fas fa-check"></i> Compressão graduada</li>
+                            <li><i class="fas fa-check"></i> Antibacteriano</li>
+                            <li><i class="fas fa-check"></i> Conforto extremo</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn-explore" data-accessory="meias">
+                           <a href="#" class="btn btn-accessory">Ver Acessórios</a>
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Mochilas -->
+                <!-- <div class="accessory-card" data-accessory-id="8">
+                    <div class="card-header">
+                        <div class="accessory-icon">
+                            <i class="fas fa-backpack"></i>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Mochilas</h3>
+                        <p class="card-description">Mochilas esportivas com compartimentos organizados</p>
+                        <ul class="card-features">
+                            <li><i class="fas fa-check"></i> Múltiplos compartimentos</li>
+                            <li><i class="fas fa-check"></i> Material resistente</li>
+                            <li><i class="fas fa-check"></i> Design ergonômico</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn-explore" data-accessory="mochilas">
+                            <a href="#" class="btn btn-accessory">Ver Acessórios</a>
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div> -->
+
+                <!-- Bonés -->
+                <!-- <div class="accessory-card" data-accessory-id="9">
+                    <div class="card-header">
+                        <div class="accessory-icon">
+                            <i class="fas fa-hat-cowboy"></i>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Bonés</h3>
+                        <p class="card-description">Bonés esportivos para proteção e estilo</p>
+                        <ul class="card-features">
+                            <li><i class="fas fa-check"></i> Proteção UV</li>
+                            <li><i class="fas fa-check"></i> Ajuste universal</li>
+                            <li><i class="fas fa-check"></i> Design moderno</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn-explore" data-accessory="bones">
+                            <a href="#" class="btn btn-accessory">Ver Acessórios</a>
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div> -->
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="cta-content">
+                <h2 class="cta-title">Pronto para Elevar Seu Treino?</h2>
+                <p class="cta-description">
+                    Descubra nossa coleção completa de acessórios premium e transforme sua experiência na academia.
+                </p>
+                <div class="cta-buttons">
+                    <button class="btn-primary">
+                        <i class="fas fa-shopping-cart"></i>
+                        Ver Todos os Produtos
+                    </button>
+                    <button class="btn-secondary">
+                        <i class="fas fa-phone"></i>
+                        Falar com Especialista
+                    </button>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-column">
+                <a href="/public/html/index.html" class="logo">
+                    <span class="logo-power">Power Rock</span>
+                    <span class="logo-supps">supplements</span>
+                </a>
+                <p class="footer-description">
+                    Sua loja especializada em suplementos de alta performance para atletas e entusiastas do fitness.
+                </p>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/profile.php?id=61575757384725" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/powerrocksupplements/" class="social-link"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3 class="footer-title">Categorias</h3>
+                <ul class="footer-links">
+                    <li><a href="/public/html/products.html">Proteínas</a></li>
+                    <li><a href="/public/html/products.html">Pré-Treino</a></li>
+                    <li><a href="/public/html/products.html">Creatina</a></li>
+                    <li><a href="/public/html/products.html">Vitaminas</a></li>
+                    <li><a href="/public/html/accessories.html">Acessórios</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3 class="footer-title">Informações</h3>
+                <ul class="footer-links">
+                    <li><a href="/about">Sobre Nós</a></li>
+                    <li><a href="/shipping">Entrega</a></li>
+                    <li><a href="/privacy">Política de Privacidade</a></li>
+                    <li><a href="/terms">Termos e Condições</a></li>
+                    <li><a href="/public/html/contact.html">Contato</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3 class="footer-title">Contato</h3>
+                <ul class="contact-info">
+                    <li>
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Av. Paulista, 1000 - São Paulo</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-phone"></i>
+                        <span>(11) 99999-9999</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-envelope"></i>
+                        <span>contato@powerrocksupplements.com.br</span>
+                    </li>
+                </ul>
+                <div class="payment-methods">
+                    <h4 class="payment-title">Formas de Pagamento</h4>
+                    <div class="payment-icons">
+                        <div class="payment-icon"></div>
+                        <div class="payment-icon"></div>
+                        <div class="payment-icon"></div>
+                        <div class="payment-icon"></div>
+                        <div class="payment-icon"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            © 2025 Power Rock Supplements. Todos os direitos reservados.
+        </div>
+    </div>
+</footer>
+
+<!-- Script de navegação - DEVE SER CARREGADO PRIMEIRO -->
+<script src="/public/js/navigation-enums.js"></script>
+<!-- Script da barra de pesquisa -->
+<script src="/public/js/search-bar.js"></script>
+<!-- WhatsApp Button -->
+<script src="/public/js/whatsapp-button.js"></script>
+<script src="/public/js/accessories.js"></script>
+<!-- Scripts de autenticação - ORDEM IMPORTA! -->
+<script src="/public/js/auth-service.js"></script>
+<script src="/public/js/auth-notifications.js"></script>
+<script src="/public/js/auth-integration.js"></script>
 </body>
 </html>

@@ -10,40 +10,10 @@
     <!-- Estilos para dropdown e notificações -->
     <link rel="stylesheet" href="/public/css/auth-dropdown.css">
     <link rel="stylesheet" href="/public/css/auth-notifications.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        /* Estilos adicionados para fundo preto e letras laranjas nos cards de marca */
-        .brand-card.custom-style {
-            background-color: #000000; /* Fundo preto */
-            color: #FFA500; /* Letras laranjas */
-            border: 1px solid #FFA500; /* Borda laranja opcional */
-        }
-        .brand-card.custom-style .brand-name,
-        .brand-card.custom-style .brand-description,
-        .brand-card.custom-style .stat-label,
-        .brand-card.custom-style .stat-value {
-            color: #FFA500; /* Letras laranjas */
-        }
-        .brand-card.custom-style .brand-logo img {
-            /* Opcional: ajustar filtro se o logo não contrastar bem */
-            /* filter: brightness(0) invert(1) sepia(1) saturate(5) hue-rotate(30deg); */
-        }
-        .brand-card.custom-style .btn-primary {
-            background-color: #FFA500; /* Botão laranja */
-            color: #000000; /* Texto preto no botão */
-            border: none;
-        }
-        .brand-card.custom-style .btn-primary:hover {
-            background-color: #cc8400; /* Laranja mais escuro no hover */
-        }
-         .brand-card.custom-style .brand-stats {
-            border-top: 1px solid #FFA500; /* Linha divisória laranja */
-        }
-        .brand-card.custom-style .stat:not(:last-child) {
-            border-right: 1px solid #FFA500; /* Linha divisória laranja */
-        }
-    </style>
 </head>
 <body>
 <!-- Header -->
@@ -63,7 +33,7 @@
         <div class="header-right">
             <a href="/public/html/cart.html" class="cart-link">
                 <i class="fas fa-shopping-cart"></i>
-                <span class="cart-badge" style="display: none;"></span> <!-- Badge inicialmente oculto -->
+                <span class="cart-badge" style="display: none;"></span>
             </a>
             <div class="user-dropdown">
                 <button class="user-icon-btn" aria-label="Conta">
@@ -127,161 +97,472 @@
 </section>
 
 <!-- Main Content -->
-<main class="main">
-    <div class="container">
-        <div class="brands-header">
-            <h1 class="page-title">Nossas Marcas</h1>
-            <p class="page-description">Conheça as melhores marcas de suplementos do mercado</p>
-        </div>
-
-        <div class="brands-grid" id="brands-grid-container">
-            <!-- Cards de marcas serão carregados dinamicamente ou mapeados aqui -->
-            <!-- Exemplo de card com a nova classe de estilo e data attribute para ID -->
-            <div class="brand-card custom-style" data-brand-id="1"> <!-- ID MaxTitan -->
-                <div class="brand-logo">
-                    <img src="/assets/images/brands/max-titanium.png" alt="Max Titanium">
-                </div>
-                <div class="brand-info">
-                    <h2 class="brand-name">Max Titanium</h2>
-                    <p class="brand-description">Uma das maiores marcas de suplementos do Brasil, conhecida pela qualidade e inovação.</p>
-                    <div class="brand-stats">
-                        <div class="stat">
-                            <span class="stat-value">150+</span>
-                            <span class="stat-label">Produtos</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-value">4.8</span>
-                            <span class="stat-label">Avaliação</span>
-                        </div>
-                    </div>
-                    <a href="#" class="btn btn-primary">
-                        Ver Produtos
-                        <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-
-            <div class="brand-card custom-style" data-brand-id="5"> <!-- ID IntegralMedica -->
-                <div class="brand-logo">
-                    <img src="/assets/images/brands/integral-medica.png" alt="Integral Médica">
-                </div>
-                <div class="brand-info">
-                    <h2 class="brand-name">Integral Médica</h2>
-                    <p class="brand-description">Marca líder em suplementos alimentares, com produtos de alta qualidade e preço acessível.</p>
-                     <div class="brand-stats">
-                        <div class="stat">
-                            <span class="stat-value">200+</span>
-                            <span class="stat-label">Produtos</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-value">4.7</span>
-                            <span class="stat-label">Avaliação</span>
-                        </div>
-                    </div>
-                    <a href="#" class="btn btn-primary">
-                        Ver Produtos
-                        <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-
-             <div class="brand-card custom-style" data-brand-id="3"> <!-- ID Growth -->
-                <div class="brand-logo">
-                    <img src="/assets/images/brands/growth.png" alt="Growth">
-                </div>
-                <div class="brand-info">
-                    <h2 class="brand-name">Growth</h2>
-                    <p class="brand-description">Marca premium de suplementos, focada em produtos de alta qualidade e performance.</p>
-                     <div class="brand-stats">
-                        <div class="stat">
-                            <span class="stat-value">100+</span>
-                            <span class="stat-label">Produtos</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-value">4.9</span>
-                            <span class="stat-label">Avaliação</span>
-                        </div>
-                    </div>
-                    <a href="#" class="btn btn-primary">
-                        Ver Produtos
-                        <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-
-             <div class="brand-card custom-style" data-brand-id="10"> <!-- ID Dymatize -->
-                <div class="brand-logo">
-                    <img src="/assets/images/brands/dymatize.png" alt="Dymatize">
-                </div>
-                <div class="brand-info">
-                    <h2 class="brand-name">Dymatize</h2>
-                    <p class="brand-description">Marca internacional reconhecida pela qualidade e sabor incomparável dos seus produtos.</p>
-                     <div class="brand-stats">
-                        <div class="stat">
-                            <span class="stat-value">80+</span>
-                            <span class="stat-label">Produtos</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-value">4.8</span>
-                            <span class="stat-label">Avaliação</span>
-                        </div>
-                    </div>
-                    <a href="#" class="btn btn-primary">
-                        Ver Produtos
-                        <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-
-             <div class="brand-card custom-style" data-brand-id="6"> <!-- ID BlackSkull -->
-                 <div class="brand-logo">
-                     <img src="/assets/images/brands/black-skull.png" alt="Black Skull">
-                 </div>
-                 <div class="brand-info">
-                     <h2 class="brand-name">Black Skull</h2>
-                     <p class="brand-description">Marca conhecida por seus produtos hardcore e foco em resultados extremos.</p>
-                     <div class="brand-stats">
-                         <div class="stat">
-                             <span class="stat-value">90+</span>
-                             <span class="stat-label">Produtos</span>
-                         </div>
-                         <div class="stat">
-                             <span class="stat-value">4.6</span>
-                             <span class="stat-label">Avaliação</span>
-                         </div>
-                     </div>
-                     <a href="#" class="btn btn-primary">
-                         Ver Produtos
-                         <i class="fas fa-arrow-right"></i>
-                     </a>
-                 </div>
-             </div>
-
-            <!-- Adicionar mais cards conforme necessário, seguindo o padrão -->
-
-        </div>
-
-        <!-- Seção de Destaques e Benefícios mantidas como estavam -->
-         <section class="featured-brands">
-             <h2 class="section-title">Marcas em Destaque</h2>
-             <div class="featured-brands-slider">
-                 <!-- Conteúdo do slider -->
-             </div>
-         </section>
-         <section class="benefits-section">
-             <h2 class="section-title">Por que Comprar Conosco?</h2>
-             <div class="benefits-grid">
-                 <!-- Conteúdo dos benefícios -->
-             </div>
-         </section>
-
+<main class="main-modern">
+    <!-- Hero Section -->
+    <!-- Modern Brands Hero Section -->
+<section class="brands-hero-modern">
+    <!-- Animated Background Elements -->
+    <div class="brands-bg-elements">
+        <div class="floating-element element-1"></div>
+        <div class="floating-element element-2"></div>
+        <div class="floating-element element-3"></div>
+        <div class="floating-element element-4"></div>
+        <div class="floating-element element-5"></div>
+        <div class="floating-element element-6"></div>
     </div>
+    
+    <!-- Gradient Overlays -->
+    <div class="brands-gradient-overlay"></div>
+    <div class="brands-radial-overlay"></div>
+    
+    <!-- Background Pattern -->
+    <div class="brands-pattern-bg"></div>
+    
+    <!-- Content Container -->
+    <div class="container brands-container">
+        <div class="brands-content-modern">
+            <!-- Badge -->
+            <!-- <div class="brands-badge">
+                <i class="fas fa-crown"></i>
+                <span>Marcas Premium</span>
+            </div> -->
+            
+            <!-- Main Title -->
+            <h1 class="brands-title-modern">
+                As melhores
+                <span class="brands-highlight">
+                    <span class="highlight-text">marcas</span>
+                    <div class="highlight-underline"></div>
+                </span>
+                <br>
+                do mercado
+            </h1>
+            
+            <!-- Subtitle -->
+            <p class="brands-subtitle-modern">
+                Descubra nossa seleção exclusiva das marcas mais confiáveis e reconhecidas 
+                do mercado de suplementos. Qualidade, performance e resultados garantidos.
+            </p>
+            
+            <!-- Stats -->
+            <div class="brands-stats">
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-number">15+</div>
+                        <div class="stat-label">Marcas</div>
+                    </div>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-box"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-number">500+</div>
+                        <div class="stat-label">Produtos</div>
+                    </div>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-number">4.9</div>
+                        <div class="stat-label">Avaliação</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Action Buttons -->
+            <div class="brands-actions-modern">
+                <button class="btn-primary-brands" id="btn-ver-catalogo">
+                    <span class="btn-text">Explorar Marcas</span>
+                    <div class="btn-icon">
+                        <i class="fas fa-arrow-down"></i>
+                    </div>
+                    <div class="btn-glow"></div>
+                </button>
+                
+                <!-- <button class="btn-secondary-brands" id="btn-ver-catalogo">
+                    <div class="btn-icon-secondary">
+                        <i class="fas fa-play"></i>
+                    </div>
+                    <span class="btn-text">Ver Catálogo</span>
+                </button> -->
+            </div>
+            
+            <!-- Trust Indicators -->
+            <div class="brands-trust">
+                <div class="trust-item">
+                    <i class="fas fa-certificate"></i>
+                    <span>Qualidade Certificada</span>
+                </div>
+                <div class="trust-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Garantia Total</span>
+                </div>
+                <div class="trust-item">
+                    <i class="fas fa-shipping-fast"></i>
+                    <span>Entrega Rápida</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Side Visual Element -->
+        <div class="brands-visual">
+            <div class="visual-circle-brands">
+                <div class="circle-content">
+                    <i class="fas fa-gem"></i>
+                </div>
+            </div>
+            <div class="visual-brands">
+                <div class="brand-icon-animated brand-1">
+                    <i class="fas fa-dumbbell"></i>
+                </div>
+                <div class="brand-icon-animated brand-2">
+                    <i class="fas fa-fire"></i>
+                </div>
+                <div class="brand-icon-animated brand-3">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <div class="brand-icon-animated brand-4">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <div class="brand-icon-animated brand-5">
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="brand-icon-animated brand-6">
+                    <i class="fas fa-trophy"></i>
+                </div>
+            </div>
+            <!-- <div class="floating-card-modern">
+                <div class="card-icon">
+                    <i class="fas fa-crown"></i>
+                </div>
+                <div class="card-content">
+                    <span class="card-title">Premium Quality</span>
+                    <span class="card-subtitle">Marcas Certificadas</span>
+                </div>
+            </div> -->
+        </div>
+    </div>
+    
+    <!-- Scroll Indicator -->
+    <div class="scroll-indicator-brands">
+        <div class="scroll-text">Conheça nossas marcas</div>
+        <div class="scroll-arrow">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </div>
+</section>
+    <!-- Brands Grid Section -->
+    <section class="brands-showcase" id="brands-showcase">
+        <div class="container">
+            <!-- <div class="section-header">
+                <div class="section-badge">
+                    <i class="fas fa-crown"></i>
+                    <span>Catálogo</span>
+                </div>
+                <h2 class="section-title">Nossas Marcas Parceiras</h2>
+                <p class="section-subtitle">
+                    Trabalhamos apenas com as marcas mais confiáveis e reconhecidas do mercado
+                </p>
+            </div> -->
+
+            <div class="brands-grid" id="brands-grid-container">
+                <!-- Max Titanium -->
+                <div class="brand-card premium-card" data-brand-id="1">
+                    <div class="card-glow"></div>
+                    <div class="brand-header">
+                        <div class="brand-logo">
+                            <img src="/assets/images/0x0.png" alt="Max Titanium">
+                        </div>
+                        <div class="premium-badge">
+                            <i class="fas fa-gem"></i>
+                            Premium
+                        </div>
+                    </div>
+                    <div class="brand-content">
+                        <h3 class="brand-name">Max Titanium</h3>
+                        <p class="brand-description">
+                            Uma das maiores marcas de suplementos do Brasil, conhecida pela qualidade e inovação.
+                        </p>
+                        <div class="brand-features">
+                            <div class="feature">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Qualidade Premium</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-shield-alt"></i>
+                                <span>Certificação ISO</span>
+                            </div>
+                        </div>
+                        <div class="brand-stats">
+                            <div class="stat">
+                                <span class="stat-value">150+</span>
+                                <span class="stat-label">Produtos</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">4.8</span>
+                                <span class="stat-label">Avaliação</span>
+                            </div>
+                        </div>
+                        <button class="btn-brand">
+                            <span>Ver Produtos</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Integral Médica -->
+                <div class="brand-card premium-card" data-brand-id="5">
+                    <div class="card-glow"></div>
+                    <div class="brand-header">
+                        <div class="brand-logo">
+                            <img src="/assets/images/D_NQ_NP_718380-MLA74976648903_032024-O.webp" alt="Integral Médica">
+                        </div>
+                        <div class="premium-badge">
+                            <i class="fas fa-gem"></i>
+                            Premium
+                        </div>
+                    </div>
+                    <div class="brand-content">
+                        <h3 class="brand-name">Integral Médica</h3>
+                        <p class="brand-description">
+                            Marca líder em suplementos alimentares, com produtos de alta qualidade e preço acessível.
+                        </p>
+                        <div class="brand-features">
+                            <div class="feature">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Melhor Custo-Benefício</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-award"></i>
+                                <span>Marca do Ano</span>
+                            </div>
+                        </div>
+                        <div class="brand-stats">
+                            <div class="stat">
+                                <span class="stat-value">200+</span>
+                                <span class="stat-label">Produtos</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">4.7</span>
+                                <span class="stat-label">Avaliação</span>
+                            </div>
+                        </div>
+                        <button class="btn-brand">
+                            <span>Ver Produtos</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Growth Supplements -->
+                <div class="brand-card premium-card" data-brand-id="3">
+                    <div class="card-glow"></div>
+                    <div class="brand-header">
+                        <div class="brand-logo">
+                            <img src="/assets/images/logo.png" alt="Growth Supplements">
+                        </div>
+                        <div class="premium-badge">
+                            <i class="fas fa-gem"></i>
+                            Premium
+                        </div>
+                    </div>
+                    <div class="brand-content">
+                        <h3 class="brand-name">Growth Supplements</h3>
+                        <p class="brand-description">
+                            Marca premium de suplementos, focada em produtos de alta qualidade e performance.
+                        </p>
+                        <div class="brand-features">
+                            <div class="feature">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Alta Performance</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-flask"></i>
+                                <span>Fórmulas Avançadas</span>
+                            </div>
+                        </div>
+                        <div class="brand-stats">
+                            <div class="stat">
+                                <span class="stat-value">100+</span>
+                                <span class="stat-label">Produtos</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">4.9</span>
+                                <span class="stat-label">Avaliação</span>
+                            </div>
+                        </div>
+                        <button class="btn-brand">
+                            <span>Ver Produtos</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Black Skull -->
+                <div class="brand-card premium-card" data-brand-id="6">
+                    <div class="card-glow"></div>
+                    <div class="brand-header">
+                        <div class="brand-logo">
+                            <img src="/assets/images/black-skull-heavy-sports-nutrition-logo-png_seeklogo-328537.png" alt="Black Skull">
+                        </div>
+                        <div class="premium-badge">
+                            <i class="fas fa-gem"></i>
+                            Premium
+                        </div>
+                    </div>
+                    <div class="brand-content">
+                        <h3 class="brand-name">Black Skull</h3>
+                        <p class="brand-description">
+                            Marca conhecida por seus produtos hardcore e foco em resultados extremos.
+                        </p>
+                        <div class="brand-features">
+                            <div class="feature">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Resultados Extremos</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-fire"></i>
+                                <span>Hardcore Edition</span>
+                            </div>
+                        </div>
+                        <div class="brand-stats">
+                            <div class="stat">
+                                <span class="stat-value">90+</span>
+                                <span class="stat-label">Produtos</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">4.6</span>
+                                <span class="stat-label">Avaliação</span>
+                            </div>
+                        </div>
+                        <button class="btn-brand">
+                            <span>Ver Produtos</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="why-choose-us">
+        <div class="container">
+            <div class="section-header">
+                <!-- <div class="section-badge">
+                    <i class="fas fa-shield-check"></i>
+                    <span>Garantia</span>
+                </div> -->
+                <h2 class="section-title">Por que Escolher Nossas Marcas?</h2>
+            </div>
+            
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <h3>Qualidade Certificada</h3>
+                    <p>Todas as marcas possuem certificações internacionais e seguem os mais rigorosos padrões de qualidade.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-shipping-fast"></i>
+                    </div>
+                    <h3>Entrega Rápida</h3>
+                    <p>Entregamos seus produtos favoritos em todo o país com agilidade e segurança garantida.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3>Garantia Total</h3>
+                    <p>Oferecemos garantia completa em todos os produtos e suporte especializado para suas dúvidas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 </main>
 
 <!-- Footer -->
-<footer class="footer">
-    <!-- Conteúdo do footer -->
-</footer>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <a href="/public/html/index.html" class="logo">
+                        <span class="logo-power">Power Rock</span>
+                        <span class="logo-supps">supplements</span>
+                    </a>
+                    <p class="footer-description">
+                        Sua loja especializada em suplementos de alta performance para atletas e entusiastas do fitness.
+                    </p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/profile.php?id=61575757384725" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/powerrocksupplements/" class="social-link"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3 class="footer-title">Categorias</h3>
+                    <ul class="footer-links">
+                        <li><a href="/public/html/products.html">Proteínas</a></li>
+                        <li><a href="/public/html/products.html">Pré-Treino</a></li>
+                        <li><a href="/public/html/products.html">Creatina</a></li>
+                        <li><a href="/public/html/products.html">Vitaminas</a></li>
+                        <li><a href="/public/html/accessories.html">Acessórios</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3 class="footer-title">Informações</h3>
+                    <ul class="footer-links">
+                        <li><a href="/about">Sobre Nós</a></li>
+                        <li><a href="/shipping">Entrega</a></li>
+                        <li><a href="/privacy">Política de Privacidade</a></li>
+                        <li><a href="/terms">Termos e Condições</a></li>
+                        <li><a href="/public/html/contact.html">Contato</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3 class="footer-title">Contato</h3>
+                    <ul class="contact-info">
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Av. Paulista, 1000 - São Paulo</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <span>(11) 99999-9999</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <span>contato@powerrocksupplements.com.br</span>
+                        </li>
+                    </ul>
+                    <div class="payment-methods">
+                        <h4 class="payment-title">Formas de Pagamento</h4>
+                        <div class="payment-icons">
+                            <div class="payment-icon"></div>
+                            <div class="payment-icon"></div>
+                            <div class="payment-icon"></div>
+                            <div class="payment-icon"></div>
+                            <div class="payment-icon"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                © 2025 Power Rock Supplements. Todos os direitos reservados.
+            </div>
+        </div>
+    </footer>
 
 <!-- Script de navegação - DEVE SER CARREGADO PRIMEIRO -->
     <script src="/public/js/navigation-enums.js"></script>

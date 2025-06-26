@@ -10,31 +10,10 @@
     <!-- Estilos para dropdown e notificações -->
     <link rel="stylesheet" href="/public/css/auth-dropdown.css">
     <link rel="stylesheet" href="/public/css/auth-notifications.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        /* Estilos adicionados para fundo preto e letras laranjas nos cards de objetivo */
-        .goal-card.custom-style {
-            background-color: #000000; /* Fundo preto */
-            color: #FFA500; /* Letras laranjas */
-            border: 1px solid #FFA500; /* Borda laranja opcional */
-        }
-        .goal-card.custom-style h2,
-        .goal-card.custom-style p,
-        .goal-card.custom-style .goal-benefits li {
-            color: #FFA500; /* Letras laranjas */
-        }
-        .goal-card.custom-style .goal-icon i {
-            color: #FFA500; /* Ícone laranja */
-        }
-        .goal-card.custom-style .btn-primary {
-            background-color: #FFA500; /* Botão laranja */
-            color: #000000; /* Texto preto no botão */
-            border: none;
-        }
-        .goal-card.custom-style .btn-primary:hover {
-            background-color: #cc8400; /* Laranja mais escuro no hover */
-        }
-    </style>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 <!-- Header -->
@@ -54,7 +33,7 @@
         <div class="header-right">
             <a href="/public/html/cart.html" class="cart-link">
                 <i class="fas fa-shopping-cart"></i>
-                <span class="cart-badge" style="display: none;"></span> <!-- Badge inicialmente oculto -->
+                <span class="cart-badge" style="display: none;"></span>
             </a>
             <div class="user-dropdown">
                 <button class="user-icon-btn" aria-label="Conta">
@@ -83,7 +62,7 @@
                     </ul>                   
                 </li>
                 <li class="menu-item">
-                    <a href="/public/html/goals.html" class="nav-link">Objetivo 
+                    <a href="/public/html/goals.html" class="nav-link">Objetivos 
                         <i class="fas fa-chevron-down" style="margin-left: 6px; font-size: 0.85em;"></i>
                     </a>
                     <ul class="submenu">
@@ -117,165 +96,313 @@
     </div>
 </section>
 
-<main class="main-content">
-    <div class="container">
-        <section class="goals-header">
-            <h1 class="page-title">Encontre o Suporte Ideal para Seus Objetivos</h1>
-            <p class="page-description">
-                Descubra produtos específicos para cada objetivo de treino e suplementação.
-                Nossa seleção especializada ajuda você a alcançar seus objetivos de forma mais eficiente.
-            </p>
-        </section>
-
-        <section class="goals-grid" id="goals-grid-container">
-            <!-- Cards de objetivos serão carregados dinamicamente aqui -->
-            <!-- Exemplo de card com a nova classe de estilo e data attribute para ID -->
-            <div class="goal-card custom-style" data-objective-id="4">
-                <div class="goal-icon">
+<main class="goals-hero-modern">
+        <div class="goals-bg-elements">
+            <div class="floating-element element-1"></div>
+            <div class="floating-element element-2"></div>
+            <div class="floating-element element-3"></div>
+            <div class="floating-element element-4"></div>
+            <div class="floating-element element-5"></div>
+        </div>
+        <div class="goals-gradient-overlay"></div>
+        <div class="goals-radial-overlay"></div>
+        <div class="goals-pattern-bg"></div>
+        <div class="goals-container">
+            <div class="goals-content-modern">
+                <!-- <div class="goals-badge">
+                    <i class="fas fa-star"></i>
+                    Suplementos Premium
+                </div> -->
+                <div class="goals-title-container">
+                    <h1 class="goals-title-modern">
+                        Encontre o
+                        <span class="goals-highlight">
+                            <span class="highlight-text">suporte ideal</span>
+                            <span class="highlight-underline"></span>
+                        </span>
+                        <span class="title-main">para seus objetivos</span>
+                    </h1>
+                    <div class="goals-visual-inline">
+                        <div class="visual-circle-goals">
+                            <div class="circle-content">
+                                <i class="fas fa-bullseye"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p class="goals-subtitle-modern">
+                    Descubra produtos específicos para cada objetivo de treino e suplementação. 
+                    Nossa seleção especializada ajuda você a alcançar seus objetivos de forma mais eficiente.
+                </p>
+                <div class="goals-stats">
+                    <div class="stat-item">
+                        <div class="stat-icon"><i class="fas fa-box"></i></div>
+                        <div class="stat-content">
+                            <span class="stat-number">500+</span>
+                            <span class="stat-label">Produtos</span>
+                        </div>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <div class="stat-icon"><i class="fas fa-users"></i></div>
+                        <div class="stat-content">
+                            <span class="stat-number">10k+</span>
+                            <span class="stat-label">Clientes</span>
+                        </div>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <div class="stat-icon"><i class="fas fa-thumbs-up"></i></div>
+                        <div class="stat-content">
+                            <span class="stat-number">98%</span>
+                            <span class="stat-label">Satisfação</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="goals-actions-modern">
+                    <a href="/produtos" class="btn-primary-goals">
+                        Explorar Objetivos
+                        <span class="btn-icon"><i class="fas fa-arrow-right"></i></span>
+                        <span class="btn-glow"></span>
+                    </a>
+                    <a href="/como-funciona" class="btn-secondary-goals">
+                        Como Funciona
+                        <span class="btn-icon-secondary"><i class="fas fa-info-circle"></i></span>
+                    </a>
+                </div>
+                <div class="goals-trust">
+                    <div class="trust-item">
+                        <i class="fas fa-check-circle"></i>
+                        Produtos Premium
+                    </div>
+                    <div class="trust-item">
+                        <i class="fas fa-shipping-fast"></i>
+                        Entrega Rápida
+                    </div>
+                    <div class="trust-item">
+                        <i class="fas fa-shield-alt"></i>
+                        Qualidade Garantida
+                    </div>
+                </div>
+            </div>
+            <div class="visual-objectives">
+                <div class="objective-icon objective-1">
                     <i class="fas fa-dumbbell"></i>
                 </div>
-                <h2>Ganho de Massa Muscular</h2>
-                <p>Suplementos ideais para aumentar a massa muscular e força.</p>
-                <ul class="goal-benefits">
-                    <li>Proteínas de alta qualidade</li>
-                    <li>Creatina e aminoácidos</li>
-                    <li>Pré-treino para energia</li>
-                </ul>
-                <a href="#" class="btn btn-primary">Ver Objetivo</a> <!-- Link será tratado pelo JS -->
-            </div>
-
-             <div class="goal-card custom-style" data-objective-id="1"> <!-- ID Emagrecimento -->
-                <div class="goal-icon">
+                <div class="objective-icon objective-2">
                     <i class="fas fa-fire"></i>
                 </div>
-                <h2>Queima de Gordura</h2>
-                <p>Produtos que auxiliam na redução de gordura corporal.</p>
-                <ul class="goal-benefits">
-                    <li>Termogênicos naturais</li>
-                    <li>Suplementos para metabolismo</li>
-                    <li>Produtos para definição</li>
-                </ul>
-                 <a href="#" class="btn btn-primary">Ver Objetivo</a>
-            </div>
-
-             <div class="goal-card custom-style" data-objective-id="7"> <!-- ID MelhoraDeDesempenho -->
-                <div class="goal-icon">
+                <div class="objective-icon objective-3">
                     <i class="fas fa-running"></i>
                 </div>
-                <h2>Performance e Energia</h2>
-                <p>Suplementos para melhorar a performance e disposição.</p>
-                <ul class="goal-benefits">
-                    <li>Pré-treino energético</li>
-                    <li>BCAA para recuperação</li>
-                    <li>Eletrólitos e hidratação</li>
-                </ul>
-                 <a href="#" class="btn btn-primary">Ver Objetivo</a>
-            </div>
-
-             <div class="goal-card custom-style" data-objective-id="8"> <!-- ID MelhoraDeSaude -->
-                <div class="goal-icon">
+                <div class="objective-icon objective-4">
                     <i class="fas fa-heart"></i>
                 </div>
-                <h2>Saúde e Bem-estar</h2>
-                <p>Produtos para manter a saúde e qualidade de vida.</p>
-                <ul class="goal-benefits">
-                    <li>Vitaminas e minerais</li>
-                    <li>Ômega 3 e antioxidantes</li>
-                    <li>Suplementos naturais</li>
-                </ul>
-                 <a href="#" class="btn btn-primary">Ver Objetivo</a>
             </div>
-            <!-- Outros cards serão adicionados dinamicamente ou podem ser mapeados aqui -->
+        </div>
+        <div class="scroll-indicator-goals">
+            <span class="scroll-text">Role para explorar</span>
+            <i class="fas fa-chevron-down scroll-arrow"></i>
+        </div>
+    </main>
 
+
+        <!-- Cards de Objetivos -->
+        <section class="goals-section">
+            <div class="section-header">
+                <h2 class="section-title">Seus Objetivos, Nossa Especialidade</h2>
+                <!-- <p class="section-subtitle">Escolha seu objetivo e descubra os melhores produtos para você</p> -->
+            </div>
+
+            <div class="goals-grid" id="goals-grid-container">
+                <div class="goal-card" data-objective-id="4">
+                    <div class="card-glow"></div>
+                    <div class="goal-icon">
+                        <i class="fas fa-dumbbell"></i>
+                    </div>
+                    <h3>Ganho de Massa Muscular</h3>
+                    <p>Suplementos ideais para aumentar a massa muscular e força com resultados comprovados.</p>
+                    <ul class="goal-benefits">
+                        <li><i class="fas fa-check"></i>Proteínas de alta qualidade</li>
+                        <li><i class="fas fa-check"></i>Creatina e aminoácidos</li>
+                        <li><i class="fas fa-check"></i>Pré-treino para energia</li>
+                    </ul>
+                    <button class="btn-primary">
+                        <span>Explorar Produtos</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <div class="goal-card" data-objective-id="1">
+                    <div class="card-glow"></div>
+                    <div class="goal-icon">
+                        <i class="fas fa-fire"></i>
+                    </div>
+                    <h3>Queima de Gordura</h3>
+                    <p>Produtos que auxiliam na redução de gordura corporal de forma natural e eficaz.</p>
+                    <ul class="goal-benefits">
+                        <li><i class="fas fa-check"></i>Termogênicos naturais</li>
+                        <li><i class="fas fa-check"></i>Suplementos para metabolismo</li>
+                        <li><i class="fas fa-check"></i>Produtos para definição</li>
+                    </ul>
+                    <button class="btn-primary">
+                        <span>Explorar Produtos</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <div class="goal-card" data-objective-id="7">
+                    <div class="card-glow"></div>
+                    <div class="goal-icon">
+                        <i class="fas fa-running"></i>
+                    </div>
+                    <h3>Performance e Energia</h3>
+                    <p>Suplementos para melhorar a performance e disposição nos seus treinos.</p>
+                    <ul class="goal-benefits">
+                        <li><i class="fas fa-check"></i>Pré-treino energético</li>
+                        <li><i class="fas fa-check"></i>BCAA para recuperação</li>
+                        <li><i class="fas fa-check"></i>Eletrólitos e hidratação</li>
+                    </ul>
+                    <button class="btn-primary">
+                        <span>Explorar Produtos</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <div class="goal-card" data-objective-id="8">
+                    <div class="card-glow"></div>
+                    <div class="goal-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Saúde e Bem-estar</h3>
+                    <p>Produtos para manter a saúde e qualidade de vida no seu dia a dia.</p>
+                    <ul class="goal-benefits">
+                        <li><i class="fas fa-check"></i>Vitaminas e minerais</li>
+                        <li><i class="fas fa-check"></i>Ômega 3 e antioxidantes</li>
+                        <li><i class="fas fa-check"></i>Suplementos naturais</li>
+                    </ul>
+                    <button class="btn-primary">
+                        <span>Explorar Produtos</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
         </section>
 
-        <!-- Seções de Produtos em Destaque e Guia mantidas como estavam -->
-        <section class="featured-products">
-             <h2 class="section-title">Produtos em Destaque por Objetivo</h2>
-             <div class="products-slider">
-                 <!-- Conteúdo do slider -->
-             </div>
-        </section>
-        <section class="goals-guide">
-             <h2 class="section-title">Guia de Objetivos</h2>
-             <div class="guide-content">
-                 <!-- Conteúdo do guia -->
-             </div>
+        <!-- Seção de Destaque -->
+        <section class="featured-section">
+            <div class="featured-content">
+                <div class="featured-text">
+                    <h2>Por que escolher nossos produtos?</h2>
+                    <p>Trabalhamos apenas com as melhores marcas do mercado, garantindo qualidade e resultados comprovados para todos os seus objetivos.</p>
+                    <div class="features-list">
+                        <div class="feature-item">
+                            <i class="fas fa-medal"></i>
+                            <span>Produtos Premium</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-shipping-fast"></i>
+                            <span>Entrega Rápida</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-certificate"></i>
+                            <span>Qualidade Garantida</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="featured-visual">
+                    <div class="visual-card">
+                        <i class="fas fa-trophy"></i>
+                        <h4>Milhares de resultados comprovados</h4>
+                    </div>
+                </div>
+            </div>
         </section>
 
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="cta-content">
+                <h2>Pronto para começar sua jornada?</h2>
+                <p>Escolha seu objetivo e descubra os produtos ideais para você</p>
+                <button class="btn-cta">
+                    <span>Ver Todos os Produtos</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </section>
     </div>
 </main>
 
 <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-column">
-                    <a href="/public/html/index.html" class="logo">
-                        <span class="logo-power">Power Rock</span>
-                        <span class="logo-supps">Supplements</span>
-                    </a>
-                    <p class="footer-description">
-                        Sua loja especializada em suplementos de alta performance para atletas e entusiastas do fitness.
-                    </p>
-                    <div class="social-links">
-                        <a href="https://www.facebook.com/profile.php?id=61575757384725" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                        <a href="https://www.instagram.com/powerrocksupplements/" class="social-link"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-                <div class="footer-column">
-                    <h3 class="footer-title">Categorias</h3>
-                    <ul class="footer-links">
-                        <li><a href="/public/html/products.html">Proteínas</a></li>
-                        <li><a href="/public/html/products.html">Pré-Treino</a></li>
-                        <li><a href="/public/html/products.html">Creatina</a></li>
-                        <li><a href="/public/html/products.html">Vitaminas</a></li>
-                        <li><a href="/public/html/accessories.html">Acessórios</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3 class="footer-title">Informações</h3>
-                    <ul class="footer-links">
-                        <li><a href="/about">Sobre Nós</a></li>
-                        <li><a href="/shipping">Entrega</a></li>
-                        <li><a href="/privacy">Política de Privacidade</a></li>
-                        <li><a href="/terms">Termos e Condições</a></li>
-                        <li><a href="/public/html/contact.html">Contato</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3 class="footer-title">Contato</h3>
-                    <ul class="contact-info">
-                        <li>
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>Av. Paulista, 1000 - São Paulo</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-phone"></i>
-                            <span>(11) 99999-9999</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-envelope"></i>
-                            <span>contato@powerrocksupplements.com.br</span>
-                        </li>
-                    </ul>
-                    <div class="payment-methods">
-                        <h4 class="payment-title">Formas de Pagamento</h4>
-                        <div class="payment-icons">
-                            <div class="payment-icon"></div>
-                            <div class="payment-icon"></div>
-                            <div class="payment-icon"></div>
-                            <div class="payment-icon"></div>
-                            <div class="payment-icon"></div>
-                        </div>
-                    </div>
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-column">
+                <a href="/public/html/index.html" class="logo">
+                    <span class="logo-power">Power Rock</span>
+                    <span class="logo-supps">Supplements</span>
+                </a>
+                <p class="footer-description">
+                    Sua loja especializada em suplementos de alta performance para atletas e entusiastas do fitness.
+                </p>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/profile.php?id=61575757384725" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/powerrocksupplements/" class="social-link"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
-            <div class="copyright">
-                © 2025 Power Rock Supplements. Todos os direitos reservados.
+            <div class="footer-column">
+                <h3 class="footer-title">Categorias</h3>
+                <ul class="footer-links">
+                    <li><a href="/public/html/products.html">Proteínas</a></li>
+                    <li><a href="/public/html/products.html">Pré-Treino</a></li>
+                    <li><a href="/public/html/products.html">Creatina</a></li>
+                    <li><a href="/public/html/products.html">Vitaminas</a></li>
+                    <li><a href="/public/html/accessories.html">Acessórios</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3 class="footer-title">Informações</h3>
+                <ul class="footer-links">
+                    <li><a href="/about">Sobre Nós</a></li>
+                    <li><a href="/shipping">Entrega</a></li>
+                    <li><a href="/privacy">Política de Privacidade</a></li>
+                    <li><a href="/terms">Termos e Condições</a></li>
+                    <li><a href="/public/html/contact.html">Contato</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3 class="footer-title">Contato</h3>
+                <ul class="contact-info">
+                    <li>
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Av. Paulista, 1000 - São Paulo</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-phone"></i>
+                        <span>(11) 99999-9999</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-envelope"></i>
+                        <span>contato@powerrocksupplements.com.br</span>
+                    </li>
+                </ul>
+                <div class="payment-methods">
+                    <h4 class="payment-title">Formas de Pagamento</h4>
+                    <div class="payment-icons">
+                        <div class="payment-icon"></div>
+                        <div class="payment-icon"></div>
+                        <div class="payment-icon"></div>
+                        <div class="payment-icon"></div>
+                        <div class="payment-icon"></div>
+                    </div>
+                </div>
             </div>
         </div>
-    </footer>
+        <div class="copyright">
+            © 2025 Power Rock Supplements. Todos os direitos reservados.
+        </div>
+    </div>
+</footer>
 
 <!-- Script de navegação - DEVE SER CARREGADO PRIMEIRO -->
 <script src="/public/js/navigation-enums.js"></script>
@@ -287,6 +414,6 @@
 <!-- Scripts de autenticação - ORDEM IMPORTA! -->
 <script src="/public/js/auth-service.js"></script>
 <script src="/public/js/auth-notifications.js"></script>
-<script src="/public/js/auth-integration.js"></script> <!-- Inclui a lógica do carrinho -->
+<script src="/public/js/auth-integration.js"></script>
 </body>
 </html>

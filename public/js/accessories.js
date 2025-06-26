@@ -26,7 +26,7 @@ function initializeAccessoryCards() {
         });
 
         // Adicionar evento de clique para ver produtos do acessório
-        const viewProductsBtn = card.querySelector(".btn-primary");
+        const viewProductsBtn = card.querySelector(".btn-accessory");
         const accessoryId = card.getAttribute("data-accessory-id");
 
         if (viewProductsBtn && accessoryId) {
