@@ -1,39 +1,24 @@
 // Cart Service - Gerenciamento do carrinho com migração de sessão
 class CartService {
   constructor() {
-    this.API_BASE_URL = "https://localhost:4242/api"
-    this.cart = null
-    this.isLoading = false
-    this.sessionId = this.getOrCreateSessionId()
-    this.init()
+    this.API_BASE_URL = "https://localhost:4242/api";
+    this.cart = null;
+    this.isLoading = false;
+    // Apenas carrega o sessionId do localStorage, não cria um novo.
+    // A fonte da verdade será a resposta do backend.
+    this.sessionId = localStorage.getItem("sessionId");
+    this.init();
   }
 
   async init() {
-    await this.loadCart()
-    this.updateCartBadge()
+    await this.loadCart();
+    this.updateCartBadge();
 
     // Verificar se precisa migrar carrinho após login
-    await this.checkAndMigrateCart()
+    await this.checkAndMigrateCart();
 
     // Debug
-    this.debugCartState()
-  }
-
-  getOrCreateSessionId() {
-    let sessionId = localStorage.getItem("sessionId")
-    if (!sessionId) {
-      sessionId = this.generateSessionId()
-      localStorage.setItem("sessionId", sessionId)
-    }
-    return sessionId
-  }
-
-  generateSessionId() {
-    return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (c) => {
-      const r = (Math.random() * 16) | 0
-      const v = c == "x" ? r : (r & 0x3) | 0x8
-      return v.toString(16)
-    })
+    this.debugCartState();
   }
 
   async checkAndMigrateCart() {
@@ -49,10 +34,17 @@ class CartService {
 
   async migrateSessionCart() {
     try {
+      // Extrai o GUID do sessionId (formato: "session_GUID")
+      const sessionIdGuid = this.sessionId ? this.sessionId.replace("session_", "") : null;
+      if (!sessionIdGuid) {
+        console.error("Não foi possível extrair o GUID da sessão para migração.");
+        return;
+      }
+
       const response = await fetch(`${this.API_BASE_URL}/Cart/migrate`, {
         method: "POST",
         headers: this.getHeaders(),
-        body: JSON.stringify({ sessionId: this.sessionId }),
+        body: JSON.stringify({ sessionId: sessionIdGuid }),
         credentials: "include",
       })
 
@@ -83,17 +75,33 @@ class CartService {
         credentials: "include",
       })
 
-      console.log("Response status:", response.status)
-      console.log("Headers enviados:", this.getHeaders())
+      if (response.headers.has("X-Session-Id")) {
+        const newSessionId = response.headers.get("X-Session-Id");
+        if (newSessionId !== this.sessionId) {
+          this.sessionId = newSessionId;
+          localStorage.setItem("sessionId", this.sessionId);
+          console.log("Novo sessionId do backend salvo:", this.sessionId);
+        }
+      }
 
       if (response.ok) {
         const result = await response.json()
         console.log("Resposta da API:", result)
 
         if (result.hasSuccess && result.value) {
-          this.cart = result.value
-          console.log("Carrinho carregado:", this.cart)
-          console.log("Total de itens:", this.cart.totalItems)
+          this.cart = result.value;
+
+          // Sincroniza o sessionId com o backend
+          if (result.value.userId && result.value.userId.startsWith("session_")) {
+            if (this.sessionId !== result.value.userId) {
+              this.sessionId = result.value.userId;
+              localStorage.setItem("sessionId", this.sessionId);
+              console.log("Session ID sincronizado com o backend:", this.sessionId);
+            }
+          }
+
+          console.log("Carrinho carregado:", this.cart);
+          console.log("Total de itens:", this.cart.totalItems);
         } else {
           console.error("Erro ao carregar carrinho:", result.errors)
           this.cart = { items: [], totalAmount: 0, totalItems: 0 }
@@ -112,7 +120,7 @@ class CartService {
   }
 
   // Adicionar item ao carrinho
-  async addItem(productId, quantity = 1, flavor = null, size = null) {
+  async addItem(productId, quantity = 1, flavor = null, size = null, sessionId = this.sessionId) {
     try {
       this.isLoading = true
       this.showLoadingState()
@@ -122,6 +130,7 @@ class CartService {
         quantity: quantity,
         flavor: flavor,
         size: size,
+        sessionId: sessionId,
       }
 
       const response = await fetch(`${this.API_BASE_URL}/Cart/add`, {
@@ -259,9 +268,11 @@ class CartService {
     }
 
     // Adicionar token de autenticação se disponível
-    const authToken = localStorage.getItem("authToken")
-    if (authToken) {
-      headers["Authorization"] = `Bearer ${authToken}`
+    const authToken = localStorage.getItem("authToken");
+    if (authToken && this.isUserAuthenticated()) {
+      headers["Authorization"] = `Bearer ${authToken}`;
+    } else {
+      // O backend gerencia a sessão via cookie, não precisamos enviar o ID.
     }
 
     return headers
