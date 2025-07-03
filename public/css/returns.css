@@ -156,7 +156,7 @@
 }
 
 .returns-highlight .highlight-text {
-  background: linear-gradient(135deg, #f97316, #ff8c42);
+  background: linear-gradient(135deg, #f97316, #ea580c);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -445,14 +445,6 @@
   height: 4px;
   background: linear-gradient(90deg, #f97316, #ff8c42);
   border-radius: 2px;
-}
-
-.section-subtitle {
-  font-size: 1.125rem;
-  color: #9ca3af;
-  max-width: 600px;
-  margin: 0 auto;
-  line-height: 1.6;
 }
 
 .steps-container {
