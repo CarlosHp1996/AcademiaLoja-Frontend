@@ -1559,8 +1559,6 @@
 }
 
 .container {
-  max-width: 100% !important;
-  width: 100% !important;
   padding-left: 2rem;
   padding-right: 2rem;
 }
@@ -1601,6 +1599,6 @@
 
 @media (min-width: 1800px) {
   .goals-grid {
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
   }
 }
