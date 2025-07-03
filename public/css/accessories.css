@@ -193,6 +193,7 @@
   transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
   position: relative;
   cursor: pointer;
+  width: 100%;
 }
 
 .accessory-card::before {
@@ -1346,8 +1347,7 @@
 }
 
 .container {
-  max-width: 100% !important;
-  width: 100% !important;
+
   padding-left: 2rem;
   padding-right: 2rem;
 }
