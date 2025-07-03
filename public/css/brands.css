@@ -3,7 +3,7 @@
 /* CSS Variables */
 :root {
   --color-orange: #f97316;
-  --color-red: #dc2626;
+  --color-orange-dark: #ea580c;
   --color-white: #ffffff;
   --color-black: #000000;
   --color-zinc-300: #d4d4d8;
@@ -15,15 +15,15 @@
 
 /* Reset e Base */
 .main-modern {
-    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-    min-height: 100vh;
-    position: relative;
-    overflow-x: hidden;
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
 }
 
+/* Remover a sobrescrita da .container - usar a definição do style.css */
+
 .container {
-  max-width: 100% !important;
-  width: 100% !important;
   padding-left: 2rem;
   padding-right: 2rem;
 }
@@ -59,7 +59,7 @@
 .brands-bg-elements .element-1 {
   width: 200px;
   height: 200px;
-  background: linear-gradient(45deg, var(--color-orange), var(--color-red));
+  background: linear-gradient(45deg, var(--color-orange), var(--color-orange-dark));
   top: 10%;
   left: 5%;
   animation-delay: 0s;
@@ -68,7 +68,7 @@
 .brands-bg-elements .element-2 {
   width: 150px;
   height: 150px;
-  background: linear-gradient(45deg, var(--color-red), var(--color-orange));
+  background: linear-gradient(45deg, var(--color-orange-dark), var(--color-orange));
   top: 70%;
   right: 8%;
   animation-delay: 2s;
@@ -77,7 +77,7 @@
 .brands-bg-elements .element-3 {
   width: 100px;
   height: 100px;
-  background: linear-gradient(45deg, var(--color-orange), var(--color-red));
+  background: linear-gradient(45deg, var(--color-orange), var(--color-orange-dark));
   bottom: 30%;
   left: 12%;
   animation-delay: 4s;
@@ -86,7 +86,7 @@
 .brands-bg-elements .element-4 {
   width: 120px;
   height: 120px;
-  background: linear-gradient(45deg, var(--color-red), var(--color-orange));
+  background: linear-gradient(45deg, var(--color-orange-dark), var(--color-orange));
   top: 40%;
   right: 30%;
   animation-delay: 1s;
@@ -95,7 +95,7 @@
 .brands-bg-elements .element-5 {
   width: 180px;
   height: 180px;
-  background: linear-gradient(45deg, var(--color-orange), var(--color-red));
+  background: linear-gradient(45deg, var(--color-orange), var(--color-orange-dark));
   bottom: 10%;
   right: 20%;
   animation-delay: 3s;
@@ -104,7 +104,7 @@
 .brands-bg-elements .element-6 {
   width: 80px;
   height: 80px;
-  background: linear-gradient(45deg, var(--color-red), var(--color-orange));
+  background: linear-gradient(45deg, var(--color-orange-dark), var(--color-orange));
   top: 20%;
   left: 40%;
   animation-delay: 5s;
@@ -161,7 +161,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  background: linear-gradient(135deg, var(--color-orange), var(--color-red));
+  background: linear-gradient(135deg, var(--color-orange), var(--color-orange-dark));
   color: var(--color-white);
   padding: 0.75rem 1.5rem;
   border-radius: 50px;
@@ -188,7 +188,7 @@
 }
 
 .brands-highlight .highlight-text {
-  background: linear-gradient(135deg, var(--color-orange), var(--color-red));
+  background: linear-gradient(135deg, var(--color-orange), var(--color-orange-dark));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -202,7 +202,7 @@
   left: 0;
   right: 0;
   height: 8px;
-  background: linear-gradient(135deg, var(--color-orange), var(--color-red));
+  background: linear-gradient(135deg, var(--color-orange), var(--color-orange-dark));
   border-radius: 4px;
   opacity: 0.3;
   animation: expand 2s ease-out;
@@ -241,7 +241,7 @@
 .brands-stats .stat-icon {
   width: 50px;
   height: 50px;
-  background: linear-gradient(135deg, var(--color-orange), var(--color-red));
+  background: linear-gradient(135deg, var(--color-orange), var(--color-orange-dark));
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -290,7 +290,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.75rem;
-  background: linear-gradient(135deg, var(--color-orange), var(--color-red));
+  background: linear-gradient(135deg, var(--color-orange), var(--color-orange-dark));
   color: var(--color-white);
   border: none;
   padding: 1.25rem 2.5rem;
@@ -351,7 +351,7 @@
 .btn-secondary-brands .btn-icon-secondary {
   width: 40px;
   height: 40px;
-  background: linear-gradient(135deg, var(--color-orange), var(--color-red));
+  background: linear-gradient(135deg, var(--color-orange), var(--color-orange-dark));
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -430,7 +430,7 @@
   position: absolute;
   width: 45px;
   height: 45px;
-  background: linear-gradient(135deg, var(--color-orange), var(--color-red));
+  background: linear-gradient(135deg, var(--color-orange), var(--color-orange-dark));
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -502,7 +502,7 @@
 .floating-card-modern .card-icon {
   width: 50px;
   height: 50px;
-  background: linear-gradient(135deg, var(--color-orange), var(--color-red));
+  background: linear-gradient(135deg, var(--color-orange), var(--color-orange-dark));
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -557,859 +557,864 @@
 
 /* Hero Section Antiga (manter para compatibilidade) */
 .hero-brands {
-    position: relative;
-    padding: 6rem 0 4rem;
-    background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #2d2d2d 100%);
-    overflow: hidden;
+  position: relative;
+  padding: 6rem 0 4rem;
+  background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #2d2d2d 100%);
+  overflow: hidden;
 }
 
 .hero-background {
-    position: relative;
-    z-index: 2;
+  position: relative;
+  z-index: 2;
 }
 
 .hero-content {
-    text-align: center;
-    max-width: 100% !important;
-    margin: 0 auto;
-    padding: 0 2rem;
+  text-align: center;
+  max-width: 100% !important;
+  margin: 0 auto;
+  padding: 0 2rem;
 }
 
 .hero-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    background: linear-gradient(135deg, #f97316, #ea580c);
-    color: #000;
-    padding: 0.5rem 1.5rem;
-    border-radius: 25px;
-    font-size: 0.875rem;
-    font-weight: 600;
-    margin-bottom: 2rem;
-    animation: pulse 2s infinite;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, #f97316, #ea580c);
+  color: #000;
+  padding: 0.5rem 1.5rem;
+  border-radius: 25px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  animation: pulse 2s infinite;
 }
 
 .hero-badge i {
-    color: #000;
+  color: #000;
 }
 
 .hero-title {
-    font-size: 4rem;
-    font-weight: 800;
-    color: #fff;
-    margin-bottom: 1.5rem;
-    line-height: 1.1;
-    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  font-size: 4rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 1.5rem;
+  line-height: 1.1;
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .hero-title .highlight {
-    background: linear-gradient(135deg, #f97316, #ea580c);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    position: relative;
+  background: linear-gradient(135deg, #f97316, #ea580c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
 }
 
 .hero-description {
-    font-size: 1.25rem;
-    color: #b3b3b3;
-    line-height: 1.6;
-    margin-bottom: 3rem;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
+  font-size: 1.25rem;
+  color: #b3b3b3;
+  line-height: 1.6;
+  margin-bottom: 3rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .hero-stats {
-    display: flex;
-    justify-content: center;
-    gap: 3rem;
-    flex-wrap: wrap;
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  flex-wrap: wrap;
 }
 
 .stat-item {
-    text-align: center;
-    padding: 1.5rem;
-    background: rgba(249, 115, 22, 0.1);
-    border: 1px solid rgba(249, 115, 22, 0.2);
-    border-radius: 12px;
-    backdrop-filter: blur(10px);
-    transition: all 0.3s ease;
+  text-align: center;
+  padding: 1.5rem;
+  background: rgba(249, 115, 22, 0.1);
+  border: 1px solid rgba(249, 115, 22, 0.2);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
 }
 
 .stat-item:hover {
-    transform: translateY(-5px);
-    background: rgba(249, 115, 22, 0.2);
-    border-color: #f97316;
+  transform: translateY(-5px);
+  background: rgba(249, 115, 22, 0.2);
+  border-color: #f97316;
 }
 
 .stat-number {
-    display: block;
-    font-size: 2.5rem;
-    font-weight: 800;
-    color: #f97316;
-    margin-bottom: 0.5rem;
+  display: block;
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #f97316;
+  margin-bottom: 0.5rem;
 }
 
 .stat-label {
-    font-size: 0.875rem;
-    color: #b3b3b3;
-    font-weight: 500;
+  font-size: 0.875rem;
+  color: #b3b3b3;
+  font-weight: 500;
 }
 
 /* Floating Elements */
 .hero-decoration {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    pointer-events: none;
-    z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 1;
 }
 
 .floating-element {
-    position: absolute;
-    background: linear-gradient(135deg, #f97316, #ea580c);
-    border-radius: 50%;
-    opacity: 0.1;
-    animation: float 6s ease-in-out infinite;
+  position: absolute;
+  background: linear-gradient(135deg, #f97316, #ea580c);
+  border-radius: 50%;
+  opacity: 0.1;
+  animation: float 6s ease-in-out infinite;
 }
 
 .element-1 {
-    width: 100px;
-    height: 100px;
-    top: 20%;
-    left: 10%;
-    animation-delay: 0s;
+  width: 100px;
+  height: 100px;
+  top: 20%;
+  left: 10%;
+  animation-delay: 0s;
 }
 
 .element-2 {
-    width: 60px;
-    height: 60px;
-    top: 60%;
-    right: 15%;
-    animation-delay: 2s;
+  width: 60px;
+  height: 60px;
+  top: 60%;
+  right: 15%;
+  animation-delay: 2s;
 }
 
 .element-3 {
-    width: 80px;
-    height: 80px;
-    bottom: 20%;
-    left: 20%;
-    animation-delay: 4s;
+  width: 80px;
+  height: 80px;
+  bottom: 20%;
+  left: 20%;
+  animation-delay: 4s;
 }
 
 /* Brands Showcase Section */
 .brands-showcase {
-    padding: 6rem 0;
-    background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
-    position: relative;
-    max-width: 100% !important;
-    width: 100% !important;
+  padding: 6rem 0;
+  background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
+  position: relative;
+  max-width: 100%;
+  width: 100%;
 }
 
 .brands-showcase::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 100px;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5));
-    pointer-events: none;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100px;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5));
+  pointer-events: none;
 }
 
 .section-header {
-    text-align: center;
-    margin-bottom: 4rem;
-    max-width: 100% !important;
-    margin-left: auto;
-    margin-right: auto;
+  text-align: center;
+  margin-bottom: 4rem;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .section-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    background: rgba(249, 115, 22, 0.1);
-    color: #f97316;
-    padding: 0.5rem 1.5rem;
-    border-radius: 25px;
-    font-size: 0.875rem;
-    font-weight: 600;
-    margin-bottom: 1.5rem;
-    border: 1px solid rgba(249, 115, 22, 0.2);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(249, 115, 22, 0.1);
+  color: #f97316;
+  padding: 0.5rem 1.5rem;
+  border-radius: 25px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  border: 1px solid rgba(249, 115, 22, 0.2);
 }
 
 .section-title {
-    font-size: 3rem;
-    font-weight: 800;
-    color: #fff;
-    margin-bottom: 1rem;
-    line-height: 1.2;
-    text-align: center;
+  font-size: 3rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+  text-align: center;
 }
 
 .section-subtitle {
-    font-size: 1.125rem;
-    color: #b3b3b3;
-    line-height: 1.6;
+  font-size: 1.125rem;
+  color: #b3b3b3;
+  line-height: 1.6;
 }
 
 /* Brands Grid */
 .brands-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 2.5rem;
-    margin-top: 4rem;
-    max-width: 100% !important;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 3rem;
+  margin-top: 4rem;
+  max-width: 100%;
 }
 
 /* Premium Brand Cards */
 .premium-card {
-    position: relative;
-    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-    border: 1px solid rgba(249, 115, 22, 0.2);
-    border-radius: 20px;
-    overflow: hidden;
-    transition: all 0.4s ease;
-    cursor: pointer;
+  position: relative;
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  border: 1px solid rgba(249, 115, 22, 0.2);
+  border-radius: 20px;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  cursor: pointer;
 }
 
 .premium-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, rgba(249, 115, 22, 0.05), rgba(234, 88, 12, 0.05));
-    opacity: 0;
-    transition: opacity 0.3s ease;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(249, 115, 22, 0.05), rgba(234, 88, 12, 0.05));
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 .premium-card:hover::before {
-    opacity: 1;
+  opacity: 1;
 }
 
 .premium-card:hover {
-    transform: translateY(-10px);
-    border-color: #f97316;
-    box-shadow: 0 20px 40px rgba(249, 115, 22, 0.2);
+  transform: translateY(-10px);
+  border-color: #f97316;
+  box-shadow: 0 20px 40px rgba(249, 115, 22, 0.2);
 }
 
 .card-glow {
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    right: -2px;
-    bottom: -2px;
-    background: linear-gradient(135deg, #f97316, #ea580c);
-    border-radius: 20px;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    z-index: -1;
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(135deg, #f97316, #ea580c);
+  border-radius: 20px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
 }
 
 .premium-card:hover .card-glow {
-    opacity: 0.3;
+  opacity: 0.3;
 }
 
 .brand-header {
-    position: relative;
-    padding: 2rem 2rem 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  position: relative;
+  padding: 2rem 2rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .brand-logo {
-    background: white;
-    border-radius: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 120px;
-    height: 120px;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+  background: white;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  height: 120px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .brand-logo img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-    filter: brightness(1.1);
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  filter: brightness(1.1);
 }
 
 .premium-badge {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    background: linear-gradient(135deg, #f97316, #ea580c);
-    color: #000;
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, #f97316, #ea580c);
+  color: #000;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
 }
 
 .brand-content {
-    padding: 0 2rem 2rem;
+  padding: 0 2rem 2rem;
 }
 
 .brand-name {
-    font-size: 1.75rem;
-    font-weight: 700;
-    color: #fff;
-    margin-bottom: 1rem;
-    line-height: 1.3;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 1rem;
+  line-height: 1.3;
 }
 
 .brand-description {
-    font-size: 1rem;
-    color: #b3b3b3;
-    line-height: 1.6;
-    margin-bottom: 1.5rem;
+  font-size: 1rem;
+  color: #b3b3b3;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
 }
 
 .brand-features {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
 }
 
 .feature {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    color: #f97316;
-    font-size: 0.875rem;
-    font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: #f97316;
+  font-size: 0.875rem;
+  font-weight: 500;
 }
 
 .feature i {
-    font-size: 1rem;
-    color: #f97316;
+  font-size: 1rem;
+  color: #f97316;
 }
 
 .brand-stats {
-    display: flex;
-    justify-content: space-between;
-    padding: 1.5rem 0;
-    margin-bottom: 2rem;
-    border-top: 1px solid rgba(249, 115, 22, 0.2);
-    border-bottom: 1px solid rgba(249, 115, 22, 0.2);
+  display: flex;
+  justify-content: space-between;
+  padding: 1.5rem 0;
+  margin-bottom: 2rem;
+  border-top: 1px solid rgba(249, 115, 22, 0.2);
+  border-bottom: 1px solid rgba(249, 115, 22, 0.2);
 }
 
 .stat {
-    text-align: center;
-    flex: 1;
+  text-align: center;
+  flex: 1;
 }
 
 .stat:not(:last-child) {
-    border-right: 1px solid rgba(249, 115, 22, 0.2);
+  border-right: 1px solid rgba(249, 115, 22, 0.2);
 }
 
 .stat-value {
-    display: block;
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #f97316;
-    margin-bottom: 0.25rem;
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #f97316;
+  margin-bottom: 0.25rem;
 }
 
 .brand-stats .stat-label {
-    font-size: 0.75rem;
-    color: #b3b3b3;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+  font-size: 0.75rem;
+  color: #b3b3b3;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .btn-brand {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.75rem;
-    background: linear-gradient(135deg, #f97316, #ea580c);
-    color: #000;
-    padding: 1rem 2rem;
-    border: none;
-    border-radius: 12px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  background: linear-gradient(135deg, #f97316, #ea580c);
+  color: #000;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
 
 .btn-brand::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: left 0.5s ease;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
 }
 
 .btn-brand:hover::before {
-    left: 100%;
+  left: 100%;
 }
 
 .btn-brand:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(249, 115, 22, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(249, 115, 22, 0.4);
 }
 
 .btn-brand i {
-    transition: transform 0.3s ease;
+  transition: transform 0.3s ease;
 }
 
 .btn-brand:hover i {
-    transform: translateX(5px);
+  transform: translateX(5px);
 }
 
 /* Why Choose Us Section */
 .why-choose-us {
-    padding: 6rem 0;
-    background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
-    position: relative;
-    max-width: 100% !important;
-    width: 100% !important;
+  padding: 6rem 0;
+  background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+  position: relative;
+  max-width: 100%;
+  width: 100%;
 }
 
 .why-choose-us::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: 
-        radial-gradient(circle at 25% 25%, rgba(249, 115, 22, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 75% 75%, rgba(234, 88, 12, 0.1) 0%, transparent 50%);
-    pointer-events: none;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 25% 25%, rgba(249, 115, 22, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 75% 75%, rgba(234, 88, 12, 0.1) 0%, transparent 50%);
+  pointer-events: none;
 }
 
 .benefits-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2.5rem;
-    margin-top: 4rem;
-    position: relative;
-    z-index: 2;
-    max-width: 100% !important;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2.5rem;
+  margin-top: 4rem;
+  position: relative;
+  z-index: 2;
+  max-width: 100%;
 }
 
 .benefit-card {
-    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-    border: 1px solid rgba(249, 115, 22, 0.2);
-    border-radius: 20px;
-    padding: 3rem 2rem;
-    text-align: center;
-    transition: all 0.4s ease;
-    position: relative;
-    overflow: hidden;
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  border: 1px solid rgba(249, 115, 22, 0.2);
+  border-radius: 20px;
+  padding: 3rem 2rem;
+  text-align: center;
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
 }
 
 .benefit-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, rgba(249, 115, 22, 0.05), rgba(234, 88, 12, 0.05));
-    opacity: 0;
-    transition: opacity 0.3s ease;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(249, 115, 22, 0.05), rgba(234, 88, 12, 0.05));
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 .benefit-card:hover::before {
-    opacity: 1;
+  opacity: 1;
 }
 
 .benefit-card:hover {
-    transform: translateY(-10px);
-    border-color: #f97316;
-    box-shadow: 0 20px 40px rgba(249, 115, 22, 0.15);
+  transform: translateY(-10px);
+  border-color: #f97316;
+  box-shadow: 0 20px 40px rgba(249, 115, 22, 0.15);
 }
 
 .benefit-icon {
-    width: 80px;
-    height: 80px;
-    background: linear-gradient(135deg, #f97316, #ea580c);
-    border-radius: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 2rem;
-    position: relative;
-    overflow: hidden;
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, #f97316, #ea580c);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 2rem;
+  position: relative;
+  overflow: hidden;
 }
 
 .benefit-icon::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-    transition: left 0.5s ease;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s ease;
 }
 
 .benefit-card:hover .benefit-icon::before {
-    left: 100%;
+  left: 100%;
 }
 
 .benefit-icon i {
-    font-size: 2rem;
-    color: #000;
-    z-index: 2;
-    position: relative;
+  font-size: 2rem;
+  color: #000;
+  z-index: 2;
+  position: relative;
 }
 
 .benefit-card h3 {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #fff;
-    margin-bottom: 1rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 1rem;
 }
 
 .benefit-card p {
-    font-size: 1rem;
-    color: #b3b3b3;
-    line-height: 1.6;
+  font-size: 1rem;
+  color: #b3b3b3;
+  line-height: 1.6;
 }
 
 /* Animations */
 @keyframes pulse {
-    0%, 100% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.05);
-    }
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
 }
 
 @keyframes float {
-    0%, 100% {
-        transform: translateY(0px) rotate(0deg);
-    }
-    25% {
-        transform: translateY(-15px) rotate(90deg);
-    }
-    50% {
-        transform: translateY(-10px) rotate(180deg);
-    }
-    75% {
-        transform: translateY(-20px) rotate(270deg);
-    }
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-15px) rotate(90deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(180deg);
+  }
+  75% {
+    transform: translateY(-20px) rotate(270deg);
+  }
 }
 
 @keyframes expand {
-    0% {
-        width: 0;
-    }
-    100% {
-        width: 100%;
-    }
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
 }
 
 @keyframes rotate {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {
-        transform: translateY(0);
-    }
-    40% {
-        transform: translateY(-10px);
-    }
-    60% {
-        transform: translateY(-5px);
-    }
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
 }
 
 /* ===== RESPONSIVE DESIGN ===== */
 
 /* Responsive para Hero Moderno */
 @media (min-width: 1024px) {
-    .brands-container {
-        grid-template-columns: 1fr 500px;
-        gap: 4rem;
-    }
+  .brands-container {
+    grid-template-columns: 1fr 500px;
+    gap: 4rem;
+  }
 
-    .brands-content-modern {
-        text-align: left;
-        margin: 0;
-    }
+  .brands-content-modern {
+    text-align: left;
+    margin: 0;
+  }
 
-    .brands-stats {
-        justify-content: flex-start;
-    }
+  .brands-stats {
+    justify-content: flex-start;
+  }
 
-    .brands-actions-modern {
-        justify-content: flex-start;
-    }
+  .brands-actions-modern {
+    justify-content: flex-start;
+  }
 
-    .brands-trust {
-        justify-content: flex-start;
-    }
+  .brands-trust {
+    justify-content: flex-start;
+  }
 
-    .brands-visual {
-        display: flex;
-    }
+  .brands-visual {
+    display: flex;
+  }
 }
 
 @media (min-width: 1400px) {
-    .brands-grid {
-        grid-template-columns: repeat(4, 1fr);
-    }
+  .brands-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 @media (min-width: 1800px) {
-    .brands-grid {
-        grid-template-columns: repeat(5, 1fr);
-    }
+  .brands-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
 @media (max-width: 1024px) {
-    .hero-title {
-        font-size: 3rem;
-    }
-    
-    .section-title {
-        font-size: 2.5rem;
-    }
-    
-    .brands-grid {
-        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-        gap: 2rem;
-    }
-    
-    .hero-stats {
-        gap: 2rem;
-    }
+  .hero-title {
+    font-size: 3rem;
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+  }
+
+  .brands-grid {
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    gap: 2.5rem;
+  }
+
+  .hero-stats {
+    gap: 2rem;
+  }
 }
 
 @media (max-width: 768px) {
-    .hero-brands {
-        padding: 4rem 0 3rem;
-    }
-    
-    .hero-title {
-        font-size: 2.5rem;
-    }
-    
-    .hero-description {
-        font-size: 1.125rem;
-    }
-    
-    .hero-stats {
-        flex-direction: column;
-        gap: 1.5rem;
-        align-items: center;
-    }
-    
-    .stat-item {
-        width: 100%;
-        max-width: 250px;
-    }
-    
-    .section-title {
-        font-size: 2rem;
-    }
-    
-    .brands-grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-    }
-    
-    .benefits-grid {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-    }
-    
-    .brands-showcase,
-    .why-choose-us {
-        padding: 4rem 0;
-    }
+  .hero-brands {
+    padding: 4rem 0 3rem;
+  }
 
-    /* Hero Moderno Mobile */
-    .brands-stats {
-        flex-direction: column;
-        gap: 1.5rem;
-    }
+  .hero-title {
+    font-size: 2.5rem;
+  }
 
-    .brands-stats .stat-divider {
-        width: 3rem;
-        height: 1px;
-    }
+  .hero-description {
+    font-size: 1.125rem;
+  }
 
-    .brands-actions-modern {
-        flex-direction: column;
-        align-items: center;
-    }
+  .hero-stats {
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+  }
 
-    .btn-primary-brands,
-    .btn-secondary-brands {
-        width: 100%;
-        max-width: 300px;
-        justify-content: center;
-    }
+  .stat-item {
+    width: 100%;
+    max-width: 250px;
+  }
 
-    .brands-trust {
-        flex-direction: column;
-        gap: 1rem;
-        align-items: center;
-    }
+  .section-title {
+    font-size: 2rem;
+  }
+
+  .brands-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .benefits-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .brands-showcase,
+  .why-choose-us {
+    padding: 4rem 0;
+  }
+
+  /* Hero Moderno Mobile */
+  .brands-stats {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .brands-stats .stat-divider {
+    width: 3rem;
+    height: 1px;
+  }
+
+  .brands-actions-modern {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .btn-primary-brands,
+  .btn-secondary-brands {
+    width: 100%;
+    max-width: 300px;
+    justify-content: center;
+  }
+
+  .brands-trust {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+  }
 }
 
 @media (max-width: 480px) {
-    .hero-content {
-        padding: 0 1rem;
-    }
-    
-    .hero-title {
-        font-size: 2rem;
-    }
-    
-    .hero-description {
-        font-size: 1rem;
-    }
-    
-    .stat-number {
-        font-size: 2rem;
-    }
-    
-    .section-title {
-        font-size: 1.75rem;
-    }
-    
-    .section-subtitle {
-        font-size: 1rem;
-    }
-    
-    .brand-header {
-        flex-direction: column;
-        gap: 1rem;
-        align-items: center;
-    }
-    
-    .brand-logo {
-        width: 100px;
-        height: 100px;
-    }
-    
-    .brand-stats {
-        flex-direction: column;
-        gap: 1rem;
-        text-align: center;
-    }
-    
-    .stat:not(:last-child) {
-        border-right: none;
-        border-bottom: 1px solid rgba(249, 115, 22, 0.2);
-        padding-bottom: 1rem;
-    }
-    
-    .benefit-card {
-        padding: 2rem 1.5rem;
-    }
-    
-    .benefit-icon {
-        width: 60px;
-        height: 60px;
-    }
-    
-    .benefit-icon i {
-        font-size: 1.5rem;
-    }
+  .hero-content {
+    padding: 0 1rem;
+  }
 
-    /* Hero Moderno Mobile */
-    .brands-container {
-        padding: 1rem;
-    }
+  .hero-title {
+    font-size: 2rem;
+  }
 
-    .brands-badge {
-        padding: 0.5rem 1rem;
-        font-size: 0.8rem;
-    }
+  .hero-description {
+    font-size: 1rem;
+  }
 
-    .brands-stats .stat-icon {
-        width: 40px;
-        height: 40px;
-        font-size: 1rem;
-    }
+  .stat-number {
+    font-size: 2rem;
+  }
 
-    .brands-stats .stat-number {
-        font-size: 1.5rem;
-    }
+  .section-title {
+    font-size: 1.75rem;
+  }
 
-    .btn-primary-brands,
-    .btn-secondary-brands {
-        padding: 1rem 2rem;
-        font-size: 1rem;
-    }
+  .section-subtitle {
+    font-size: 1rem;
+  }
 
-    .floating-card-modern {
-        padding: 1rem;
-        top: -40px;
-        right: -60px;
-    }
+  .brand-header {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+  }
 
-    .floating-card-modern .card-icon {
-        width: 40px;
-        height: 40px;
-        font-size: 1rem;
-    }
+  .brand-logo {
+    width: 100px;
+    height: 100px;
+  }
+
+  .brand-stats {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  .stat:not(:last-child) {
+    border-right: none;
+    border-bottom: 1px solid rgba(249, 115, 22, 0.2);
+    padding-bottom: 1rem;
+  }
+
+  .benefit-card {
+    padding: 2rem 1.5rem;
+  }
+
+  .benefit-icon {
+    width: 60px;
+    height: 60px;
+  }
+
+  .benefit-icon i {
+    font-size: 1.5rem;
+  }
+
+  /* Hero Moderno Mobile */
+  .brands-container {
+    padding: 1rem;
+  }
+
+  .brands-badge {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+  }
+
+  .brands-stats .stat-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+
+  .brands-stats .stat-number {
+    font-size: 1.5rem;
+  }
+
+  .btn-primary-brands,
+  .btn-secondary-brands {
+    padding: 1rem 2rem;
+    font-size: 1rem;
+  }
+
+  .floating-card-modern {
+    padding: 1rem;
+    top: -40px;
+    right: -60px;
+  }
+
+  .floating-card-modern .card-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
 }
 
 /* Accessibility */
 @media (prefers-reduced-motion: reduce) {
-    .floating-element,
-    .card-glow,
-    .brands-bg-elements .floating-element,
-    .visual-circle-brands,
-    .brand-icon-animated,
-    .brands-badge,
-    .floating-card-modern,
-    .scroll-indicator-brands .scroll-arrow {
-        animation: none;
-    }
-    
-    .premium-card,
-    .btn-brand,
-    .benefit-card,
-    .btn-primary-brands,
-    .btn-secondary-brands {
-        transition: none;
-    }
+  .floating-element,
+  .card-glow,
+  .brands-bg-elements .floating-element,
+  .visual-circle-brands,
+  .brand-icon-animated,
+  .brands-badge,
+  .floating-card-modern,
+  .scroll-indicator-brands .scroll-arrow {
+    animation: none;
+  }
+
+  .premium-card,
+  .btn-brand,
+  .benefit-card,
+  .btn-primary-brands,
+  .btn-secondary-brands {
+    transition: none;
+  }
 }
 
 /* Dark mode improvements */
 @media (prefers-color-scheme: dark) {
-    .premium-card {
-        border-color: rgba(249, 115, 22, 0.3);
-    }
-    
-    .brands-showcase {
-        background: linear-gradient(135deg, #0a0a0a 0%, #000 100%);
-    }
+  .premium-card {
+    border-color: rgba(249, 115, 22, 0.3);
+  }
+
+  .brands-showcase {
+    background: linear-gradient(135deg, #0a0a0a 0%, #000 100%);
+  }
 }

@@ -41,27 +41,24 @@ document.addEventListener("DOMContentLoaded", () => {
       })
     }
 
-    // Finalizar compra
+    // Finalizar compra - NOVA IMPLEMENTAÇÃO COM VERIFICAÇÃO DE AUTENTICAÇÃO
     if (btnCheckout) {
-      btnCheckout.addEventListener("click", async () => {
-        if (window.cartService.isEmpty()) {
-          alert("Carrinho está vazio!")
+      // Remove event listeners existentes para evitar duplicação
+      const newBtnCheckout = btnCheckout.cloneNode(true)
+      btnCheckout.parentNode.replaceChild(newBtnCheckout, btnCheckout)
+
+      newBtnCheckout.addEventListener("click", () => {
+        console.log("Botão Finalizar Compra clicado - cart-ui.js")
+
+        // Verifica se o cartService está disponível
+        if (!window.cartService) {
+          console.error("CartService não está disponível")
+          alert("Erro interno. Tente recarregar a página.")
           return
         }
 
-        // Por enquanto, redirecionar para página de checkout
-        // Futuramente você pode implementar um modal de endereço
-        const shippingAddress = prompt("Digite seu endereço de entrega:")
-        if (shippingAddress) {
-          const result = await window.cartService.checkout(shippingAddress)
-          if (result.success) {
-            alert("Pedido criado com sucesso! Redirecionando...")
-            // Redirecionar para página de pedidos ou confirmação
-            window.location.href = "/public/html/orders.html"
-          }
-        } else {
-          alert("Endereço é obrigatório para finalizar a compra.")
-        }
+        // Usa o novo método handleCheckout que verifica autenticação
+        window.cartService.handleCheckout()
       })
     }
 
@@ -73,6 +70,30 @@ document.addEventListener("DOMContentLoaded", () => {
     })
   }
 
+  // Aguarda o cartService estar disponível antes de configurar
+  function waitForCartService(callback, maxAttempts = 50) {
+    let attempts = 0
+
+    function checkCartService() {
+      attempts++
+
+      if (window.cartService) {
+        console.log("CartService carregado, configurando painel do carrinho")
+        callback()
+      } else if (attempts < maxAttempts) {
+        console.log(`Aguardando CartService... tentativa ${attempts}`)
+        setTimeout(checkCartService, 100)
+      } else {
+        console.error("Timeout: CartService não carregou a tempo")
+        // Tenta configurar mesmo assim
+        callback()
+      }
+    }
+
+    checkCartService()
+  }
+
   // Chamar a função de configuração do painel do carrinho
-  setupCartPanel()
-});
+  console.log("Inicializando cart-ui.js")
+  waitForCartService(setupCartPanel)
+})

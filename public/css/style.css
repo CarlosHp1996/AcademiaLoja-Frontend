@@ -47,6 +47,27 @@ body {
   padding: 0 1rem;
 }
 
+/* Garantir que a largura seja consistente em todas as páginas */
+@media (min-width: 768px) {
+  .container {
+    padding: 0 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1200px;
+    padding: 0 2rem;
+  }
+}
+
+@media (min-width: 1400px) {
+  .container {
+    max-width: 1400px;
+    padding: 0 2rem;
+  }
+}
+
 a {
   text-decoration: none;
   color: inherit;
@@ -75,16 +96,16 @@ img {
   margin-right: auto;
   display: block;
   margin-bottom: 0;
-  flex: 1
+  flex: 1;
 }
 
 .categories .section-title {
-    font-size: 2.5rem;
-    font-weight: 700;
+  font-size: 2.5rem;
+  font-weight: 700;
 }
 
 .section-title .highlight {
-    margin-left: 0.1em;
+  margin-left: 0.1em;
 }
 
 .text-center {
@@ -1073,22 +1094,22 @@ img {
 
 /* Somente para Produtos Em Destaque */
 .featured-products .section-title {
-    font-size: 2.5rem;
+  font-size: 2.5rem;
 }
 
 .section-header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    width: 100%;
-    margin-bottom: 2rem;
-    /* Remova ou sobrescreva qualquer regra que centralize o conteúdo aqui */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-bottom: 2rem;
+  /* Remova ou sobrescreva qualquer regra que centralize o conteúdo aqui */
 }
 
 .section-header,
 .section-title {
-    width: 100%;
+  width: 100%;
 }
 
 /* Product Detail */
@@ -1777,32 +1798,29 @@ img {
 
 .benefit-card {
   background-color: var(--color-zinc-900);
-    padding: 1.5rem;
-    border-radius: 0.5rem;
-    text-align: center;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-    transition: 
-        box-shadow 0.3s cubic-bezier(.4,0,.2,1),
-        transform 0.3s cubic-bezier(.4,0,.2,1),
-        background 0.3s;
-    position: relative;
-    z-index: 1;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  text-align: center;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  transition: box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), background 0.3s;
+  position: relative;
+  z-index: 1;
 }
 
 .benefit-card:hover {
-    box-shadow: 0 8px 32px 0 rgba(249,115,22,0.18), 0 2px 8px rgba(0,0,0,0.18);
-    background: linear-gradient(135deg, rgba(249,115,22,0.08) 0%, rgba(255,255,255,0.01) 100%);
-    transform: translateY(-8px) scale(1.03);
-    z-index: 2;
+  box-shadow: 0 8px 32px 0 rgba(249, 115, 22, 0.18), 0 2px 8px rgba(0, 0, 0, 0.18);
+  background: linear-gradient(135deg, rgba(249, 115, 22, 0.08) 0%, rgba(255, 255, 255, 0.01) 100%);
+  transform: translateY(-8px) scale(1.03);
+  z-index: 2;
 }
 
 .benefit-card .benefit-icon {
-    transition: transform 0.3s cubic-bezier(.4,0,.2,1), box-shadow 0.3s;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s;
 }
 
 .benefit-card:hover .benefit-icon {
-    transform: scale(1.15) rotate(-8deg);
-    box-shadow: 0 4px 16px rgba(249,115,22,0.25);
+  transform: scale(1.15) rotate(-8deg);
+  box-shadow: 0 4px 16px rgba(249, 115, 22, 0.25);
 }
 
 .benefit-icon {

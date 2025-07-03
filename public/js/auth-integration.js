@@ -228,7 +228,7 @@ function initAuth() {
     showUserDebugInfo();
     if (!checkPageAccess()) return;
     initUserDropdown();
-    updateCartItemCount(); // Atualiza a contagem do carrinho após inicializar a autenticação
+    //updateCartItemCount(); // Atualiza a contagem do carrinho após inicializar a autenticação
     console.log("Sistema de autenticação inicializado");
 }
 
@@ -244,6 +244,6 @@ window.authIntegration = {
     initUserDropdown,
     showUserDebugInfo,
     initAuth,
-    updateCartItemCount // Exporta a função para ser chamada externamente se necessário (ex: após adicionar item)
+   // updateCartItemCount // Exporta a função para ser chamada externamente se necessário (ex: após adicionar item)
 };
 

@@ -821,7 +821,7 @@
 .goals-bg-elements .element-1 {
   width: 180px;
   height: 180px;
-  background: linear-gradient(45deg, var(--color-orange), var(--color-red));
+  background: linear-gradient(45deg, var(--color-orange), var(--color-orange-dark));
   top: 15%;
   left: 8%;
   animation-delay: 0s;
@@ -830,7 +830,7 @@
 .goals-bg-elements .element-2 {
   width: 120px;
   height: 120px;
-  background: linear-gradient(45deg, var(--color-red), var(--color-orange));
+  background: linear-gradient(45deg, var(--color-orange-dark), var(--color-orange));
   top: 60%;
   right: 12%;
   animation-delay: 2s;
@@ -839,7 +839,7 @@
 .goals-bg-elements .element-3 {
   width: 90px;
   height: 90px;
-  background: linear-gradient(45deg, var(--color-orange), var(--color-red));
+  background: linear-gradient(45deg, var(--color-orange), var(--color-orange-dark));
   bottom: 25%;
   left: 15%;
   animation-delay: 4s;
@@ -848,7 +848,7 @@
 .goals-bg-elements .element-4 {
   width: 60px;
   height: 60px;
-  background: linear-gradient(45deg, var(--color-red), var(--color-orange));
+  background: linear-gradient(45deg, var(--color-orange-dark), var(--color-orange));
   top: 25%;
   right: 35%;
   animation-delay: 1s;
@@ -857,7 +857,7 @@
 .goals-bg-elements .element-5 {
   width: 140px;
   height: 140px;
-  background: linear-gradient(45deg, var(--color-orange), var(--color-red));
+  background: linear-gradient(45deg, var(--color-orange), var(--color-orange-dark));
   bottom: 15%;
   right: 25%;
   animation-delay: 3s;
@@ -914,7 +914,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  background: linear-gradient(135deg, var(--color-orange), var(--color-red));
+  background: linear-gradient(135deg, var(--color-orange), var(--color-orange-dark));
   color: var(--color-white);
   padding: 0.75rem 1.5rem;
   border-radius: 50px;
@@ -948,7 +948,7 @@
 }
 
 .goals-highlight .highlight-text {
-  background: linear-gradient(135deg, var(--color-orange), var(--color-red));
+  background: linear-gradient(135deg, var(--color-orange), var(--color-orange-dark));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -962,7 +962,7 @@
   left: 0;
   right: 0;
   height: 8px;
-  background: linear-gradient(135deg, var(--color-orange), var(--color-red));
+  background: linear-gradient(135deg, var(--color-orange), var(--color-orange-dark));
   border-radius: 4px;
   opacity: 0.3;
   animation: expand 2s ease-out;
@@ -1001,7 +1001,7 @@
 .goals-stats .stat-icon {
   width: 50px;
   height: 50px;
-  background: linear-gradient(135deg, var(--color-orange), var(--color-red));
+  background: linear-gradient(135deg, var(--color-orange), var(--color-orange-dark));
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -1050,7 +1050,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.75rem;
-  background: linear-gradient(135deg, var(--color-orange), var(--color-red));
+  background: linear-gradient(135deg, var(--color-orange), var(--color-orange-dark));
   color: var(--color-white);
   border: none;
   padding: 1.25rem 2.5rem;
@@ -1111,7 +1111,7 @@
 .btn-secondary-goals .btn-icon-secondary {
   width: 40px;
   height: 40px;
-  background: linear-gradient(135deg, var(--color-orange), var(--color-red));
+  background: linear-gradient(135deg, var(--color-orange), var(--color-orange-dark));
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -1204,7 +1204,7 @@
     position: absolute;
     width: 60px; /* Aumentado de 50px */
     height: 60px;
-    background: linear-gradient(135deg, var(--color-orange), var(--color-red));
+    background: linear-gradient(135deg, var(--color-orange), var(--color-orange-dark));
     border-radius: 50%;
     display: flex;
     align-items: center;

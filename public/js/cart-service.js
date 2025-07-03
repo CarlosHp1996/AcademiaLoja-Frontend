@@ -1,31 +1,99 @@
-// Cart Service - Gerenciamento do carrinho
+// Cart Service - Gerenciamento do carrinho com migração de sessão
 class CartService {
   constructor() {
     this.API_BASE_URL = "https://localhost:4242/api"
     this.cart = null
     this.isLoading = false
+    this.sessionId = this.getOrCreateSessionId()
     this.init()
   }
 
   async init() {
     await this.loadCart()
     this.updateCartBadge()
+
+    // Verificar se precisa migrar carrinho após login
+    await this.checkAndMigrateCart()
+
+    // Debug
+    this.debugCartState()
+  }
+
+  getOrCreateSessionId() {
+    let sessionId = localStorage.getItem("sessionId")
+    if (!sessionId) {
+      sessionId = this.generateSessionId()
+      localStorage.setItem("sessionId", sessionId)
+    }
+    return sessionId
+  }
+
+  generateSessionId() {
+    return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (c) => {
+      const r = (Math.random() * 16) | 0
+      const v = c == "x" ? r : (r & 0x3) | 0x8
+      return v.toString(16)
+    })
+  }
+
+  async checkAndMigrateCart() {
+    // Verificar se o usuário acabou de fazer login
+    const needsMigration = localStorage.getItem("needsCartMigration")
+
+    if (needsMigration === "true" && this.isUserAuthenticated()) {
+      console.log("Migrando carrinho de sessão para usuário logado...")
+      await this.migrateSessionCart()
+      localStorage.removeItem("needsCartMigration")
+    }
+  }
+
+  async migrateSessionCart() {
+    try {
+      const response = await fetch(`${this.API_BASE_URL}/Cart/migrate`, {
+        method: "POST",
+        headers: this.getHeaders(),
+        body: JSON.stringify({ sessionId: this.sessionId }),
+        credentials: "include",
+      })
+
+      const result = await response.json()
+
+      if (response.ok && result.hasSuccess) {
+        this.cart = result.value
+        this.updateCartBadge()
+        this.showSuccessMessage("Carrinho migrado com sucesso!")
+        console.log("Carrinho migrado:", this.cart)
+      } else {
+        console.error("Erro ao migrar carrinho:", result.errors)
+      }
+    } catch (error) {
+      console.error("Erro ao migrar carrinho:", error)
+    }
   }
 
   // Carregar carrinho do backend
   async loadCart() {
     try {
       this.isLoading = true
+      console.log("Carregando carrinho...")
+
       const response = await fetch(`${this.API_BASE_URL}/Cart`, {
         method: "GET",
         headers: this.getHeaders(),
-        credentials: 'include',
+        credentials: "include",
       })
+
+      console.log("Response status:", response.status)
+      console.log("Headers enviados:", this.getHeaders())
 
       if (response.ok) {
         const result = await response.json()
-        if (result.hasSuccess) {
+        console.log("Resposta da API:", result)
+
+        if (result.hasSuccess && result.value) {
           this.cart = result.value
+          console.log("Carrinho carregado:", this.cart)
+          console.log("Total de itens:", this.cart.totalItems)
         } else {
           console.error("Erro ao carregar carrinho:", result.errors)
           this.cart = { items: [], totalAmount: 0, totalItems: 0 }
@@ -39,6 +107,7 @@ class CartService {
       this.cart = { items: [], totalAmount: 0, totalItems: 0 }
     } finally {
       this.isLoading = false
+      console.log("Atualizando badge com:", this.cart)
     }
   }
 
@@ -59,7 +128,7 @@ class CartService {
         method: "POST",
         headers: this.getHeaders(),
         body: JSON.stringify(requestData),
-        credentials: 'include',
+        credentials: "include",
       })
 
       const result = await response.json()
@@ -93,7 +162,7 @@ class CartService {
         method: "PUT",
         headers: this.getHeaders(),
         body: JSON.stringify({ quantity: quantity }),
-        credentials: 'include',
+        credentials: "include",
       })
 
       const result = await response.json()
@@ -125,7 +194,7 @@ class CartService {
       const response = await fetch(`${this.API_BASE_URL}/Cart/remove/${productId}`, {
         method: "DELETE",
         headers: this.getHeaders(),
-        credentials: 'include',
+        credentials: "include",
       })
 
       const result = await response.json()
@@ -158,7 +227,7 @@ class CartService {
       const response = await fetch(`${this.API_BASE_URL}/Cart/clear`, {
         method: "DELETE",
         headers: this.getHeaders(),
-        credentials: 'include',
+        credentials: "include",
       })
 
       const result = await response.json()
@@ -198,17 +267,124 @@ class CartService {
     return headers
   }
 
+  // Verificar se usuário está autenticado com Bearer token
+  isUserAuthenticated() {
+    // Verifica se o authService está disponível
+    if (window.authService && typeof window.authService.isAuthenticated === "function") {
+      const isAuth = window.authService.isAuthenticated()
+      console.log("AuthService check:", isAuth)
+      return isAuth
+    }
+
+    // Fallback: verifica diretamente o token no localStorage
+    const authToken = localStorage.getItem("authToken")
+    console.log("Auth token from localStorage:", authToken ? "Present" : "Not found")
+
+    if (!authToken) return false
+
+    try {
+      // Verifica se o token é válido (não expirado)
+      const tokenParts = authToken.split(".")
+      if (tokenParts.length !== 3) {
+        console.log("Invalid token format")
+        return false
+      }
+
+      const payload = JSON.parse(atob(tokenParts[1]))
+      const expirationTime = payload.exp * 1000
+      const currentTime = Date.now()
+
+      const isValid = currentTime < expirationTime
+      console.log("Token validation:", { expirationTime, currentTime, isValid })
+
+      return isValid
+    } catch (error) {
+      console.error("Erro ao verificar token:", error)
+      return false
+    }
+  }
+
+  // Verificar autenticação e redirecionar para checkout
+  handleCheckout() {
+    // Verifica se o carrinho está vazio
+    if (this.isEmpty()) {
+      this.showErrorMessage("Carrinho está vazio!")
+      return
+    }
+
+    // Verifica se o usuário está autenticado com Bearer token
+    if (this.isUserAuthenticated()) {
+      // Usuário autenticado - redireciona para checkout
+      console.log("Usuário autenticado, redirecionando para checkout...")
+      this.showSuccessMessage("Redirecionando para finalização da compra...")
+
+      // Fecha o painel do carrinho
+      this.closeCartPanel()
+
+      // Redireciona para a página de checkout após um breve delay
+      setTimeout(() => {
+        window.location.href = "/public/html/checkout.html"
+      }, 1000)
+    } else {
+      // Usuário não autenticado - marcar para migração e redirecionar para registro
+      console.log("Usuário não autenticado, redirecionando para registro...")
+
+      // Marcar que precisa migrar carrinho após login
+      localStorage.setItem("needsCartMigration", "true")
+
+      // Mostra notificação informando que precisa fazer login
+      if (window.authNotifications) {
+        window.authNotifications.loginRequired("Faça login ou crie uma conta para finalizar sua compra")
+      } else {
+        this.showErrorMessage("Faça login ou crie uma conta para finalizar sua compra")
+      }
+
+      // Fecha o painel do carrinho
+      this.closeCartPanel()
+
+      // Salva a URL atual para redirecionamento após login
+      const currentUrl = window.location.href
+      localStorage.setItem("redirectAfterLogin", currentUrl)
+
+      // Redireciona para a página de registro após um breve delay
+      setTimeout(() => {
+        window.location.href = "/public/html/register.html"
+      }, 1500)
+    }
+  }
+
   // Atualizar badge do carrinho
   updateCartBadge() {
+    console.log("Atualizando badge do carrinho...")
+    console.log("Cart atual:", this.cart)
+
     const badge = document.getElementById("cart-badge")
+    console.log("Badge element:", badge)
+
     if (badge && this.cart) {
-      const totalItems = this.cart.totalItems || 0
+      // Verificar diferentes possibilidades de estrutura
+      let totalItems = 0
+
+      if (this.cart.totalItems !== undefined) {
+        totalItems = this.cart.totalItems
+      } else if (this.cart.TotalItems !== undefined) {
+        totalItems = this.cart.TotalItems
+      } else if (this.cart.items && Array.isArray(this.cart.items)) {
+        totalItems = this.cart.items.reduce((sum, item) => sum + (item.quantity || 0), 0)
+      }
+
+      console.log("Total de itens calculado:", totalItems)
+
       if (totalItems > 0) {
         badge.textContent = totalItems
         badge.style.display = "flex"
+        console.log("Badge mostrado com:", totalItems)
       } else {
         badge.style.display = "none"
+        console.log("Badge ocultado")
       }
+    } else {
+      console.log("Badge element ou cart não encontrado")
     }
   }
 
@@ -484,7 +660,7 @@ class CartService {
     }, 300)
   }
 
-  // Finalizar compra
+  // Finalizar compra (método legado mantido para compatibilidade)
   async checkout(shippingAddress) {
     try {
       this.isLoading = true
@@ -493,7 +669,7 @@ class CartService {
         method: "POST",
         headers: this.getHeaders(),
         body: JSON.stringify({ shippingAddress: shippingAddress }),
-        credentials: 'include',
+        credentials: "include",
       })
 
       const result = await response.json()
@@ -516,6 +692,17 @@ class CartService {
     } finally {
       this.isLoading = false
     }
+  }
+
+  // Método de debug para verificar estado do carrinho
+  debugCartState() {
+    console.log("=== DEBUG CART STATE ===")
+    console.log("Session ID:", this.sessionId)
+    console.log("Is Authenticated:", this.isUserAuthenticated())
+    console.log("Auth Token:", localStorage.getItem("authToken") ? "Present" : "Not found")
+    console.log("Cart:", this.cart)
+    console.log("Headers:", this.getHeaders())
+    console.log("========================")
   }
 
   // Obter carrinho atual

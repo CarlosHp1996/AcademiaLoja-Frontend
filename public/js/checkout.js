@@ -1,331 +1,474 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Elementos do DOM
-    const paymentTabs = document.querySelectorAll('.payment-tab');
-    const paymentForms = document.querySelectorAll('.payment-form');
-    const cardNumberInput = document.getElementById('card-number');
-    const cardExpiryInput = document.getElementById('card-expiry');
-    const cardCvcInput = document.getElementById('card-cvc');
-    const debitCardNumberInput = document.getElementById('debit-card-number');
-    const debitCardExpiryInput = document.getElementById('debit-card-expiry');
-    const debitCardCvcInput = document.getElementById('debit-card-cvc');
-    const copyPixBtn = document.getElementById('copy-pix');
-    const completePurchaseBtn = document.getElementById('complete-purchase');
-    
-    // Inicializar Stripe
-    let stripe;
+// Checkout Service - Integração completa com Stripe e Backend
+
+class CheckoutService {
+  constructor() {
+    this.API_BASE_URL = "https://localhost:4242/api"
+    this.stripe = null
+    this.cardElement = null
+    this.cart = null
+    this.currentOrder = null
+    this.paymentIntent = null
+
+    this.init()
+  }
+
+  async init() {
     try {
-        stripe = Stripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
+      // Inicializar Stripe
+      this.stripe = Stripe("pk_test_TYooMQauvdEDq54NiTphI7jx") // Substitua pela sua chave pública
+
+      // Carregar dados do carrinho
+      await this.loadCartData()
+
+      // Configurar interface
+      this.setupUI()
+      this.setupEventListeners()
+
+      // Configurar Stripe Elements
+      this.setupStripeElements()
     } catch (error) {
-        console.log('Stripe não inicializado: ', error);
+      console.error("Erro ao inicializar checkout:", error)
+      this.showNotification("Erro ao carregar página de checkout", "error")
     }
-    
-    // Inicializar eventos
-    function initEvents() {
-        // Alternar entre métodos de pagamento
-        paymentTabs.forEach(tab => {
-            tab.addEventListener('click', function() {
-                const method = this.getAttribute('data-method');
-                
-                // Remover classe ativa de todas as abas e formulários
-                paymentTabs.forEach(t => t.classList.remove('active'));
-                paymentForms.forEach(f => f.classList.remove('active'));
-                
-                // Adicionar classe ativa à aba clicada e ao formulário correspondente
-                this.classList.add('active');
-                document.getElementById(`${method}-form`).classList.add('active');
-            });
-        });
-        
-        // Formatar número do cartão
-        if (cardNumberInput) {
-            cardNumberInput.addEventListener('input', function() {
-                this.value = formatCardNumber(this.value);
-            });
-        }
-        
-        if (debitCardNumberInput) {
-            debitCardNumberInput.addEventListener('input', function() {
-                this.value = formatCardNumber(this.value);
-            });
-        }
-        
-        // Formatar data de validade
-        if (cardExpiryInput) {
-            cardExpiryInput.addEventListener('input', function() {
-                this.value = formatCardExpiry(this.value);
-            });
-        }
-        
-        if (debitCardExpiryInput) {
-            debitCardExpiryInput.addEventListener('input', function() {
-                this.value = formatCardExpiry(this.value);
-            });
-        }
-        
-        // Limitar CVC a números
-        if (cardCvcInput) {
-            cardCvcInput.addEventListener('input', function() {
-                this.value = this.value.replace(/[^\d]/g, '');
-            });
-        }
-        
-        if (debitCardCvcInput) {
-            debitCardCvcInput.addEventListener('input', function() {
-                this.value = this.value.replace(/[^\d]/g, '');
-            });
-        }
-        
-        // Copiar código PIX
-        if (copyPixBtn) {
-            copyPixBtn.addEventListener('click', function() {
-                const pixCode = this.previousElementSibling;
-                pixCode.select();
-                document.execCommand('copy');
-                
-                showNotification('Código PIX copiado!', 'success');
-            });
-        }
-        
-        // Finalizar compra
-        if (completePurchaseBtn) {
-            completePurchaseBtn.addEventListener('click', function() {
-                // Verificar qual método de pagamento está ativo
-                const activeMethod = document.querySelector('.payment-tab.active').getAttribute('data-method');
-                
-                // Validar campos de acordo com o método
-                let isValid = false;
-                
-                switch(activeMethod) {
-                    case 'credit-card':
-                        isValid = validateCreditCardForm();
-                        break;
-                    case 'debit-card':
-                        isValid = validateDebitCardForm();
-                        break;
-                    case 'pix':
-                        isValid = true; // PIX não precisa de validação adicional
-                        break;
-                }
-                
-                if (isValid) {
-                    // Simulação de processamento de pagamento
-                    this.disabled = true;
-                    this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processando...';
-                    
-                    setTimeout(() => {
-                        // Simulação de sucesso
-                        showNotification('Pagamento processado com sucesso! Redirecionando...', 'success');
-                        
-                        // Redirecionar para página de confirmação após alguns segundos
-                        setTimeout(() => {
-                            window.location.href = '/public/html/order-confirmation.html';
-                        }, 2000);
-                    }, 3000);
-                }
-            });
-        }
+  }
+
+  async loadCartData() {
+    try {
+      this.showLoading(true)
+
+      // Carregar carrinho do CartService
+      if (window.cartService) {
+        await window.cartService.loadCart()
+        this.cart = window.cartService.getCart()
+      }
+
+      if (!this.cart || !this.cart.items || this.cart.items.length === 0) {
+        this.showEmptyCart()
+        return
+      }
+
+      // Renderizar dados do carrinho
+      this.renderOrderSummary()
+      this.showCheckout()
+    } catch (error) {
+      console.error("Erro ao carregar carrinho:", error)
+      this.showNotification("Erro ao carregar dados do carrinho", "error")
+    } finally {
+      this.showLoading(false)
     }
-    
-    // Validar formulário de cartão de crédito
-    function validateCreditCardForm() {
-        const cardNumber = cardNumberInput.value.replace(/\s/g, '');
-        const cardExpiry = cardExpiryInput.value;
-        const cardCvc = cardCvcInput.value;
-        const cardName = document.getElementById('card-name').value;
-        
-        if (!cardNumber || cardNumber.length < 16) {
-            showNotification('Número do cartão inválido', 'error');
-            return false;
-        }
-        
-        if (!cardExpiry || !isValidExpiry(cardExpiry)) {
-            showNotification('Data de validade inválida', 'error');
-            return false;
-        }
-        
-        if (!cardCvc || cardCvc.length < 3) {
-            showNotification('CVC inválido', 'error');
-            return false;
-        }
-        
-        if (!cardName) {
-            showNotification('Nome no cartão é obrigatório', 'error');
-            return false;
-        }
-        
-        return true;
+  }
+
+  setupUI() {
+    // Configurar abas de pagamento
+    const paymentTabs = document.querySelectorAll(".payment-tab")
+    const paymentForms = document.querySelectorAll(".payment-form")
+
+    paymentTabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        const method = tab.dataset.method
+
+        // Remover classe ativa
+        paymentTabs.forEach((t) => t.classList.remove("active"))
+        paymentForms.forEach((f) => f.classList.remove("active"))
+
+        // Adicionar classe ativa
+        tab.classList.add("active")
+        document.getElementById(`${method}-payment`).classList.add("active")
+      })
+    })
+
+    // Configurar CEP
+    const cepInput = document.getElementById("shipping-cep")
+    if (cepInput) {
+      cepInput.addEventListener("input", (e) => {
+        e.target.value = this.formatCEP(e.target.value)
+      })
+
+      cepInput.addEventListener("blur", () => {
+        this.searchCEP(cepInput.value)
+      })
     }
-    
-    // Validar formulário de cartão de débito
-    function validateDebitCardForm() {
-        const cardNumber = debitCardNumberInput.value.replace(/\s/g, '');
-        const cardExpiry = debitCardExpiryInput.value;
-        const cardCvc = debitCardCvcInput.value;
-        const cardName = document.getElementById('debit-card-name').value;
-        
-        if (!cardNumber || cardNumber.length < 16) {
-            showNotification('Número do cartão inválido', 'error');
-            return false;
-        }
-        
-        if (!cardExpiry || !isValidExpiry(cardExpiry)) {
-            showNotification('Data de validade inválida', 'error');
-            return false;
-        }
-        
-        if (!cardCvc || cardCvc.length < 3) {
-            showNotification('CVC inválido', 'error');
-            return false;
-        }
-        
-        if (!cardName) {
-            showNotification('Nome no cartão é obrigatório', 'error');
-            return false;
-        }
-        
-        return true;
+  }
+
+  setupEventListeners() {
+    // Botão finalizar compra
+    const completeBtn = document.getElementById("complete-purchase")
+    if (completeBtn) {
+      completeBtn.addEventListener("click", () => this.handleCompletePurchase())
     }
-    
-    // Formatar número do cartão (adicionar espaços a cada 4 dígitos)
-    function formatCardNumber(value) {
-        const v = value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
-        const matches = v.match(/\d{4,16}/g);
-        const match = matches && matches[0] || '';
-        const parts = [];
-        
-        for (let i = 0, len = match.length; i < len; i += 4) {
-            parts.push(match.substring(i, i + 4));
-        }
-        
-        if (parts.length) {
-            return parts.join(' ');
+  }
+
+  setupStripeElements() {
+    if (!this.stripe) return
+
+    const elements = this.stripe.elements({
+      appearance: {
+        theme: "night",
+        variables: {
+          colorPrimary: "#ff6600",
+          colorBackground: "#111111",
+          colorText: "#ffffff",
+          colorDanger: "#ef4444",
+          fontFamily: "Inter, system-ui, sans-serif",
+          spacingUnit: "4px",
+          borderRadius: "8px",
+        },
+      },
+    })
+
+    // Criar elemento do cartão
+    this.cardElement = elements.create("card", {
+      style: {
+        base: {
+          fontSize: "16px",
+          color: "#ffffff",
+          "::placeholder": {
+            color: "#666666",
+          },
+        },
+      },
+    })
+
+    // Montar elemento
+    const cardElementContainer = document.getElementById("card-element")
+    if (cardElementContainer) {
+      this.cardElement.mount("#card-element")
+
+      // Escutar mudanças
+      this.cardElement.on("change", (event) => {
+        const displayError = document.getElementById("card-errors")
+        if (event.error) {
+          displayError.textContent = event.error.message
         } else {
-            return value;
+          displayError.textContent = ""
         }
+      })
     }
-    
-    // Formatar data de validade (MM/AA)
-    function formatCardExpiry(value) {
-        const v = value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
-        
-        if (v.length > 2) {
-            return `${v.substring(0, 2)}/${v.substring(2, 4)}`;
-        } else {
-            return v;
-        }
+  }
+
+  async handleCompletePurchase() {
+    try {
+      // Validar formulário
+      if (!this.validateForm()) {
+        return
+      }
+
+      // Desabilitar botão
+      const completeBtn = document.getElementById("complete-purchase")
+      completeBtn.disabled = true
+      completeBtn.classList.add("btn-loading")
+
+      // Criar pedido usando o CartService
+      await this.createOrderFromCart()
+
+      // Processar pagamento
+      const activePaymentMethod = document.querySelector(".payment-tab.active").dataset.method
+
+      if (activePaymentMethod === "card") {
+        await this.processCardPayment()
+      } else if (activePaymentMethod === "pix") {
+        await this.processPixPayment()
+      }
+    } catch (error) {
+      console.error("Erro ao finalizar compra:", error)
+      this.showNotification("Erro ao processar pagamento. Tente novamente.", "error")
+    } finally {
+      // Reabilitar botão
+      const completeBtn = document.getElementById("complete-purchase")
+      completeBtn.disabled = false
+      completeBtn.classList.remove("btn-loading")
     }
-    
-    // Validar data de validade
-    function isValidExpiry(value) {
-        const [month, year] = value.split('/');
-        
-        // Verificar se mês está entre 1 e 12
-        if (parseInt(month) < 1 || parseInt(month) > 12) {
-            return false;
-        }
-        
-        // Verificar se o ano não está no passado
-        const currentYear = new Date().getFullYear() % 100;
-        const currentMonth = new Date().getMonth() + 1;
-        
-        if (parseInt(year) < currentYear) {
-            return false;
-        }
-        
-        if (parseInt(year) === currentYear && parseInt(month) < currentMonth) {
-            return false;
-        }
-        
-        return true;
+  }
+
+  async createOrderFromCart() {
+    try {
+      const shippingAddress = this.getShippingAddressString()
+
+      // Usar o CartService para converter carrinho em pedido
+      const response = await fetch(`${this.API_BASE_URL}/Cart/checkout`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${window.authService?.getToken()}`,
+        },
+        body: JSON.stringify({ shippingAddress: shippingAddress }),
+        credentials: "include",
+      })
+
+      const result = await response.json()
+
+      if (!response.ok || !result.hasSuccess) {
+        throw new Error(result.errors?.[0] || "Erro ao criar pedido")
+      }
+
+      this.currentOrder = { orderId: result.value }
+      console.log("Pedido criado:", this.currentOrder)
+    } catch (error) {
+      console.error("Erro ao criar pedido:", error)
+      throw error
     }
-    
-    // Função para exibir notificações
-    function showNotification(message, type) {
-        // Verificar se já existe uma notificação
-        const existingNotification = document.querySelector('.notification');
-        if (existingNotification) {
-            existingNotification.remove();
+  }
+
+  async processCardPayment() {
+    try {
+      // Criar payment intent
+      const response = await fetch(`${this.API_BASE_URL}/Payment/create/${this.currentOrder.orderId}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${window.authService?.getToken()}`,
+        },
+      })
+
+      const result = await response.json()
+
+      if (!response.ok || !result.hasSuccess) {
+        throw new Error(result.errors?.[0] || "Erro ao criar intenção de pagamento")
+      }
+
+      this.paymentIntent = result.value
+      console.log("Payment Intent criado:", this.paymentIntent)
+
+      // Confirmar pagamento com Stripe
+      const { error, paymentIntent } = await this.stripe.confirmCardPayment(this.paymentIntent.clientSecret, {
+        payment_method: {
+          card: this.cardElement,
+          billing_details: {
+            name: document.getElementById("shipping-name").value,
+            email: window.authService?.getUserData()?.email,
+          },
+        },
+      })
+
+      if (error) {
+        throw new Error(error.message)
+      }
+
+      if (paymentIntent.status === "succeeded") {
+        this.showNotification("Pagamento processado com sucesso!", "success")
+
+        // Limpar carrinho
+        if (window.cartService) {
+          await window.cartService.clearCart()
         }
-        
-        // Criar nova notificação
-        const notification = document.createElement('div');
-        notification.className = `notification ${type}`;
-        notification.innerHTML = `
-            <div class="notification-content">
-                <i class="fas ${type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle'}"></i>
-                <span>${message}</span>
-            </div>
-        `;
-        
-        // Adicionar ao corpo do documento
-        document.body.appendChild(notification);
-        
-        // Remover após alguns segundos
+
+        // Redirecionar para confirmação
         setTimeout(() => {
-            notification.classList.add('fade-out');
-            setTimeout(() => {
-                notification.remove();
-            }, 300);
-        }, 3000);
+          window.location.href = `/public/html/order-confirmation.html?order=${this.currentOrder.orderId}`
+        }, 2000)
+      }
+    } catch (error) {
+      console.error("Erro no pagamento com cartão:", error)
+      throw error
     }
-    
-    // Adicionar estilos para notificações
-    const notificationStyles = document.createElement('style');
-    notificationStyles.textContent = `
-        .notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 15px 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            z-index: 1000;
-            animation: slideIn 0.3s ease;
-        }
-        
-        .notification.success {
-            background-color: #10b981;
-            color: white;
-        }
-        
-        .notification.info {
-            background-color: #3b82f6;
-            color: white;
-        }
-        
-        .notification.error {
-            background-color: #ef4444;
-            color: white;
-        }
-        
-        .notification-content {
-            display: flex;
-            align-items: center;
-        }
-        
-        .notification-content i {
-            margin-right: 10px;
-            font-size: 1.2rem;
-        }
-        
-        .notification.fade-out {
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        @keyframes slideIn {
-            from {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-    `;
-    document.head.appendChild(notificationStyles);
-    
-    // Inicializar
-    initEvents();
-});
+  }
+
+  async processPixPayment() {
+    try {
+      // Para PIX, apenas criar o payment intent
+      const response = await fetch(`${this.API_BASE_URL}/Payment/create/${this.currentOrder.orderId}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${window.authService?.getToken()}`,
+        },
+      })
+
+      const result = await response.json()
+
+      if (!response.ok || !result.hasSuccess) {
+        throw new Error(result.errors?.[0] || "Erro ao criar pagamento PIX")
+      }
+
+      this.paymentIntent = result.value
+
+      this.showNotification("Pedido criado! Redirecionando para pagamento PIX...", "success")
+
+      // Redirecionar para página de PIX
+      setTimeout(() => {
+        window.location.href = `/public/html/pix-payment.html?order=${this.currentOrder.orderId}&payment=${this.paymentIntent.paymentId}`
+      }, 2000)
+    } catch (error) {
+      console.error("Erro no pagamento PIX:", error)
+      throw error
+    }
+  }
+
+  validateForm() {
+    const requiredFields = [
+      "shipping-name",
+      "shipping-cep",
+      "shipping-street",
+      "shipping-number",
+      "shipping-neighborhood",
+      "shipping-city",
+      "shipping-state",
+    ]
+
+    let isValid = true
+
+    requiredFields.forEach((fieldId) => {
+      const field = document.getElementById(fieldId)
+      if (field && !field.value.trim()) {
+        field.style.borderColor = "#ef4444"
+        isValid = false
+      } else if (field) {
+        field.style.borderColor = "#333"
+      }
+    })
+
+    if (!isValid) {
+      this.showNotification("Por favor, preencha todos os campos obrigatórios", "error")
+    }
+
+    return isValid
+  }
+
+  getShippingAddressString() {
+    const address = {
+      name: document.getElementById("shipping-name").value,
+      cep: document.getElementById("shipping-cep").value,
+      street: document.getElementById("shipping-street").value,
+      number: document.getElementById("shipping-number").value,
+      complement: document.getElementById("shipping-complement").value,
+      neighborhood: document.getElementById("shipping-neighborhood").value,
+      city: document.getElementById("shipping-city").value,
+      state: document.getElementById("shipping-state").value,
+    }
+
+    // Formatar endereço como string
+    let addressString = `${address.name}, ${address.street}, ${address.number}`
+    if (address.complement) {
+      addressString += `, ${address.complement}`
+    }
+    addressString += `, ${address.neighborhood}, ${address.city} - ${address.state}, CEP: ${address.cep}`
+
+    return addressString
+  }
+
+  renderOrderSummary() {
+    const summaryItems = document.getElementById("summary-items")
+    const subtotalAmount = document.getElementById("subtotal-amount")
+    const totalAmount = document.getElementById("total-amount")
+
+    if (!summaryItems || !this.cart) return
+
+    // Renderizar itens
+    summaryItems.innerHTML = ""
+
+    this.cart.items.forEach((item) => {
+      const itemElement = document.createElement("div")
+      itemElement.className = "summary-item"
+      itemElement.innerHTML = `
+        <div class="item-image">
+          <img src="${item.productImage || "/placeholder.svg?height=60&width=60"}" 
+               alt="${item.productName}"
+               onerror="this.src='/placeholder.svg?height=60&width=60'">
+        </div>
+        <div class="item-details">
+          <div class="item-name">${item.productName}</div>
+          ${item.flavor && item.flavor !== "Sem sabor" ? `<div class="item-variant">Sabor: ${item.flavor}</div>` : ""}
+          <div class="item-price">
+            <span class="item-quantity">${item.quantity}x</span>
+            <span class="item-amount">R$ ${item.totalPrice.toFixed(2).replace(".", ",")}</span>
+          </div>
+        </div>
+      `
+      summaryItems.appendChild(itemElement)
+    })
+
+    // Atualizar totais
+    if (subtotalAmount) {
+      subtotalAmount.textContent = `R$ ${this.cart.totalAmount.toFixed(2).replace(".", ",")}`
+    }
+
+    if (totalAmount) {
+      totalAmount.textContent = `R$ ${this.cart.totalAmount.toFixed(2).replace(".", ",")}`
+    }
+  }
+
+  async searchCEP(cep) {
+    const cleanCEP = cep.replace(/\D/g, "")
+
+    if (cleanCEP.length !== 8) return
+
+    try {
+      const response = await fetch(`https://viacep.com.br/ws/${cleanCEP}/json/`)
+      const data = await response.json()
+
+      if (!data.erro) {
+        document.getElementById("shipping-street").value = data.logradouro || ""
+        document.getElementById("shipping-neighborhood").value = data.bairro || ""
+        document.getElementById("shipping-city").value = data.localidade || ""
+        document.getElementById("shipping-state").value = data.uf || ""
+      }
+    } catch (error) {
+      console.error("Erro ao buscar CEP:", error)
+    }
+  }
+
+  formatCEP(value) {
+    const cleanValue = value.replace(/\D/g, "")
+    if (cleanValue.length <= 5) {
+      return cleanValue
+    }
+    return `${cleanValue.slice(0, 5)}-${cleanValue.slice(5, 8)}`
+  }
+
+  showLoading(show) {
+    const loading = document.getElementById("checkout-loading")
+    const container = document.getElementById("checkout-container")
+
+    if (show) {
+      loading.style.display = "flex"
+      container.style.display = "none"
+    } else {
+      loading.style.display = "none"
+      container.style.display = "block"
+    }
+  }
+
+  showCheckout() {
+    document.getElementById("checkout-container").style.display = "block"
+    document.getElementById("empty-cart").style.display = "none"
+  }
+
+  showEmptyCart() {
+    document.getElementById("checkout-container").style.display = "none"
+    document.getElementById("empty-cart").style.display = "flex"
+  }
+
+  showNotification(message, type = "info") {
+    // Remover notificação existente
+    const existing = document.querySelector(".checkout-notification")
+    if (existing) {
+      existing.remove()
+    }
+
+    // Criar nova notificação
+    const notification = document.createElement("div")
+    notification.className = `checkout-notification ${type}`
+    notification.textContent = message
+
+    document.body.appendChild(notification)
+
+    // Remover após 5 segundos
+    setTimeout(() => {
+      notification.remove()
+    }, 5000)
+  }
+}
+
+// Inicializar quando o DOM estiver pronto
+document.addEventListener("DOMContentLoaded", () => {
+  // Aguardar serviços estarem disponíveis
+  function waitForServices() {
+    if (window.authService && window.cartService) {
+      new CheckoutService()
+    } else {
+      setTimeout(waitForServices, 100)
+    }
+  }
+
+  waitForServices()
+})

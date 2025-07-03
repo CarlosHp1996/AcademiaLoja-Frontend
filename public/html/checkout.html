@@ -63,7 +63,7 @@
                     </ul>                   
                 </li>
                 <li class="menu-item">
-                    <a href="/public/html/goals.html" class="nav-link">Objetivo 
+                    <a href="/public/html/goals.html" class="nav-link">Objetivos 
                         <i class="fas fa-chevron-down" style="margin-left: 6px; font-size: 0.85em;"></i>
                     </a>
                     <ul class="submenu">
@@ -97,169 +97,99 @@
     </div>
 </section>
 
-    <!-- Main Content -->
-    <main class="main">
-        <div class="container">
-            <div class="checkout-container">
-                <div class="checkout-header">
-                    <h1 class="page-title">Finalizar Compra</h1>
-                    <div class="checkout-steps">
-                        <div class="step active">
-                            <div class="step-number">1</div>
-                            <div class="step-label">Carrinho</div>
+<!-- Main Content -->
+<main class="main">
+    <div class="container">
+        <!-- Loading State -->
+        <div id="checkout-loading" class="checkout-loading">
+            <div class="loading-spinner">
+                <i class="fas fa-spinner fa-spin"></i>
+            </div>
+            <p>Carregando informações do pedido...</p>
+        </div>
+
+        <!-- Checkout Container -->
+        <div id="checkout-container" class="checkout-container" style="display: none;">
+            <!-- Header -->
+            <div class="checkout-header">
+                <div class="breadcrumb">
+                    <a href="/public/html/index.html">
+                        <i class="fas fa-home"></i>
+                        Início
+                    </a>
+                    <i class="fas fa-chevron-right"></i>
+                    <a href="/public/html/products.html">Produtos</a>
+                    <i class="fas fa-chevron-right"></i>
+                    <span>Checkout</span>
+                </div>
+                <h1 class="page-title">
+                    <i class="fas fa-credit-card"></i>
+                    Finalizar Compra
+                </h1>
+                <div class="checkout-steps">
+                    <div class="step completed">
+                        <div class="step-circle">
+                            <i class="fas fa-check"></i>
                         </div>
-                        <div class="step active">
-                            <div class="step-number">2</div>
-                            <div class="step-label">Pagamento</div>
-                        </div>
-                        <div class="step">
-                            <div class="step-number">3</div>
-                            <div class="step-label">Confirmação</div>
-                        </div>
+                        <span class="step-label">Carrinho</span>
+                    </div>
+                    <div class="step-line"></div>
+                    <div class="step active">
+                        <div class="step-circle">2</div>
+                        <span class="step-label">Pagamento</span>
+                    </div>
+                    <div class="step-line"></div>
+                    <div class="step">
+                        <div class="step-circle">3</div>
+                        <span class="step-label">Confirmação</span>
                     </div>
                 </div>
+            </div>
 
-                <div class="checkout-content">
-                    <div class="checkout-form">
-                        <div class="payment-methods">
-                            <h2>Forma de Pagamento</h2>
-                            <div class="payment-tabs">
-                                <button class="payment-tab active" data-method="credit-card">
-                                    <i class="fas fa-credit-card"></i>
-                                    Cartão de Crédito
-                                </button>
-                                <button class="payment-tab" data-method="debit-card">
-                                    <i class="fas fa-credit-card"></i>
-                                    Cartão de Débito
-                                </button>
-                                <button class="payment-tab" data-method="pix">
-                                    <i class="fas fa-qrcode"></i>
-                                    PIX
-                                </button>
-                            </div>
-
-                            <div class="payment-form active" id="credit-card-form">
-                                <div class="form-group">
-                                    <label for="card-number">Número do Cartão</label>
-                                    <div class="card-input-container">
-                                        <input type="text" id="card-number" class="form-input" placeholder="1234 5678 9012 3456" maxlength="19">
-                                        <div class="card-icons">
-                                            <i class="fab fa-cc-visa"></i>
-                                            <i class="fab fa-cc-mastercard"></i>
-                                            <i class="fab fa-cc-amex"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group">
-                                        <label for="card-expiry">Validade</label>
-                                        <input type="text" id="card-expiry" class="form-input" placeholder="MM/AA" maxlength="5">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="card-cvc">CVC</label>
-                                        <input type="text" id="card-cvc" class="form-input" placeholder="123" maxlength="4">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="card-name">Nome no Cartão</label>
-                                    <input type="text" id="card-name" class="form-input" placeholder="Nome como aparece no cartão">
-                                </div>
-                                <div class="form-group">
-                                    <label for="installments">Parcelas</label>
-                                    <select id="installments" class="form-select">
-                                        <option value="1">1x de R$ 349,70 (sem juros)</option>
-                                        <option value="2">2x de R$ 174,85 (sem juros)</option>
-                                        <option value="3">3x de R$ 116,57 (sem juros)</option>
-                                        <option value="4">4x de R$ 87,43 (sem juros)</option>
-                                        <option value="5">5x de R$ 69,94 (sem juros)</option>
-                                        <option value="6">6x de R$ 58,28 (sem juros)</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="payment-form" id="debit-card-form">
-                                <div class="form-group">
-                                    <label for="debit-card-number">Número do Cartão</label>
-                                    <div class="card-input-container">
-                                        <input type="text" id="debit-card-number" class="form-input" placeholder="1234 5678 9012 3456" maxlength="19">
-                                        <div class="card-icons">
-                                            <i class="fab fa-cc-visa"></i>
-                                            <i class="fab fa-cc-mastercard"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group">
-                                        <label for="debit-card-expiry">Validade</label>
-                                        <input type="text" id="debit-card-expiry" class="form-input" placeholder="MM/AA" maxlength="5">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="debit-card-cvc">CVC</label>
-                                        <input type="text" id="debit-card-cvc" class="form-input" placeholder="123" maxlength="4">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="debit-card-name">Nome no Cartão</label>
-                                    <input type="text" id="debit-card-name" class="form-input" placeholder="Nome como aparece no cartão">
-                                </div>
-                            </div>
-
-                            <div class="payment-form" id="pix-form">
-                                <div class="pix-container">
-                                    <div class="pix-qrcode">
-                                        <img src="/assets/images/pix-qrcode.png" alt="QR Code PIX">
-                                    </div>
-                                    <div class="pix-info">
-                                        <p>Escaneie o QR Code com o aplicativo do seu banco ou copie o código PIX abaixo:</p>
-                                        <div class="pix-code">
-                                            <input type="text" value="00020126580014BR.GOV.BCB.PIX0136123e4567-e89b-12d3-a456-426655440000" readonly>
-                                            <button class="btn-copy" id="copy-pix">
-                                                <i class="fas fa-copy"></i>
-                                            </button>
-                                        </div>
-                                        <p class="pix-expiry">Este código expira em 30 minutos.</p>
-                                    </div>
-                                </div>
-                            </div>
+            <!-- Content -->
+            <div class="checkout-content">
+                <!-- Left Column - Forms -->
+                <div class="checkout-forms">
+                    <!-- Shipping Address -->
+                    <div class="form-section">
+                        <div class="section-header">
+                            <h2>
+                                <i class="fas fa-map-marker-alt"></i>
+                                Endereço de Entrega
+                            </h2>
                         </div>
-
-                        <div class="billing-address">
-                            <h2>Endereço de Cobrança</h2>
-                            <div class="form-group">
-                                <label for="billing-name">Nome Completo</label>
-                                <input type="text" id="billing-name" class="form-input">
+                        <div class="form-grid">
+                            <div class="form-group full-width">
+                                <label for="shipping-name">Nome Completo *</label>
+                                <input type="text" id="shipping-name" class="form-input" required>
                             </div>
                             <div class="form-group">
-                                <label for="billing-cep">CEP</label>
-                                <input type="text" id="billing-cep" class="form-input" maxlength="9">
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label for="billing-street">Rua</label>
-                                    <input type="text" id="billing-street" class="form-input">
-                                </div>
-                                <div class="form-group">
-                                    <label for="billing-number">Número</label>
-                                    <input type="text" id="billing-number" class="form-input">
-                                </div>
+                                <label for="shipping-cep">CEP *</label>
+                                <input type="text" id="shipping-cep" class="form-input" maxlength="9" required>
                             </div>
                             <div class="form-group">
-                                <label for="billing-complement">Complemento</label>
-                                <input type="text" id="billing-complement" class="form-input">
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label for="billing-neighborhood">Bairro</label>
-                                    <input type="text" id="billing-neighborhood" class="form-input">
-                                </div>
-                                <div class="form-group">
-                                    <label for="billing-city">Cidade</label>
-                                    <input type="text" id="billing-city" class="form-input">
-                                </div>
+                                <label for="shipping-street">Rua *</label>
+                                <input type="text" id="shipping-street" class="form-input" required>
                             </div>
                             <div class="form-group">
-                                <label for="billing-state">Estado</label>
-                                <select id="billing-state" class="form-select">
+                                <label for="shipping-number">Número *</label>
+                                <input type="text" id="shipping-number" class="form-input" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="shipping-complement">Complemento</label>
+                                <input type="text" id="shipping-complement" class="form-input">
+                            </div>
+                            <div class="form-group">
+                                <label for="shipping-neighborhood">Bairro *</label>
+                                <input type="text" id="shipping-neighborhood" class="form-input" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="shipping-city">Cidade *</label>
+                                <input type="text" id="shipping-city" class="form-input" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="shipping-state">Estado *</label>
+                                <select id="shipping-state" class="form-select" required>
                                     <option value="">Selecione</option>
                                     <option value="AC">Acre</option>
                                     <option value="AL">Alagoas</option>
@@ -293,214 +223,206 @@
                         </div>
                     </div>
 
-                    <div class="checkout-summary">
-                        <div class="summary-header">
-                            <h2>Resumo do Pedido</h2>
+                    <!-- Payment Method -->
+                    <div class="form-section">
+                        <div class="section-header">
+                            <h2>
+                                <i class="fas fa-credit-card"></i>
+                                Forma de Pagamento
+                            </h2>
                         </div>
-                        <div class="summary-items">
-                            <div class="summary-item">
-                                <div class="item-image">
-                                    <img src="/assets/images/products/whey-protein.jpg" alt="Whey Protein">
-                                </div>
-                                <div class="item-details">
-                                    <h3>Whey Protein 100% Pure</h3>
-                                    <p class="item-variant">Sabor: Chocolate</p>
-                                    <div class="item-price">
-                                        <span class="item-quantity">1x</span>
-                                        <span class="item-amount">R$ 199,90</span>
-                                    </div>
-                                </div>
+                        
+                        <!-- Payment Tabs -->
+                        <div class="payment-tabs">
+                            <button class="payment-tab active" data-method="card">
+                                <i class="fas fa-credit-card"></i>
+                                <span>Cartão</span>
+                            </button>
+                            <button class="payment-tab" data-method="pix">
+                                <i class="fas fa-qrcode"></i>
+                                <span>PIX</span>
+                            </button>
+                        </div>
+
+                        <!-- Card Payment Form -->
+                        <div id="card-payment" class="payment-form active">
+                            <div id="card-element" class="stripe-element">
+                                <!-- Stripe Elements será inserido aqui -->
                             </div>
-                            <div class="summary-item">
-                                <div class="item-image">
-                                    <img src="/assets/images/products/creatine.jpg" alt="Creatina">
+                            <div id="card-errors" class="payment-errors" role="alert"></div>
+                        </div>
+
+                        <!-- PIX Payment Form -->
+                        <div id="pix-payment" class="payment-form">
+                            <div class="pix-info">
+                                <div class="pix-icon">
+                                    <i class="fas fa-qrcode"></i>
                                 </div>
-                                <div class="item-details">
-                                    <h3>Creatina Monohidratada</h3>
-                                    <p class="item-variant">Sabor: Natural</p>
-                                    <div class="item-price">
-                                        <span class="item-quantity">1x</span>
-                                        <span class="item-amount">R$ 89,90</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="summary-item">
-                                <div class="item-image">
-                                    <img src="/assets/images/products/bcaa.jpg" alt="BCAA">
-                                </div>
-                                <div class="item-details">
-                                    <h3>BCAA 2:1:1 - 90 Cápsulas</h3>
-                                    <p class="item-variant">Sabor: Sem sabor</p>
-                                    <div class="item-price">
-                                        <span class="item-quantity">1x</span>
-                                        <span class="item-amount">R$ 69,90</span>
-                                    </div>
+                                <div class="pix-text">
+                                    <h3>Pagamento via PIX</h3>
+                                    <p>Após confirmar o pedido, você receberá o código PIX para pagamento instantâneo.</p>
                                 </div>
                             </div>
                         </div>
-                        <div class="summary-totals">
-                            <div class="summary-row">
-                                <span>Subtotal</span>
-                                <span>R$ 359,70</span>
-                            </div>
-                            <div class="summary-row">
-                                <span>Frete</span>
-                                <span>Grátis</span>
-                            </div>
-                            <div class="summary-row discount">
-                                <span>Desconto</span>
-                                <span>-R$ 10,00</span>
-                            </div>
-                            <div class="summary-row total">
-                                <span>Total</span>
-                                <span>R$ 349,70</span>
-                            </div>
+                    </div>
+                </div>
+
+                <!-- Right Column - Order Summary -->
+                <div class="order-summary">
+                    <div class="summary-header">
+                        <h2>
+                            <i class="fas fa-shopping-bag"></i>
+                            Resumo do Pedido
+                        </h2>
+                    </div>
+
+                    <!-- Items -->
+                    <div class="summary-items" id="summary-items">
+                        <!-- Items serão carregados via JavaScript -->
+                    </div>
+
+                    <!-- Totals -->
+                    <div class="summary-totals">
+                        <div class="total-row">
+                            <span>Subtotal</span>
+                            <span id="subtotal-amount">R$ 0,00</span>
                         </div>
-                        <button id="complete-purchase" class="btn btn-primary btn-lg">
-                            Finalizar Compra
-                            <i class="fas fa-lock"></i>
-                        </button>
-                        <div class="secure-checkout">
+                        <div class="total-row">
+                            <span>Frete</span>
+                            <span id="shipping-amount">Grátis</span>
+                        </div>
+                        <div class="total-row discount" id="discount-row" style="display: none;">
+                            <span>Desconto</span>
+                            <span id="discount-amount">-R$ 0,00</span>
+                        </div>
+                        <div class="total-row final">
+                            <span>Total</span>
+                            <span id="total-amount">R$ 0,00</span>
+                        </div>
+                    </div>
+
+                    <!-- Action Button -->
+                    <button id="complete-purchase" class="btn-complete-purchase">
+                        <span class="btn-text">Finalizar Compra</span>
+                        <i class="fas fa-lock"></i>
+                    </button>
+
+                    <!-- Security Info -->
+                    <div class="security-info">
+                        <div class="security-item">
                             <i class="fas fa-shield-alt"></i>
                             <span>Pagamento 100% seguro</span>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-column">
-                    <a href="/public/html/index.html" class="logo">
-                        <span class="logo-power">Power Rock</span>
-                        <span class="logo-supps">Supplements</span>
-                    </a>
-                    <p class="footer-description">
-                        Sua loja especializada em suplementos de alta performance para atletas e entusiastas do fitness.
-                    </p>
-                    <div class="social-links">
-                        <a href="https://www.facebook.com/profile.php?id=61575757384725" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                        <a href="https://www.instagram.com/powerrocksupplements/" class="social-link"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-                <div class="footer-column">
-                    <h3 class="footer-title">Categorias</h3>
-                    <ul class="footer-links">
-                        <li><a href="/public/html/products.html">Proteínas</a></li>
-                        <li><a href="/public/html/products.html">Pré-Treino</a></li>
-                        <li><a href="/public/html/products.html">Creatina</a></li>
-                        <li><a href="/public/html/products.html">Vitaminas</a></li>
-                        <li><a href="/public/html/accessories.html">Acessórios</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3 class="footer-title">Informações</h3>
-                    <ul class="footer-links">
-                        <li><a href="/about">Sobre Nós</a></li>
-                        <li><a href="/shipping">Entrega</a></li>
-                        <li><a href="/privacy">Política de Privacidade</a></li>
-                        <li><a href="/terms">Termos e Condições</a></li>
-                        <li><a href="/public/html/contact.html">Contato</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3 class="footer-title">Contato</h3>
-                    <ul class="contact-info">
-                        <li>
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>Av. Paulista, 1000 - São Paulo</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-phone"></i>
-                            <span>(11) 99999-9999</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-envelope"></i>
-                            <span>contato@powerrocksupplements.com.br</span>
-                        </li>
-                    </ul>
-                    <div class="payment-methods">
-                        <h4 class="payment-title">Formas de Pagamento</h4>
-                        <div class="payment-icons">
-                            <div class="payment-icon"></div>
-                            <div class="payment-icon"></div>
-                            <div class="payment-icon"></div>
-                            <div class="payment-icon"></div>
-                            <div class="payment-icon"></div>
+                        <div class="security-item">
+                            <i class="fas fa-truck"></i>
+                            <span>Frete grátis acima de R$ 199</span>
+                        </div>
+                        <div class="security-item">
+                            <i class="fas fa-undo"></i>
+                            <span>7 dias para troca</span>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="copyright">
-                © 2025 Power Rock Supplements. Todos os direitos reservados.
-            </div>
         </div>
-    </footer>
 
-    <!-- Cart Side Panel -->
-<div class="cart-overlay" id="cart-overlay"></div>
-<div class="cart-panel" id="cart-panel">
-    <div class="cart-header">
-        <h3>
-            <i class="fas fa-shopping-cart"></i>
-            Meu Carrinho
-        </h3>
-        <button class="cart-close" id="cart-close">
-            <i class="fas fa-times"></i>
-        </button>
-    </div>
-    
-    <div class="cart-content" id="cart-content">
-        <div class="cart-empty" id="cart-empty" style="display: none;">
-            <i class="fas fa-shopping-cart"></i>
-            <p>Seu carrinho está vazio</p>
-            <button class="btn-continue-shopping" id="continue-shopping">
-                Continuar Comprando
-            </button>
-        </div>
-        
-        <div class="cart-items" id="cart-items">
-            <!-- Items serão inseridos aqui via JavaScript -->
-        </div>
-    </div>
-    
-    <div class="cart-footer" id="cart-footer">
-        <div class="cart-summary">
-            <div class="cart-total">
-                <span>Total: </span>
-                <span class="total-amount" id="total-amount">R$ 0,00</span>
-            </div>
-            <div class="cart-actions">
-                <button class="btn-continue" id="btn-continue-shopping">
-                    <i class="fas fa-arrow-left"></i>
-                    Continuar Comprando
-                </button>
-                <button class="btn-checkout" id="btn-checkout">
-                    <span>Finalizar Compra</span>
-                    <i class="fas fa-arrow-right"></i>
-                </button>
+        <!-- Empty Cart State -->
+        <div id="empty-cart" class="empty-cart" style="display: none;">
+            <div class="empty-cart-content">
+                <i class="fas fa-shopping-cart"></i>
+                <h2>Seu carrinho está vazio</h2>
+                <p>Adicione produtos ao seu carrinho para continuar com a compra.</p>
+                <a href="/public/html/products.html" class="btn-primary">
+                    <i class="fas fa-shopping-bag"></i>
+                    Ver Produtos
+                </a>
             </div>
         </div>
     </div>
-</div>
+</main>
 
-    <!-- Script de navegação - DEVE SER CARREGADO PRIMEIRO -->
-    <script src="/public/js/navigation-enums.js"></script>
-    <!-- Script da barra de pesquisa -->
-    <script src="/public/js/search-bar.js"></script>
-    <!-- WhatsApp Button -->
-    <script src="/public/js/whatsapp-button.js"></script>
-    <script src="/public/js/checkout.js"></script>
-    <script src="/public/js/cart-service.js"></script>
-    <script src="/public/js/cart-ui.js"></script>
-    <script src="https://js.stripe.com/v3/"></script>
-        <!-- Scripts de autenticação - ORDEM IMPORTA! -->
-    <script src="/public/js/auth-service.js"></script>
-    <script src="/public/js/auth-notifications.js"></script>
-    <script src="/public/js/auth-integration.js"></script>
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-column">
+                <a href="/public/html/index.html" class="logo">
+                    <span class="logo-power">Power Rock</span>
+                    <span class="logo-supps">Supplements</span>
+                </a>
+                <p class="footer-description">
+                    Sua loja especializada em suplementos de alta performance para atletas e entusiastas do fitness.
+                </p>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/profile.php?id=61575757384725" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/powerrocksupplements/" class="social-link"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3 class="footer-title">Categorias</h3>
+                <ul class="footer-links">
+                    <li><a href="/public/html/products.html">Proteínas</a></li>
+                    <li><a href="/public/html/products.html">Pré-Treino</a></li>
+                    <li><a href="/public/html/products.html">Creatina</a></li>
+                    <li><a href="/public/html/products.html">Vitaminas</a></li>
+                    <li><a href="/public/html/accessories.html">Acessórios</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3 class="footer-title">Informações</h3>
+                <ul class="footer-links">
+                    <li><a href="/about">Sobre Nós</a></li>
+                    <li><a href="/shipping">Entrega</a></li>
+                    <li><a href="/privacy">Política de Privacidade</a></li>
+                    <li><a href="/terms">Termos e Condições</a></li>
+                    <li><a href="/public/html/contact.html">Contato</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3 class="footer-title">Contato</h3>
+                <ul class="contact-info">
+                    <li>
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Av. Paulista, 1000 - São Paulo</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-phone"></i>
+                        <span>(11) 99999-9999</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-envelope"></i>
+                        <span>contato@powerrocksupplements.com.br</span>
+                    </li>
+                </ul>
+                <div class="payment-methods">
+                    <h4 class="payment-title">Formas de Pagamento</h4>
+                    <div class="payment-icons">
+                        <div class="payment-icon"></div>
+                        <div class="payment-icon"></div>
+                        <div class="payment-icon"></div>
+                        <div class="payment-icon"></div>
+                        <div class="payment-icon"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            © 2025 Power Rock Supplements. Todos os direitos reservados.
+        </div>
+    </div>
+</footer>
+
+<!-- Scripts -->
+<script src="/public/js/navigation-enums.js"></script>
+<script src="/public/js/search-bar.js"></script>
+<script src="/public/js/whatsapp-button.js"></script>
+<script src="/public/js/cart-service.js"></script>
+<script src="/public/js/cart-ui.js"></script>
+<script src="https://js.stripe.com/v3/"></script>
+<script src="/public/js/checkout.js"></script>
+<!-- Scripts de autenticação - ORDEM IMPORTA! -->
+<script src="/public/js/auth-service.js"></script>
+<script src="/public/js/auth-notifications.js"></script>
+<script src="/public/js/auth-integration.js"></script>
 </body>
 </html>

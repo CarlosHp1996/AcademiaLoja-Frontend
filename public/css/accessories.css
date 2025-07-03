@@ -682,7 +682,7 @@
 .accessories-bg-elements .element-1 {
   width: 160px;
   height: 160px;
-  background: linear-gradient(45deg, var(--color-orange), var(--color-red));
+  background: linear-gradient(45deg, var(--color-orange), var(--color-orange-dark));
   top: 10%;
   left: 5%;
   animation-delay: 0s;
@@ -691,7 +691,7 @@
 .accessories-bg-elements .element-2 {
   width: 120px;
   height: 120px;
-  background: linear-gradient(45deg, var(--color-red), var(--color-orange));
+  background: linear-gradient(45deg, var(--color-orange-dark), var(--color-orange));
   top: 70%;
   right: 8%;
   animation-delay: 2s;
@@ -700,7 +700,7 @@
 .accessories-bg-elements .element-3 {
   width: 80px;
   height: 80px;
-  background: linear-gradient(45deg, var(--color-orange), var(--color-red));
+  background: linear-gradient(45deg, var(--color-orange), var(--color-orange-dark));
   bottom: 30%;
   left: 12%;
   animation-delay: 4s;
@@ -709,7 +709,7 @@
 .accessories-bg-elements .element-4 {
   width: 100px;
   height: 100px;
-  background: linear-gradient(45deg, var(--color-red), var(--color-orange));
+  background: linear-gradient(45deg, var(--color-orange-dark), var(--color-orange));
   top: 40%;
   right: 30%;
   animation-delay: 1s;
@@ -718,7 +718,7 @@
 .accessories-bg-elements .element-5 {
   width: 140px;
   height: 140px;
-  background: linear-gradient(45deg, var(--color-orange), var(--color-red));
+  background: linear-gradient(45deg, var(--color-orange), var(--color-orange-dark));
   bottom: 10%;
   right: 20%;
   animation-delay: 3s;
@@ -727,7 +727,7 @@
 .accessories-bg-elements .element-6 {
   width: 60px;
   height: 60px;
-  background: linear-gradient(45deg, var(--color-red), var(--color-orange));
+  background: linear-gradient(45deg, var(--color-orange-dark), var(--color-orange));
   top: 20%;
   left: 40%;
   animation-delay: 5s;
@@ -785,7 +785,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  background: linear-gradient(135deg, var(--color-orange), var(--color-red));
+  background: linear-gradient(135deg, var(--color-orange), var(--color-orange-dark));
   color: var(--color-white);
   padding: 0.75rem 1.5rem;
   border-radius: 50px;
@@ -812,7 +812,7 @@
 }
 
 .accessories-highlight .highlight-text {
-  background: linear-gradient(135deg, var(--color-orange), var(--color-red));
+  background: linear-gradient(135deg, var(--color-orange), var(--color-orange-dark));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -826,7 +826,7 @@
   left: 0;
   right: 0;
   height: 8px;
-  background: linear-gradient(135deg, var(--color-orange), var(--color-red));
+  background: linear-gradient(135deg, var(--color-orange), var(--color-orange-dark));
   border-radius: 4px;
   opacity: 0.3;
   animation: expand 2s ease-out;
@@ -865,7 +865,7 @@
 .accessories-stats .stat-icon {
   width: 50px;
   height: 50px;
-  background: linear-gradient(135deg, var(--color-orange), var(--color-red));
+  background: linear-gradient(135deg, var(--color-orange), var(--color-orange-dark));
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -914,7 +914,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.75rem;
-  background: linear-gradient(135deg, var(--color-orange), var(--color-red));
+  background: linear-gradient(135deg, var(--color-orange), var(--color-orange-dark));
   color: var(--color-white);
   border: none;
   padding: 1.25rem 2.5rem;
@@ -975,7 +975,7 @@
 .btn-secondary-accessories .btn-icon-secondary {
   width: 40px;
   height: 40px;
-  background: linear-gradient(135deg, var(--color-orange), var(--color-red));
+  background: linear-gradient(135deg, var(--color-orange), var(--color-orange-dark));
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -1053,7 +1053,7 @@
   position: absolute;
   width: 45px;
   height: 45px;
-  background: linear-gradient(135deg, var(--color-orange), var(--color-red));
+  background: linear-gradient(135deg, var(--color-orange), var(--color-orange-dark));
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -1123,7 +1123,7 @@
 .floating-card-modern .card-icon {
   width: 50px;
   height: 50px;
-  background: linear-gradient(135deg, var(--color-orange), var(--color-red));
+  background: linear-gradient(135deg, var(--color-orange), var(--color-orange-dark));
   border-radius: 50%;
   display: flex;
   align-items: center;

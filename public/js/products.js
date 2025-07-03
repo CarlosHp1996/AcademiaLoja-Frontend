@@ -585,9 +585,9 @@ document.addEventListener('DOMContentLoaded', function() {
                         <span class="product-price text-xl font-bold text-orange-500">R$ ${product.price.toFixed(2).replace('.', ',')}</span>
                         ${product.oldPrice ? `<span class="text-sm text-gray-400 line-through">R$ ${product.oldPrice.toFixed(2).replace('.', ',')}</span>` : ''}
                     </div>
-                    <button class="add-to-cart mt-3 w-full bg-orange-500 text-white py-2 rounded hover:bg-orange-600 transition-colors duration-300" data-product-id="${product.id}">
+                    <a href="/public/html/product-detail.html?id=${product.id}" class="add-to-cart mt-3 w-full bg-orange-500 text-white py-2 rounded hover:bg-orange-600 transition-colors duration-300" data-product-id="${product.id}">
                         COMPRAR
-                    </button>
+                    </a>
                 </div>
             `;
             productsGrid.appendChild(productCard);
@@ -636,10 +636,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Anexar eventos aos botões dentro dos cards
     function attachCardEvents() {
-        document.querySelectorAll('.add-to-cart').forEach(button => {
-            button.removeEventListener('click', handleAddToCart);
-            button.addEventListener('click', handleAddToCart);
-        });
+        // document.querySelectorAll('.add-to-cart').forEach(button => {
+        //     button.removeEventListener('click', handleAddToCart);
+        //     button.addEventListener('click', handleAddToCart);
+        // });
         document.querySelectorAll('.wishlist-btn').forEach(button => {
             button.removeEventListener('click', handleWishlistToggle);
             button.addEventListener('click', handleWishlistToggle);
