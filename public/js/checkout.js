@@ -15,7 +15,7 @@ class CheckoutService {
   async init() {
     try {
       // Inicializar Stripe
-      this.stripe = Stripe("pk_test_TYooMQauvdEDq54NiTphI7jx") // Substitua pela sua chave pública
+      this.stripe = Stripe("pk_test_51R7kMyQ3UBH6KXI9pei6vdGfFCpoHgJXddLYT71GH9n0PRaxcHBdq5vmNMOxiZvgR9cxDMfjJ4MMm7DJjO1E9NmG00vIJfQ2KX") // Substitua pela sua chave pública
 
       // Carregar dados do carrinho
       await this.loadCartData()
@@ -180,86 +180,138 @@ class CheckoutService {
     }
   }
 
-  async createOrderFromCart() {
-    try {
-      const shippingAddress = this.getShippingAddressString()
+  // Correção do método createOrderFromCart no CheckoutService
 
-      // Usar o CartService para converter carrinho em pedido
-      const response = await fetch(`${this.API_BASE_URL}/Cart/checkout`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${window.authService?.getToken()}`,
-        },
-        body: JSON.stringify({ shippingAddress: shippingAddress }),
-        credentials: "include",
-      })
+async createOrderFromCart() {
+  try {
+    const shippingAddress = this.getShippingAddressObject()
 
-      const result = await response.json()
-
-      if (!response.ok || !result.hasSuccess) {
-        throw new Error(result.errors?.[0] || "Erro ao criar pedido")
-      }
-
-      this.currentOrder = { orderId: result.value }
-      console.log("Pedido criado:", this.currentOrder)
-    } catch (error) {
-      console.error("Erro ao criar pedido:", error)
-      throw error
+    // Verificar se o usuário está autenticado
+    if (!window.authService?.getToken()) {
+      throw new Error("Você precisa estar logado para finalizar a compra")
     }
+
+    const token = window.authService.getToken()
+    console.log("Token disponível:", !!token) // Log para debug
+
+    // Usar o CartService para converter carrinho em pedido
+    const response = await fetch(`${this.API_BASE_URL}/Cart/checkout`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}` // Correção: mover Authorization para dentro de headers
+      },
+      body: JSON.stringify(shippingAddress),
+    })
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error("Erro na resposta do servidor:", response.status, response.statusText, errorText);
+      
+      // Tratamento específico para erro 401
+      if (response.status === 401) {
+        throw new Error("Sessão expirada. Por favor, faça login novamente.");
+      }
+      
+      throw new Error(`O servidor respondeu com um erro (${response.status}). Veja o console para detalhes.`);
+    }
+
+    const result = await response.json()
+
+    if (!result.hasSuccess) {
+      throw new Error(result.errors?.[0] || "Erro ao criar pedido")
+    }
+
+    this.currentOrder = { orderId: result.value }
+    console.log("Pedido criado:", this.currentOrder)
+  } catch (error) {
+    console.error("Erro ao criar pedido:", error)
+    throw error
   }
+}
 
   async processCardPayment() {
     try {
-      // Criar payment intent
-      const response = await fetch(`${this.API_BASE_URL}/Payment/create/${this.currentOrder.orderId}`, {
+      // 1. Criar payment intent no backend
+      const createResponse = await fetch(`${this.API_BASE_URL}/Payment/create/${this.currentOrder.orderId}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${window.authService?.getToken()}`,
         },
-      })
+      });
 
-      const result = await response.json()
+      const createResult = await createResponse.json();
 
-      if (!response.ok || !result.hasSuccess) {
-        throw new Error(result.errors?.[0] || "Erro ao criar intenção de pagamento")
+      if (!createResponse.ok || !createResult.hasSuccess) {
+        throw new Error(createResult.errors?.[0] || "Erro ao criar intenção de pagamento");
       }
 
-      this.paymentIntent = result.value
-      console.log("Payment Intent criado:", this.paymentIntent)
+      this.paymentIntent = createResult.value;
+      console.log("Payment Intent criado:", this.paymentIntent);
 
-      // Confirmar pagamento com Stripe
-      const { error, paymentIntent } = await this.stripe.confirmCardPayment(this.paymentIntent.clientSecret, {
-        payment_method: {
-          card: this.cardElement,
-          billing_details: {
-            name: document.getElementById("shipping-name").value,
-            email: window.authService?.getUserData()?.email,
-          },
+      // 2. Criar PaymentMethod no frontend com Stripe.js
+      const { error, paymentMethod } = await this.stripe.createPaymentMethod({
+        type: 'card',
+        card: this.cardElement,
+        billing_details: {
+          name: document.getElementById("shipping-name").value,
+          email: window.authService?.userData?.email,
         },
-      })
+      });
 
       if (error) {
-        throw new Error(error.message)
+        throw new Error(error.message);
       }
 
-      if (paymentIntent.status === "succeeded") {
-        this.showNotification("Pagamento processado com sucesso!", "success")
+      // 3. Confirmar o pagamento no backend
+      const confirmResponse = await fetch(`${this.API_BASE_URL}/Payment/confirm`, {
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${window.authService?.getToken()}`,
+          },
+          body: JSON.stringify({
+              paymentIntentId: this.paymentIntent.transactionId, // Corrigido para usar o ID da transação do Stripe
+              paymentMethodId: paymentMethod.id,
+          }),
+      });
 
-        // Limpar carrinho
-        if (window.cartService) {
-          await window.cartService.clearCart()
-        }
+      const confirmResult = await confirmResponse.json();
 
-        // Redirecionar para confirmação
-        setTimeout(() => {
-          window.location.href = `/public/html/order-confirmation.html?order=${this.currentOrder.orderId}`
-        }, 2000)
+      if (!confirmResponse.ok || !confirmResult.hasSuccess) {
+          throw new Error(confirmResult.errors?.[0] || "Erro ao confirmar o pagamento.");
       }
+
+      // 4. Verificar o pagamento no backend
+      const verifyResponse = await fetch(`${this.API_BASE_URL}/Payment/verify/${this.paymentIntent.paymentId}`, {
+          method: "GET",
+          headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${window.authService?.getToken()}`,
+          },
+      });
+
+      const verifyResult = await verifyResponse.json();
+
+      if (!verifyResponse.ok || !verifyResult.hasSuccess) {
+          throw new Error(verifyResult.errors?.[0] || "Erro ao verificar o pagamento.");
+      }
+
+      // 5. Sucesso
+      this.showNotification("Pagamento processado com sucesso!", "success");
+
+      if (window.cartService) {
+        await window.cartService.clearCart();
+      }
+
+      setTimeout(() => {
+        window.location.href = `/public/html/tracking.html`;
+      }, 2000);
+
     } catch (error) {
-      console.error("Erro no pagamento com cartão:", error)
-      throw error
+      console.error("Erro no pagamento com cartão:", error);
+      this.showNotification(error.message, "error");
     }
   }
 
@@ -324,26 +376,23 @@ class CheckoutService {
     return isValid
   }
 
+  getShippingAddressObject() {
+    return {
+      Name: document.getElementById("shipping-name").value,
+      Cep: document.getElementById("shipping-cep").value,
+      Street: document.getElementById("shipping-street").value,
+      Number: document.getElementById("shipping-number").value,
+      Complement: document.getElementById("shipping-complement").value,
+      Neighborhood: document.getElementById("shipping-neighborhood").value,
+      City: document.getElementById("shipping-city").value,
+      State: document.getElementById("shipping-state").value,
+    }
+  }
+
   getShippingAddressString() {
-    const address = {
-      name: document.getElementById("shipping-name").value,
-      cep: document.getElementById("shipping-cep").value,
-      street: document.getElementById("shipping-street").value,
-      number: document.getElementById("shipping-number").value,
-      complement: document.getElementById("shipping-complement").value,
-      neighborhood: document.getElementById("shipping-neighborhood").value,
-      city: document.getElementById("shipping-city").value,
-      state: document.getElementById("shipping-state").value,
-    }
-
-    // Formatar endereço como string
-    let addressString = `${address.name}, ${address.street}, ${address.number}`
-    if (address.complement) {
-      addressString += `, ${address.complement}`
-    }
-    addressString += `, ${address.neighborhood}, ${address.city} - ${address.state}, CEP: ${address.cep}`
-
-    return addressString
+    const address = this.getShippingAddressObject()
+    const complement = address.complement ? `, ${address.complement}` : ""
+    return `${address.street}, ${address.number}${complement} - ${address.neighborhood}, ${address.city} - ${address.state}, CEP: ${address.cep}`
   }
 
   renderOrderSummary() {
