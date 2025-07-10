@@ -306,7 +306,7 @@ async createOrderFromCart() {
       }
 
       setTimeout(() => {
-        window.location.href = `/public/html/tracking.html`;
+        window.location.href = `/public/html/dashboard.html`;
       }, 2000);
 
     } catch (error) {
