@@ -8,12 +8,9 @@
     <link rel="stylesheet" href="/public/css/profile.css">
     <link rel="stylesheet" href="/public/css/dashboard.css">
     <link rel="stylesheet" href="/public/css/whatsapp-button.css">
-    <!-- Estilos para dropdown e notificações -->
     <link rel="stylesheet" href="/public/css/auth-dropdown.css">
     <link rel="stylesheet" href="/public/css/auth-notifications.css">
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="/public/css/cart-panel.css">
 </head>
@@ -49,7 +46,7 @@
     </div>
 </header>
 
- <!-- Subheader -->
+<!-- Subheader -->
 <section class="subheader">
     <div class="container">
         <nav class="subheader-nav">
@@ -98,385 +95,215 @@
     </div>
 </section>
 
-    <!-- Main Content -->
-    <main class="main">
-        <div class="container">
-            <div class="profile-container">
-                <div class="profile-sidebar">
-                    <div class="user-info">
-                        <div class="user-avatar">
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <h2 class="user-name">Carlos Henrique</h2>
-                        <p class="user-email">carlos@email.com</p>
+<!-- Main Content -->
+<main class="main">
+    <div class="container">
+        <div class="profile-container">
+            <div class="profile-sidebar">
+                <div class="user-info">
+                    <div class="user-avatar">
+                        <i class="fas fa-user"></i>
                     </div>
-                    <nav class="profile-nav">
-                        <ul>
-                            <li>
-                                <a href="/public/html/profile.html">
-                                    <i class="fas fa-user-circle"></i>
-                                    Meu Perfil
-                                </a>
-                            </li>
-                            <li class="active">
-                                <a href="/public/html/dashboard.html">
-                                    <i class="fas fa-chart-line"></i>
-                                    Meus Pedidos
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/public/html/wishlist.html">
-                                    <i class="fas fa-heart"></i>
-                                    Lista de Desejos
-                                </a>
-                            </li>                            
-                            <li class="logout">
-                                <a href="#" id="logoutBtn">
-                                    <i class="fas fa-sign-out-alt"></i>
-                                    Sair
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
+                    <h2 class="user-name" id="user-name">Carregando...</h2>
+                    <p class="user-email" id="user-email">Carregando...</p>
                 </div>
-                <div class="profile-content">
-                    <div class="profile-header">
-                        <h1 class="profile-title">Meus Pedidos</h1>
-                        <p class="profile-subtitle">Acompanhe o status dos seus pedidos</p>
-                    </div>
-
-                    <div class="dashboard-filters">
-                        <div class="search-filter">
-                            <input type="text" id="orderSearch" placeholder="Buscar por número de pedido ou produto">
-                            <button type="button" class="search-btn">
-                                <i class="fas fa-search"></i>
-                            </button>
-                        </div>
-                        <div class="filter-group">
-                            <label for="statusFilter">Status:</label>
-                            <select id="statusFilter">
-                                <option value="all">Todos</option>
-                                <option value="pending">Pendente de Pagamento</option>
-                                <option value="processing">Em Processamento</option>
-                                <option value="shipped">Em Transporte</option>
-                                <option value="delivered">Entregue</option>
-                                <option value="cancelled">Cancelado</option>
-                            </select>
-                        </div>
-                        <div class="filter-group">
-                            <label for="dateFilter">Período:</label>
-                            <select id="dateFilter">
-                                <option value="all">Todos</option>
-                                <option value="last30">Últimos 30 dias</option>
-                                <option value="last90">Últimos 90 dias</option>
-                                <option value="last180">Últimos 180 dias</option>
-                                <option value="last365">Último ano</option>
-                            </select>
-                        </div>
-                        <button type="button" id="applyFilters" class="btn btn-primary">
-                            Aplicar Filtros
-                            <i class="fas fa-filter"></i>
-                        </button>
-                    </div>
-
-                    <div class="orders-container">
-                        <!-- Pedido 1 -->
-                        <div class="order-card">
-                            <div class="order-header">
-                                <div class="order-info">
-                                    <h3 class="order-number">Pedido #12345</h3>
-                                    <span class="order-date">15/05/2023</span>
-                                </div>
-                                <div class="order-status delivered">
-                                    <i class="fas fa-check-circle"></i>
-                                    Entregue
-                                </div>
-                            </div>
-                            <div class="order-items">
-                                <div class="order-item">
-                                    <div class="item-image">
-                                        <img src="/assets/images/products/whey-protein.jpg" alt="Whey Protein">
-                                    </div>
-                                    <div class="item-details">
-                                        <h4 class="item-name">Whey Protein 100% Pure</h4>
-                                        <p class="item-variant">Sabor: Chocolate, 900g</p>
-                                        <p class="item-quantity">Quantidade: 2</p>
-                                    </div>
-                                    <div class="item-price">
-                                        <span class="price">R$ 199,90</span>
-                                    </div>
-                                </div>
-                                <div class="order-item">
-                                    <div class="item-image">
-                                        <img src="/assets/images/products/creatine.jpg" alt="Creatina">
-                                    </div>
-                                    <div class="item-details">
-                                        <h4 class="item-name">Creatina Monohidratada</h4>
-                                        <p class="item-variant">300g</p>
-                                        <p class="item-quantity">Quantidade: 1</p>
-                                    </div>
-                                    <div class="item-price">
-                                        <span class="price">R$ 89,90</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="order-footer">
-                                <div class="order-total">
-                                    <span>Total:</span>
-                                    <strong>R$ 489,70</strong>
-                                </div>
-                                <div class="order-actions">
-                                    <button class="btn btn-outline">
-                                        <i class="fas fa-eye"></i>
-                                        Ver Detalhes
-                                    </button>
-                                    <button class="btn btn-primary">
-                                        <i class="fas fa-shopping-cart"></i>
-                                        Comprar Novamente
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Pedido 2 -->
-                        <div class="order-card">
-                            <div class="order-header">
-                                <div class="order-info">
-                                    <h3 class="order-number">Pedido #12344</h3>
-                                    <span class="order-date">10/05/2023</span>
-                                </div>
-                                <div class="order-status shipped">
-                                    <i class="fas fa-truck"></i>
-                                    Em Transporte
-                                </div>
-                            </div>
-                            <div class="order-items">
-                                <div class="order-item">
-                                    <div class="item-image">
-                                        <img src="/assets/images/products/pre-workout.jpg" alt="Pré-Treino">
-                                    </div>
-                                    <div class="item-details">
-                                        <h4 class="item-name">Pré-Treino Explosivo</h4>
-                                        <p class="item-variant">Sabor: Frutas Cítricas, 300g</p>
-                                        <p class="item-quantity">Quantidade: 1</p>
-                                    </div>
-                                    <div class="item-price">
-                                        <span class="price">R$ 129,90</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="order-footer">
-                                <div class="order-total">
-                                    <span>Total:</span>
-                                    <strong>R$ 129,90</strong>
-                                </div>
-                                <div class="order-actions">
-                                    <button class="btn btn-outline">
-                                        <i class="fas fa-eye"></i>
-                                        Ver Detalhes
-                                    </button>
-                                    <button class="btn btn-primary">
-                                        <i class="fas fa-truck"></i>
-                                        Rastrear Pedido
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Pedido 3 -->
-                        <div class="order-card">
-                            <div class="order-header">
-                                <div class="order-info">
-                                    <h3 class="order-number">Pedido #12343</h3>
-                                    <span class="order-date">05/05/2023</span>
-                                </div>
-                                <div class="order-status processing">
-                                    <i class="fas fa-box"></i>
-                                    Em Processamento
-                                </div>
-                            </div>
-                            <div class="order-items">
-                                <div class="order-item">
-                                    <div class="item-image">
-                                        <img src="/assets/images/products/bcaa.jpg" alt="BCAA">
-                                    </div>
-                                    <div class="item-details">
-                                        <h4 class="item-name">BCAA 5000</h4>
-                                        <p class="item-variant">Sabor: Limão, 300g</p>
-                                        <p class="item-quantity">Quantidade: 1</p>
-                                    </div>
-                                    <div class="item-price">
-                                        <span class="price">R$ 79,90</span>
-                                    </div>
-                                </div>
-                                <div class="order-item">
-                                    <div class="item-image">
-                                        <img src="/assets/images/products/glutamine.jpg" alt="Glutamina">
-                                    </div>
-                                    <div class="item-details">
-                                        <h4 class="item-name">Glutamina</h4>
-                                        <p class="item-variant">300g</p>
-                                        <p class="item-quantity">Quantidade: 1</p>
-                                    </div>
-                                    <div class="item-price">
-                                        <span class="price">R$ 69,90</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="order-footer">
-                                <div class="order-total">
-                                    <span>Total:</span>
-                                    <strong>R$ 149,80</strong>
-                                </div>
-                                <div class="order-actions">
-                                    <button class="btn btn-outline">
-                                        <i class="fas fa-eye"></i>
-                                        Ver Detalhes
-                                    </button>
-                                    <button class="btn btn-primary">
-                                        <i class="fas fa-box"></i>
-                                        Acompanhar
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Pedido 4 -->
-                        <div class="order-card">
-                            <div class="order-header">
-                                <div class="order-info">
-                                    <h3 class="order-number">Pedido #12342</h3>
-                                    <span class="order-date">01/05/2023</span>
-                                </div>
-                                <div class="order-status pending">
-                                    <i class="fas fa-clock"></i>
-                                    Pendente de Pagamento
-                                </div>
-                            </div>
-                            <div class="order-items">
-                                <div class="order-item">
-                                    <div class="item-image">
-                                        <img src="/assets/images/products/multivitamin.jpg" alt="Multivitamínico">
-                                    </div>
-                                    <div class="item-details">
-                                        <h4 class="item-name">Multivitamínico Completo</h4>
-                                        <p class="item-variant">60 cápsulas</p>
-                                        <p class="item-quantity">Quantidade: 1</p>
-                                    </div>
-                                    <div class="item-price">
-                                        <span class="price">R$ 59,90</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="order-footer">
-                                <div class="order-total">
-                                    <span>Total:</span>
-                                    <strong>R$ 59,90</strong>
-                                </div>
-                                <div class="order-actions">
-                                    <button class="btn btn-outline">
-                                        <i class="fas fa-eye"></i>
-                                        Ver Detalhes
-                                    </button>
-                                    <button class="btn btn-primary">
-                                        <i class="fas fa-credit-card"></i>
-                                        Finalizar Pagamento
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="pagination">
-                        <button class="pagination-btn" disabled>
-                            <i class="fas fa-chevron-left"></i>
-                        </button>
-                        <div class="pagination-pages">
-                            <button class="pagination-page active">1</button>
-                            <button class="pagination-page">2</button>
-                            <button class="pagination-page">3</button>
-                        </div>
-                        <button class="pagination-btn">
-                            <i class="fas fa-chevron-right"></i>
-                        </button>
-                    </div>
-                </div>
+                <nav class="profile-nav">
+                    <ul>
+                        <li>
+                            <a href="/public/html/profile.html">
+                                <i class="fas fa-user-circle"></i>
+                                Meu Perfil
+                            </a>
+                        </li>
+                        <li class="active">
+                            <a href="/public/html/dashboard.html">
+                                <i class="fas fa-chart-line"></i>
+                                Meus Pedidos
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/public/html/wishlist.html">
+                                <i class="fas fa-heart"></i>
+                                Lista de Desejos
+                            </a>
+                        </li>                            
+                        <li class="logout">
+                            <a href="#" id="logoutBtn">
+                                <i class="fas fa-sign-out-alt"></i>
+                                Sair
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
-        </div>
-    </main>
+            <div class="profile-content">
+                <div class="profile-header">
+                    <h1 class="profile-title">Meus Pedidos</h1>
+                    <p class="profile-subtitle">Acompanhe o status dos seus pedidos</p>
+                </div>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-column">
-                    <a href="/public/html/index.html" class="logo">
-                        <span class="logo-power">Power Rock</span>
-                        <span class="logo-supps">Supplements</span>
+                <div class="dashboard-filters">
+                    <div class="search-filter">
+                        <input type="text" id="orderSearch" placeholder="Buscar por número de pedido ou produto">
+                        <button type="button" class="search-btn">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                    <div class="filter-group">
+                        <label for="statusFilter">Status:</label>
+                        <select id="statusFilter">
+                            <option value="">Todos</option>
+                            <option value="PENDING">Pendente de Pagamento</option>
+                            <option value="PROCESSING">Em Processamento</option>
+                            <option value="SHIPPED">Em Transporte</option>
+                            <option value="DELIVERED">Entregue</option>
+                            <option value="CANCELLED">Cancelado</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="dateFilter">Período:</label>
+                        <select id="dateFilter">
+                            <option value="">Todos</option>
+                            <option value="30">Últimos 30 dias</option>
+                            <option value="90">Últimos 90 dias</option>
+                            <option value="180">Últimos 180 dias</option>
+                            <option value="365">Último ano</option>
+                        </select>
+                    </div>
+                    <button type="button" id="applyFilters" class="btn btn-primary">
+                        Aplicar Filtros
+                        <i class="fas fa-filter"></i>
+                    </button>
+                </div>
+
+                <!-- Loading State -->
+                <div class="loading-container" id="loading-container" style="display: none;">
+                    <div class="loading-spinner">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        <p>Carregando seus pedidos...</p>
+                    </div>
+                </div>
+
+                <!-- Empty State -->
+                <div class="empty-state" id="empty-state" style="display: none;">
+                    <div class="empty-icon">
+                        <i class="fas fa-shopping-bag"></i>
+                    </div>
+                    <h3>Nenhum pedido encontrado</h3>
+                    <p>Você ainda não fez nenhum pedido ou não há pedidos que correspondam aos filtros aplicados.</p>
+                    <a href="/public/html/products.html" class="btn btn-primary">
+                        <i class="fas fa-shopping-cart"></i>
+                        Começar a Comprar
                     </a>
-                    <p class="footer-description">
-                        Sua loja especializada em suplementos de alta performance para atletas e entusiastas do fitness.
-                    </p>
-                    <div class="social-links">
-                        <a href="https://www.facebook.com/profile.php?id=61575757384725" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                        <a href="https://www.instagram.com/powerrocksupplements/" class="social-link"><i class="fab fa-instagram"></i></a>
+                </div>
+
+                <!-- Error State -->
+                <div class="error-state" id="error-state" style="display: none;">
+                    <div class="error-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
                     </div>
+                    <h3>Erro ao carregar pedidos</h3>
+                    <p id="error-message">Ocorreu um erro ao carregar seus pedidos. Tente novamente.</p>
+                    <button class="btn btn-primary" onclick="loadOrders()">
+                        <i class="fas fa-refresh"></i>
+                        Tentar Novamente
+                    </button>
                 </div>
-                <div class="footer-column">
-                    <h3 class="footer-title">Categorias</h3>
-                    <ul class="footer-links">
-                        <li><a href="/public/html/products.html">Proteínas</a></li>
-                        <li><a href="/public/html/products.html">Pré-Treino</a></li>
-                        <li><a href="/public/html/products.html">Creatina</a></li>
-                        <li><a href="/public/html/products.html">Vitaminas</a></li>
-                        <li><a href="/public/html/accessories.html">Acessórios</a></li>
-                    </ul>
+
+                <!-- Orders Container -->
+                <div class="orders-container" id="orders-container">
+                    <!-- Pedidos serão carregados dinamicamente -->
                 </div>
-                <div class="footer-column">
-                    <h3 class="footer-title">Informações</h3>
-                    <ul class="footer-links">
-                        <li><a href="/about">Sobre Nós</a></li>
-                        <li><a href="/shipping">Entrega</a></li>
-                        <li><a href="/privacy">Política de Privacidade</a></li>
-                        <li><a href="/terms">Termos e Condições</a></li>
-                        <li><a href="/public/html/contact.html">Contato</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3 class="footer-title">Contato</h3>
-                    <ul class="contact-info">
-                        <li>
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>Av. Paulista, 1000 - São Paulo</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-phone"></i>
-                            <span>(11) 99999-9999</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-envelope"></i>
-                            <span>contato@powerrocksupplements.com.br</span>
-                        </li>
-                    </ul>
-                    <div class="payment-methods">
-                        <h4 class="payment-title">Formas de Pagamento</h4>
-                        <div class="payment-icons">
-                            <div class="payment-icon"></div>
-                            <div class="payment-icon"></div>
-                            <div class="payment-icon"></div>
-                            <div class="payment-icon"></div>
-                            <div class="payment-icon"></div>
-                        </div>
+
+                <!-- Pagination -->
+                <div class="pagination" id="pagination" style="display: none;">
+                    <button class="pagination-btn" id="prev-page" disabled>
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <div class="pagination-pages" id="pagination-pages">
+                        <!-- Páginas serão geradas dinamicamente -->
                     </div>
+                    <button class="pagination-btn" id="next-page">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
                 </div>
-            </div>
-            <div class="copyright">
-                © 2025 Power Rock Supplements. Todos os direitos reservados.
             </div>
         </div>
-    </footer>
+    </div>
+</main>
 
-    <!-- Cart Side Panel -->
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-column">
+                <a href="/public/html/index.html" class="logo">
+                    <span class="logo-power">Power Rock</span>
+                    <span class="logo-supps">Supplements</span>
+                </a>
+                <p class="footer-description">
+                    Sua loja especializada em suplementos de alta performance para atletas e entusiastas do fitness.
+                </p>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/profile.php?id=61575757384725" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/powerrocksupplements/" class="social-link"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3 class="footer-title">Categorias</h3>
+                <ul class="footer-links">
+                    <li><a href="/public/html/products.html">Proteínas</a></li>
+                    <li><a href="/public/html/products.html">Pré-Treino</a></li>
+                    <li><a href="/public/html/products.html">Creatina</a></li>
+                    <li><a href="/public/html/products.html">Vitaminas</a></li>
+                    <li><a href="/public/html/accessories.html">Acessórios</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3 class="footer-title">Informações</h3>
+                <ul class="footer-links">
+                    <li><a href="/about">Sobre Nós</a></li>
+                    <li><a href="/shipping">Entrega</a></li>
+                    <li><a href="/privacy">Política de Privacidade</a></li>
+                    <li><a href="/terms">Termos e Condições</a></li>
+                    <li><a href="/public/html/contact.html">Contato</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3 class="footer-title">Contato</h3>
+                <ul class="contact-info">
+                    <li>
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Av. Paulista, 1000 - São Paulo</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-phone"></i>
+                        <span>(11) 99999-9999</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-envelope"></i>
+                        <span>contato@powerrocksupplements.com.br</span>
+                    </li>
+                </ul>
+                <div class="payment-methods">
+                    <h4 class="payment-title">Formas de Pagamento</h4>
+                    <div class="payment-icons">
+                        <div class="payment-icon"></div>
+                        <div class="payment-icon"></div>
+                        <div class="payment-icon"></div>
+                        <div class="payment-icon"></div>
+                        <div class="payment-icon"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            © 2025 Power Rock Supplements. Todos os direitos reservados.
+        </div>
+    </div>
+</footer>
+
+<!-- Cart Side Panel -->
 <div class="cart-overlay" id="cart-overlay"></div>
 <div class="cart-panel" id="cart-panel">
     <div class="cart-header">
@@ -523,18 +350,15 @@
     </div>
 </div>
 
-    <!-- Script de navegação - DEVE SER CARREGADO PRIMEIRO -->
-    <script src="/public/js/navigation-enums.js"></script>
-    <!-- Script da barra de pesquisa -->
-    <script src="/public/js/search-bar.js"></script>
-    <script src="/public/js/dashboard.js"></script>
-     <script src="/public/js/cart-service.js"></script>
-     <script src="/public/js/cart-ui.js"></script>
-     <!-- WhatsApp Button -->
-    <script src="/public/js/whatsapp-button.js"></script>
-        <!-- Scripts de autenticação - ORDEM IMPORTA! -->
-    <script src="/public/js/auth-service.js"></script>
-    <script src="/public/js/auth-notifications.js"></script>
-    <script src="/public/js/auth-integration.js"></script>
+<!-- Scripts -->
+<script src="/public/js/navigation-enums.js"></script>
+<script src="/public/js/search-bar.js"></script>
+<script src="/public/js/dashboard.js"></script>
+<script src="/public/js/cart-service.js"></script>
+<script src="/public/js/cart-ui.js"></script>
+<script src="/public/js/whatsapp-button.js"></script>
+<script src="/public/js/auth-service.js"></script>
+<script src="/public/js/auth-notifications.js"></script>
+<script src="/public/js/auth-integration.js"></script>
 </body>
-</html> 
+</html>
