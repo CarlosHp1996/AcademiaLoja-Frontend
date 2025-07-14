@@ -8,12 +8,9 @@
     <link rel="stylesheet" href="/public/css/profile.css">
     <link rel="stylesheet" href="/public/css/order-details.css">
     <link rel="stylesheet" href="/public/css/whatsapp-button.css">
-    <!-- Estilos para dropdown e notificações -->
     <link rel="stylesheet" href="/public/css/auth-dropdown.css">
     <link rel="stylesheet" href="/public/css/auth-notifications.css">
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="/public/css/cart-panel.css">
 </head>
@@ -49,7 +46,7 @@
     </div>
 </header>
 
- <!-- Subheader -->
+<!-- Subheader -->
 <section class="subheader">
     <div class="container">
         <nav class="subheader-nav">
@@ -98,312 +95,226 @@
     </div>
 </section>
 
-    <!-- Main Content -->
-    <main class="main">
-        <div class="container">
-            <div class="profile-container">
-                <div class="profile-sidebar">
-                    <div class="user-info">
-                        <div class="user-avatar">
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <h2 class="user-name">Carlos Henrique</h2>
-                        <p class="user-email">carlos@email.com</p>
+<!-- Main Content -->
+<main class="main">
+    <div class="container">
+        <div class="profile-container">
+            <div class="profile-sidebar">
+                <div class="user-info">
+                    <div class="user-avatar">
+                        <i class="fas fa-user"></i>
                     </div>
-                    <nav class="profile-nav">
-                        <ul>
-                            <li>
-                                <a href="/public/html/profile.html">
-                                    <i class="fas fa-user-circle"></i>
-                                    Meu Perfil
-                                </a>
-                            </li>
-                            <li class="active">
-                                <a href="/public/html/dashboard.html">
-                                    <i class="fas fa-chart-line"></i>
-                                    Minhas Compras
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/public/html/wishlist.html">
-                                    <i class="fas fa-heart"></i>
-                                    Lista de Desejos
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/public/html/addresses.html">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                    Endereços
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/public/html/payment-methods.html">
-                                    <i class="fas fa-credit-card"></i>
-                                    Formas de Pagamento
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/public/html/settings.html">
-                                    <i class="fas fa-cog"></i>
-                                    Configurações
-                                </a>
-                            </li>
-                            <li class="logout">
-                                <a href="#" id="logoutBtn">
-                                    <i class="fas fa-sign-out-alt"></i>
-                                    Sair
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
+                    <h2 class="user-name" id="user-name">Carregando...</h2>
+                    <p class="user-email" id="user-email">Carregando...</p>
                 </div>
-                <div class="profile-content">
+                <nav class="profile-nav">
+                    <ul>
+                        <li>
+                            <a href="/public/html/profile.html">
+                                <i class="fas fa-user-circle"></i>
+                                Meu Perfil
+                            </a>
+                        </li>
+                        <li class="active">
+                            <a href="/public/html/dashboard.html">
+                                <i class="fas fa-chart-line"></i>
+                                Meus Pedidos
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/public/html/wishlist.html">
+                                <i class="fas fa-heart"></i>
+                                Lista de Desejos
+                            </a>
+                        </li>
+                        <li class="logout">
+                            <a href="#" id="logoutBtn">
+                                <i class="fas fa-sign-out-alt"></i>
+                                Sair
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="profile-content">
+                <!-- Loading State -->
+                <div class="loading-container" id="loading-container">
+                    <div class="loading-spinner">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        <p>Carregando detalhes do pedido...</p>
+                    </div>
+                </div>
+
+                <!-- Error State -->
+                <div class="error-state" id="error-state" style="display: none;">
+                    <div class="error-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <h3>Erro ao carregar pedido</h3>
+                    <p id="error-message">Ocorreu um erro ao carregar os detalhes do pedido.</p>
+                    <div class="error-actions">
+                        <button class="btn btn-primary" onclick="loadOrderDetails()">
+                            <i class="fas fa-refresh"></i>
+                            Tentar Novamente
+                        </button>
+                        <a href="/public/html/dashboard.html" class="btn btn-outline">
+                            <i class="fas fa-arrow-left"></i>
+                            Voltar aos Pedidos
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Order Details Content -->
+                <div class="order-details-content" id="order-details-content" style="display: none;">
                     <div class="profile-header">
                         <div class="header-actions">
                             <a href="/public/html/dashboard.html" class="btn btn-outline">
                                 <i class="fas fa-arrow-left"></i>
-                                Voltar para Minhas Compras
+                                Voltar para Meus Pedidos
                             </a>
                             <button class="btn btn-primary" id="printOrder">
                                 <i class="fas fa-print"></i>
                                 Imprimir Pedido
                             </button>
                         </div>
-                        <h1 class="profile-title">Detalhes do Pedido #12345</h1>
-                        <p class="profile-subtitle">Realizado em 15/05/2023</p>
+                        <h1 class="profile-title" id="order-title">Detalhes do Pedido</h1>
+                        <p class="profile-subtitle" id="order-subtitle">Carregando...</p>
                     </div>
 
                     <div class="order-details-container">
                         <!-- Status do Pedido -->
                         <section class="order-section">
-                            <h2 class="section-title">Status do Pedido</h2>
-                            <div class="order-timeline">
-                                <div class="timeline-item completed">
-                                    <div class="timeline-icon">
-                                        <i class="fas fa-check-circle"></i>
-                                    </div>
-                                    <div class="timeline-content">
-                                        <h3>Pedido Confirmado</h3>
-                                        <p>15/05/2023 às 14:30</p>
-                                    </div>
-                                </div>
-                                <div class="timeline-item completed">
-                                    <div class="timeline-icon">
-                                        <i class="fas fa-box"></i>
-                                    </div>
-                                    <div class="timeline-content">
-                                        <h3>Em Processamento</h3>
-                                        <p>15/05/2023 às 16:45</p>
-                                    </div>
-                                </div>
-                                <div class="timeline-item completed">
-                                    <div class="timeline-icon">
-                                        <i class="fas fa-truck"></i>
-                                    </div>
-                                    <div class="timeline-content">
-                                        <h3>Em Transporte</h3>
-                                        <p>16/05/2023 às 09:15</p>
-                                    </div>
-                                </div>
-                                <div class="timeline-item active">
-                                    <div class="timeline-icon">
-                                        <i class="fas fa-map-marker-alt"></i>
-                                    </div>
-                                    <div class="timeline-content">
-                                        <h3>Em Entrega</h3>
-                                        <p>Previsão: 17/05/2023</p>
-                                    </div>
-                                </div>
-                                <div class="timeline-item">
-                                    <div class="timeline-icon">
-                                        <i class="fas fa-home"></i>
-                                    </div>
-                                    <div class="timeline-content">
-                                        <h3>Entregue</h3>
-                                        <p>-</p>
-                                    </div>
-                                </div>
+                            <h2 class="section-title">
+                                <i class="fas fa-info-circle"></i>
+                                Status do Pedido
+                            </h2>
+                            <div class="order-status-info" id="order-status-info">
+                                <!-- Status será carregado dinamicamente -->
                             </div>
                         </section>
 
                         <!-- Informações de Entrega -->
                         <section class="order-section">
-                            <h2 class="section-title">Informações de Entrega</h2>
-                            <div class="delivery-info">
-                                <div class="info-group">
-                                    <h3>Endereço de Entrega</h3>
-                                    <p>Carlos Henrique</p>
-                                    <p>Rua das Flores, 123</p>
-                                    <p>Bairro: Centro</p>
-                                    <p>São Paulo - SP</p>
-                                    <p>CEP: 01234-567</p>
-                                </div>
-                                <div class="info-group">
-                                    <h3>Transportadora</h3>
-                                    <p>Correios</p>
-                                    <p>Rastreio: <a href="#" class="tracking-link">BR123456789BR</a></p>
-                                    <p>Prazo de Entrega: 3-5 dias úteis</p>
-                                </div>
+                            <h2 class="section-title">
+                                <i class="fas fa-truck"></i>
+                                Informações de Entrega
+                            </h2>
+                            <div class="delivery-info" id="delivery-info">
+                                <!-- Informações de entrega serão carregadas dinamicamente -->
                             </div>
                         </section>
 
                         <!-- Produtos -->
                         <section class="order-section">
-                            <h2 class="section-title">Produtos</h2>
-                            <div class="products-list">
-                                <div class="product-item">
-                                    <div class="product-image">
-                                        <img src="/assets/images/products/whey-protein.jpg" alt="Whey Protein">
-                                    </div>
-                                    <div class="product-details">
-                                        <h3>Whey Protein 100% Pure</h3>
-                                        <p class="product-variant">Sabor: Chocolate, 900g</p>
-                                        <div class="product-price">
-                                            <span class="quantity">2x</span>
-                                            <span class="price">R$ 199,90</span>
-                                        </div>
-                                    </div>
-                                    <div class="product-total">
-                                        <span>R$ 399,80</span>
-                                    </div>
-                                </div>
-                                <div class="product-item">
-                                    <div class="product-image">
-                                        <img src="/assets/images/products/creatine.jpg" alt="Creatina">
-                                    </div>
-                                    <div class="product-details">
-                                        <h3>Creatina Monohidratada</h3>
-                                        <p class="product-variant">300g</p>
-                                        <div class="product-price">
-                                            <span class="quantity">1x</span>
-                                            <span class="price">R$ 89,90</span>
-                                        </div>
-                                    </div>
-                                    <div class="product-total">
-                                        <span>R$ 89,90</span>
-                                    </div>
-                                </div>
+                            <h2 class="section-title">
+                                <i class="fas fa-box"></i>
+                                Produtos do Pedido
+                            </h2>
+                            <div class="products-list" id="products-list">
+                                <!-- Produtos serão carregados dinamicamente -->
                             </div>
                         </section>
 
                         <!-- Resumo do Pedido -->
                         <section class="order-section">
-                            <h2 class="section-title">Resumo do Pedido</h2>
-                            <div class="order-summary">
-                                <div class="summary-row">
-                                    <span>Subtotal</span>
-                                    <span>R$ 489,70</span>
-                                </div>
-                                <div class="summary-row">
-                                    <span>Frete</span>
-                                    <span>R$ 15,90</span>
-                                </div>
-                                <div class="summary-row">
-                                    <span>Desconto</span>
-                                    <span>- R$ 20,00</span>
-                                </div>
-                                <div class="summary-row total">
-                                    <span>Total</span>
-                                    <span>R$ 485,60</span>
-                                </div>
+                            <h2 class="section-title">
+                                <i class="fas fa-calculator"></i>
+                                Resumo do Pedido
+                            </h2>
+                            <div class="order-summary" id="order-summary">
+                                <!-- Resumo será carregado dinamicamente -->
                             </div>
                         </section>
 
                         <!-- Informações de Pagamento -->
                         <section class="order-section">
-                            <h2 class="section-title">Informações de Pagamento</h2>
-                            <div class="payment-info">
-                                <div class="info-group">
-                                    <h3>Método de Pagamento</h3>
-                                    <p>Cartão de Crédito</p>
-                                    <p>Visa - Final 1234</p>
-                                    <p>Parcelado em 3x</p>
-                                </div>
-                                <div class="info-group">
-                                    <h3>Status do Pagamento</h3>
-                                    <p class="status paid">Pago</p>
-                                    <p>Data: 15/05/2023</p>
-                                </div>
+                            <h2 class="section-title">
+                                <i class="fas fa-credit-card"></i>
+                                Informações de Pagamento
+                            </h2>
+                            <div class="payment-info" id="payment-info">
+                                <!-- Informações de pagamento serão carregadas dinamicamente -->
                             </div>
                         </section>
                     </div>
                 </div>
             </div>
         </div>
-    </main>
+    </div>
+</main>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-column">
-                    <a href="/public/html/index.html" class="logo">
-                        <span class="logo-power">Power Rock</span>
-                        <span class="logo-supps">Supplements</span>
-                    </a>
-                    <p class="footer-description">
-                        Sua loja especializada em suplementos de alta performance para atletas e entusiastas do fitness.
-                    </p>
-                    <div class="social-links">
-                        <a href="https://www.facebook.com/profile.php?id=61575757384725" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                        <a href="https://www.instagram.com/powerrocksupplements/" class="social-link"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-                <div class="footer-column">
-                    <h3 class="footer-title">Categorias</h3>
-                    <ul class="footer-links">
-                        <li><a href="/public/html/products.html">Proteínas</a></li>
-                        <li><a href="/public/html/products.html">Pré-Treino</a></li>
-                        <li><a href="/public/html/products.html">Creatina</a></li>
-                        <li><a href="/public/html/products.html">Vitaminas</a></li>
-                        <li><a href="/public/html/accessories.html">Acessórios</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3 class="footer-title">Informações</h3>
-                    <ul class="footer-links">
-                        <li><a href="/about">Sobre Nós</a></li>
-                        <li><a href="/shipping">Entrega</a></li>
-                        <li><a href="/privacy">Política de Privacidade</a></li>
-                        <li><a href="/terms">Termos e Condições</a></li>
-                        <li><a href="/public/html/contact.html">Contato</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3 class="footer-title">Contato</h3>
-                    <ul class="contact-info">
-                        <li>
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>Av. Paulista, 1000 - São Paulo</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-phone"></i>
-                            <span>(11) 99999-9999</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-envelope"></i>
-                            <span>contato@powerrocksupplements.com.br</span>
-                        </li>
-                    </ul>
-                    <div class="payment-methods">
-                        <h4 class="payment-title">Formas de Pagamento</h4>
-                        <div class="payment-icons">
-                            <div class="payment-icon"></div>
-                            <div class="payment-icon"></div>
-                            <div class="payment-icon"></div>
-                            <div class="payment-icon"></div>
-                            <div class="payment-icon"></div>
-                        </div>
-                    </div>
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-column">
+                <a href="/public/html/index.html" class="logo">
+                    <span class="logo-power">Power Rock</span>
+                    <span class="logo-supps">Supplements</span>
+                </a>
+                <p class="footer-description">
+                    Sua loja especializada em suplementos de alta performance para atletas e entusiastas do fitness.
+                </p>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/profile.php?id=61575757384725" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/powerrocksupplements/" class="social-link"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
-            <div class="copyright">
-                © 2025 Power Rock Supplements. Todos os direitos reservados.
+            <div class="footer-column">
+                <h3 class="footer-title">Categorias</h3>
+                <ul class="footer-links">
+                    <li><a href="/public/html/products.html">Proteínas</a></li>
+                    <li><a href="/public/html/products.html">Pré-Treino</a></li>
+                    <li><a href="/public/html/products.html">Creatina</a></li>
+                    <li><a href="/public/html/products.html">Vitaminas</a></li>
+                    <li><a href="/public/html/accessories.html">Acessórios</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3 class="footer-title">Informações</h3>
+                <ul class="footer-links">
+                    <li><a href="/about">Sobre Nós</a></li>
+                    <li><a href="/shipping">Entrega</a></li>
+                    <li><a href="/privacy">Política de Privacidade</a></li>
+                    <li><a href="/terms">Termos e Condições</a></li>
+                    <li><a href="/public/html/contact.html">Contato</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3 class="footer-title">Contato</h3>
+                <ul class="contact-info">
+                    <li>
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Av. Paulista, 1000 - São Paulo</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-phone"></i>
+                        <span>(11) 99999-9999</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-envelope"></i>
+                        <span>contato@powerrocksupplements.com.br</span>
+                    </li>
+                </ul>
+                <div class="payment-methods">
+                    <h4 class="payment-title">Formas de Pagamento</h4>
+                    <div class="payment-icons">
+                        <div class="payment-icon"></div>
+                        <div class="payment-icon"></div>
+                        <div class="payment-icon"></div>
+                        <div class="payment-icon"></div>
+                        <div class="payment-icon"></div>
+                    </div>
+                </div>
             </div>
         </div>
-    </footer>
+        <div class="copyright">
+            © 2025 Power Rock Supplements. Todos os direitos reservados.
+        </div>
+    </div>
+</footer>
 
-    <!-- Cart Side Panel -->
+<!-- Cart Side Panel -->
 <div class="cart-overlay" id="cart-overlay"></div>
 <div class="cart-panel" id="cart-panel">
     <div class="cart-header">
@@ -450,18 +361,15 @@
     </div>
 </div>
 
-    <!-- Script de navegação - DEVE SER CARREGADO PRIMEIRO -->
-    <script src="/public/js/navigation-enums.js"></script>
-    <!-- Script da barra de pesquisa -->
-    <script src="/public/js/search-bar.js"></script>
-    <script src="/public/js/order-details.js"></script>
-     <script src="/public/js/cart-service.js"></script>
-     <script src="/public/js/cart-ui.js"></script>
-     <!-- WhatsApp Button -->
-    <script src="/public/js/whatsapp-button.js"></script>
-        <!-- Scripts de autenticação - ORDEM IMPORTA! -->
-    <script src="/public/js/auth-service.js"></script>
-    <script src="/public/js/auth-notifications.js"></script>
-    <script src="/public/js/auth-integration.js"></script>
+<!-- Scripts -->
+<script src="/public/js/navigation-enums.js"></script>
+<script src="/public/js/search-bar.js"></script>
+<script src="/public//js/order-details.js"></script>
+<script src="/public/js/cart-service.js"></script>
+<script src="/public/js/cart-ui.js"></script>
+<script src="/public/js/whatsapp-button.js"></script>
+<script src="/public/js/auth-service.js"></script>
+<script src="/public/js/auth-notifications.js"></script>
+<script src="/public/js/auth-integration.js"></script>
 </body>
-</html> 
+</html>
