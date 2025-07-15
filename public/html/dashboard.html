@@ -121,12 +121,6 @@
                                 Meus Pedidos
                             </a>
                         </li>
-                        <li>
-                            <a href="/public/html/wishlist.html">
-                                <i class="fas fa-heart"></i>
-                                Lista de Desejos
-                            </a>
-                        </li>                            
                         <li class="logout">
                             <a href="#" id="logoutBtn">
                                 <i class="fas fa-sign-out-alt"></i>
@@ -144,8 +138,8 @@
 
                 <div class="dashboard-filters">
                     <div class="search-filter">
-                        <input type="text" id="orderSearch" placeholder="Buscar por número de pedido ou produto">
-                        <button type="button" class="search-btn">
+                        <input type="text" id="orderSearch" placeholder="Buscar por número do pedido">
+                        <button type="button" id="dashboard-search-btn" class="dashboard-search-btn">
                             <i class="fas fa-search"></i>
                         </button>
                     </div>
@@ -161,19 +155,12 @@
                         </select>
                     </div>
                     <div class="filter-group">
-                        <label for="dateFilter">Período:</label>
-                        <select id="dateFilter">
-                            <option value="">Todos</option>
-                            <option value="30">Últimos 30 dias</option>
-                            <option value="90">Últimos 90 dias</option>
-                            <option value="180">Últimos 180 dias</option>
-                            <option value="365">Último ano</option>
+                        <label for="dateSort">Ordenar por data:</label>
+                        <select id="dateSort">
+                            <option value="desc">Mais recentes</option>
+                            <option value="asc">Mais antigos</option>
                         </select>
                     </div>
-                    <button type="button" id="applyFilters" class="btn btn-primary">
-                        Aplicar Filtros
-                        <i class="fas fa-filter"></i>
-                    </button>
                 </div>
 
                 <!-- Loading State -->

@@ -3,9 +3,9 @@ const API_BASE_URL = "https://localhost:4242/api"
 
 // Elementos do DOM
 const orderSearch = document.getElementById("orderSearch")
+const searchBtn = document.getElementById("dashboard-search-btn")
 const statusFilter = document.getElementById("statusFilter")
-const dateFilter = document.getElementById("dateFilter")
-const applyFiltersBtn = document.getElementById("applyFilters")
+const dateSort = document.getElementById("dateSort")
 const ordersContainer = document.getElementById("orders-container")
 const loadingContainer = document.getElementById("loading-container")
 const emptyState = document.getElementById("empty-state")
@@ -25,7 +25,7 @@ let totalPages = 1
 const currentFilters = {
   search: "",
   status: "",
-  dateRange: "",
+  sort: "desc",
 }
 
 // Função para obter token de autenticação
@@ -103,20 +103,21 @@ async function loadOrders(page = 1, filters = currentFilters) {
   try {
     // Construir parâmetros de query
     const queryParams = new URLSearchParams({
-      page: page.toString(),
-      pageSize: "10",
+      Page: page.toString(),
+      PageSize: "10",
+      //SortBy: "OrderDate",
+      SortDirection: filters.sort, // "asc" ou "desc"
     })
 
     // Adicionar filtros se existirem
     if (filters.search) {
-      queryParams.append("search", filters.search)
+      queryParams.append("OrderNumber", filters.search)
     }
     if (filters.status) {
-      queryParams.append("status", filters.status)
+      queryParams.append("Status", filters.status)
     }
-    if (filters.dateRange) {
-      queryParams.append("dateRange", filters.dateRange)
-    }
+
+    
 
     const response = await fetch(`${API_BASE_URL}/Order/get?${queryParams}`, {
       method: "GET",
@@ -187,7 +188,6 @@ function renderOrders(orders) {
                         <i class="fas fa-eye"></i>
                         Ver Detalhes
                     </button>
-                    ${getActionButton(order)}
                 </div>
             </div>
         </div>
@@ -357,59 +357,57 @@ function getStatusText(status) {
 }
 
 // Função para obter botão de ação baseado no status
-function getActionButton(order) {
-  const status = order.status?.toUpperCase()
-  const actions = {
-    PENDING: `
-            <button class="btn btn-primary" onclick="finishPayment('${order.id}')">
-                <i class="fas fa-credit-card"></i>
-                Finalizar Pagamento
-            </button>
-        `,
-    PROCESSING: `
-            <button class="btn btn-primary" onclick="trackOrder('${order.id}')">
-                <i class="fas fa-box"></i>
-                Acompanhar
-            </button>
-        `,
-    SHIPPED: `
-            <button class="btn btn-primary" onclick="trackOrder('${order.id}')">
-                <i class="fas fa-truck"></i>
-                Rastrear Pedido
-            </button>
-        `,
-    // DELIVERED: `
-    //         <button class="btn btn-primary" onclick="buyAgain('${order.id}')">
-    //             <i class="fas fa-shopping-cart"></i>
-    //             Comprar Novamente
-    //         </button>
-    //     `,
-    CANCELLED: `
-            <button class="btn btn-primary" onclick="contactSupport('${order.id}')">
-                <i class="fas fa-headset"></i>
-                Falar com Atendente
-            </button>
-        `,
-  }
-  return actions[status] || ""
-}
+// function getActionButton(order) {
+//   const status = order.status?.toUpperCase()
+//   const actions = {
+//     PENDING: `
+//             <button class="btn btn-primary" onclick="finishPayment('${order.id}')">
+//                 <i class="fas fa-credit-card"></i>
+//                 Finalizar Pagamento
+//             </button>
+//         `,
+//     PROCESSING: `
+//             <button class="btn btn-primary" onclick="trackOrder('${order.id}')">
+//                 <i class="fas fa-box"></i>
+//                 Acompanhar
+//             </button>
+//         `,
+//     SHIPPED: `
+//             <button class="btn btn-primary" onclick="trackOrder('${order.id}')">
+//                 <i class="fas fa-truck"></i>
+//                 Rastrear Pedido
+//             </button>
+//         `,
+//     DELIVERED: `
+//             <button class="btn btn-primary" onclick="buyAgain('${order.id}')">
+//                 <i class="fas fa-shopping-cart"></i>
+//                 Comprar Novamente
+//             </button>
+//         `,
+//     CANCELLED: `
+//             <button class="btn btn-primary" onclick="contactSupport('${order.id}')">
+//                 <i class="fas fa-headset"></i>
+//                 Falar com Atendente
+//             </button>
+//         `,
+//   }
+//   return actions[status] || ""
+// }
 
 // Event Listeners
-orderSearch.addEventListener("input", (e) => {
-  currentFilters.search = e.target.value
+searchBtn.addEventListener("click", () => {
+  currentFilters.search = orderSearch.value
+  loadOrders(1, currentFilters)
 })
 
 statusFilter.addEventListener("change", (e) => {
   currentFilters.status = e.target.value
+  loadOrders(1, currentFilters)
 })
 
-dateFilter.addEventListener("change", (e) => {
-  currentFilters.dateRange = e.target.value
-})
-
-applyFiltersBtn.addEventListener("click", () => {
-  currentPage = 1
-  loadOrders(currentPage, currentFilters)
+dateSort.addEventListener("change", (e) => {
+  currentFilters.sort = e.target.value
+  loadOrders(1, currentFilters)
 })
 
 // Navegação da paginação
@@ -486,10 +484,3 @@ document.addEventListener("DOMContentLoaded", () => {
     loadOrders()
   }
 })
-
-// Atualizar pedidos a cada 30 segundos (opcional)
-setInterval(() => {
-  if (checkAuthentication() && document.visibilityState === "visible") {
-    loadOrders(currentPage, currentFilters)
-  }
-}, 30000)
