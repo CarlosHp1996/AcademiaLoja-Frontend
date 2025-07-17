@@ -6,6 +6,7 @@
     <title>Checkout - Power Rock Supplements</title>
     <link rel="stylesheet" href="/public/css/style.css">
     <link rel="stylesheet" href="/public/css/checkout.css">
+    <link rel="stylesheet" href="/public/css/profile.css">
     <link rel="stylesheet" href="/public/css/whatsapp-button.css">
     <!-- Estilos para dropdown e notificações -->
     <link rel="stylesheet" href="/public/css/auth-dropdown.css">
@@ -157,69 +158,26 @@
                                 <i class="fas fa-map-marker-alt"></i>
                                 Endereço de Entrega
                             </h2>
+                            <button class="btn btn-primary" id="addAddressBtn">
+                                <i class="fas fa-plus"></i>
+                                Adicionar Endereço
+                            </button>
                         </div>
-                        <div class="form-grid">
-                            <div class="form-group full-width">
-                                <label for="shipping-name">Nome Completo *</label>
-                                <input type="text" id="shipping-name" class="form-input" required>
+                        
+                        <div class="addresses-container" id="addresses-container">
+                            <!-- Endereços serão carregados dinamicamente -->
+                        </div>
+
+                        <div class="empty-addresses" id="empty-addresses" style="display: none;">
+                            <div class="empty-icon">
+                                <i class="fas fa-map-marker-alt"></i>
                             </div>
-                            <div class="form-group">
-                                <label for="shipping-cep">CEP *</label>
-                                <input type="text" id="shipping-cep" class="form-input" maxlength="9" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="shipping-street">Rua *</label>
-                                <input type="text" id="shipping-street" class="form-input" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="shipping-number">Número *</label>
-                                <input type="text" id="shipping-number" class="form-input" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="shipping-complement">Complemento</label>
-                                <input type="text" id="shipping-complement" class="form-input">
-                            </div>
-                            <div class="form-group">
-                                <label for="shipping-neighborhood">Bairro *</label>
-                                <input type="text" id="shipping-neighborhood" class="form-input" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="shipping-city">Cidade *</label>
-                                <input type="text" id="shipping-city" class="form-input" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="shipping-state">Estado *</label>
-                                <select id="shipping-state" class="form-select" required>
-                                    <option value="">Selecione</option>
-                                    <option value="AC">Acre</option>
-                                    <option value="AL">Alagoas</option>
-                                    <option value="AP">Amapá</option>
-                                    <option value="AM">Amazonas</option>
-                                    <option value="BA">Bahia</option>
-                                    <option value="CE">Ceará</option>
-                                    <option value="DF">Distrito Federal</option>
-                                    <option value="ES">Espírito Santo</option>
-                                    <option value="GO">Goiás</option>
-                                    <option value="MA">Maranhão</option>
-                                    <option value="MT">Mato Grosso</option>
-                                    <option value="MS">Mato Grosso do Sul</option>
-                                    <option value="MG">Minas Gerais</option>
-                                    <option value="PA">Pará</option>
-                                    <option value="PB">Paraíba</option>
-                                    <option value="PR">Paraná</option>
-                                    <option value="PE">Pernambuco</option>
-                                    <option value="PI">Piauí</option>
-                                    <option value="RJ">Rio de Janeiro</option>
-                                    <option value="RN">Rio Grande do Norte</option>
-                                    <option value="RS">Rio Grande do Sul</option>
-                                    <option value="RO">Rondônia</option>
-                                    <option value="RR">Roraima</option>
-                                    <option value="SC">Santa Catarina</option>
-                                    <option value="SP">São Paulo</option>
-                                    <option value="SE">Sergipe</option>
-                                    <option value="TO">Tocantins</option>
-                                </select>
-                            </div>
+                            <h3>Nenhum endereço cadastrado</h3>
+                            <p>Adicione um endereço para continuar</p>
+                            <button class="btn btn-primary" onclick="openAddressModal()">
+                                <i class="fas fa-plus"></i>
+                                Adicionar Primeiro Endereço
+                            </button>
                         </div>
                     </div>
 
@@ -340,6 +298,108 @@
         </div>
     </div>
 </main>
+
+<!-- Address Modal -->
+<div class="modal-overlay" id="addressModalOverlay" style="display: none;">
+    <div class="modal" id="addressModal">
+        <div class="modal-header">
+            <h3 id="addressModalTitle">Adicionar Endereço</h3>
+            <button class="modal-close" id="closeAddressModal">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form id="addressForm" class="address-form">
+                <input type="hidden" id="addressId" name="addressId">
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="zipCode">CEP</label>
+                        <input type="text" id="zipCode" name="zipCode" placeholder="00000-000" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="street">Rua/Avenida</label>
+                        <input type="text" id="street" name="street" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="number">Número</label>
+                        <input type="text" id="number" name="number" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="complement">Complemento</label>
+                        <input type="text" id="complement" name="complement" placeholder="Apto, Bloco, etc.">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="neighborhood">Bairro</label>
+                        <input type="text" id="neighborhood" name="neighborhood" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="city">Cidade</label>
+                        <input type="text" id="city" name="city" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="state">Estado</label>
+                        <select id="state" name="state" required>
+                            <option value="">Selecione</option>
+                            <option value="0">Acre</option>
+                            <option value="1">Alagoas</option>
+                            <option value="2">Amapá</option>
+                            <option value="3">Amazonas</option>
+                            <option value="4">Bahia</option>
+                            <option value="5">Ceará</option>
+                            <option value="6">Distrito Federal</option>
+                            <option value="7">Espírito Santo</option>
+                            <option value="8">Goiás</option>
+                            <option value="9">Maranhão</option>
+                            <option value="10">Mato Grosso</option>
+                            <option value="11">Mato Grosso do Sul</option>
+                            <option value="12">Minas Gerais</option>
+                            <option value="13">Pará</option>
+                            <option value="14">Paraíba</option>
+                            <option value="15">Paraná</option>
+                            <option value="16">Pernambuco</option>
+                            <option value="17">Piauí</option>
+                            <option value="18">Rio de Janeiro</option>
+                            <option value="19">Rio Grande do Norte</option>
+                            <option value="20">Rio Grande do Sul</option>
+                            <option value="21">Rondônia</option>
+                            <option value="22">Roraima</option>
+                            <option value="23">Santa Catarina</option>
+                            <option value="24">São Paulo</option>
+                            <option value="25">Sergipe</option>
+                            <option value="26">Tocantins</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="mainAddress" class="checkbox-label">
+                            <input type="checkbox" id="mainAddress" name="mainAddress">
+                            Tornar este o endereço principal
+                        </label>
+                    </div>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-outline" id="cancelAddressBtn">
+                        Cancelar
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i>
+                        Salvar Endereço
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 <!-- Footer -->
 <footer class="footer">

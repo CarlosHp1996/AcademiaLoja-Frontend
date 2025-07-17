@@ -95,7 +95,7 @@ async function loadUserProfile() {
 
     if (result.hasSuccess && result.value) {
       currentUser = result.value
-      currentAddresses = result.value.addresses || []
+      currentAddresses = result.value.user.addresses || []
 
       populateUserInfo()
       populatePersonalForm()
@@ -141,11 +141,12 @@ function renderAddresses() {
   addressesContainer.innerHTML = currentAddresses
     .map(
       (address) => `
-        <div class="address-card" data-address-id="${address.id}">
+        <div class="address-card ${address.mainAddress ? 'main-address' : ''}" data-address-id="${address.id}">
             <div class="address-header">
                 <div class="address-icon">
                     <i class="fas fa-map-marker-alt"></i>
                 </div>
+                ${address.mainAddress ? '<span class="main-address-tag" style="margin-left:30%;">Principal</span>' : ''}
                 <div class="address-actions">
                     <button class="btn-icon" onclick="editAddress('${address.id}')" title="Editar">
                         <i class="fas fa-edit"></i>
@@ -162,7 +163,7 @@ function renderAddresses() {
                 </div>
                 <div class="address-details">
                     <span>${address.neighborhood}</span>
-                    <span>${address.city} - ${getStateName(address.state)}</span>
+                    <span>${address.city} - ${address.state}</span>
                     <span>CEP: ${formatZipCode(address.zipCode)}</span>
                 </div>
             </div>
@@ -173,38 +174,38 @@ function renderAddresses() {
 }
 
 // Função para obter nome do estado
-function getStateName(stateValue) {
-  const states = {
-    0: "AC",
-    1: "AL",
-    2: "AP",
-    3: "AM",
-    4: "BA",
-    5: "CE",
-    6: "DF",
-    7: "ES",
-    8: "GO",
-    9: "MA",
-    10: "MT",
-    11: "MS",
-    12: "MG",
-    13: "PA",
-    14: "PB",
-    15: "PR",
-    16: "PE",
-    17: "PI",
-    18: "RJ",
-    19: "RN",
-    20: "RS",
-    21: "RO",
-    22: "RR",
-    23: "SC",
-    24: "SP",
-    25: "SE",
-    26: "TO",
-  }
-  return states[stateValue] || "N/A"
-}
+// function getStateName(stateValue) {
+//   const states = {
+//     0: "AC",
+//     1: "AL",
+//     2: "AP",
+//     3: "AM",
+//     4: "BA",
+//     5: "CE",
+//     6: "DF",
+//     7: "ES",
+//     8: "GO",
+//     9: "MA",
+//     10: "MT",
+//     11: "MS",
+//     12: "MG",
+//     13: "PA",
+//     14: "PB",
+//     15: "PR",
+//     16: "PE",
+//     17: "PI",
+//     18: "RJ",
+//     19: "RN",
+//     20: "RS",
+//     21: "RO",
+//     22: "RR",
+//     23: "SC",
+//     24: "SP",
+//     25: "SE",
+//     26: "TO",
+//   }
+//   return states[stateValue] || "N/A"
+// }
 
 // Função para formatar CEP
 function formatZipCode(zipCode) {
@@ -327,6 +328,7 @@ async function saveAddress(formData) {
       neighborhood: formData.get("neighborhood"),
       number: formData.get("number"),
       complement: formData.get("complement") || "",
+      mainAddress: formData.get("mainAddress") === "on",
     }
 
     let updatedAddresses
@@ -431,6 +433,7 @@ function openAddressModal(addressId = null) {
       document.getElementById("neighborhood").value = address.neighborhood
       document.getElementById("city").value = address.city
       document.getElementById("state").value = address.state.toString()
+      document.getElementById("mainAddress").checked = address.mainAddress
     }
   } else {
     // Adicionar novo endereço

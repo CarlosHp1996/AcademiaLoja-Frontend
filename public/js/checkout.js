@@ -8,6 +8,10 @@ class CheckoutService {
     this.cart = null
     this.currentOrder = null
     this.paymentIntent = null
+    this.currentUser = null
+    this.currentAddresses = []
+    this.editingAddressId = null
+    this.selectedAddressId = null
 
     this.init()
   }
@@ -17,7 +21,8 @@ class CheckoutService {
       // Inicializar Stripe
       this.stripe = Stripe("pk_test_51R7kMyQ3UBH6KXI9pei6vdGfFCpoHgJXddLYT71GH9n0PRaxcHBdq5vmNMOxiZvgR9cxDMfjJ4MMm7DJjO1E9NmG00vIJfQ2KX") // Substitua pela sua chave pública
 
-      // Carregar dados do carrinho
+      // Carregar dados do usuário e do carrinho
+      await this.loadUserData()
       await this.loadCartData()
 
       // Configurar interface
@@ -29,6 +34,40 @@ class CheckoutService {
     } catch (error) {
       console.error("Erro ao inicializar checkout:", error)
       this.showNotification("Erro ao carregar página de checkout", "error")
+    }
+  }
+
+  async loadUserData() {
+    if (!window.authService?.getToken()) {
+      window.location.href = "/public/html/login.html"
+      return
+    }
+
+    try {
+      const userId = window.authService.getUserId()
+      const response = await fetch(`${this.API_BASE_URL}/Auth/get/${userId}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${window.authService.getToken()}`,
+        },
+      })
+
+      if (!response.ok) {
+        throw new Error("Erro ao carregar dados do usuário")
+      }
+
+      const result = await response.json()
+      if (result.hasSuccess && result.value) {
+        this.currentUser = result.value
+        this.currentAddresses = result.value.user.addresses || []
+        this.renderAddresses()
+      } else {
+        throw new Error(result.errors?.[0] || "Erro ao carregar dados do usuário")
+      }
+    } catch (error) {
+      console.error("Erro ao carregar dados do usuário:", error)
+      this.showNotification(error.message, "error")
     }
   }
 
@@ -76,18 +115,6 @@ class CheckoutService {
         document.getElementById(`${method}-payment`).classList.add("active")
       })
     })
-
-    // Configurar CEP
-    const cepInput = document.getElementById("shipping-cep")
-    if (cepInput) {
-      cepInput.addEventListener("input", (e) => {
-        e.target.value = this.formatCEP(e.target.value)
-      })
-
-      cepInput.addEventListener("blur", () => {
-        this.searchCEP(cepInput.value)
-      })
-    }
   }
 
   setupEventListeners() {
@@ -96,6 +123,32 @@ class CheckoutService {
     if (completeBtn) {
       completeBtn.addEventListener("click", () => this.handleCompletePurchase())
     }
+
+    // Botões do modal de endereço
+    document.getElementById("addAddressBtn").addEventListener("click", () => {
+      this.openAddressModal()
+    })
+
+    document.getElementById("closeAddressModal").addEventListener("click", () => this.closeAddressModal())
+    document.getElementById("cancelAddressBtn").addEventListener("click", () => this.closeAddressModal())
+
+    // Fechar modal ao clicar no overlay
+    document.getElementById("addressModalOverlay").addEventListener("click", (e) => {
+      if (e.target === document.getElementById("addressModalOverlay")) {
+        this.closeAddressModal()
+      }
+    })
+
+    // Formulário de endereço
+    document.getElementById("addressForm").addEventListener("submit", async (e) => {
+      e.preventDefault()
+      const formData = new FormData(e.target)
+      const submitBtn = e.target.querySelector('button[type="submit"]')
+
+      submitBtn.classList.add("loading")
+      await this.saveAddress(formData)
+      submitBtn.classList.remove("loading")
+    })
   }
 
   setupStripeElements() {
@@ -148,8 +201,9 @@ class CheckoutService {
 
   async handleCompletePurchase() {
     try {
-      // Validar formulário
-      if (!this.validateForm()) {
+      // Validar seleção de endereço
+      if (!this.selectedAddressId) {
+        this.showNotification("Por favor, selecione um endereço de entrega.", "error")
         return
       }
 
@@ -180,55 +234,50 @@ class CheckoutService {
     }
   }
 
-  // Correção do método createOrderFromCart no CheckoutService
+  async createOrderFromCart() {
+    try {
+      const shippingAddress = this.getShippingAddressObject()
 
-async createOrderFromCart() {
-  try {
-    const shippingAddress = this.getShippingAddressObject()
-
-    // Verificar se o usuário está autenticado
-    if (!window.authService?.getToken()) {
-      throw new Error("Você precisa estar logado para finalizar a compra")
-    }
-
-    const token = window.authService.getToken()
-    console.log("Token disponível:", !!token) // Log para debug
-
-    // Usar o CartService para converter carrinho em pedido
-    const response = await fetch(`${this.API_BASE_URL}/Cart/checkout`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}` // Correção: mover Authorization para dentro de headers
-      },
-      body: JSON.stringify(shippingAddress),
-    })
-
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error("Erro na resposta do servidor:", response.status, response.statusText, errorText);
-      
-      // Tratamento específico para erro 401
-      if (response.status === 401) {
-        throw new Error("Sessão expirada. Por favor, faça login novamente.");
+      // Verificar se o usuário está autenticado
+      if (!window.authService?.getToken()) {
+        throw new Error("Você precisa estar logado para finalizar a compra")
       }
-      
-      throw new Error(`O servidor respondeu com um erro (${response.status}). Veja o console para detalhes.`);
+
+      const token = window.authService.getToken()
+
+      // Usar o CartService para converter carrinho em pedido
+      const response = await fetch(`${this.API_BASE_URL}/Cart/checkout`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify(shippingAddress),
+      })
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error("Erro na resposta do servidor:", response.status, response.statusText, errorText);
+        
+        if (response.status === 401) {
+          throw new Error("Sessão expirada. Por favor, faça login novamente.");
+        }
+        
+        throw new Error(`O servidor respondeu com um erro (${response.status}). Veja o console para detalhes.`);
+      }
+
+      const result = await response.json()
+
+      if (!result.hasSuccess) {
+        throw new Error(result.errors?.[0] || "Erro ao criar pedido")
+      }
+
+      this.currentOrder = { orderId: result.value }
+    } catch (error) {
+      console.error("Erro ao criar pedido:", error)
+      throw error
     }
-
-    const result = await response.json()
-
-    if (!result.hasSuccess) {
-      throw new Error(result.errors?.[0] || "Erro ao criar pedido")
-    }
-
-    this.currentOrder = { orderId: result.value }
-    console.log("Pedido criado:", this.currentOrder)
-  } catch (error) {
-    console.error("Erro ao criar pedido:", error)
-    throw error
   }
-}
 
   async processCardPayment() {
     try {
@@ -248,15 +297,14 @@ async createOrderFromCart() {
       }
 
       this.paymentIntent = createResult.value;
-      console.log("Payment Intent criado:", this.paymentIntent);
 
       // 2. Criar PaymentMethod no frontend com Stripe.js
       const { error, paymentMethod } = await this.stripe.createPaymentMethod({
         type: 'card',
         card: this.cardElement,
         billing_details: {
-          name: document.getElementById("shipping-name").value,
-          email: window.authService?.userData?.email,
+          name: this.currentUser.user.userName,
+          email: this.currentUser.user.email,
         },
       });
 
@@ -272,12 +320,12 @@ async createOrderFromCart() {
               Authorization: `Bearer ${window.authService?.getToken()}`,
           },
           body: JSON.stringify({
-              paymentIntentId: this.paymentIntent.transactionId, // Corrigido para usar o ID da transação do Stripe
+              paymentIntentId: this.paymentIntent.transactionId,
               paymentMethodId: paymentMethod.id,
           }),
       });
 
-      const confirmResult = await confirmResponse.json();
+      const confirmResult = confirmResponse.json();
 
       if (!confirmResponse.ok || !confirmResult.hasSuccess) {
           throw new Error(confirmResult.errors?.[0] || "Erro ao confirmar o pagamento.");
@@ -346,53 +394,214 @@ async createOrderFromCart() {
     }
   }
 
-  validateForm() {
-    const requiredFields = [
-      "shipping-name",
-      "shipping-cep",
-      "shipping-street",
-      "shipping-number",
-      "shipping-neighborhood",
-      "shipping-city",
-      "shipping-state",
-    ]
-
-    let isValid = true
-
-    requiredFields.forEach((fieldId) => {
-      const field = document.getElementById(fieldId)
-      if (field && !field.value.trim()) {
-        field.style.borderColor = "#ef4444"
-        isValid = false
-      } else if (field) {
-        field.style.borderColor = "#333"
-      }
-    })
-
-    if (!isValid) {
-      this.showNotification("Por favor, preencha todos os campos obrigatórios", "error")
-    }
-
-    return isValid
-  }
-
   getShippingAddressObject() {
+    const selectedAddress = this.currentAddresses.find(addr => addr.id === this.selectedAddressId)
+    if (!selectedAddress) return null
+
     return {
-      Name: document.getElementById("shipping-name").value,
-      Cep: document.getElementById("shipping-cep").value,
-      Street: document.getElementById("shipping-street").value,
-      Number: document.getElementById("shipping-number").value,
-      Complement: document.getElementById("shipping-complement").value,
-      Neighborhood: document.getElementById("shipping-neighborhood").value,
-      City: document.getElementById("shipping-city").value,
-      State: document.getElementById("shipping-state").value,
+      Name: this.currentUser.user.userName,
+      Cep: selectedAddress.zipCode,
+      Street: selectedAddress.street,
+      Number: selectedAddress.number,
+      Complement: selectedAddress.complement,
+      Neighborhood: selectedAddress.neighborhood,
+      City: selectedAddress.city,
+      State: selectedAddress.state,
     }
   }
 
-  getShippingAddressString() {
-    const address = this.getShippingAddressObject()
-    const complement = address.complement ? `, ${address.complement}` : ""
-    return `${address.street}, ${address.number}${complement} - ${address.neighborhood}, ${address.city} - ${address.state}, CEP: ${address.cep}`
+  renderAddresses() {
+    const addressesContainer = document.getElementById("addresses-container")
+    const emptyAddresses = document.getElementById("empty-addresses")
+
+    if (!this.currentAddresses || this.currentAddresses.length === 0) {
+      addressesContainer.style.display = "none"
+      emptyAddresses.style.display = "flex"
+      return
+    }
+
+    addressesContainer.style.display = "grid"
+    emptyAddresses.style.display = "none"
+
+    addressesContainer.innerHTML = this.currentAddresses
+      .map(
+        (address) => `
+        <div class="address-card ${address.mainAddress ? 'main-address' : ''} ${this.selectedAddressId === address.id ? 'selected' : ''}" data-address-id="${address.id}">
+            <div class="address-header">
+                <div class="address-icon">
+                    <i class="fas fa-map-marker-alt"></i>
+                </div>
+                ${address.mainAddress ? '<span class="main-address-tag" style="margin-left:65%">Principal</span>' : ''}
+                <div class="address-actions">
+                    <button class="btn-icon" onclick="checkoutService.editAddress('${address.id}')" title="Editar">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                    <button class="btn-icon btn-danger" onclick="checkoutService.deleteAddress('${address.id}')" title="Excluir">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="address-content">
+                <div class="address-main">
+                    <strong>${address.street}, ${address.number}</strong>
+                    ${address.complement ? `<span class="complement">${address.complement}</span>` : ""}
+                </div>
+                <div class="address-details">
+                    <span>${address.neighborhood}</span>
+                    <span>${address.city} - ${address.state}</span>
+                    <span>CEP: ${this.formatZipCode(address.zipCode)}</span>
+                </div>
+            </div>
+            <button class="btn btn-primary btn-select-address" onclick="checkoutService.selectAddress('${address.id}')">
+                ${this.selectedAddressId === address.id ? '<i class="fas fa-check-circle"></i> Endereço Selecionado' : 'Usar este Endereço'}
+            </button>
+        </div>
+    `,
+      )
+      .join("")
+  }
+
+  selectAddress(addressId) {
+    this.selectedAddressId = addressId
+    this.renderAddresses()
+  }
+
+  editAddress(addressId) {
+    this.openAddressModal(addressId)
+  }
+
+  async deleteAddress(addressId) {
+    if (!confirm("Tem certeza que deseja excluir este endereço?")) {
+      return
+    }
+
+    try {
+      const updatedAddresses = this.currentAddresses.filter((addr) => addr.id !== addressId)
+
+      const updateData = {
+        id: this.currentUser.user.id,
+        addresses: updatedAddresses,
+      }
+
+      const response = await fetch(`${this.API_BASE_URL}/Auth/update?id=${this.currentUser.user.id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${window.authService.getToken()}`,
+        },
+        body: JSON.stringify(updateData),
+      })
+
+      if (!response.ok) {
+        throw new Error("Erro ao excluir endereço")
+      }
+
+      const result = await response.json()
+
+      if (result.hasSuccess) {
+        this.currentAddresses = result.value.user.addresses || []
+        this.renderAddresses()
+        this.showNotification("Endereço excluído com sucesso!", "success")
+      } else {
+        throw new Error(result.errors?.[0] || "Erro ao excluir endereço")
+      }
+    } catch (error) {
+      console.error("Erro ao excluir endereço:", error)
+      this.showNotification(error.message, "error")
+    }
+  }
+
+  openAddressModal(addressId = null) {
+    this.editingAddressId = addressId
+    const addressModalTitle = document.getElementById("addressModalTitle")
+    const addressForm = document.getElementById("addressForm")
+    const addressIdInput = document.getElementById("addressId")
+    const mainAddressCheckbox = document.getElementById("mainAddress")
+
+    if (addressId) {
+      const address = this.currentAddresses.find((addr) => addr.id === addressId)
+      if (address) {
+        addressModalTitle.textContent = "Editar Endereço"
+        addressIdInput.value = address.id
+        document.getElementById("zipCode").value = this.formatZipCode(address.zipCode)
+        document.getElementById("street").value = address.street
+        document.getElementById("number").value = address.number
+        document.getElementById("complement").value = address.complement || ""
+        document.getElementById("neighborhood").value = address.neighborhood
+        document.getElementById("city").value = address.city
+        document.getElementById("state").value = address.state.toString()
+        mainAddressCheckbox.checked = address.mainAddress
+      }
+    } else {
+      addressModalTitle.textContent = "Adicionar Endereço"
+      addressForm.reset()
+      addressIdInput.value = ""
+    }
+
+    document.getElementById("addressModalOverlay").style.display = "flex"
+    document.body.style.overflow = "hidden"
+  }
+
+  closeAddressModal() {
+    document.getElementById("addressModalOverlay").style.display = "none"
+    document.body.style.overflow = "auto"
+    this.editingAddressId = null
+    document.getElementById("addressForm").reset()
+  }
+
+  async saveAddress(formData) {
+    try {
+      const addressData = {
+        id: this.editingAddressId || "00000000-0000-0000-0000-000000000000",
+        street: formData.get("street"),
+        city: formData.get("city"),
+        state: Number.parseInt(formData.get("state")),
+        zipCode: formData.get("zipCode").replace(/\D/g, ""),
+        neighborhood: formData.get("neighborhood"),
+        number: formData.get("number"),
+        complement: formData.get("complement") || "",
+        mainAddress: formData.get("mainAddress") === "on",
+      }
+
+      let updatedAddresses
+      if (this.editingAddressId) {
+        updatedAddresses = this.currentAddresses.map((addr) => (addr.id === this.editingAddressId ? addressData : addr))
+      } else {
+        updatedAddresses = [...this.currentAddresses, addressData]
+      }
+
+      const updateData = {
+        id: this.currentUser.user.id,
+        addresses: updatedAddresses,
+      }
+
+      const response = await fetch(`${this.API_BASE_URL}/Auth/update?id=${this.currentUser.user.id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${window.authService.getToken()}`,
+        },
+        body: JSON.stringify(updateData),
+      })
+
+      if (!response.ok) {
+        throw new Error("Erro ao salvar endereço")
+      }
+
+      const result = await response.json()
+
+      if (result.hasSuccess) {
+        this.currentAddresses = result.value.user.addresses || []
+        this.renderAddresses()
+        this.closeAddressModal()
+        this.showNotification(this.editingAddressId ? "Endereço atualizado com sucesso!" : "Endereço adicionado com sucesso!", "success")
+      } else {
+        throw new Error(result.errors?.[0] || "Erro ao salvar endereço")
+      }
+    } catch (error) {
+      console.error("Erro ao salvar endereço:", error)
+      this.showNotification(error.message, "error")
+    }
   }
 
   renderOrderSummary() {
@@ -436,32 +645,19 @@ async createOrderFromCart() {
     }
   }
 
-  async searchCEP(cep) {
-    const cleanCEP = cep.replace(/\D/g, "")
+  // getStateName(stateValue, abbreviation = false) {
+  //   const states = {
+  //     0: "AC", 1: "AL", 2: "AP", 3: "AM", 4: "BA", 5: "CE", 6: "DF", 7: "ES", 8: "GO", 9: "MA", 10: "MT", 11: "MS", 12: "MG", 13: "PA", 14: "PB", 15: "PR", 16: "PE", 17: "PI", 18: "RJ", 19: "RN", 20: "RS", 21: "RO", 22: "RR", 23: "SC", 24: "SP", 25: "SE", 26: "TO",
+  //   }
+  //   const fullStates = {
+  //       0: "Acre", 1: "Alagoas", 2: "Amapá", 3: "Amazonas", 4: "Bahia", 5: "Ceará", 6: "Distrito Federal", 7: "Espírito Santo", 8: "Goiás", 9: "Maranhão", 10: "Mato Grosso", 11: "Mato Grosso do Sul", 12: "Minas Gerais", 13: "Pará", 14: "Paraíba", 15: "Paraná", 16: "Pernambuco", 17: "Piauí", 18: "Rio de Janeiro", 19: "Rio Grande do Norte", 20: "Rio Grande do Sul", 21: "Rondônia", 22: "Roraima", 23: "Santa Catarina", 24: "São Paulo", 25: "Sergipe", 26: "Tocantins",
+  //   }
+  //   return abbreviation ? states[stateValue] : fullStates[stateValue] || "N/A"
+  // }
 
-    if (cleanCEP.length !== 8) return
-
-    try {
-      const response = await fetch(`https://viacep.com.br/ws/${cleanCEP}/json/`)
-      const data = await response.json()
-
-      if (!data.erro) {
-        document.getElementById("shipping-street").value = data.logradouro || ""
-        document.getElementById("shipping-neighborhood").value = data.bairro || ""
-        document.getElementById("shipping-city").value = data.localidade || ""
-        document.getElementById("shipping-state").value = data.uf || ""
-      }
-    } catch (error) {
-      console.error("Erro ao buscar CEP:", error)
-    }
-  }
-
-  formatCEP(value) {
-    const cleanValue = value.replace(/\D/g, "")
-    if (cleanValue.length <= 5) {
-      return cleanValue
-    }
-    return `${cleanValue.slice(0, 5)}-${cleanValue.slice(5, 8)}`
+  formatZipCode(zipCode) {
+    if (!zipCode) return ""
+    return zipCode.replace(/(\d{5})(\d{3})/, "$1-$2")
   }
 
   showLoading(show) {
@@ -513,7 +709,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Aguardar serviços estarem disponíveis
   function waitForServices() {
     if (window.authService && window.cartService) {
-      new CheckoutService()
+      window.checkoutService = new CheckoutService()
     } else {
       setTimeout(waitForServices, 100)
     }
