@@ -357,9 +357,9 @@ class CartService {
       const currentUrl = window.location.href
       localStorage.setItem("redirectAfterLogin", currentUrl)
 
-      // Redireciona para a página de registro após um breve delay
+      // Redireciona para a página de login após um breve delay
       setTimeout(() => {
-        window.location.href = "/public/html/register.html"
+        window.location.href = "/public/html/login.html"
       }, 1500)
     }
   }
