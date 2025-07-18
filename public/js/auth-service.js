@@ -217,7 +217,7 @@ class AuthService {
             // Adiciona link para dashboard se for admin
             if (this.isAdmin()) {
                 const adminLink = document.createElement('a');
-                adminLink.href = '/public/html/admin/index.html';
+                adminLink.href = '/public/html/admin.html';
                 adminLink.className = 'dropdown-item admin-item';
                 adminLink.innerHTML = '<i class="fas fa-tachometer-alt"></i> Dashboard Admin';
                 dropdownMenu.appendChild(adminLink);
