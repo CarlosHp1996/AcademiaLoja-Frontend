@@ -87,9 +87,6 @@ document.addEventListener("DOMContentLoaded", () => {
             case "tracking":
                 loadTracking();
                 break;
-            case "settings":
-                loadSettings();
-                break;
             default:
                 contentArea.innerHTML = "<p>Seção não encontrada.</p>";
                 if (adminHeaderTitle) adminHeaderTitle.textContent = "Erro";
@@ -281,15 +278,6 @@ document.addEventListener("DOMContentLoaded", () => {
             <div class="admin-card">
                 <h2>Gerenciar Pagamentos</h2>
                 <p>Funcionalidade de pagamentos ainda não implementada.</p>
-            </div>
-        `;
-    }
-
-    function loadSettings() {
-        contentArea.innerHTML = `
-            <div class="admin-card">
-                <h2>Configurações</h2>
-                <p>Funcionalidade de configurações ainda não implementada.</p>
             </div>
         `;
     }
@@ -841,115 +829,145 @@ document.addEventListener("DOMContentLoaded", () => {
         const container = document.getElementById("order-list-container");
         let tableHTML = `
             <table class="admin-table">
-                <thead><tr><th>ID Pedido</th><th>Usuário</th><th>Data</th><th>Total</th><th>Status</th><th>Ações</th></tr></thead>
+                <thead><tr><th>Nº Pedido</th><th>Usuário</th><th>Data</th><th>Total</th><th>Status</th><th>Ativo</th></tr></thead>
                 <tbody>`;
         orders.forEach(order => {
-            const userIdentifier = order.user ? order.user.name : (order.userId || "Desconhecido");
+            const userIdentifier = order.user ? order.userName : (order.userName || "Desconhecido");
             tableHTML += `
-                <tr>
-                    <td>${order.id.substring(0, 8)}...</td>
+                <tr data-order-id="${order.id}">
+                    <td>${order.orderNumber}</td>
                     <td>${userIdentifier}</td>
                     <td>${formatDate(order.orderDate)}</td>
                     <td>R$ ${order.totalAmount.toFixed(2).replace(".", ",")}</td>
                     <td><span class="status status-${order.status?.toLowerCase()}">${order.status || "N/A"}</span></td>
                     <td>
-                        <button class="btn btn-sm btn-view" data-id="${order.id}"><i class="fas fa-eye"></i></button>
-                        <button class="btn btn-sm btn-edit" data-id="${order.id}"><i class="fas fa-edit"></i></button>
-                        <button class="btn btn-sm btn-delete" data-id="${order.id}"><i class="fas fa-trash"></i></button>
+                        <button class="btn btn-sm btn-toggle-active ${order.isActive ? 'btn-success' : 'btn-secondary'}" data-id="${order.id}" data-is-active="${order.isActive}">
+                            <i class="fas ${order.isActive ? 'fa-check' : 'fa-times'}"></i>
+                        </button>
                     </td>
                 </tr>`;
         });
         tableHTML += `</tbody></table>`;
         container.innerHTML = tableHTML;
-        container.querySelectorAll(".btn-view").forEach(btn => btn.addEventListener("click", handleViewOrderDetails));
-        container.querySelectorAll(".btn-edit").forEach(btn => btn.addEventListener("click", handleEditOrder));
-        container.querySelectorAll(".btn-delete").forEach(btn => btn.addEventListener("click", handleDeleteOrder));
+        container.querySelectorAll(".btn-toggle-active").forEach(btn => btn.addEventListener("click", handleOrderIsActiveChange));
     }
 
-    async function handleViewOrderDetails(event) {
-        const orderId = event.currentTarget.getAttribute("data-id");
-        const detailsContainer = document.getElementById("order-details-container");
-        const listContainer = document.getElementById("order-list-container");
+    async function handleOrderIsActiveChange(event) {
+        const button = event.currentTarget;
+        const orderId = button.dataset.id;
+        const currentIsActive = button.dataset.isActive === 'true';
+        const newIsActive = !currentIsActive;
+        const headers = getAuthAndJsonHeaders();
 
-        detailsContainer.innerHTML = `<div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i> Carregando detalhes do pedido...</div>`;
-        detailsContainer.style.display = "block";
-        listContainer.style.display = "none";
-
-        const result = await fetchData(`${API_BASE_URL_ADMIN}/Order/get/${orderId}`, {}, detailsContainer);
-
-        if (result && result.hasSuccess && result.value && result.value.order) {
-            const order = result.value.order;
-            let detailsHTML = `
-                <div class="form-header">
-                    <h3>Detalhes do Pedido #${order.id.substring(0, 8)}...</h3>
-                    <button type="button" id="back-to-orders" class="btn btn-sm btn-secondary"><i class="fas fa-arrow-left"></i> Voltar</button>
-                </div>
-                <div class="order-details-grid">
-                    <div><strong>ID Pedido:</strong> ${order.id}</div>
-                    <div><strong>Usuário:</strong> ${order.user ? order.user.name : order.userId}</div>
-                    <div><strong>Data:</strong> ${window.formatDate(order.orderDate)}</div>
-                    <div><strong>Total:</strong> R$ ${order.totalAmount.toFixed(2).replace(".", ",")}</div>
-                    <div><strong>Status:</strong> ${order.status || "N/A"}</div>
-                    <div><strong>Endereço:</strong> ${order.shippingAddress || "N/A"}</div>
-                </div>
-                <h4>Itens do Pedido</h4>
-                <table class="admin-table">
-                    <thead><tr><th>Produto</th><th>Quantidade</th><th>Preço Unitário</th><th>Subtotal</th></tr></thead>
-                    <tbody>`;
-            order.orderItems.forEach(item => {
-                detailsHTML += `
-                    <tr>
-                        <td>${item.productName || item.productId}</td>
-                        <td>${item.quantity}</td>
-                        <td>R$ ${item.unitPrice.toFixed(2).replace(".", ",")}</td>
-                        <td>R$ ${(item.quantity * item.unitPrice).toFixed(2).replace(".", ",")}</td>
-                    </tr>`;
-            });
-            detailsHTML += `</tbody></table>`;
-            detailsContainer.innerHTML = detailsHTML;
-            document.getElementById("back-to-orders").addEventListener("click", () => {
-                detailsContainer.style.display = "none";
-                listContainer.style.display = "block";
-            });
-        } else {
-            detailsContainer.style.display = "none";
-            listContainer.style.display = "block";
+        if (!headers) {
+            window.showNotification("Erro de autenticação. Faça login novamente.", "error");
+            return;
         }
-    }
-
-    async function handleEditOrder(event) {
-        const orderId = event.currentTarget.getAttribute("data-id");
-        window.showNotification(`Funcionalidade de editar pedido ${orderId} ainda não implementada.`, "info");
-    }
-
-    async function handleDeleteOrder(event) {
-        const orderId = event.currentTarget.getAttribute("data-id");
-        if (!confirm("Tem certeza que deseja excluir este pedido?")) return;
-
-        const headers = getAuthHeaders();
-        if (!headers) return;
 
         try {
-            const response = await fetch(`${API_BASE_URL_ADMIN}/Order/delete/${orderId}`, {
-                method: "DELETE",
-                headers: headers
+            const response = await fetch(`${API_BASE_URL_ADMIN}/Order/update/${orderId}`, {
+                method: "PUT",
+                headers: headers,
+                body: JSON.stringify({ IsActive: newIsActive })
             });
-            if (!response.ok) {
-                const errorData = await response.json().catch(() => ({ errors: [`Erro ${response.status}`] }));
-                throw new Error(errorData.errors ? errorData.errors.join(", ") : `Erro ${response.status}`);
-            }
-            const result = await response.json();
-            if (result.hasSuccess) {
-                window.showNotification("Pedido excluído com sucesso!", "success");
-                await fetchAndDisplayOrders();
+
+            if (response.ok) {
+                window.showNotification(`Pedido ${newIsActive ? "ativado" : "desativado"} com sucesso!`, "success");
+                // Update button state
+                button.dataset.isActive = newIsActive;
+                button.classList.toggle('btn-success', newIsActive);
+                button.classList.toggle('btn-secondary', !newIsActive);
+                button.innerHTML = `<i class="fas ${newIsActive ? 'fa-check' : 'fa-times'}"></i>`;
             } else {
-                throw new Error(result.errors ? result.errors.join(", ") : "Erro ao excluir pedido.");
+                const errorResult = await response.json().catch(() => null);
+                const errorMessage = errorResult && errorResult.errors ? errorResult.errors.join(", ") : `Falha na requisição: ${response.statusText}`;
+                throw new Error(errorMessage);
             }
         } catch (error) {
-            console.error("Erro ao excluir pedido:", error);
-            window.showNotification(`Erro ao excluir pedido: ${error.message}`, "error");
+            console.error("Erro ao atualizar o status do pedido:", error);
+            window.showNotification(`Erro: ${error.message}`, "error");
         }
     }
+
+    // async function handleViewOrderDetails(event) {
+    //     const orderId = event.currentTarget.getAttribute("data-id");
+    //     const detailsContainer = document.getElementById("order-details-container");
+    //     const listContainer = document.getElementById("order-list-container");
+
+    //     detailsContainer.innerHTML = `<div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i> Carregando detalhes do pedido...</div>`;
+    //     detailsContainer.style.display = "block";
+    //     listContainer.style.display = "none";
+
+    //     const result = await fetchData(`${API_BASE_URL_ADMIN}/Order/get/${orderId}`, {}, detailsContainer);
+
+    //     if (result && result.hasSuccess && result.value && result.value.order) {
+    //         const order = result.value.order;
+    //         let detailsHTML = `
+    //             <div class="form-header">
+    //                 <h3>Detalhes do Pedido #${order.id.substring(0, 8)}...</h3>
+    //                 <button type="button" id="back-to-orders" class="btn btn-sm btn-secondary"><i class="fas fa-arrow-left"></i> Voltar</button>
+    //             </div>
+    //             <div class="order-details-grid">
+    //                 <div><strong>ID Pedido:</strong> ${order.id}</div>
+    //                 <div><strong>Usuário:</strong> ${order.user ? order.user.userName : order.userId}</div>
+    //                 <div><strong>Data:</strong> ${window.formatDate(order.orderDate)}</div>
+    //                 <div><strong>Total:</strong> R$ ${order.totalAmount.toFixed(2).replace(".", ",")}</div>
+    //                 <div><strong>Status:</strong> ${order.status || "N/A"}</div>
+    //                 <div><strong>Endereço:</strong> ${order.shippingAddress || "N/A"}</div>
+    //             </div>
+    //             <h4>Itens do Pedido</h4>
+    //             <table class="admin-table">
+    //                 <thead><tr><th>Produto</th><th>Quantidade</th><th>Preço Unitário</th><th>Subtotal</th></tr></thead>
+    //                 <tbody>`;
+    //         order.orderItems.forEach(item => {
+    //             detailsHTML += `
+    //                 <tr>
+    //                     <td>${item.productName || item.productId}</td>
+    //                     <td>${item.quantity}</td>
+    //                     <td>R$ ${item.unitPrice.toFixed(2).replace(".", ",")}</td>
+    //                     <td>R$ ${(item.quantity * item.unitPrice).toFixed(2).replace(".", ",")}</td>
+    //                 </tr>`;
+    //         });
+    //         detailsHTML += `</tbody></table>`;
+    //         detailsContainer.innerHTML = detailsHTML;
+    //         document.getElementById("back-to-orders").addEventListener("click", () => {
+    //             detailsContainer.style.display = "none";
+    //             listContainer.style.display = "block";
+    //         });
+    //     } else {
+    //         detailsContainer.style.display = "none";
+    //         listContainer.style.display = "block";
+    //     }
+    // }
+
+    // async function handleDeleteOrder(event) {
+    //     const orderId = event.currentTarget.getAttribute("data-id");
+    //     if (!confirm("Tem certeza que deseja excluir este pedido?")) return;
+
+    //     const headers = getAuthHeaders();
+    //     if (!headers) return;
+
+    //     try {
+    //         const response = await fetch(`${API_BASE_URL_ADMIN}/Order/delete/${orderId}`, {
+    //             method: "DELETE",
+    //             headers: headers
+    //         });
+    //         if (!response.ok) {
+    //             const errorData = await response.json().catch(() => ({ errors: [`Erro ${response.status}`] }));
+    //             throw new Error(errorData.errors ? errorData.errors.join(", ") : `Erro ${response.status}`);
+    //         }
+    //         const result = await response.json();
+    //         if (result.hasSuccess) {
+    //             window.showNotification("Pedido excluído com sucesso!", "success");
+    //             await fetchAndDisplayOrders();
+    //         } else {
+    //             throw new Error(result.errors ? result.errors.join(", ") : "Erro ao excluir pedido.");
+    //         }
+    //     } catch (error) {
+    //         console.error("Erro ao excluir pedido:", error);
+    //         window.showNotification(`Erro ao excluir pedido: ${error.message}`, "error");
+    //     }
+    // }
 
     // --- CRUD Rastreios ---
     async function fetchAndDisplayTracking() {
