@@ -174,7 +174,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const userData = await fetchData(`${API_BASE_URL_ADMIN}/Auth/get`);
             const orderData = await fetchData(`${API_BASE_URL_ADMIN}/Order/get`);
             // Assuming payments endpoint exists; adjust if necessary
-            const paymentData = await fetchData(`${API_BASE_URL_ADMIN}/Payment/get`);
+            const paymentData = await fetchData(`${API_BASE_URL_ADMIN}/Order/get?PaymentStatus=Paid`);
 
             if (productData && productData.hasSuccess && productData.value && productData.value.products) {
                 document.getElementById("productCount").textContent = productData.value.products.length || 0;
@@ -195,10 +195,12 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             if (paymentData && paymentData.hasSuccess && paymentData.value) {
-                document.getElementById("paymentCount").textContent = paymentData.value.length || 0;
+                // Se o backend retorna { count: X, orders: [...] }
+                document.getElementById("paymentCount").textContent = paymentData.count || 0;
             } else {
                 document.getElementById("paymentCount").textContent = "Erro";
             }
+
         } catch (error) {
             console.error("Error fetching dashboard data:", error);
             window.showNotification("Erro ao carregar dados do dashboard.", "error");
@@ -636,19 +638,13 @@ document.addEventListener("DOMContentLoaded", () => {
         const container = document.getElementById("user-list-container");
         let tableHTML = `
             <table class="admin-table">
-                <thead><tr><th>Nome</th><th>Email</th><th>Role</th><th>Ativo</th><th>Ações</th></tr></thead>
+                <thead><tr><th>Nome</th><th>Email</th></tr></thead>
                 <tbody>`;
         users.forEach(user => {
             tableHTML += `
                 <tr>
-                    <td>${user.name}</td>
-                    <td>${user.email}</td>
-                    <td>${user.role}</td>
-                    <td><span class="status ${user.isActive ? "active" : "inactive"}">${user.isActive ? "Sim" : "Não"}</span></td>
-                    <td>
-                        <button class="btn btn-sm btn-edit" data-id="${user.id}"><i class="fas fa-edit"></i></button>
-                        <button class="btn btn-sm btn-delete" data-id="${user.id}"><i class="fas fa-trash"></i></button>
-                    </td>
+                    <td>${user.userName}</td>
+                    <td>${user.email}</td>                  
                 </tr>`;
         });
         tableHTML += `</tbody></table>`;
