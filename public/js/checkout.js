@@ -325,10 +325,10 @@ class CheckoutService {
           }),
       });
 
-      const confirmResult = confirmResponse.json();
+      const confirmResult = await confirmResponse.json();
 
       if (!confirmResponse.ok || !confirmResult.hasSuccess) {
-          throw new Error(confirmResult.errors?.[0] || "Erro ao confirmar o pagamento.");
+          throw new Error(confirmResult?.errors?.[0] || "Erro ao confirmar o pagamento.");
       }
 
       // 4. Verificar o pagamento no backend
@@ -399,6 +399,7 @@ class CheckoutService {
     if (!selectedAddress) return null
 
     return {
+      Id: selectedAddress.id,
       Name: this.currentUser.user.userName,
       Cep: selectedAddress.zipCode,
       Street: selectedAddress.street,
