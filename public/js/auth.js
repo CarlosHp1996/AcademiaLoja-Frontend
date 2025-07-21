@@ -275,13 +275,13 @@ if (registerForm) {
 }
 
 // Função para login com Google
-function handleGoogleLogin() {
-    // Implementar a lógica de login com Google aqui
-    console.log('Login com Google');
-}
+// function handleGoogleLogin() {
+//     // Implementar a lógica de login com Google aqui
+//     console.log('Login com Google');
+// }
 
 // Adiciona event listener para o botão de login com Google
-const googleButton = document.querySelector('.social-button.google');
-if (googleButton) {
-    googleButton.addEventListener('click', handleGoogleLogin);
-}
+// const googleButton = document.querySelector('.social-button.google');
+// if (googleButton) {
+//     googleButton.addEventListener('click', handleGoogleLogin);
+// }
