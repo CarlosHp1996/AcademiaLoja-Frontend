@@ -196,9 +196,9 @@ class AuthService {
             dropdownMenu.appendChild(userInfo);
             
             // Adiciona separador
-            const separator1 = document.createElement('div');
-            separator1.className = 'dropdown-separator';
-            dropdownMenu.appendChild(separator1);
+            // const separator1 = document.createElement('div');
+            // separator1.className = 'dropdown-separator';
+            // dropdownMenu.appendChild(separator1);
             
             // Adiciona link para perfil
             const profileLink = document.createElement('a');

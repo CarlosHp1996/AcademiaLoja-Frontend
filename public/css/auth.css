@@ -228,14 +228,14 @@ input[type="password"]::-webkit-input-password-toggle-button {
     background-color: var(--color-zinc-700);
 }
 
-.social-button.google {
+/* .social-button.google {
     background-color: var(--color-white);
     color: var(--color-zinc-900);
 }
 
 .social-button.google:hover {
     background-color: var(--color-zinc-100);
-}
+} */
 
 /* Auth Redirect */
 .auth-redirect {
