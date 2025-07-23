@@ -176,7 +176,7 @@
                         <form id="profileForm" class="profile-form">
                             <div class="form-row">
                                 <div class="form-group">
-                                    <label for="name">Nome Completo</label>
+                                    <label for="name">Nome</label>
                                     <input type="text" id="name" name="name" required>
                                 </div>
                                 <div class="form-group">
@@ -314,6 +314,17 @@
         <div class="modal-body">
             <form id="addressForm" class="address-form">
                 <input type="hidden" id="addressId" name="addressId">
+
+                <div class="form-row">                    
+                    <div class="form-group">
+                        <label for="completName">Nome Completo</label>
+                        <input type="text" id="completName" name="completName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="street">Rua/Avenida</label>
+                        <input type="text" id="street" name="street" required>
+                    </div>
+                </div>
                 
                 <div class="form-row">
                     <div class="form-group">
@@ -321,35 +332,25 @@
                         <input type="text" id="zipCode" name="zipCode" placeholder="00000-000" required>
                     </div>
                     <div class="form-group">
-                        <label for="street">Rua/Avenida</label>
-                        <input type="text" id="street" name="street" required>
-                    </div>
+                        <label for="number">Número</label>
+                        <input type="text" id="number" name="number" required>
+                    </div>                    
                 </div>
 
                 <div class="form-row">
-                    <div class="form-group">
-                        <label for="number">Número</label>
-                        <input type="text" id="number" name="number" required>
-                    </div>
+                    
                     <div class="form-group">
                         <label for="complement">Complemento</label>
                         <input type="text" id="complement" name="complement" placeholder="Apto, Bloco, etc.">
                     </div>
-                </div>
-
-                <div class="form-row">
                     <div class="form-group">
                         <label for="neighborhood">Bairro</label>
                         <input type="text" id="neighborhood" name="neighborhood" required>
                     </div>
-                    <div class="form-group">
-                        <label for="city">Cidade</label>
-                        <input type="text" id="city" name="city" required>
-                    </div>
                 </div>
 
                 <div class="form-row">
-                    <div class="form-group">
+                     <div class="form-group">
                         <label for="state">Estado</label>
                         <select id="state" name="state" required>
                             <option value="">Selecione</option>
@@ -382,10 +383,14 @@
                             <option value="26">Tocantins</option>
                         </select>
                     </div>
+                    
                     <div class="form-group">
-                        <!-- Espaço reservado -->
+                        <label for="city">Cidade</label>
+                        <input type="text" id="city" name="city" required>
                     </div>
                 </div>
+
+                
 
                 <div class="form-row">
                     <div class="form-group">

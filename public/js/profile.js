@@ -321,6 +321,7 @@ async function saveAddress(formData) {
   try {
     const addressData = {
       id: editingAddressId || "00000000-0000-0000-0000-000000000000",
+      completName: formData.get("completName"),
       street: formData.get("street"),
       city: formData.get("city"),
       state: Number.parseInt(formData.get("state")),
@@ -419,21 +420,43 @@ async function deleteAddress(addressId) {
 // Função para abrir modal de endereço
 function openAddressModal(addressId = null) {
   editingAddressId = addressId
+  const stateEnumToIndex = {
+  "AC": "0", "AL": "1", "AP": "2", "AM": "3", "BA": "4", "CE": "5", "DF": "6", "ES": "7", "GO": "8",
+  "MA": "9", "MT": "10", "MS": "11", "MG": "12", "PA": "13", "PB": "14", "PR": "15", "PE": "16",
+  "PI": "17", "RJ": "18", "RN": "19", "RS": "20", "RO": "21", "RR": "22", "SC": "23", "SP": "24",
+  "SE": "25", "TO": "26"
+  }
 
   if (addressId) {
     // Editar endereço existente
     const address = currentAddresses.find((addr) => addr.id === addressId)
     if (address) {
       addressModalTitle.textContent = "Editar Endereço"
-      document.getElementById("addressId").value = address.id
+      document.getElementById("addressId").value = address.id || ""
+      document.getElementById("completName").value = address.completName || ""
       document.getElementById("zipCode").value = formatZipCode(address.zipCode)
       document.getElementById("street").value = address.street
       document.getElementById("number").value = address.number
       document.getElementById("complement").value = address.complement || ""
       document.getElementById("neighborhood").value = address.neighborhood
       document.getElementById("city").value = address.city
-      document.getElementById("state").value = address.state.toString()
       document.getElementById("mainAddress").checked = address.mainAddress
+
+      const stateSelect = document.getElementById("state");
+      let stateValue = "";
+
+      if (address.state !== undefined && address.state !== null) {
+        // Se vier como string Enum ("PR", "SP", etc.)
+        if (typeof address.state === "string" && stateEnumToIndex[address.state]) {
+          stateValue = stateEnumToIndex[address.state];
+        }
+        // Se vier como número (índice)
+        else if (!isNaN(address.state)) {
+          stateValue = address.state.toString();
+        }
+      }
+
+      stateSelect.value = stateValue;
     }
   } else {
     // Adicionar novo endereço
