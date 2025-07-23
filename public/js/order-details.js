@@ -178,55 +178,46 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Função para renderizar informações de entrega
     function renderDeliveryInfo(order) {
-    // Parse shippingAddress se for string
-    let address = null;
-    if (order.shippingAddress) {
-        try {
-        address = typeof order.shippingAddress === "string"
-            ? JSON.parse(order.shippingAddress)
-            : order.shippingAddress;
-        } catch (e) {
-        address = null;
-        }
-    }
+      // Verifica se addresses é um array e tem pelo menos um item
+      const address = Array.isArray(order.addresses) && order.addresses.length > 0 ? order.addresses[0] : null;
 
-    deliveryInfo.innerHTML = `
-            <div class="delivery-card">
-                <div class="info-group">
-                    <h3>
-                        <i class="fas fa-map-marker-alt"></i>
-                        Endereço de Entrega
-                    </h3>
-                    <div class="address-info">
-                        ${
-                        address
-                            ? `
-                            <p><strong>Nome:</strong> ${address.Name || ""}</p>
-                            <p><strong>Rua/Avenida:</strong> ${address.Street || ""}</p>
-                            <p><strong>Cep:</strong> ${address.Cep || ""}</p>
-                            <p><strong>Número:</strong> ${address.Number || ""}</p>
-                            <p><strong>Complemento:</strong> ${address.Complement || ""}</p>
-                            <p><strong>Bairro:</strong> ${address.Neighborhood || ""}</p>
-                            <p><strong>Cidade:</strong> ${address.City || ""}</p>
-                            <p><strong>Estado:</strong> ${address.State || ""}</p>
-                            `
-                            : "<p>Endereço não informado</p>"
-                        }
-                    </div>
-                </div>
-                <div class="info-group">
-                    <h3>
-                        <i class="fas fa-truck"></i>
-                        Informações de Envio
-                    </h3>
-                    <div class="shipping-info">
-                        <p><strong>Status:</strong> ${getStatusText(order.status)}</p>
-                        <p><strong>Data do Pedido:</strong> ${formatDate(order.orderDate || order.createdAt)}</p>
-                        ${order.trackingCode ? `<p><strong>Código de Rastreamento:</strong> <span class="tracking-code">${order.trackingCode}</span></p>` : ""}
-                    </div>
-                </div>
+      deliveryInfo.innerHTML = `
+        <div class="delivery-card">
+          <div class="info-group">
+            <h3>
+              <i class="fas fa-map-marker-alt"></i>
+              Endereço de Entrega
+            </h3>
+            <div class="address-info">
+              ${
+                address
+                  ? `
+                    <p><strong>Nome:</strong> ${order.userName || ""}</p>
+                    <p><strong>Rua/Avenida:</strong> ${address.street || ""}</p>
+                    <p><strong>Cep:</strong> ${address.cep || ""}</p>
+                    <p><strong>Número:</strong> ${address.number || ""}</p>
+                    <p><strong>Complemento:</strong> ${address.complement || ""}</p>
+                    <p><strong>Bairro:</strong> ${address.neighborhood || ""}</p>
+                    <p><strong>Cidade:</strong> ${address.city || ""}</p>
+                    <p><strong>Estado:</strong> ${address.state || ""}</p>
+                  `
+                  : "<p>Endereço não informado</p>"
+              }
             </div>
-        `;
+          </div>
+          <div class="info-group">
+            <h3>
+              <i class="fas fa-truck"></i>
+              Informações de Envio
+            </h3>
+            <div class="shipping-info">
+              <p><strong>Status:</strong> ${getStatusText(order.status)}</p>
+              <p><strong>Data do Pedido:</strong> ${formatDate(order.orderDate || order.createdAt)}</p>
+              ${order.trackingCode ? `<p><strong>Código de Rastreamento:</strong> <span class="tracking-code">${order.trackingCode}</span></p>` : ""}
+            </div>
+          </div>
+        </div>
+      `;
     }
 
   // Função para renderizar lista de produtos
