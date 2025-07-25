@@ -3407,3 +3407,24 @@ img {
     font-size: 1.125rem;
   }
 }
+
+/* Carousel Styles
+.carousel-container {
+    width: 100%;
+    height: 500px;  Adjust this value as needed 
+    overflow: hidden;
+    position: relative;
+}
+
+.carousel-slide {
+    display: flex;
+    width: 500%;  100% for each image 
+    height: 100%;
+    transition: transform 0.5s ease-in-out;
+}
+
+.carousel-slide img {
+    width: 20%;  100% / 5 images 
+    height: 100%;
+    object-fit: cover;
+}*/

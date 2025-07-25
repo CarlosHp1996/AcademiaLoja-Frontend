@@ -506,6 +506,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             <option value="Creatina" ${attributes.category === "Creatina" ? "selected" : ""}>Creatina</option>
                             <option value="Vitaminas" ${attributes.category === "Vitaminas" ? "selected" : ""}>Vitaminas</option>
                             <option value="PreTreino" ${attributes.category === "PreTreino" ? "selected" : ""}>Pré Treino</option>
+                            <option value="Glutamina" ${attributes.category === "Glutamina" ? "selected" : ""}>Glutamina</option>
                         </select>
                     </div>
                     <div class="form-group col-md-6">
@@ -516,6 +517,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             <option value="AumentoDeMassaMuscular" ${attributes.objective === "AumentoDeMassaMuscular" ? "selected" : ""}>Ganho de Massa</option>
                             <option value="Hipertrofia" ${attributes.objective === "Hipertrofia" ? "selected" : ""}>Energia</option>
                             <option value="Ganho de Peso" ${attributes.objective === "GanhoDePeso" ? "selected" : ""}>Ganho de Peso</option>
+                            <option value="MelhoraDeImunidade" ${attributes.objective === "MelhoraDeImunidade" ? "selected" : ""}>Melhora De Imunidade</option>
                         </select>
                     </div>
                 </div>

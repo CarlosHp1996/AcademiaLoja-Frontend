@@ -707,3 +707,17 @@ document.querySelector('.btn-primary-modern').addEventListener('click', function
     e.preventDefault();
     window.location.href = '/public/html/products.html';
 });
+
+// // Carousel functionality
+// document.addEventListener('DOMContentLoaded', () => {
+//     const carouselSlide = document.querySelector('.carousel-slide');
+//     const images = document.querySelectorAll('.carousel-slide img');
+//     const totalImages = images.length;
+//     let currentIndex = 0;
+
+//     setInterval(() => {
+//         currentIndex = (currentIndex + 1) % totalImages;
+//         const offset = -currentIndex * 100 / totalImages;
+//         carouselSlide.style.transform = `translateX(${offset}%)`;
+//     }, 3000); // Change image every 3 seconds (3000ms)
+// });
