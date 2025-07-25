@@ -338,8 +338,9 @@
 <footer class="footer">
     <div class="container">
         <div class="footer-grid">
-            <div class="footer-column">
-                <a href="/public/html/index.html" class="logo">
+            <!-- Division 1: Main Info -->
+            <div class="footer-division" id="footer-division-1">
+                <a class="logo">
                     <span class="logo-power">Power Rock</span>
                     <span class="logo-supps">Supplements</span>
                 </a>
@@ -351,50 +352,63 @@
                     <a href="https://www.instagram.com/powerrocksupplements/" class="social-link"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
-            <div class="footer-column">
-                <h3 class="footer-title">Categorias</h3>
-                <ul class="footer-links">
-                    <li><a href="/public/html/products.html">Proteínas</a></li>
-                    <li><a href="/public/html/products.html">Pré-Treino</a></li>
-                    <li><a href="/public/html/products.html">Creatina</a></li>
-                    <li><a href="/public/html/products.html">Vitaminas</a></li>
-                    <li><a href="/public/html/accessories.html">Acessórios</a></li>
-                </ul>
+
+            <!-- Division 2: Links -->
+            <div class="footer-division" id="footer-division-2">
+                <div class="footer-column">
+                    <h3 class="footer-title">Categorias</h3>
+                    <ul class="footer-links">
+                        <li><a href="/public/html/products.html">Proteínas</a></li>
+                        <li><a href="/public/html/products.html">Pré-Treino</a></li>
+                        <li><a href="/public/html/products.html">Creatina</a></li>
+                        <li><a href="/public/html/products.html">Vitaminas</a></li>
+                        <li><a href="/public/html/accessories.html">Acessórios</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3 class="footer-title">Informações</h3>
+                    <ul class="footer-links">
+                        <li><a href="/about">Sobre Nós</a></li>
+                        <li><a href="/public/html/returns.html">Trocas e Devoluções</a></li>
+                        <li><a href="/privacy">Política de Privacidade</a></li>
+                        <li><a href="/terms">Termos e Condições</a></li>
+                        <li><a href="/public/html/contact.html">Contato</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3 class="footer-title">Contato</h3>
+                    <ul class="contact-info">
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>[ADICIONAR ENDEREÇO] - Londrina PR</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <span>ADD NUMERO</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <span>CRIAR EMAIL</span>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <div class="footer-column">
-                <h3 class="footer-title">Informações</h3>
-                <ul class="footer-links">
-                    <li><a href="/about">Sobre Nós</a></li>
-                    <li><a href="/shipping">Entrega</a></li>
-                    <li><a href="/privacy">Política de Privacidade</a></li>
-                    <li><a href="/terms">Termos e Condições</a></li>
-                    <li><a href="/public/html/contact.html">Contato</a></li>
-                </ul>
-            </div>
-            <div class="footer-column">
-                <h3 class="footer-title">Contato</h3>
-                <ul class="contact-info">
-                    <li>
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span>Av. Paulista, 1000 - São Paulo</span>
-                    </li>
-                    <li>
-                        <i class="fas fa-phone"></i>
-                        <span>(11) 99999-9999</span>
-                    </li>
-                    <li>
-                        <i class="fas fa-envelope"></i>
-                        <span>contato@powerrocksupplements.com.br</span>
-                    </li>
-                </ul>
+
+            <!-- Division 3: Payment and Shipping -->
+            <div class="footer-division" id="footer-division-3">
                 <div class="payment-methods">
                     <h4 class="payment-title">Formas de Pagamento</h4>
                     <div class="payment-icons">
-                        <div class="payment-icon"></div>
-                        <div class="payment-icon"></div>
-                        <div class="payment-icon"></div>
-                        <div class="payment-icon"></div>
-                        <div class="payment-icon"></div>
+                        <i class="fab fa-cc-visa"></i>
+                        <i class="fab fa-cc-mastercard"></i>
+                        <i class="fab fa-cc-amex"></i>
+                    </div>
+                </div>
+                <div class="shipping-methods">
+                    <h4 class="shipping-title">Meios de envio</h4>
+                    <div class="shipping-icons">
+                        <i class="fas fa-shipping-fast"></i>
+                        <i class="fas fa-hand-holding-heart"></i>
                     </div>
                 </div>
             </div>

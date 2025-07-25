@@ -1909,10 +1909,52 @@ img {
 }
 
 .footer-grid {
-  display: grid;
-  grid-template-columns: 1fr;
+  display: flex;
+  flex-direction: column;
   gap: 2rem;
   margin-bottom: 2rem;
+}
+
+#footer-division-1 .logo {
+    display: flex;
+    flex-direction: row;      /* Deixar lado a lado */
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    text-align: center;
+    width: 100%;
+    gap: 1rem;              /* Espaço entre Power Rock e Supplements */
+}
+
+#footer-division-1 .footer-description {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+#footer-division-1 .social-links {
+    justify-content: center;
+}
+
+#footer-division-1 .social-link i {
+    font-size: 1rem; /* Increased icon size */
+    transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+#footer-division-2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    justify-items: center;
+}
+
+#footer-division-3 {
+    display: flex;
+    flex-direction: row;    /* Alinha lado a lado */
+    align-items: flex-start;
+    justify-content: center;
+    gap: 3rem;              /* Espaço entre as colunas */
 }
 
 .footer-description {
@@ -1987,11 +2029,54 @@ img {
   flex-wrap: wrap;
 }
 
+.payment-icons {
+    display: flex;
+    gap: 1rem; /* Aumenta o espaço entre os ícones */
+    align-items: center; /* Alinha os ícones verticalmente */
+}
+
+.payment-icons i {
+    font-size: 2rem; /* Tamanho maior para os ícones */
+    color: #a1a1aa; /* Cor cinza para os ícones */
+    transition: color 0.3s ease, transform 0.3s ease; /* Adiciona transições suaves */
+}
+
+.payment-icons i:hover {
+    color: #ffffff; /* Cor branca ao passar o mouse */
+    transform: scale(1.1); /* Aumenta o tamanho ao passar o mouse */
+}
+
 .payment-icon {
   height: 2rem;
   width: 3rem;
   background-color: var(--color-zinc-800);
   border-radius: 0.25rem;
+}
+
+.shipping-methods {
+  margin-top: 1rem;
+}
+
+.shipping-title {
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.shipping-icons {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.shipping-icons i {
+  font-size:2rem;
+  color: #a1a1aa;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.shipping-icons i:hover {
+  color: #ffffff;
+  transform: scale(1.1);
 }
 
 .copyright {
