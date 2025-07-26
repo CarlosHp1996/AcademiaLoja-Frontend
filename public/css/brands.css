@@ -702,7 +702,7 @@
 
 /* Brands Showcase Section */
 .brands-showcase {
-  padding: 6rem 0;
+
   background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
   position: relative;
   max-width: 100%;
@@ -762,7 +762,6 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
   gap: 3rem;
-  margin-top: 4rem;
   max-width: 100%;
 }
 
