@@ -74,3 +74,15 @@ function getAccessoryNameById(accessoryId) {
     
     return accessoryMap[accessoryId] || "Acessórios";
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+  const btnExplore = document.querySelector(".btn-primary-accessories");
+  const accessoriesSection = document.querySelector(".accessories-section");
+
+  if (btnExplore && accessoriesSection) {
+    btnExplore.addEventListener("click", function (e) {
+      e.preventDefault();
+      accessoriesSection.scrollIntoView({ behavior: "smooth" });
+    });
+  }
+});
