@@ -279,3 +279,60 @@ window.NavigationEnums = {
 
 // Inicializar automaticamente
 initializeNavigation();
+
+document.addEventListener('DOMContentLoaded', function() {
+    const menuItems = document.querySelectorAll('.subheader .menu-item');
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const subheaderNav = document.querySelector('.subheader-nav');
+
+    // Toggle the main mobile navigation
+    if (mobileMenuBtn && subheaderNav) {
+        mobileMenuBtn.addEventListener('click', (e) => {
+            e.stopPropagation(); // Impede que o evento de clique se propague para o documento
+            mobileMenuBtn.classList.toggle('active');
+            subheaderNav.classList.toggle('active');
+        });
+    }
+
+    menuItems.forEach(item => {
+        const link = item.querySelector('a.nav-link');
+        const submenu = item.querySelector('.submenu');
+
+        if (link && submenu) {
+            link.addEventListener('click', function(event) {
+                // Aplica a lógica apenas na visualização móvel (corresponde ao breakpoint do CSS)
+                if (window.innerWidth <= 767) {
+                    // Se o submenu não estiver aberto, abra-o e impeça a navegação.
+                    if (!item.classList.contains('active')) {
+                        event.preventDefault();
+
+                        // Fecha outros itens de menu abertos antes de abrir o novo
+                        menuItems.forEach(otherItem => {
+                            if (otherItem !== item) {
+                                otherItem.classList.remove('active');
+                            }
+                        });
+
+                        // Abre o item atual
+                        item.classList.add('active');
+                    }
+                    // Se o submenu já estiver aberto, o clique navegará naturalmente.
+                }
+            });
+        }
+    });
+
+    // Fecha o menu móvel ao clicar fora dele
+    document.addEventListener('click', function(event) {
+        if (subheaderNav && subheaderNav.classList.contains('active')) {
+            const isClickInsideMenu = subheaderNav.contains(event.target);
+            const isClickOnMenuButton = mobileMenuBtn.contains(event.target); 
+
+            if (!isClickInsideMenu && !isClickOnMenuButton) {
+                subheaderNav.classList.remove('active');
+                mobileMenuBtn.classList.remove('active');
+                menuItems.forEach(item => item.classList.remove('active'));
+            }
+        }
+    });
+});
