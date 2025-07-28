@@ -374,39 +374,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Remover a linha de inicialização de contadores se existir
   // initializeCategoryCounters();
 
-  // Mobile menu toggle
-  const menuBtn = document.querySelector(".mobile-menu-btn")
-  const subheaderNav = document.querySelector(".subheader-nav")
-  const menuItems = document.querySelectorAll(".menu-item")
-
-  if (menuBtn && subheaderNav) {
-    menuBtn.addEventListener("click", () => {
-      menuBtn.classList.toggle("active")
-      subheaderNav.classList.toggle("active")
-    })
-
-    // Controle de submenus em dispositivos móveis
-    menuItems.forEach((item) => {
-      item.addEventListener("click", (e) => {
-        if (window.innerWidth <= 767) {
-          const submenu = item.querySelector(".submenu")
-          if (submenu) {
-            e.preventDefault()
-            item.classList.toggle("active")
-          }
-        }
-      })
-    })
-
-    // Fechar menu ao clicar fora
-    document.addEventListener("click", (e) => {
-      if (!subheaderNav.contains(e.target) && !menuBtn.contains(e.target)) {
-        menuBtn.classList.remove("active")
-        subheaderNav.classList.remove("active")
-        menuItems.forEach((item) => item.classList.remove("active"))
-      }
-    })
-  }
+  
 
   // Event delegation para botões de adicionar ao carrinho
   document.addEventListener("click", (e) => {
