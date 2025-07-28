@@ -25,6 +25,16 @@
   --color-yellow-400: #facc15;
   --color-red: #dc2626;
   --color-red-dark: #b91c1c;
+
+  /* Variáveis de largura consistentes */
+  --container-max-width-mobile: 100%;
+  --container-max-width-tablet: 768px;
+  --container-max-width-desktop: 1200px;
+  --container-max-width-large: 1400px;
+  --container-max-width-xl: 1600px;
+  --container-padding-mobile: 1rem;
+  --container-padding-tablet: 2rem;
+  --container-padding-desktop: 2rem;
 }
 
 * {
@@ -40,33 +50,216 @@ body {
   line-height: 1.6;
 }
 
+/* ===== SISTEMA DE LARGURA UNIFICADO ===== */
+
+/* Container principal - base para todas as páginas */
 .container {
   width: 100%;
-  max-width: 1200px;
+  max-width: var(--container-max-width-desktop);
   margin: 0 auto;
-  padding: 0 1rem;
+  padding-left: var(--container-padding-mobile);
+  padding-right: var(--container-padding-mobile);
 }
 
-/* Garantir que a largura seja consistente em todas as páginas */
-@media (min-width: 768px) {
+/* Seções que precisam ocupar toda a largura da viewport */
+.full-width-section {
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  position: relative;
+}
+
+/* Container para seções full-width */
+.full-width-section .container {
+  max-width: var(--container-max-width-desktop);
+  margin: 0 auto;
+  padding-left: var(--container-padding-mobile);
+  padding-right: var(--container-padding-mobile);
+}
+
+/* Seções de hero modernas */
+.hero-modern,
+.goals-hero-modern,
+.products-hero-modern,
+.accessories-hero-modern,
+.brands-hero-modern {
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+}
+
+.hero-modern .container,
+.goals-hero-modern .container,
+.products-hero-modern .container,
+.accessories-hero-modern .container,
+.brands-hero-modern .container {
+  max-width: var(--container-max-width-desktop);
+  margin: 0 auto;
+  padding-left: var(--container-padding-mobile);
+  padding-right: var(--container-padding-mobile);
+}
+
+/* Containers específicos para hero sections */
+.hero-container,
+.goals-container,
+.products-container-hero,
+.accessories-container,
+.brands-container {
+  max-width: var(--container-max-width-desktop);
+  width: 100%;
+  margin: 0 auto;
+  padding-left: var(--container-padding-mobile);
+  padding-right: var(--container-padding-mobile);
+}
+
+/* Seções de conteúdo padrão */
+.section-header {
+  max-width: var(--container-max-width-desktop);
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+/* Grids e layouts */
+.categories-grid,
+.products-grid,
+.goals-grid,
+.accessories-grid,
+.brands-grid,
+.benefits-grid {
+  max-width: var(--container-max-width-desktop);
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Seções especiais que podem precisar de largura diferente */
+.featured-section,
+.cta-section {
+  max-width: var(--container-max-width-desktop);
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* ===== RESPONSIVE BREAKPOINTS ===== */
+
+/* Mobile (até 480px) */
+@media (max-width: 480px) {
   .container {
-    padding: 0 2rem;
+    max-width: var(--container-max-width-mobile);
+    padding-left: var(--container-padding-mobile);
+    padding-right: var(--container-padding-mobile);
+  }
+
+  .hero-container,
+  .goals-container,
+  .products-container-hero,
+  .accessories-container,
+  .brands-container {
+    padding-left: var(--container-padding-mobile);
+    padding-right: var(--container-padding-mobile);
   }
 }
 
-@media (min-width: 1024px) {
+/* Tablet (481px - 768px) */
+@media (min-width: 481px) and (max-width: 768px) {
   .container {
-    max-width: 1200px;
-    padding: 0 2rem;
+    max-width: var(--container-max-width-tablet);
+    padding-left: var(--container-padding-tablet);
+    padding-right: var(--container-padding-tablet);
+  }
+
+  .hero-container,
+  .goals-container,
+  .products-container-hero,
+  .accessories-container,
+  .brands-container {
+    padding-left: var(--container-padding-tablet);
+    padding-right: var(--container-padding-tablet);
   }
 }
 
-@media (min-width: 1400px) {
+/* Desktop (769px - 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
   .container {
-    max-width: 1400px;
-    padding: 0 2rem;
+    max-width: var(--container-max-width-desktop);
+    padding-left: var(--container-padding-desktop);
+    padding-right: var(--container-padding-desktop);
+  }
+
+  .hero-container,
+  .goals-container,
+  .products-container-hero,
+  .accessories-container,
+  .brands-container {
+    padding-left: var(--container-padding-desktop);
+    padding-right: var(--container-padding-desktop);
   }
 }
+
+/* Large Desktop (1025px - 1400px) */
+@media (min-width: 1025px) and (max-width: 1400px) {
+  .container {
+    max-width: var(--container-max-width-large);
+    padding-left: var(--container-padding-desktop);
+    padding-right: var(--container-padding-desktop);
+  }
+
+  .hero-container,
+  .goals-container,
+  .products-container-hero,
+  .accessories-container,
+  .brands-container {
+    max-width: var(--container-max-width-large);
+    padding-left: var(--container-padding-desktop);
+    padding-right: var(--container-padding-desktop);
+  }
+}
+
+/* Extra Large Desktop (1401px+) */
+@media (min-width: 1401px) {
+  .container {
+    max-width: var(--container-max-width-xl);
+    padding-left: var(--container-padding-desktop);
+    padding-right: var(--container-padding-desktop);
+  }
+
+  .hero-container,
+  .goals-container,
+  .products-container-hero,
+  .accessories-container,
+  .brands-container {
+    max-width: var(--container-max-width-xl);
+    padding-left: var(--container-padding-desktop);
+    padding-right: var(--container-padding-desktop);
+  }
+}
+
+/* ===== OVERRIDE PARA ELEMENTOS ESPECÍFICOS ===== */
+
+/* Remove overrides problemáticos */
+.section-header,
+.section-title {
+  max-width: none !important;
+  width: 100% !important;
+}
+
+/* Garante que títulos de seção sejam centralizados */
+.section-title {
+  text-align: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Ajustes para elementos que estavam forçando largura total */
+.goals-content-modern,
+.products-content-modern,
+.accessories-content-modern,
+.brands-content-modern {
+  max-width: 100%;
+  width: 100%;
+}
+
+/* ===== RESTO DO CSS ORIGINAL ===== */
 
 a {
   text-decoration: none;
@@ -230,8 +423,8 @@ img {
 }
 
 .search-input::placeholder {
-  color: var(--color-zinc-400); /* Cor opcional para o placeholder */
-  font-size: 0.875rem; /* Mesma fonte do input */
+  color: var(--color-zinc-400);
+  font-size: 0.875rem;
 }
 
 .search-input:focus {
@@ -239,7 +432,7 @@ img {
 }
 
 .account-link {
-  display: none; /* Aparece apenas em telas maiores via media query */
+  display: none;
   font-size: 0.875rem;
   font-weight: 500;
   transition: color 0.2s ease;
@@ -302,6 +495,7 @@ img {
   height: 3px;
   background-color: var(--color-white);
   transition: all 0.3s ease;
+  left: 0;
 }
 
 .menu-icon::before {
@@ -364,12 +558,10 @@ img {
   position: relative;
 }
 
-/* Efeito de rotação na seta do menu Produtos */
 .menu-item > .nav-link .fa-chevron-down {
   transition: transform 0.3s ease;
 }
 
-/* Quando o menu está aberto (hover ou classe .open), gira a seta */
 .menu-item:hover > .nav-link .fa-chevron-down,
 .menu-item.open > .nav-link .fa-chevron-down {
   transform: rotate(180deg);
@@ -466,7 +658,7 @@ img {
 
 @media (min-width: 1024px) {
   .search-input {
-    width: 500px; /* Caixa de pesquisa ainda maior em telas grandes */
+    width: 500px;
   }
   .hero-title {
     font-size: 3.75rem;
@@ -1092,7 +1284,6 @@ img {
   padding: 4rem 0;
 }
 
-/* Somente para Produtos Em Destaque */
 .featured-products .section-title {
   font-size: 2.5rem;
 }
@@ -1104,7 +1295,6 @@ img {
   flex-wrap: wrap;
   width: 100%;
   margin-bottom: 2rem;
-  /* Remova ou sobrescreva qualquer regra que centralize o conteúdo aqui */
 }
 
 .section-header,
@@ -1276,7 +1466,6 @@ img {
   margin-bottom: 0.5rem;
 }
 
-/* 2. Estilos para o dropdown de sabores */
 .flavor-option-container {
   margin-bottom: 20px;
 }
@@ -1916,50 +2105,55 @@ img {
 }
 
 #footer-division-1 .logo {
-    display: flex;
-    flex-direction: row;      /* Deixar lado a lado */
-    align-items: center;
-    justify-content: center;
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-    font-weight: bold;
-    text-align: center;
-    width: 100%;
-    gap: 1rem;              /* Espaço entre Power Rock e Supplements */
+  display: flex;
+  flex-direction: row; /* Deixar lado a lado em desktop */
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  font-weight: bold;
+  text-align: center;
+  width: 100%;
+  gap: 1rem; /* Espaço entre Power Rock e Supplements */
 }
 
-#footer-division-1 .footer-description {
-    text-align: center;
-    margin-bottom: 1.5rem;
+/* Ajuste para mobile - logo em coluna */
+@media (max-width: 768px) {
+  #footer-division-1 .logo {
+    flex-direction: column; /* Empilhar verticalmente no mobile */
+    gap: 0.25rem; /* Reduzir espaço entre as linhas */
+    font-size: 2rem; /* Reduzir tamanho da fonte no mobile */
+  }
 }
 
-#footer-division-1 .social-links {
-    justify-content: center;
-}
-
-#footer-division-1 .social-link i {
-    font-size: 1rem; /* Increased icon size */
-    transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+@media (max-width: 480px) {
+  #footer-division-1 .logo {
+    font-size: 1.75rem; /* Ainda menor em telas muito pequenas */
+    gap: 0.125rem; /* Espaço mínimo entre as linhas */
+  }
 }
 
 #footer-division-2 {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 2rem;
-    justify-items: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  justify-items: center;
 }
 
 #footer-division-3 {
-    display: flex;
-    flex-direction: row;    /* Alinha lado a lado */
-    align-items: flex-start;
-    justify-content: center;
-    gap: 3rem;              /* Espaço entre as colunas */
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 3rem;
 }
 
 .footer-description {
   color: var(--color-zinc-400);
   margin: 1rem 0;
+  text-align: center;
+  width: 100%;
+  display: block;
 }
 
 .social-links {
@@ -2001,6 +2195,12 @@ img {
   color: var(--color-orange);
 }
 
+.footer .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem; /* Opcional: ajusta o espaço entre os ícones */
+}
+
 .contact-info li {
   display: flex;
   align-items: flex-start;
@@ -2025,25 +2225,19 @@ img {
 
 .payment-icons {
   display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-}
-
-.payment-icons {
-    display: flex;
-    gap: 1rem; /* Aumenta o espaço entre os ícones */
-    align-items: center; /* Alinha os ícones verticalmente */
+  gap: 1rem;
+  align-items: center;
 }
 
 .payment-icons i {
-    font-size: 2rem; /* Tamanho maior para os ícones */
-    color: #a1a1aa; /* Cor cinza para os ícones */
-    transition: color 0.3s ease, transform 0.3s ease; /* Adiciona transições suaves */
+  font-size: 2rem;
+  color: #a1a1aa;
+  transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .payment-icons i:hover {
-    color: #ffffff; /* Cor branca ao passar o mouse */
-    transform: scale(1.1); /* Aumenta o tamanho ao passar o mouse */
+  color: #ffffff;
+  transform: scale(1.1);
 }
 
 .payment-icon {
@@ -2069,7 +2263,7 @@ img {
 }
 
 .shipping-icons i {
-  font-size:2rem;
+  font-size: 2rem;
   color: #a1a1aa;
   transition: color 0.3s ease, transform 0.3s ease;
 }
@@ -2085,77 +2279,6 @@ img {
   font-size: 0.875rem;
   padding-top: 2rem;
   border-top: 1px solid var(--color-zinc-900);
-}
-
-/* Responsive Styles */
-@media (min-width: 640px) {
-  .hero-title {
-    font-size: 3rem;
-  }
-  .products-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (min-width: 768px) {
-  .main-nav {
-    display: flex;
-    gap: 1.5rem;
-  }
-  .search-container {
-    display: block;
-  }
-  .account-link {
-    display: block;
-  }
-  .mobile-menu-btn {
-    display: none;
-  }
-  .categories-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-  .products-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-  .benefits-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-  .newsletter-content {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .newsletter-text {
-    flex: 1;
-  }
-  .newsletter-form {
-    width: auto;
-    flex: 1;
-  }
-  .footer-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
-  .product-title {
-    font-size: 3rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .search-input {
-    width: 800px;
-  }
-  .hero-title {
-    font-size: 3.75rem;
-  }
-  .categories-grid {
-    grid-template-columns: repeat(5, 1fr);
-  }
-  .products-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
-  .product-detail {
-    grid-template-columns: 1fr 1fr;
-  }
 }
 
 /* Cart Styles */
@@ -2651,7 +2774,7 @@ img {
   min-width: 220px;
   height: 48px;
   font-size: 1.1rem;
-  padding: 0 2.5rem 0 1.2rem; /* espaço à direita para a seta */
+  padding: 0 2.5rem 0 1.2rem;
   background: var(--color-orange);
   color: #111;
   border: none;
@@ -2690,19 +2813,6 @@ img {
   box-shadow: none;
   background: var(--color-orange);
 }
-
-/* Aumenta o tamanho do dropdown e deixa o cursor pointer */
-/* #flavor-options select.flavor-options {
-    min-width: 220px;
-    height: 48px;
-    font-size: 1.1rem;
-    padding: 0 0rem;
-    border-radius: 15px;
-    background: #18181b;
-    color: #ff6600;
-    cursor: pointer;
-    transition: border-color 0.2s;
-} */
 
 #flavor-options select.flavor-options:focus {
   border-color: none;
@@ -3492,24 +3602,3 @@ img {
     font-size: 1.125rem;
   }
 }
-
-/* Carousel Styles
-.carousel-container {
-    width: 100%;
-    height: 500px;  Adjust this value as needed 
-    overflow: hidden;
-    position: relative;
-}
-
-.carousel-slide {
-    display: flex;
-    width: 500%;  100% for each image 
-    height: 100%;
-    transition: transform 0.5s ease-in-out;
-}
-
-.carousel-slide img {
-    width: 20%;  100% / 5 images 
-    height: 100%;
-    object-fit: cover;
-}*/
