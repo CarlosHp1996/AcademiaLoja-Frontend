@@ -107,14 +107,16 @@
   position: relative;
   z-index: 10;
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr; /* Alterado para uma coluna */
   gap: 3rem;
   align-items: center;
+  justify-items: center; /* Centraliza o conteúdo */
   min-height: 80vh;
   padding: 2rem 4rem;
   max-width: 1400px;
   width: 100%;
   margin: 0 auto;
+  text-align: center; /* Centraliza o texto */
 }
 
 /* Contact Content */

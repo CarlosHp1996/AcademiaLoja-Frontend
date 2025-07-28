@@ -140,13 +140,15 @@
   position: relative;
   z-index: 10;
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr; /* Alterado para uma coluna */
   gap: 3rem;
   align-items: center;
+  justify-items: center; /* Centraliza o conteúdo */
   min-height: 100vh;
   padding: 2rem 2rem;
   max-width: 100% !important;
   width: 100% !important;
+  text-align: center; /* Centraliza o texto */
 }
 
 /* Brands Content */
