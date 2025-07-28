@@ -379,6 +379,8 @@ img {
   align-items: center;
   gap: 1.5rem;
   justify-content: flex-start;
+  flex-grow: 1; /* Permite que a seção esquerda cresça para preencher o espaço */
+  margin-right: 1.5rem; /* Adiciona um espaço antes dos ícones da direita */
 }
 
 .logo {
@@ -410,12 +412,14 @@ img {
 }
 
 .search-container {
-  display: none;
+  display: none; /* Mantém oculto em telas pequenas por padrão */
+  flex-grow: 1; /* Faz o container da busca crescer e ocupar o espaço disponível */
+  max-width: 900px; /* Define uma largura máxima para a barra de busca */
 }
 
 .search-input {
   height: 3rem;
-  width: 250px;
+  width: 100%;
   border-radius: 9999px;
   background-color: var(--color-zinc-900);
   padding: 0 2rem 0 1rem;
@@ -3501,7 +3505,7 @@ img {
 
 @media (min-width: 768px) {
   .search-container {
-    display: block;
+    display: flex;
   }
   .account-link {
     display: block;
@@ -3586,9 +3590,6 @@ img {
 }
 
 @media (min-width: 1024px) {
-  .search-input {
-    width: 500px;
-  }
   .hero-title {
     font-size: 3.75rem;
   }
