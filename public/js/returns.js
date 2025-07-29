@@ -91,30 +91,39 @@ document.addEventListener("DOMContentLoaded", () => {
   const primaryBtn = document.querySelector(".btn-primary-returns")
   const secondaryBtn = document.querySelector(".btn-secondary-returns")
 
+  // Função auxiliar para rolagem suave com deslocamento para cabeçalhos fixos
+  const smoothScrollTo = (element) => {
+    if (!element) return;
+
+    const header = document.querySelector('.header');
+    const subheader = document.querySelector('.subheader');
+    const headerHeight = header ? header.offsetHeight : 0;
+    const subheaderHeight = subheader ? subheader.offsetHeight : 0;
+    const totalHeaderHeight = headerHeight + subheaderHeight;
+
+    const elementPosition = element.getBoundingClientRect().top;
+    const offsetPosition = elementPosition + window.pageYOffset - totalHeaderHeight - 20; // 20px de espaço extra
+
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: "smooth"
+    });
+  };
+
   if (primaryBtn) {
-    primaryBtn.addEventListener("click", () => {
-      // Scroll to form section
-      const formSection = document.querySelector(".return-form-section")
-      if (formSection) {
-        formSection.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        })
-      }
-    })
+    primaryBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      const formSection = document.querySelector(".return-form-section");
+      smoothScrollTo(formSection);
+    });
   }
 
   if (secondaryBtn) {
-    secondaryBtn.addEventListener("click", () => {
-      // Scroll to FAQ section
-      const faqSection = document.querySelector(".faq-section")
-      if (faqSection) {
-        faqSection.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        })
-      }
-    })
+    secondaryBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      const faqSection = document.querySelector(".faq-section");
+      smoothScrollTo(faqSection);
+    });
   }
 
   // Form input animations
@@ -142,20 +151,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     })
   }
-
-  // Smooth scroll for internal links
-  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-    anchor.addEventListener("click", function (e) {
-      e.preventDefault()
-      const target = document.querySelector(this.getAttribute("href"))
-      if (target) {
-        target.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        })
-      }
-    })
-  })
 
   // Step items hover effect
   const stepItems = document.querySelectorAll(".step-item")

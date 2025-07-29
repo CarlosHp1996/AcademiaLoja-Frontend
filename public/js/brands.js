@@ -36,11 +36,3 @@ function initializeBrandCards() {
         }
     });
 }
-
-document.getElementById('btn-ver-catalogo').addEventListener('click', function(e) {
-    e.preventDefault();
-    const section = document.getElementById('brands-showcase');
-    if (section) {
-        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-});
