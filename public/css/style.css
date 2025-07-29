@@ -1263,13 +1263,6 @@ img {
   margin-bottom: 1rem;
 }
 
-.rating,
-.product-rating {
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-}
-
 .stars {
   color: var(--color-yellow-400);
   display: flex;
@@ -1287,14 +1280,6 @@ img {
 .star.empty,
 .stars .fa-star.empty {
   color: var(--color-zinc-700);
-}
-
-.rating-text,
-.rating-count,
-.product-reviews {
-  font-size: 0.875rem;
-  color: var(--color-zinc-300);
-  margin-left: 0.5rem;
 }
 
 .stock-badge,
@@ -1788,25 +1773,6 @@ img {
   margin-top: 2rem;
   letter-spacing: 0.01em;
   text-align: left;
-}
-
-.product-rating-small,
-.product-rating {
-  display: flex;
-  align-items: center;
-  margin-bottom: 0.5rem;
-}
-
-.product-rating-small .stars,
-.product-rating .stars {
-  font-size: 0.875rem;
-}
-
-.product-rating-small .rating-value,
-.product-rating .reviews {
-  font-size: 0.75rem;
-  color: var(--color-zinc-400);
-  margin-left: 0.25rem;
 }
 
 .product-name {
@@ -2712,33 +2678,6 @@ img {
 .stock-status .out-of-stock {
   color: #e74c3c;
   font-weight: 500;
-}
-
-/* Estilos para avaliação */
-.product-rating {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 15px;
-}
-
-.product-rating .stars {
-  display: flex;
-  gap: 2px;
-}
-
-.product-rating .stars i {
-  color: #ffd700;
-  font-size: 16px;
-}
-
-.product-rating .stars i.text-gray-300 {
-  color: #ddd;
-}
-
-.product-rating .rating-text {
-  color: #666;
-  font-size: 0.9em;
 }
 
 /* Estilos para opções de sabor */

@@ -46,7 +46,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         name: data.value.name,
         price: data.value.price,
         oldPrice: data.value.oldPrice,
-        rating: data.value.rating || 4.5,
         image: data.value.imageUrl || "https://via.placeholder.com/500x500",
         description: data.value.description,
         stockQuantity: data.value.stockQuantity || 0,
@@ -90,12 +89,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       stockStatus.innerHTML = `<span class="out-of-stock">✗ Fora de estoque</span>`
     }
 
-    // Renderizar avaliação
-    const ratingContainer = document.getElementById("product-rating")
-    ratingContainer.innerHTML = `
-            <div class="stars">${renderStars(product.rating)}</div>
-            <span class="rating-text">(${product.rating})</span>
-        `
+    
 
     document.getElementById("product-description").textContent = product.description || "Descrição não disponível."
 
@@ -158,20 +152,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     flavorOptionsDiv.appendChild(selectElement)
   }
 
-  // Função para renderizar estrelas de avaliação
-  function renderStars(rating) {
-    let starsHtml = ""
-    for (let i = 0; i < 5; i++) {
-      if (i < Math.floor(rating)) {
-        starsHtml += '<i class="fas fa-star"></i>'
-      } else if (i === Math.floor(rating) && rating % 1 !== 0) {
-        starsHtml += '<i class="fas fa-star-half-alt"></i>'
-      } else {
-        starsHtml += '<i class="fas fa-star text-gray-300"></i>'
-      }
-    }
-    return starsHtml
-  }
+  
 
   // Função para alternar botão ativo
   function toggleActive(clickedElement, selector) {
@@ -481,7 +462,4 @@ document.addEventListener("DOMContentLoaded", async () => {
   setupAddToCart()
   setupShippingCalculator()
   renderRelatedProducts()
-
-  // Nota: O setupCartPanel() foi removido daqui pois agora é gerenciado pelo cart-ui.js
-  // para evitar conflitos de event listeners
 })
