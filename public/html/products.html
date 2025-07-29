@@ -116,7 +116,6 @@
                     Descubra os
                     <span class="products-highlight">
                         <span class="highlight-text">melhores produtos</span>
-                        <span class="highlight-underline"></span>
                     </span>
                     <span class="title-main">para seus treinos</span>
                 </h1>
@@ -178,6 +177,7 @@
                 <aside class="filters-sidebar">
                     <div class="filters-header">
                         <h2><i class="fas fa-filter"></i> Filtros</h2>
+                        <button class="btn-close-panel" id="close-filter-btn"><i class="fas fa-times"></i></button>
                         <button id="clearFilters" class="btn-text">
                             <i class="fas fa-times"></i>
                             Limpar
@@ -340,7 +340,18 @@
                     <div class="products-header">
                         <h1 class="page-title">Todos os Produtos</h1>
                         <div class="products-actions">
+                            <div class="mobile-actions">
+                                <button class="btn-mobile-filter" id="mobile-filter-btn">
+                                    <i class="fas fa-filter"></i>
+                                    Filtrar
+                                </button>
+                                <button class="btn-mobile-sort" id="mobile-sort-btn">
+                                    <i class="fas fa-sort-amount-down"></i>
+                                    Ordenar
+                                </button>
+                            </div>
                             <div class="sort-options enhanced-sort">
+                                <button class="btn-close-panel" id="close-sort-btn"><i class="fas fa-times"></i></button>
                                 <label for="sortBy">Ordenar por:</label>
                                 <select id="sortBy">
                                     <option value="relevance">Relevância</option>
