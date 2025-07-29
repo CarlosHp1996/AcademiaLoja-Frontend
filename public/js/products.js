@@ -294,6 +294,48 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Inicializar eventos
     function initEvents() {
+        const mobileFilterBtn = document.getElementById('mobile-filter-btn');
+        const mobileSortBtn = document.getElementById('mobile-sort-btn');
+        const filtersSidebar = document.querySelector('.filters-sidebar');
+        const sortOptions = document.querySelector('.sort-options');
+        let overlay = null;
+
+        const closeFilterBtn = document.getElementById('close-filter-btn');
+        const closeSortBtn = document.getElementById('close-sort-btn');
+
+        if (closeFilterBtn) {
+            closeFilterBtn.addEventListener('click', closeMobilePanels);
+        }
+
+        if (closeSortBtn) {
+            closeSortBtn.addEventListener('click', closeMobilePanels);
+        }
+
+        function createOverlay() {
+            if (document.querySelector('.overlay')) return;
+            overlay = document.createElement('div');
+            overlay.className = 'overlay';
+            document.body.appendChild(overlay);
+            overlay.addEventListener('click', closeMobilePanels);
+        }
+
+        function showOverlay() {
+            if (!overlay) createOverlay();
+            overlay.style.display = 'block';
+        }
+
+        function hideOverlay() {
+            if (overlay) {
+                overlay.style.display = 'none';
+            }
+        }
+
+        function closeMobilePanels() {
+            if (filtersSidebar) filtersSidebar.classList.remove('mobile-active');
+            if (sortOptions) sortOptions.classList.remove('mobile-active');
+            hideOverlay();
+        }
+
         // Eventos iniciais para checkboxes já existentes
         filterCheckboxes.forEach(checkbox => {
             checkbox.addEventListener('change', function() {
@@ -392,7 +434,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Evento para limpar filtros
         if (clearFiltersBtn) {
-            clearFiltersBtn.addEventListener('click', clearFilters);
+            clearFiltersBtn.addEventListener('click', () => {
+                clearFilters();
+                closeMobilePanels();
+            });
         }
 
         // Evento para ordenação - aplicar em tempo real
@@ -400,6 +445,7 @@ document.addEventListener('DOMContentLoaded', function() {
             sortBySelect.addEventListener('change', function() {
                 filters.page = 1;
                 debounceApplyFilters(100); // Delay menor para sort
+                closeMobilePanels();
             });
         }
 
@@ -418,6 +464,20 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
         });
+
+        if (mobileFilterBtn) {
+            mobileFilterBtn.addEventListener('click', () => {
+                showOverlay();
+                if (filtersSidebar) filtersSidebar.classList.add('mobile-active');
+            });
+        }
+
+        if (mobileSortBtn) {
+            mobileSortBtn.addEventListener('click', () => {
+                showOverlay();
+                if (sortOptions) sortOptions.classList.add('mobile-active');
+            });
+        }
     }
 
     // Aplicar filtros e buscar produtos da API
