@@ -3,6 +3,35 @@ document.addEventListener("DOMContentLoaded", function() {
     initializeGoalsPage();
 });
 
+document.addEventListener('DOMContentLoaded', () => {
+    const exploreButton = document.getElementById('explore-goals-btn');
+    const goalsSection = document.getElementById('goals-section');
+
+    if (exploreButton && goalsSection) {
+        exploreButton.addEventListener('click', (e) => {
+            e.preventDefault(); // Previne o comportamento padrão do link
+
+            // Calcula a altura dos cabeçalhos fixos para um posicionamento perfeito
+            const header = document.querySelector('.header');
+            const subheader = document.querySelector('.subheader');
+            const headerHeight = header ? header.offsetHeight : 0;
+            const subheaderHeight = subheader ? subheader.offsetHeight : 0;
+            const totalHeaderHeight = headerHeight + subheaderHeight;
+
+            // Calcula a posição da seção de destino
+            const sectionTop = goalsSection.getBoundingClientRect().top + window.scrollY;
+
+            // Rola a página suavemente até a posição correta
+            window.scrollTo({
+                top: sectionTop - totalHeaderHeight - 20, // 20px de margem extra para respiro
+                behavior: 'smooth'
+            });
+        });
+    }
+});
+
+
+
 //const API_BASE_URL = "https://localhost:4242/api";
 
 function initializeGoalsPage() {

@@ -11,6 +11,8 @@
   padding: 2rem 0;
   width: 100vw;
   margin-left: calc(-50vw + 50%);
+  min-height: auto; /* Remove a altura mínima fixa */
+
 }
 
 /* Animated Background Elements */

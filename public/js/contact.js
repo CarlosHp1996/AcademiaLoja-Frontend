@@ -40,18 +40,18 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       // Simulate form submission
-      const submitBtn = this.querySelector(".btn-submit-form")
-      const originalText = submitBtn.querySelector(".btn-text").textContent
+      // const submitBtn = this.querySelector(".btn-submit-form")
+      // const originalText = submitBtn.querySelector(".btn-text").textContent
 
-      submitBtn.querySelector(".btn-text").textContent = "Enviando..."
-      submitBtn.disabled = true
+      // submitBtn.querySelector(".btn-text").textContent = "Enviando..."
+      // submitBtn.disabled = true
 
-      setTimeout(() => {
-        alert("Mensagem enviada com sucesso! Entraremos em contato em breve.")
-        this.reset()
-        submitBtn.querySelector(".btn-text").textContent = originalText
-        submitBtn.disabled = false
-      }, 2000)
+      // setTimeout(() => {
+      //   alert("Mensagem enviada com sucesso! Entraremos em contato em breve.")
+      //   this.reset()
+      //   submitBtn.querySelector(".btn-text").textContent = originalText
+      //   submitBtn.disabled = false
+      // }, 2000)
     })
   }
 
