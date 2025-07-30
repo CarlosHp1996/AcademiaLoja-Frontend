@@ -3698,11 +3698,11 @@ img {
   }
   .hero-actions-modern {
     flex-direction: column;
-    align-items: stretch;
+    align-items: center; /* Centraliza os botões */
   }
   .btn-primary-modern,
   .btn-secondary-modern {
-    width: 100%;
+    width: auto; /* Ajusta a largura para o conteúdo */
     justify-content: center;
   }
   .hero-trust {
