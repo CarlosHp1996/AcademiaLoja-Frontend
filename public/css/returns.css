@@ -166,18 +166,6 @@
   z-index: 2;
 }
 
-.returns-highlight .highlight-underline {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 6px;
-  background: linear-gradient(135deg, #f97316, #ff8c42);
-  border-radius: 3px;
-  opacity: 0.3;
-  animation: expand 2s ease-out;
-}
-
 /* Returns Subtitle */
 .returns-subtitle-modern {
   font-size: 1.25rem;

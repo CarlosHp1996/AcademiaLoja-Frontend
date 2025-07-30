@@ -958,18 +958,6 @@
   z-index: 2;
 }
 
-.goals-highlight .highlight-underline {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 8px;
-  background: linear-gradient(135deg, var(--color-orange), var(--color-orange-dark));
-  border-radius: 4px;
-  opacity: 0.3;
-  animation: expand 2s ease-out;
-}
-
 /* Goals Subtitle */
 .goals-subtitle-modern {
   font-size: 1.25rem;

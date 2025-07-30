@@ -168,18 +168,6 @@
   z-index: 2;
 }
 
-.contact-highlight .highlight-underline {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 6px;
-  background: linear-gradient(135deg, #f97316, #ea580c);
-  border-radius: 3px;
-  opacity: 0.3;
-  animation: expand 2s ease-out;
-}
-
 /* Contact Subtitle */
 .contact-subtitle-modern {
   font-size: 1.25rem;
