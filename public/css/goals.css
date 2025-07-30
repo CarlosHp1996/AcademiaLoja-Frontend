@@ -675,6 +675,16 @@
     font-size: 2rem;
   }
 
+  .featured-text {
+    text-align: center;
+  }
+
+  .features-list {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
   .cta-content h2 {
     font-size: 2rem;
   }
@@ -1398,7 +1408,8 @@
   .goals-trust {
     flex-direction: column;
     gap: 1rem;
-    align-items: center;
+    align-items: flex-start;
+    display: inline-flex;
   }
 }
 
