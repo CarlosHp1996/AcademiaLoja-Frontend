@@ -1,152 +1,30 @@
-/* Estilos para a página de contato - VERSÃO CORRIGIDA */
+/* Estilos para a página de contato - VERSÃO ATUALIZADA */
 
-/* Contact Hero Section - SIMPLIFICADO */
-.contact-hero-modern {
-  position: relative;
-  min-height: 80vh;
-  display: flex;
-  align-items: center;
-  overflow: hidden;
-  background: #000000; /* Apenas fundo preto simples */
-  padding: 6rem 0;
-  width: 100%;
-}
-
-/* Contact Container - CORRIGIDO */
-.contact-container {
-  position: relative;
-  z-index: 10;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 3rem;
-  align-items: center;
-  justify-items: center;
-  min-height: 80vh;
-  padding: 2rem 4rem;
-  max-width: 1400px;
-  width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  box-sizing: border-box;
-}
-
-/* Contact Content */
-.contact-content-modern {
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-/* Contact Title */
-.contact-title-modern {
-  font-size: clamp(2.5rem, 8vw, 4rem);
-  font-weight: 900;
-  line-height: 1.1;
-  margin-bottom: 2rem;
-  letter-spacing: -0.02em;
-  color: #fff;
-  word-wrap: break-word;
-  hyphens: auto;
-}
-
-.contact-highlight {
-  position: relative;
-  display: inline-block;
-}
-
-.contact-highlight .highlight-text {
-  background: linear-gradient(135deg, #f97316, #ea580c);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  position: relative;
-  z-index: 2;
-}
-
-/* Contact Subtitle */
-.contact-subtitle-modern {
-  font-size: 1.25rem;
-  color: #d1d5db;
-  margin-bottom: 3rem;
-  line-height: 1.6;
-  font-weight: 400;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* Contact Stats */
-.contact-stats {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 2rem;
-  margin-bottom: 3rem;
-  padding: 2rem 0;
-  flex-wrap: wrap;
-}
-
-.contact-stats .stat-item {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  text-align: left;
-}
-
-.contact-stats .stat-icon {
-  width: 50px;
-  height: 50px;
-  background: linear-gradient(135deg, #f97316, #ff8c42);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.25rem;
-  color: #fff;
-  box-shadow: 0 8px 25px rgba(249, 115, 22, 0.3);
-}
-
-.contact-stats .stat-content {
-  display: flex;
-  flex-direction: column;
-}
-
-.contact-stats .stat-number {
-  font-size: 1.75rem;
-  font-weight: 800;
-  color: #f97316;
-  line-height: 1;
-}
-
-.contact-stats .stat-label {
-  font-size: 0.875rem;
-  color: #9ca3af;
-  margin-top: 0.25rem;
-}
-
-.contact-stats .stat-divider {
-  width: 1px;
-  height: 3rem;
-  background-color: #374151;
-}
-
-/* Contact Methods Section */
+/* Contact Methods Section - FUNDO PRETO */
 .contact-methods-section {
-  padding: 6rem 0;
-  background: linear-gradient(135deg, #111827 0%, #000000 100%);
-  margin: 4rem 0;
+  padding: 1rem 0;
+  background: #000000; /* Fundo completamente preto */
+  margin: 2rem 0;
   border-radius: 30px;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.contact-methods-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  box-sizing: border-box;
 }
 
 .section-header {
   text-align: center;
   margin-bottom: 4rem;
+  padding: 1px 0;
 }
 
 .section-title {
-  font-size: 2.75rem;
+  font-size: 4rem;
   font-weight: 800;
   color: #fff;
   margin-bottom: 1rem;
@@ -160,7 +38,7 @@
   left: 50%;
   transform: translateX(-50%);
   width: 80px;
-  height: 4px;
+  height: 10px;
   background: linear-gradient(90deg, #f97316, #ff8c42);
   border-radius: 2px;
 }
@@ -170,6 +48,8 @@
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2rem;
   margin-top: 3rem;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .contact-method-card {
@@ -510,44 +390,12 @@
 
 /* Responsividade */
 @media (max-width: 1200px) {
-  .contact-container {
-    padding: 2rem 1.5rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .contact-container {
-    grid-template-columns: 1fr 400px;
-    gap: 4rem;
-    padding: 2rem 4rem;
-  }
-
-  .contact-content-modern {
-    text-align: left;
-    margin: 0;
-  }
-
-  .contact-stats {
-    justify-content: flex-start;
+  .contact-methods-container {
+    padding: 0 1.5rem;
   }
 }
 
 @media (max-width: 768px) {
-  .contact-container {
-    padding: 2rem 1rem;
-    gap: 2rem;
-  }
-
-  .contact-stats {
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-
-  .contact-stats .stat-divider {
-    width: 3rem;
-    height: 1px;
-  }
-
   .contact-methods-grid {
     grid-template-columns: 1fr;
   }
@@ -559,27 +407,12 @@
 
   .contact-form-section,
   .contact-methods-section {
-    padding: 4rem 2rem;
+    padding: 1rem 2rem;
     margin: 3rem 0;
   }
 }
 
 @media (max-width: 480px) {
-  .contact-container {
-    padding: 1rem 0.5rem;
-    min-height: auto;
-  }
-
-  .contact-stats .stat-icon {
-    width: 40px;
-    height: 40px;
-    font-size: 1rem;
-  }
-
-  .contact-stats .stat-number {
-    font-size: 1.5rem;
-  }
-
   .method-icon {
     width: 60px;
     height: 60px;
@@ -603,44 +436,46 @@
     padding-left: 1rem;
     padding-right: 1rem;
   }
+
+  .section-title {
+    font-size: 2.5rem;
+  }
 }
 
 @media (max-width: 320px) {
-  .contact-container {
-    padding: 0.5rem;
-  }
-
   .container {
     padding-left: 0.5rem;
     padding-right: 0.5rem;
   }
 
-  .contact-title-modern {
-    font-size: 2rem;
+  .contact-methods-section {
+    margin: 1rem 0;
+    padding: 4rem 1rem;
   }
-
-  .contact-subtitle-modern {
-    font-size: 1rem;
+  
+  .contact-methods-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
   }
 }
 
 @media (min-width: 1400px) {
   .contact-methods-grid {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
 @media (min-width: 1600px) {
-  .contact-container {
+  .contact-methods-container {
     max-width: 1600px;
-    padding: 2rem 6rem;
+    padding: 0 6rem;
   }
 }
 
 @media (min-width: 1920px) {
-  .contact-container {
+  .contact-methods-container {
     max-width: 1800px;
-    padding: 2rem 8rem;
+    padding: 0 8rem;
   }
 }
 
