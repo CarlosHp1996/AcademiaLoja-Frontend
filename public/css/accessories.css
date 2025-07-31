@@ -351,31 +351,6 @@
   transform: translateX(4px);
 }
 
-/* CTA Section */
-.cta-section {
-  background: linear-gradient(135deg, #1f2937, #111827);
-  border: 2px solid #f97316;
-  border-radius: 24px;
-  padding: 4rem 3rem;
-  text-align: center;
-  margin: 4rem 0;
-  position: relative;
-  overflow: hidden;
-  max-width: 100%;
-  width: 100%;
-}
-
-.cta-section::before {
-  content: "";
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(249, 115, 22, 0.1) 0%, transparent 70%);
-  animation: pulse 4s ease-in-out infinite;
-}
-
 @keyframes pulse {
   0%,
   100% {
@@ -386,33 +361,6 @@
     opacity: 0.8;
     transform: scale(1.05);
   }
-}
-
-.cta-content {
-  position: relative;
-  z-index: 2;
-}
-
-.cta-title {
-  font-size: 2.5rem;
-  font-weight: 800;
-  color: #fff;
-  margin-bottom: 1rem;
-}
-
-.cta-description {
-  font-size: 1.125rem;
-  color: #9ca3af;
-  line-height: 1.6;
-  max-width: 600px;
-  margin: 0 auto 2.5rem;
-}
-
-.cta-buttons {
-  display: flex;
-  gap: 1.5rem;
-  justify-content: center;
-  flex-wrap: wrap;
 }
 
 .btn-primary,
@@ -713,20 +661,6 @@
     gap: 1.5rem;
   }
 
-  .cta-section {
-    padding: 3rem 2rem;
-    margin: 3rem 0;
-  }
-
-  .cta-title {
-    font-size: 2rem;
-  }
-
-  .cta-buttons {
-    flex-direction: column;
-    align-items: center;
-  }
-
   .btn-primary,
   .btn-secondary {
     width: 100%;
@@ -818,19 +752,6 @@
 
   .card-title {
     font-size: 1.25rem;
-  }
-
-  .cta-section {
-    padding: 2rem 1.5rem;
-    border-radius: 16px;
-  }
-
-  .cta-title {
-    font-size: 1.75rem;
-  }
-
-  .cta-description {
-    font-size: 1rem;
   }
 
   .accessories-container {
