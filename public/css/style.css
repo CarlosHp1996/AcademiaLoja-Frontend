@@ -51,7 +51,8 @@ body {
   overflow-x: hidden; /* Previne scroll horizontal */
 }
 
-html, body {
+html,
+body {
   overflow-x: hidden;
   max-width: 100%;
 }
@@ -178,19 +179,19 @@ html, body {
   .footer-column {
     text-align: center;
   }
-  
+
   .footer-column .footer-title {
     text-align: center;
   }
-  
+
   .footer-column .footer-links {
     text-align: center;
   }
-  
+
   .footer-column .contact-info {
     text-align: center;
   }
-  
+
   .footer-column .contact-info li {
     justify-content: center;
   }
@@ -200,24 +201,24 @@ html, body {
   .footer-column {
     text-align: center;
   }
-  
+
   .footer-column .footer-title {
     text-align: center;
     margin-bottom: 1rem;
   }
-  
+
   .footer-column .footer-links {
     text-align: center;
   }
-  
+
   .footer-column .footer-links li {
     text-align: center;
   }
-  
+
   .footer-column .contact-info {
     text-align: center;
   }
-  
+
   .footer-column .contact-info li {
     justify-content: center;
     text-align: center;
@@ -686,97 +687,8 @@ img {
   display: flex;
   align-items: center;
   overflow: hidden;
-  background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%);
+  background: #000000;
   width: 100%;
-  max-width: 100%;
-}
-
-/* Animated Background Elements */
-.hero-bg-elements {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 1;
-  overflow: hidden;
-}
-
-.floating-element {
-  position: absolute;
-  border-radius: 50%;
-  opacity: 0.1;
-  animation: float 6s ease-in-out infinite;
-}
-
-.element-1 {
-  width: 200px;
-  height: 200px;
-  background: linear-gradient(45deg, var(--color-orange), var(--color-orange-dark));
-  top: 10%;
-  left: 10%;
-  animation-delay: 0s;
-}
-
-.element-2 {
-  width: 150px;
-  height: 150px;
-  background: linear-gradient(45deg, var(--color-orange-dark), var(--color-orange));
-  top: 60%;
-  right: 15%;
-  animation-delay: 2s;
-}
-
-.element-3 {
-  width: 100px;
-  height: 100px;
-  background: linear-gradient(45deg, var(--color-orange), var(--color-orange-dark));
-  bottom: 20%;
-  left: 20%;
-  animation-delay: 4s;
-}
-
-.element-4 {
-  width: 80px;
-  height: 80px;
-  background: linear-gradient(45deg, var(--color-orange-dark), var(--color-orange));
-  top: 30%;
-  right: 40%;
-  animation-delay: 1s;
-}
-
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0px) rotate(0deg);
-  }
-  50% {
-    transform: translateY(-20px) rotate(180deg);
-  }
-}
-
-/* Gradient Overlays */
-.hero-gradient-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(249, 115, 22, 0.1) 0%, rgba(220, 38, 38, 0.05) 50%, rgba(0, 0, 0, 0.8) 100%);
-  z-index: 2;
-}
-
-.hero-radial-overlay {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse at center, transparent 0%, rgba(0, 0, 0, 0.4) 70%, rgba(0, 0, 0, 0.8) 100%);
-  z-index: 3;
-}
-
-/* Background Image - CORRIGIDO */
-.hero-bg-image {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0.3;
-  z-index: 0;
   max-width: 100%;
 }
 
@@ -1004,14 +916,6 @@ img {
 .trust-item i {
   color: var(--color-orange);
   font-size: 1rem;
-}
-
-/* Hero Visual */
-.hero-visual {
-  position: relative;
-  display: none;
-  align-items: center;
-  justify-content: center;
 }
 
 .visual-circle {
@@ -1766,12 +1670,12 @@ img {
 
 /* Products Grid */
 .products-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1.5rem;
-    width: 100%;
-    max-width: 100%;
-    box-sizing: border-box;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .product-card {
@@ -3597,6 +3501,14 @@ img {
   .cart-grid {
     grid-template-columns: 2fr 1fr;
   }
+  .hero-container {
+    grid-template-columns: 1fr 400px;
+    gap: 4rem;
+  }
+  .hero-content-modern {
+    text-align: left;
+    margin: 0;
+  }
 }
 
 @media (max-width: 767px) {
@@ -3743,25 +3655,25 @@ img {
   * {
     max-width: 100% !important;
   }
-  
+
   .container {
     max-width: 100%;
     padding-left: 1rem;
     padding-right: 1rem;
     overflow-x: hidden;
   }
-  
+
   .hero-modern {
     width: 100%;
     max-width: 100%;
   }
-  
+
   .footer {
     width: 100%;
     max-width: 100%;
     overflow-x: hidden;
   }
-  
+
   .header {
     width: 100%;
     max-width: 100%;
