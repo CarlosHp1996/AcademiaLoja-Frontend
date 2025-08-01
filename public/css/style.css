@@ -456,7 +456,8 @@ img {
 }
 
 .logo-img {
-  height: 80px;
+  width: 100px;
+  height: 100px;
   max-width: 100px;
   width: auto;
 }
