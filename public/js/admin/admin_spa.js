@@ -462,6 +462,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     <label for="productDescription">Descrição:</label>
                     <textarea id="productDescription" name="Description" required class="form-control">${isEditing ? product.description : ""}</textarea>
                 </div>
+                <div class="form-group">
+                    <label for="productBenefit">Benefícios:</label>
+                    <textarea id="productBenefit" name="Benefit" required class="form-control">${isEditing ? product.benefit : ""}</textarea>
+                </div>
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <label for="productFlavor">Sabor:</label>
