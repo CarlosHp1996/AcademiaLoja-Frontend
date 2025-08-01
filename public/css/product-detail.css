@@ -1,0 +1,8 @@
+/* Estilos para a página de detalhes do produto */
+
+.product-title {
+    font-size: 3em; /* Tamanho da fonte aumentado para o título do produto */
+    font-weight: bold;
+    color: white;
+    margin-bottom: 15px;
+}
