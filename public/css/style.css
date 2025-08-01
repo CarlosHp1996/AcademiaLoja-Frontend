@@ -2893,8 +2893,8 @@ img {
 
 .related-product-card:hover {
   box-shadow: 0 0 20px 0 #f97316, 0 4px 16px rgba(0, 0, 0, 0.12);
-  transform: translateY(-4px) scale(1.03);
-  z-index: 2;
+  /* transform: translateY(-4px) scale(1.03);
+  z-index: 2; */
 }
 
 .related-product-image {
