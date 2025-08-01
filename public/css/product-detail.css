@@ -33,3 +33,40 @@
     font-size: 0.8em;
     color: white;
 }
+
+/* Estilos para a imagem principal do produto */
+.product-main-image {
+    max-width: 450px; /* Reduz a largura máxima da imagem principal */
+    margin: 0 auto; /* Centraliza a imagem */
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.product-main-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Estilos para os botões de opção do produto em modo desktop */
+@media (min-width: 768px) {
+    .product-options .flavor-options,
+    .product-options .size-select {
+        max-width: 250px;
+    }
+
+    .quantity-selector {
+        display: flex;
+        width: 120px;
+    }
+
+    .quantity-selector .quantity-input {
+        width: 40px;
+        text-align: center;
+    }
+
+    .add-to-cart-btn {
+        max-width: 200px; /* Reduz a largura do botão Comprar */
+        flex: none; /* Remove a propriedade flex que o expande */
+    }
+}

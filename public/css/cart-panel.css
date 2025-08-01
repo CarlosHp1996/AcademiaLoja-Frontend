@@ -190,8 +190,8 @@
 }
 
 .quantity-btn {
-  background: #374151;
-  color: #fff;
+  background: #f97316;
+  color: black;
   border: none;
   width: 28px;
   height: 28px;
@@ -201,12 +201,12 @@
   justify-content: center;
   cursor: pointer;
   transition: all 0.3s ease;
-  font-size: 0.875rem;
+  font-size: 1.5rem;
 }
 
-.quantity-btn:hover {
-  background: #f97316;
-}
+/* .quantity-btn:hover {
+  background: white;
+} */
 
 .quantity-btn:disabled {
   background: #1f2937;
