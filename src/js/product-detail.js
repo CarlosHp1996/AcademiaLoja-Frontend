@@ -403,13 +403,19 @@ document.addEventListener("DOMContentLoaded", async () => {
       return
     }
 
-    // Criar a div de produtos relacionados
+    // Criar a estrutura do carrossel
     const relatedSection = document.createElement("div")
     relatedSection.className = "related-products-section"
     relatedSection.innerHTML = `
             <h2 class="product-content">Para comprar com esse produto</h2>
-            <div class="products-grid" id="products-grid">
-                <!-- Produtos serão inseridos aqui -->
+            <div class="related-products-carousel">
+                <button class="carousel-prev"><i class="fas fa-chevron-left"></i></button>
+                <div class="carousel-wrapper">
+                    <div class="carousel-slides" id="related-slides">
+                        <!-- Produtos serão inseridos aqui -->
+                    </div>
+                </div>
+                <button class="carousel-next"><i class="fas fa-chevron-right"></i></button>
             </div>
         `
 
@@ -417,18 +423,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     const tabsContainer = document.querySelector(".product-tabs")
     if (tabsContainer) {
       tabsContainer.insertAdjacentElement("afterend", relatedSection)
-    } else {
-      console.error("Container .product-tabs não encontrado")
-      return
     }
 
     // Renderizar cada produto relacionado
-    const grid = document.getElementById("products-grid")
-    console.log("Grid container:", grid)
-
-    relatedProducts.forEach((product, index) => {
-      console.log(`Renderizando produto ${index + 1}:`, product)
-
+    const slidesContainer = document.getElementById("related-slides")
+    relatedProducts.forEach((product) => {
       const productCard = document.createElement("div")
       const priceDisplay =
         product.price && typeof product.price === "number" ? `R$ ${product.price.toFixed(2)}` : "Preço não disponível"
@@ -446,13 +445,29 @@ document.addEventListener("DOMContentLoaded", async () => {
                     </button>
                 </div>
             `
-
-      console.log("Card HTML:", productCard.outerHTML)
-      grid.appendChild(productCard)
+      slidesContainer.appendChild(productCard)
     })
 
-    console.log("Grid final:", grid.innerHTML)
-    console.log("Produtos renderizados com sucesso!")
+    // Lógica do carrossel
+    const prevButton = document.querySelector(".carousel-prev")
+    const nextButton = document.querySelector(".carousel-next")
+    const slides = document.querySelector(".carousel-slides")
+    const items = document.querySelectorAll(".related-product-card")
+    let index = 0
+
+    function updateCarousel() {
+        slides.style.transform = `translateX(${-index * 100}%)`
+    }
+
+    prevButton.addEventListener("click", () => {
+        index = (index - 1 + items.length) % items.length
+        updateCarousel()
+    })
+
+    nextButton.addEventListener("click", () => {
+        index = (index + 1) % items.length
+        updateCarousel()
+    })
   }
 
   // Chamar funções principais

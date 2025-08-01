@@ -48,8 +48,34 @@
     display: block;
 }
 
-/* Estilos para os botões de opção do produto em modo desktop */
+/* Layout do produto */
+.product-detail {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
 @media (min-width: 768px) {
+    .product-detail {
+        grid-template-columns: 1fr 1fr;
+        align-items: flex-start;
+    }
+
+    .product-header {
+        grid-column: 2 / 3; /* Coloca o cabeçalho na segunda coluna */
+        grid-row: 1 / 2; /* Coloca o cabeçalho na primeira linha */
+    }
+
+    .product-images {
+        grid-column: 1 / 2; /* Coloca as imagens na primeira coluna */
+        grid-row: 1 / 3; /* Faz as imagens ocuparem duas linhas */
+    }
+
+    .product-info {
+        grid-column: 2 / 3; /* Coloca as informações na segunda coluna */
+        grid-row: 2 / 3; /* Coloca as informações na segunda linha */
+    }
+
     .product-options .flavor-options,
     .product-options .size-select {
         max-width: 250px;
@@ -69,4 +95,53 @@
         max-width: 200px; /* Reduz a largura do botão Comprar */
         flex: none; /* Remove a propriedade flex que o expande */
     }
+}
+
+/* Reordenação para modo mobile */
+@media (max-width: 767px) {
+    .product-header {
+        order: -1; /* Move o cabeçalho do produto para cima da imagem */
+    }
+}
+
+/* Estilos para o carrossel de produtos relacionados */
+.related-products-carousel {
+    position: relative;
+    overflow: hidden;
+}
+
+.carousel-wrapper {
+    overflow: hidden;
+}
+
+.carousel-slides {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.related-product-card {
+    flex: 0 0 100%;
+    max-width: 180px; /* Tamanho menor para os cards */
+    margin: 0 10px;
+}
+
+.carousel-prev,
+.carousel-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.carousel-prev {
+    left: 0;
+}
+
+.carousel-next {
+    right: 0;
 }
