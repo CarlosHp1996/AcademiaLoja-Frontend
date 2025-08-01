@@ -6,3 +6,30 @@
     color: white;
     margin-bottom: 15px;
 }
+
+/* Estilos para os breadcrumbs */
+.breadcrumbs {
+    margin-top: 25px; /* Aumenta o espaçamento superior */
+    margin-bottom: 25px; /* Adiciona espaçamento inferior */
+    font-size: 1.1em; /* Aumenta o tamanho da fonte */
+    font-weight: 600; /* Deixa a fonte em negrito */
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Espaçamento entre os itens */
+}
+
+.breadcrumbs a {
+    text-decoration: none;
+    color: #f97316; /* Cor azul para links */
+    transition: color 0.3s ease;
+}
+
+.breadcrumbs a:hover {
+    color: white; /* Cor do link ao passar o mouse */
+}
+
+.breadcrumbs .fa-chevron-right {
+    font-size: 0.8em;
+    color: white;
+}
