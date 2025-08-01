@@ -154,6 +154,17 @@ body {
   margin: 0 auto;
 }
 
+/* SOLUÇÃO RÁPIDA - Adicione esta classe ao HTML */
+.hero-compact {
+  min-height: auto !important;
+  padding: 3rem 0 !important;
+}
+
+.hero-compact .hero-container {
+  min-height: auto !important;
+  padding: 2rem 1rem !important;
+}
+
 /* ===== RESPONSIVE BREAKPOINTS ===== */
 
 /* Mobile (até 480px) */
