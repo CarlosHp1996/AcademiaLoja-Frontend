@@ -218,7 +218,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <tr>
                             <td>${product.id.substring(0, 8)}...</td>
                             <td>
-                                <a href="/html/product-detail.html?id=${product.id}">
+                                <a href="/product-detail.html?id=${product.id}">
                                     <img src="${product.imageUrl || '/assets/images/placeholder.jpg'}" alt="${product.name}" width="50" height="50" style="object-fit: cover; border-radius: 4px; cursor:pointer;">
                                 </a>
                             </td>
@@ -335,7 +335,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // View product details
 function viewProduct(id) {
-    window.location.href = `/html/admin/products-detail.html?id=${id}`;
+    window.location.href = `/admin/products-detail.html?id=${id}`;
 }
 
 // Edit product

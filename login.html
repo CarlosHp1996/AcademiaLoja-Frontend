@@ -3,23 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rastreamento do Pedido - Power Rock Supplements</title>
+    <title>Login - Power Rock Supplements</title>
     <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/profile.css">
-    <link rel="stylesheet" href="/css/tracking.css">
+    <link rel="stylesheet" href="/css/auth.css">
+    <link rel="stylesheet" href="/css/forgout-password.css">
     <link rel="stylesheet" href="/css/whatsapp-button.css">
+    <!-- Estilos para dropdown e notificações -->
     <link rel="stylesheet" href="/css/auth-dropdown.css">
     <link rel="stylesheet" href="/css/auth-notifications.css">
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="/css/cart-panel.css">
 </head>
-<body data-required-role="User">
+<body>
 <!-- Header -->
 <header class="header">
     <div class="container">
         <div class="header-left">
-            <a href="/html/index.html" class="logo">
+            <a href="/index.html" class="logo">
                 <img src="/assets/images/logoLoja.png" alt="Logo Power Rock" class="logo-img">
             </a>
             <div class="search-container">
@@ -46,13 +49,13 @@
     </div>
 </header>
 
-<!-- Subheader -->
+  <!-- Subheader -->
 <section class="subheader">
     <div class="container">
         <nav class="subheader-nav">
             <ul class="menu-list">
                 <li class="menu-item">
-                    <a href="/html/products.html" class="nav-link">
+                    <a href="/products.html" class="nav-link">
                         Produtos
                         <i class="fas fa-chevron-down" style="margin-left: 6px; font-size: 0.85em;"></i>
                     </a>
@@ -61,7 +64,7 @@
                     </ul>                   
                 </li>
                 <li class="menu-item">
-                    <a href="/html/goals.html" class="nav-link">Objetivos 
+                    <a href="/goals.html" class="nav-link">Objetivos 
                         <i class="fas fa-chevron-down" style="margin-left: 6px; font-size: 0.85em;"></i>
                     </a>
                     <ul class="submenu">
@@ -69,7 +72,7 @@
                     </ul>
                 </li>
                 <li class="menu-item">
-                    <a href="/html/accessories.html" class="nav-link">Acessórios
+                    <a href="/accessories.html" class="nav-link">Acessórios
                         <i class="fas fa-chevron-down" style="margin-left: 6px; font-size: 0.85em;"></i>
                     </a>
                     <ul class="submenu">
@@ -77,7 +80,7 @@
                     </ul>
                 </li>
                 <li class="menu-item">
-                    <a href="/html/brands.html" class="nav-link">Marcas
+                    <a href="/brands.html" class="nav-link">Marcas
                         <i class="fas fa-chevron-down" style="margin-left: 6px; font-size: 0.85em;"></i>
                     </a>
                     <ul class="submenu">
@@ -85,154 +88,72 @@
                     </ul>
                 </li>
                 <li class="menu-item">
-                    <a href="/html/contact.html" class="nav-link">Contato</a>                   
+                    <a href="/contact.html" class="nav-link">Contato</a>                   
                 </li>
                 <li class="menu-item">
-                    <a href="/html/returns.html" class="nav-link">Trocas e Devoluções</a>                   
+                    <a href="/returns.html" class="nav-link">Trocas e Devoluções</a>                   
                 </li>
             </ul>
         </nav>
     </div>
 </section>
 
-<!-- Main Content -->
-<main class="main">
-    <div class="container">
-        <div class="profile-container">
-            <div class="profile-sidebar">
-                <div class="user-info">
-                    <div class="user-avatar">
-                        <i class="fas fa-user"></i>
-                    </div>
-                    <h2 class="user-name" id="user-name">Carregando...</h2>
-                    <p class="user-email" id="user-email">Carregando...</p>
-                </div>
-                <nav class="profile-nav">
-                    <ul>
-                        <li>
-                            <a href="/html/profile.html">
-                                <i class="fas fa-user-circle"></i>
-                                Meu Perfil
-                            </a>
-                        </li>
-                        <li class="active">
-                            <a href="/html/dashboard.html">
-                                <i class="fas fa-chart-line"></i>
-                                Meus Pedidos
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/html/wishlist.html">
-                                <i class="fas fa-heart"></i>
-                                Lista de Desejos
-                            </a>
-                        </li>
-                        <li class="logout">
-                            <a href="#" id="logoutBtn">
-                                <i class="fas fa-sign-out-alt"></i>
-                                Sair
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-            <div class="profile-content">
-                <!-- Loading State -->
-                <div class="loading-container" id="loading-container">
-                    <div class="loading-spinner">
-                        <i class="fas fa-spinner fa-spin"></i>
-                        <p>Carregando informações de rastreamento...</p>
-                    </div>
-                </div>
-
-                <!-- Error State -->
-                <div class="error-state" id="error-state" style="display: none;">
-                    <div class="error-icon">
-                        <i class="fas fa-exclamation-triangle"></i>
-                    </div>
-                    <h3>Erro ao carregar rastreamento</h3>
-                    <p id="error-message">Ocorreu um erro ao carregar as informações de rastreamento.</p>
-                    <div class="error-actions">
-                        <button class="btn btn-primary" onclick="loadTrackingDetails()">
-                            <i class="fas fa-refresh"></i>
-                            Tentar Novamente
-                        </button>
-                        <a href="/html/dashboard.html" class="btn btn-outline">
-                            <i class="fas fa-arrow-left"></i>
-                            Voltar aos Pedidos
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Tracking Content -->
-                <div class="tracking-content" id="tracking-content" style="display: none;">
-                    <div class="profile-header">
-                        <div class="header-actions">
-                            <a href="/html/dashboard.html" class="btn btn-outline">
-                                <i class="fas fa-arrow-left"></i>
-                                Voltar para Meus Pedidos
-                            </a>
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <div class="auth-container">
+                <div class="auth-box">
+                    <h1 class="auth-title">Login</h1>
+                    <p class="auth-subtitle">Entre com sua conta para continuar</p>
+                    
+                    <form id="loginForm" class="auth-form">
+                        <div class="form-group">
+                            <label for="email">E-mail</label>
+                            <input type="email" id="email" name="email" required placeholder="Seu e-mail">
                         </div>
-                        <h1 class="profile-title" id="tracking-title">Rastreamento do Pedido</h1>
-                        <p class="profile-subtitle" id="tracking-subtitle">Carregando...</p>
-                    </div>
-
-                    <div class="tracking-container">
-                        <!-- Status do Rastreamento -->
-                        <section class="tracking-section">
-                            <h2 class="section-title">
-                                <i class="fas fa-route"></i>
-                                Status do Rastreamento
-                            </h2>
-                            <div class="tracking-status" id="tracking-status">
-                                <!-- Status será carregado dinamicamente -->
-                            </div>
-                            <div class="tracking-progress" id="tracking-progress">
-                                <!-- Progresso será carregado dinamicamente -->
-                            </div>
-                        </section>
-
-                        <!-- Histórico de Atualizações -->
-                        <section class="tracking-section">
-                            <h2 class="section-title">
-                                <i class="fas fa-history"></i>
-                                Histórico de Atualizações
-                            </h2>
-                            <div class="tracking-timeline" id="tracking-timeline">
-                                <!-- Timeline será carregada dinamicamente -->
-                            </div>
-                        </section>
-
-                        <!-- Informações da Entrega -->
-                        <section class="tracking-section">
-                            <h2 class="section-title">
-                                <i class="fas fa-truck"></i>
-                                Informações da Entrega
-                            </h2>
-                            <div class="delivery-info" id="delivery-info">
-                                <!-- Informações de entrega serão carregadas dinamicamente -->
-                            </div>
-                        </section>
-
-                        <!-- Ações -->
-                        <section class="tracking-section">
-                            <div class="tracking-actions">
-                                <button class="btn btn-primary" id="refreshTracking">
-                                    <i class="fas fa-sync-alt"></i>
-                                    Atualizar Rastreamento
-                                </button>
-                                <button class="btn btn-outline" id="contactSupport">
-                                    <i class="fas fa-headset"></i>
-                                    Falar com Atendente
+                        
+                        <div class="form-group">
+                            <label for="password">Senha</label>
+                            <div class="password-input">
+                                <input type="password" id="password" name="password" required placeholder="Sua senha">
+                                <button type="button" class="toggle-password">
+                                    <i class="fas fa-eye"></i>
                                 </button>
                             </div>
-                        </section>
+                        </div>
+
+                        <div class="form-options">
+                            <label class="remember-me">
+                                <input type="checkbox" name="remember">
+                                <span>Lembrar de mim</span>
+                            </label>
+                            <a href="#" class="forgot-password">Esqueceu a senha?</a>
+                        </div>
+
+                        <button type="submit" class="auth-button">
+                            Entrar
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </form>
+
+                    <div class="auth-separator">
+                        <span>ou</span>
                     </div>
+
+                    <!-- <div class="social-login">
+                        <button class="social-button google">
+                            <i class="fab fa-google"></i>
+                            Continuar com Google
+                        </button>
+                    </div> -->
+
+                    <p class="auth-redirect">
+                        Não tem uma conta? <a href="/register">Cadastre-se</a>
+                    </p>
                 </div>
             </div>
         </div>
-    </div>
-</main>
+    </main>
 
 <!-- Footer -->
 <footer class="footer">
@@ -258,21 +179,21 @@
                 <div class="footer-column">
                     <h3 class="footer-title">Categorias</h3>
                     <ul class="footer-links">
-                        <li><a href="/html/products.html">Proteínas</a></li>
-                        <li><a href="/html/products.html">Pré-Treino</a></li>
-                        <li><a href="/html/products.html">Creatina</a></li>
-                        <li><a href="/html/products.html">Vitaminas</a></li>
-                        <li><a href="/html/accessories.html">Acessórios</a></li>
+                        <li><a href="/products.html">Proteínas</a></li>
+                        <li><a href="/products.html">Pré-Treino</a></li>
+                        <li><a href="/products.html">Creatina</a></li>
+                        <li><a href="/products.html">Vitaminas</a></li>
+                        <li><a href="/accessories.html">Acessórios</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
                     <h3 class="footer-title">Informações</h3>
                     <ul class="footer-links">
                         <li><a href="/about">Sobre Nós</a></li>
-                        <li><a href="/html/returns.html">Trocas e Devoluções</a></li>
+                        <li><a href="/returns.html">Trocas e Devoluções</a></li>
                         <li><a href="/privacy">Política de Privacidade</a></li>
                         <li><a href="/terms">Termos e Condições</a></li>
-                        <li><a href="/html/contact.html">Contato</a></li>
+                        <li><a href="/contact.html">Contato</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
@@ -319,7 +240,7 @@
     </div>
 </footer>
 
-<!-- Cart Side Panel -->
+    <!-- Cart Side Panel -->
 <div class="cart-overlay" id="cart-overlay"></div>
 <div class="cart-panel" id="cart-panel">
     <div class="cart-header">
@@ -366,15 +287,19 @@
     </div>
 </div>
 
-<!-- Scripts -->
-<script src="/js/navigation-enums.js"></script>
-<script src="/js/search-bar.js"></script>
-<script src="/js/tracking.js"></script>
-<script src="/js/cart-service.js"></script>
-<script src="/js/cart-ui.js"></script>
-<script src="/js/whatsapp-button.js"></script>
-<script src="/js/auth-service.js"></script>
-<script src="/js/auth-notifications.js"></script>
-<script src="/js/auth-integration.js"></script>
+    <!-- Script de navegação - DEVE SER CARREGADO PRIMEIRO -->
+    <script src="/js/navigation-enums.js"></script>
+    <!-- Script da barra de pesquisa -->
+    <script src="/js/search-bar.js"></script>
+    <script src="/js/auth.js"></script>
+    <script src="/js/forgout-password.js"></script>
+     <script src="/js/cart-service.js"></script>
+     <script src="/js/cart-ui.js"></script>
+     <!-- WhatsApp Button -->
+    <script src="/js/whatsapp-button.js"></script>
+        <!-- Scripts de autenticação - ORDEM IMPORTA! -->
+    <script src="/js/auth-service.js"></script>
+    <script src="/js/auth-notifications.js"></script>
+    <script src="/js/auth-integration.js"></script>
 </body>
-</html>
+<> 

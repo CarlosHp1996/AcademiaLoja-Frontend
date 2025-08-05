@@ -82,10 +82,10 @@ document.addEventListener('DOMContentLoaded', function() {
                             <td>${window.formatCurrency(order.total)}</td>
                             <td>
                                 <div class="action-buttons">
-                                    <button class="btn-action btn-view" title="Ver detalhes" onclick="window.location.href='/html/admin/orders-detail.html?id=${order.id}'">
+                                    <button class="btn-action btn-view" title="Ver detalhes" onclick="window.location.href='/admin/orders-detail.html?id=${order.id}'">
                                         <i class="fas fa-eye"></i>
                                     </button>
-                                    <button class="btn-action btn-edit" title="Editar" onclick="window.location.href='/html/admin/orders-edit.html?id=${order.id}'">
+                                    <button class="btn-action btn-edit" title="Editar" onclick="window.location.href='/admin/orders-edit.html?id=${order.id}'">
                                         <i class="fas fa-edit"></i>
                                     </button>
                                 </div>
@@ -135,10 +135,10 @@ document.addEventListener('DOMContentLoaded', function() {
                             <td>${product.stockQuantity || 0}</td>
                             <td>
                                 <div class="action-buttons">
-                                    <button class="btn-action btn-view" title="Ver detalhes" onclick="window.location.href='/html/admin/products-detail.html?id=${product.id}'">
+                                    <button class="btn-action btn-view" title="Ver detalhes" onclick="window.location.href='/admin/products-detail.html?id=${product.id}'">
                                         <i class="fas fa-eye"></i>
                                     </button>
-                                    <button class="btn-action btn-edit" title="Editar" onclick="window.location.href='/html/admin/products-edit.html?id=${product.id}'">
+                                    <button class="btn-action btn-edit" title="Editar" onclick="window.location.href='/admin/products-edit.html?id=${product.id}'">
                                         <i class="fas fa-edit"></i>
                                     </button>
                                 </div>

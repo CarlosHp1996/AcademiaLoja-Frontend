@@ -629,7 +629,7 @@ document.addEventListener('DOMContentLoaded', function() {
             productCard.className = 'product-card bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:scale-105';
             productCard.innerHTML = `
                 <div class="relative">
-                    <a href="/html/product-detail.html?id=${product.id}">
+                    <a href="/product-detail.html?id=${product.id}">
                         <img src="${product.imageUrl || '/assets/images/placeholder.png'}" alt="${product.name}" class="w-full h-48 object-cover" style="cursor:pointer;">
                     </a>
                     ${product.isNew ? '<span class="absolute top-2 left-2 bg-green-500 text-white text-xs font-semibold px-2 py-1 rounded">NOVO</span>' : ''}
@@ -645,7 +645,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <span class="product-price text-xl font-bold text-orange-500">R$ ${product.price.toFixed(2).replace('.', ',')}</span>
                         ${product.oldPrice ? `<span class="text-sm text-gray-400 line-through">R$ ${product.oldPrice.toFixed(2).replace('.', ',')}</span>` : ''}
                     </div>
-                    <a href="/html/product-detail.html?id=${product.id}" class="add-to-cart mt-3 w-full bg-orange-500 text-white py-2 rounded hover:bg-orange-600 transition-colors duration-300" data-product-id="${product.id}">
+                    <a href="/product-detail.html?id=${product.id}" class="add-to-cart mt-3 w-full bg-orange-500 text-white py-2 rounded hover:bg-orange-600 transition-colors duration-300" data-product-id="${product.id}">
                         COMPRAR
                     </a>
                 </div>

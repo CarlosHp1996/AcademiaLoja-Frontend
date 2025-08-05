@@ -164,7 +164,7 @@ class AuthService {
             
             // Redireciona para a página inicial
             setTimeout(() => {
-                window.location.href = '/html/index.html';
+                window.location.href = '/index.html';
             }, 1000);
         }
     }
@@ -202,14 +202,14 @@ class AuthService {
             
             // Adiciona link para perfil
             const profileLink = document.createElement('a');
-            profileLink.href = '/html/profile.html';
+            profileLink.href = '/profile.html';
             profileLink.className = 'dropdown-item';
             profileLink.innerHTML = '<i class="fas fa-user"></i> Meu Perfil';
             dropdownMenu.appendChild(profileLink);
             
             // Adiciona link para pedidos
             const ordersLink = document.createElement('a');
-            ordersLink.href = '/html/dashboard.html';
+            ordersLink.href = '/dashboard.html';
             ordersLink.className = 'dropdown-item';
             ordersLink.innerHTML = '<i class="fas fa-shopping-bag"></i> Meus Pedidos';
             dropdownMenu.appendChild(ordersLink);
@@ -217,7 +217,7 @@ class AuthService {
             // Adiciona link para dashboard se for admin
             if (this.isAdmin()) {
                 const adminLink = document.createElement('a');
-                adminLink.href = '/html/admin.html';
+                adminLink.href = '/admin.html';
                 adminLink.className = 'dropdown-item admin-item';
                 adminLink.innerHTML = '<i class="fas fa-tachometer-alt"></i> Dashboard Admin';
                 dropdownMenu.appendChild(adminLink);
@@ -242,13 +242,13 @@ class AuthService {
         } else {
             // Usuário não autenticado
             const registerLink = document.createElement('a');
-            registerLink.href = '/html/register.html';
+            registerLink.href = '/register.html';
             registerLink.className = 'dropdown-item';
             registerLink.innerHTML = '<i class="fas fa-user-plus"></i> Criar Conta';
             dropdownMenu.appendChild(registerLink);
 
             const loginLink = document.createElement('a');
-            loginLink.href = '/html/login.html';
+            loginLink.href = '/login.html';
             loginLink.className = 'dropdown-item';
             loginLink.innerHTML = '<i class="fas fa-sign-in-alt"></i> Fazer Login';
             dropdownMenu.appendChild(loginLink);
@@ -278,21 +278,21 @@ class AuthService {
         
         // Rotas que requerem autenticação (qualquer usuário logado)
         const userRoutes = [
-            '/html/cart.html',
-            '/html/checkout.html',
-            '/html/profile.html',
-            '/html/orders.html',
-            '/html/tracking.html'
+            '/cart.html',
+            '/checkout.html',
+            '/profile.html',
+            '/orders.html',
+            '/tracking.html'
         ];
         
         // Rotas que requerem privilégios de admin
         const adminRoutes = [
-            '/html/admin/index.html',
-            '/html/admin/orders.html',
-            '/html/admin/payments.html',
-            '/html/admin/products.html',
-            '/html/admin/tracking.html',
-            '/html/admin/users.html'
+            '/admin/index.html',
+            '/admin/orders.html',
+            '/admin/payments.html',
+            '/admin/products.html',
+            '/admin/tracking.html',
+            '/admin/users.html'
         ];
         
         // Verifica se é uma rota de admin

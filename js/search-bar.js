@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         // Construir URL para a página de produtos com o termo de busca
-        const productsUrl = `/html/products.html?Name=${encodeURIComponent(searchTerm)}`;
+        const productsUrl = `/products.html?Name=${encodeURIComponent(searchTerm)}`;
         
         // Navegar para a página de produtos
         window.location.href = productsUrl;
@@ -188,7 +188,7 @@ window.SearchUtils = {
     },
     
     buildSearchUrl: function(searchTerm, additionalParams = {}) {
-        const baseUrl = '/html/products.html';
+        const baseUrl = '/products.html';
         const params = new URLSearchParams();
         
         if (searchTerm) {

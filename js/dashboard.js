@@ -46,7 +46,7 @@ function getAuthHeaders() {
 function checkAuthentication() {
   const token = getAuthToken()
   if (!token) {
-    window.location.href = "/html/login.html"
+    window.location.href = "/login.html"
     return false
   }
   return true
@@ -128,7 +128,7 @@ async function loadOrders(page = 1, filters = currentFilters) {
       if (response.status === 401) {
         localStorage.removeItem("authToken")
         sessionStorage.removeItem("authToken")
-        window.location.href = "/html/login.html"
+        window.location.href = "/login.html"
         return
       }
       throw new Error(`Erro ${response.status}: ${response.statusText}`)
@@ -438,21 +438,21 @@ logoutBtn.addEventListener("click", async (e) => {
     // Limpar tokens locais
     localStorage.removeItem("authToken")
     sessionStorage.removeItem("authToken")
-    window.location.href = "/html/login.html"
+    window.location.href = "/login.html"
   }
 })
 
 // Funções de ação dos pedidos
 async function viewOrderDetails(orderId) {
-  window.location.href = `/html/order-details.html?id=${orderId}`
+  window.location.href = `/order-details.html?id=${orderId}`
 }
 
 async function finishPayment(orderId) {
-  window.location.href = `/html/payment.html?order=${orderId}`
+  window.location.href = `/payment.html?order=${orderId}`
 }
 
 async function trackOrder(orderId) {
-  window.location.href = `/html/tracking.html?order=${orderId}`
+  window.location.href = `/tracking.html?order=${orderId}`
 }
 
 // async function buyAgain(orderId) {
@@ -463,7 +463,7 @@ async function trackOrder(orderId) {
 //     })
 
 //     if (response.ok) {
-//       window.location.href = "/html/cart.html"
+//       window.location.href = "/cart.html"
 //     } else {
 //       throw new Error("Erro ao adicionar produtos ao carrinho")
 //     }
@@ -474,7 +474,7 @@ async function trackOrder(orderId) {
 // }
 
 async function contactSupport(orderId) {
-  window.location.href = `/html/support.html?order=${orderId}`
+  window.location.href = `/support.html?order=${orderId}`
 }
 
 // Inicialização

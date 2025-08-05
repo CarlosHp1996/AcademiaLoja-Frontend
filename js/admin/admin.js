@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function() {
             localStorage.removeItem('authToken');
             
             // Redirect to login page
-            window.location.href = '/html/login.html';
+            window.location.href = '/login.html';
         });
     }
     
@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const token = localStorage.getItem('authToken');
         if (!token) {
             // Redirect to login if no token
-            window.location.href = '/html/login.html';
+            window.location.href = '/login.html';
         }
         
         // You could also verify the token validity with the backend here
@@ -128,7 +128,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (response.status === 401) {
                     // Unauthorized - token expired or invalid
                     localStorage.removeItem('authToken');
-                    window.location.href = '/html/login.html';
+                    window.location.href = '/login.html';
                     return null;
                 }
                 

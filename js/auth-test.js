@@ -93,23 +93,23 @@ function testPageAccess() {
     
     // Lista de páginas restritas a usuários (User e Admin)
     const userRestrictedPages = [
-        '/html/cart.html',
-        '/html/checkout.html',
-        '/html/dashboard.html',
-        '/html/order-details.html',
-        '/html/profile.html',
-        '/html/tracking.html',
-        '/html/account/my-account.html'
+        '/cart.html',
+        '/checkout.html',
+        '/dashboard.html',
+        '/order-details.html',
+        '/profile.html',
+        '/tracking.html',
+        '/account/my-account.html'
     ];
     
     // Lista de páginas restritas a admin
     const adminRestrictedPages = [
-        '/html/admin/index.html',
-        '/html/admin/orders.html',
-        '/html/admin/payments.html',
-        '/html/admin/products.html',
-        '/html/admin/tracking.html',
-        '/html/admin/users.html'
+        '/admin/index.html',
+        '/admin/orders.html',
+        '/admin/payments.html',
+        '/admin/products.html',
+        '/admin/tracking.html',
+        '/admin/users.html'
     ];
     
     const token = localStorage.getItem('authToken');

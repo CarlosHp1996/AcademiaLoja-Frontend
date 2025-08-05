@@ -287,7 +287,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // View user details
 function viewUser(id) {
-    window.location.href = `/html/admin/users-detail.html?id=${id}`;
+    window.location.href = `/admin/users-detail.html?id=${id}`;
 }
 
 // Edit user

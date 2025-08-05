@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             // Parse the fetched HTML
             const parser = new DOMParser();
-            const doc = parser.parseFromString(htmlText, "text/html");
+            const doc = parser.parseFromString(htmlText, "text");
 
             // Extract the main content and modals from the fetched document
             const fetchedMainContent = doc.querySelector(".admin-main");

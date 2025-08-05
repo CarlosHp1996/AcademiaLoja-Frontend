@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
       enumValue: 1,
       href:
         window.NavigationEnums?.generateFilterUrl("category", "WheyProtein") ||
-        "/html/products.html?CategoryIds=1",
+        "/products.html?CategoryIds=1",
       image: "/assets/images/whey.webp",
       icon: "fas fa-dumbbell",
       description: "Proteína de alta qualidade para ganho de massa muscular",
@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
       enumValue: 6,
       href:
         window.NavigationEnums?.generateFilterUrl("category", "PreTreino") ||
-        "/html/products.html?CategoryIds=6",
+        "/products.html?CategoryIds=6",
       image: "/assets/images/7760b939e99c891f282253d7b9c7e32f-g5cg80n3g3.webp",
       icon: "fas fa-fire",
       description: "Energia e foco para treinos intensos",
@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
       enumKey: "Creatina",
       enumValue: 3,
       href:
-        window.NavigationEnums?.generateFilterUrl("category", "Creatina") || "/html/products.html?CategoryIds=3",
+        window.NavigationEnums?.generateFilterUrl("category", "Creatina") || "/products.html?CategoryIds=3",
       image: "/assets/images/creatine-_300g.webp",
       icon: "fas fa-bolt",
       description: "Aumento de força e potência muscular",
@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
       enumValue: 4,
       href:
         window.NavigationEnums?.generateFilterUrl("category", "Glutamina") ||
-        "/html/products.html?CategoryIds=4",
+        "/products.html?CategoryIds=4",
       image: "/assets/images/glutamina-darkness-350g-integralmedica.jpg",
       icon: "fas fa-shield-alt",
       description: "Recuperação muscular e fortalecimento imunológico",
@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
       enumValue: 9,
       href:
         window.NavigationEnums?.generateFilterUrl("category", "Vitaminas") ||
-        "/html/products.html?CategoryIds=9",
+        "/products.html?CategoryIds=9",
       image: "/assets/images/vitamina-c-1500mg-60-caps-integralmedica.jpg",
       icon: "fas fa-leaf",
       description: "Suporte nutricional e bem-estar geral",
@@ -274,7 +274,7 @@ document.addEventListener("DOMContentLoaded", () => {
         productCard.addEventListener("click", (e) => {
           // Verificar se não clicou em um botão específico
           if (!e.target.closest(".quick-view-btn") && !e.target.closest(".add-to-wishlist-btn")) {
-            window.location.href = `/html/product-detail.html?id=${product.id}`
+            window.location.href = `/product-detail.html?id=${product.id}`
           }
         })
 
@@ -673,7 +673,7 @@ document.getElementById('btn-ver-destaques').addEventListener('click', function(
 
 document.querySelector('.btn-primary-modern').addEventListener('click', function(e) {
     e.preventDefault();
-    window.location.href = '/html/products.html';
+    window.location.href = '/products.html';
 });
 
 // // Carousel functionality

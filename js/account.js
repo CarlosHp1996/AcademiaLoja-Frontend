@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // Verificar autenticação
   const token = localStorage.getItem('authToken');
   if (!isTokenValid(token)) {
-    window.location.href = '/html/login.html';
+    window.location.href = '/login.html';
     return;
   }
 
@@ -56,13 +56,13 @@ document.addEventListener('DOMContentLoaded', function() {
       localStorage.removeItem('authToken');
       localStorage.removeItem('userId');
       localStorage.removeItem('userName');
-      window.location.href = '/html/login.html';
+      window.location.href = '/login.html';
     } catch (error) {
       console.error('Erro ao chamar API de logout:', error);
       localStorage.removeItem('authToken');
       localStorage.removeItem('userId');
       localStorage.removeItem('userName');
-      window.location.href = '/html/first-page.html';
+      window.location.href = '/first-page.html';
     }
   });
     

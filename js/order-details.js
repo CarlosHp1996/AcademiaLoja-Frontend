@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function checkAuthentication() {
     const token = getAuthToken()
     if (!token) {
-      window.location.href = "/html/login.html"
+      window.location.href = "/login.html"
       return false
     }
     return true
@@ -108,7 +108,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (response.status === 401) {
           localStorage.removeItem("authToken")
           sessionStorage.removeItem("authToken")
-          window.location.href = "/html/login.html"
+          window.location.href = "/login.html"
           return
         }
         if (response.status === 404) {
@@ -458,7 +458,7 @@ document.addEventListener("DOMContentLoaded", () => {
       } finally {
         localStorage.removeItem("authToken")
         sessionStorage.removeItem("authToken")
-        window.location.href = "/html/login.html"
+        window.location.href = "/login.html"
       }
     })
   }
