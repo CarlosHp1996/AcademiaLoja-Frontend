@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Objetivos - Academia Loja</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/goals.css">
+    <link rel="stylesheet" href="/css/whatsapp-button.css">
+    <!-- Estilos para dropdown e notificações -->
+    <link rel="stylesheet" href="/css/auth-dropdown.css">
+    <link rel="stylesheet" href="/css/auth-notifications.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/cart-panel.css">
+</head>
+<body>
+<!-- Header -->
+<header class="header">
+    <div class="container">
+        <div class="header-left">
+            <a href="/html/index.html" class="logo">
+                <img src="/assets/images/logoLoja.png" alt="Logo Power Rock" class="logo-img">
+            </a>
+            <div class="search-container">
+                <input type="search" placeholder="Encontre o produto ideal para você!" class="search-input">
+            </div>
+        </div>
+        <div class="header-right">
+            <button class="cart-link" id="cart-button">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-badge" id="cart-badge" style="display: none;">0</span>
+            </button>
+            <div class="user-dropdown">
+                <button class="user-icon-btn" aria-label="Conta">
+                    <i class="fas fa-user"></i>
+                </button>
+                <div class="dropdown-menu">
+                    <!-- Dropdown menu será preenchido via JavaScript -->
+                </div>
+            </div>
+            <button class="mobile-menu-btn" aria-label="Abrir menu">
+                <span class="menu-icon"></span>
+            </button>
+        </div>
+    </div>
+</header>
+
+ <!-- Subheader -->
+<section class="subheader">
+    <div class="container">
+        <nav class="subheader-nav">
+            <ul class="menu-list">
+                <li class="menu-item">
+                    <a href="/html/products.html" class="nav-link">
+                        Produtos
+                        <i class="fas fa-chevron-down" style="margin-left: 6px; font-size: 0.85em;"></i>
+                    </a>
+                    <ul class="submenu">
+                        <!-- Itens serão populados dinamicamente via JavaScript -->
+                    </ul>                   
+                </li>
+                <li class="menu-item">
+                    <a href="/html/goals.html" class="nav-link">Objetivos 
+                        <i class="fas fa-chevron-down" style="margin-left: 6px; font-size: 0.85em;"></i>
+                    </a>
+                    <ul class="submenu">
+                        <!-- Itens serão populados dinamicamente via JavaScript -->
+                    </ul>
+                </li>
+                <li class="menu-item">
+                    <a href="/html/accessories.html" class="nav-link">Acessórios
+                        <i class="fas fa-chevron-down" style="margin-left: 6px; font-size: 0.85em;"></i>
+                    </a>
+                    <ul class="submenu">
+                        <!-- Itens serão populados dinamicamente via JavaScript -->
+                    </ul>
+                </li>
+                <li class="menu-item">
+                    <a href="/html/brands.html" class="nav-link">Marcas
+                        <i class="fas fa-chevron-down" style="margin-left: 6px; font-size: 0.85em;"></i>
+                    </a>
+                    <ul class="submenu">
+                        <!-- Itens serão populados dinamicamente via JavaScript -->
+                    </ul>
+                </li>
+                <li class="menu-item">
+                    <a href="/html/contact.html" class="nav-link">Contato</a>                   
+                </li>
+                <li class="menu-item">
+                    <a href="/html/returns.html" class="nav-link">Trocas e Devoluções</a>                   
+                </li>
+            </ul>
+        </nav>
+    </div>
+</section>
+
+<main class="goals-hero-modern">
+        <div class="goals-container">
+            <div class="goals-content-modern">
+                <div class="goals-title-container">
+                    <h1 class="goals-title-modern">
+                        Encontre o
+                        <span class="goals-highlight">
+                            <span class="highlight-text">suporte ideal</span>
+                        </span>
+                        <span class="title-main">para seus objetivos</span>
+                    </h1>
+                    
+                </div>
+                <p class="goals-subtitle-modern">
+                    Descubra produtos específicos para cada objetivo de treino e suplementação. 
+                    Nossa seleção especializada ajuda você a alcançar seus objetivos de forma mais eficiente.
+                </p>
+                <div class="goals-stats">
+                    <div class="stat-item">
+                        <div class="stat-icon"><i class="fas fa-box"></i></div>
+                        <div class="stat-content">
+                            <span class="stat-number">500+</span>
+                            <span class="stat-label">Produtos</span>
+                        </div>
+                    </div>
+                </div>                
+                <div class="goals-trust">
+                    <div class="trust-item">
+                        <i class="fas fa-check-circle"></i>
+                        Produtos Premium
+                    </div>
+                    <div class="trust-item">
+                        <i class="fas fa-shipping-fast"></i>
+                        Entrega Rápida
+                    </div>
+                    <div class="trust-item">
+                        <i class="fas fa-shield-alt"></i>
+                        Qualidade Garantida
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </main>
+
+        <!-- Cards de Objetivos -->
+        <section class="goals-section" id="goals-section">
+            <div class="section-header">
+                <h2 class="section-title">Seus Objetivos, Nossa Especialidade</h2>
+            </div>
+
+            <div class="goals-grid" id="goals-grid-container">
+                <div class="goal-card" data-objective-id="4">
+                    <div class="card-glow"></div>
+                    <div class="goal-icon">
+                        <i class="fas fa-dumbbell"></i>
+                    </div>
+                    <h3>Ganho de Massa Muscular</h3>
+                    <p>Suplementos ideais para aumentar a massa muscular e força com resultados comprovados.</p>
+                    <ul class="goal-benefits">
+                        <li><i class="fas fa-check"></i>Proteínas de alta qualidade</li>
+                        <li><i class="fas fa-check"></i>Creatina e aminoácidos</li>
+                        <li><i class="fas fa-check"></i>Pré-treino para energia</li>
+                    </ul>
+                    <button class="btn-primary">
+                        <span>Explorar Produtos</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <div class="goal-card" data-objective-id="1">
+                    <div class="card-glow"></div>
+                    <div class="goal-icon">
+                        <i class="fas fa-fire"></i>
+                    </div>
+                    <h3>Queima de Gordura</h3>
+                    <p>Produtos que auxiliam na redução de gordura corporal de forma natural e eficaz.</p>
+                    <ul class="goal-benefits">
+                        <li><i class="fas fa-check"></i>Termogênicos naturais</li>
+                        <li><i class="fas fa-check"></i>Suplementos para metabolismo</li>
+                        <li><i class="fas fa-check"></i>Produtos para definição</li>
+                    </ul>
+                    <button class="btn-primary">
+                        <span>Explorar Produtos</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <div class="goal-card" data-objective-id="7">
+                    <div class="card-glow"></div>
+                    <div class="goal-icon">
+                        <i class="fas fa-running"></i>
+                    </div>
+                    <h3>Performance e Energia</h3>
+                    <p>Suplementos para melhorar a performance e disposição nos seus treinos.</p>
+                    <ul class="goal-benefits">
+                        <li><i class="fas fa-check"></i>Pré-treino energético</li>
+                        <li><i class="fas fa-check"></i>BCAA para recuperação</li>
+                        <li><i class="fas fa-check"></i>Eletrólitos e hidratação</li>
+                    </ul>
+                    <button class="btn-primary">
+                        <span>Explorar Produtos</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <div class="goal-card" data-objective-id="8">
+                    <div class="card-glow"></div>
+                    <div class="goal-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Saúde e Bem-estar</h3>
+                    <p>Produtos para manter a saúde e qualidade de vida no seu dia a dia.</p>
+                    <ul class="goal-benefits">
+                        <li><i class="fas fa-check"></i>Vitaminas e minerais</li>
+                        <li><i class="fas fa-check"></i>Ômega 3 e antioxidantes</li>
+                        <li><i class="fas fa-check"></i>Suplementos naturais</li>
+                    </ul>
+                    <button class="btn-primary">
+                        <span>Explorar Produtos</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção de Destaque -->
+        <section class="featured-section">
+            <div class="featured-content">
+                <div class="featured-text">
+                    <h2>Por que escolher nossos produtos?</h2>
+                    <p>Trabalhamos apenas com as melhores marcas do mercado, garantindo qualidade e resultados comprovados para todos os seus objetivos.</p>
+                    <div class="features-list">
+                        <div class="feature-item">
+                            <i class="fas fa-medal"></i>
+                            <span>Produtos Premium</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-shipping-fast"></i>
+                            <span>Entrega Rápida</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-certificate"></i>
+                            <span>Qualidade Garantida</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="featured-visual">
+                    <div class="visual-card">
+                        <i class="fas fa-trophy"></i>
+                        <h4>Milhares de resultados comprovados</h4>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="cta-content">
+                <h2>Pronto para começar sua jornada?</h2>
+                <p>Escolha seu objetivo e descubra os produtos ideais para você</p>
+                <a href="/html/products.html" class="btn-cta">
+                    <span>Ver Todos os Produtos</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </section>
+    </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <!-- Division 1: Main Info -->
+            <div class="footer-division" id="footer-division-1">
+                <a class="logo">
+                    <span class="logo-power">Power Rock</span>
+                    <span class="logo-supps">Supplements</span>
+                </a>
+                <p class="footer-description">
+                    Sua loja especializada em suplementos de alta performance para atletas e entusiastas do fitness.
+                </p>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/profile.php?id=61575757384725" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/powerrocksupplements/" class="social-link"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+
+            <!-- Division 2: Links -->
+            <div class="footer-division" id="footer-division-2">
+                <div class="footer-column">
+                    <h3 class="footer-title">Categorias</h3>
+                    <ul class="footer-links">
+                        <li><a href="/html/products.html">Proteínas</a></li>
+                        <li><a href="/html/products.html">Pré-Treino</a></li>
+                        <li><a href="/html/products.html">Creatina</a></li>
+                        <li><a href="/html/products.html">Vitaminas</a></li>
+                        <li><a href="/html/accessories.html">Acessórios</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3 class="footer-title">Informações</h3>
+                    <ul class="footer-links">
+                        <li><a href="/about">Sobre Nós</a></li>
+                        <li><a href="/html/returns.html">Trocas e Devoluções</a></li>
+                        <li><a href="/privacy">Política de Privacidade</a></li>
+                        <li><a href="/terms">Termos e Condições</a></li>
+                        <li><a href="/html/contact.html">Contato</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3 class="footer-title">Contato</h3>
+                    <ul class="contact-info">
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>[ADICIONAR ENDEREÇO] - Londrina PR</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <span>ADD NUMERO</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <span>CRIAR EMAIL</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Division 3: Payment and Shipping -->
+            <div class="footer-division" id="footer-division-3">
+                <div class="payment-methods">
+                    <h4 class="payment-title">Formas de Pagamento</h4>
+                    <div class="payment-icons">
+                        <i class="fab fa-cc-visa"></i>
+                        <i class="fab fa-cc-mastercard"></i>
+                        <i class="fab fa-cc-amex"></i>
+                    </div>
+                </div>
+                <div class="shipping-methods">
+                    <h4 class="shipping-title">Meios de envio</h4>
+                    <div class="shipping-icons">
+                        <i class="fas fa-shipping-fast"></i>
+                        <i class="fas fa-hand-holding-heart"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            © 2025 Power Rock Supplements. Todos os direitos reservados.
+        </div>
+    </div>
+</footer>
+
+<!-- Cart Side Panel -->
+<div class="cart-overlay" id="cart-overlay"></div>
+<div class="cart-panel" id="cart-panel">
+    <div class="cart-header">
+        <h3>
+            <i class="fas fa-shopping-cart"></i>
+            Meu Carrinho
+        </h3>
+        <button class="cart-close" id="cart-close">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+    
+    <div class="cart-content" id="cart-content">
+        <div class="cart-empty" id="cart-empty" style="display: none;">
+            <i class="fas fa-shopping-cart"></i>
+            <p>Seu carrinho está vazio</p>
+            <button class="btn-continue-shopping" id="continue-shopping">
+                Continuar Comprando
+            </button>
+        </div>
+        
+        <div class="cart-items" id="cart-items">
+            <!-- Items serão inseridos aqui via JavaScript -->
+        </div>
+    </div>
+    
+    <div class="cart-footer" id="cart-footer">
+        <div class="cart-summary">
+            <div class="cart-total">
+                <span>Total: </span>
+                <span class="total-amount" id="total-amount">R$ 0,00</span>
+            </div>
+            <div class="cart-actions">
+                <button class="btn-continue" id="btn-continue-shopping">
+                    <i class="fas fa-arrow-left"></i>
+                    Continuar Comprando
+                </button>
+                <button class="btn-checkout" id="btn-checkout">
+                    <span>Finalizar Compra</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Script de navegação - DEVE SER CARREGADO PRIMEIRO -->
+<script src="/js/navigation-enums.js"></script>
+<!-- Script da barra de pesquisa -->
+<script src="/js/search-bar.js"></script>
+<script src="/js/goals.js"></script>
+<!-- WhatsApp Button -->
+<script src="/js/cart-service.js"></script>
+<script src="/js/cart-ui.js"></script>
+<script src="/js/whatsapp-button.js"></script>
+<!-- Scripts de autenticação - ORDEM IMPORTA! -->
+<script src="/js/auth-service.js"></script>
+<script src="/js/auth-notifications.js"></script>
+<script src="/js/auth-integration.js"></script>
+</body>
+</html>

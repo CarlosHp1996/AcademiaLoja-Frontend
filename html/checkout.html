@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Power Rock Supplements</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/checkout.css">
+    <link rel="stylesheet" href="/css/profile.css">
+    <link rel="stylesheet" href="/css/whatsapp-button.css">
+    <!-- Estilos para dropdown e notificações -->
+    <link rel="stylesheet" href="/css/auth-dropdown.css">
+    <link rel="stylesheet" href="/css/auth-notifications.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/cart-panel.css">
+</head>
+<body data-required-role="User">
+<!-- Header -->
+<header class="header">
+    <div class="container">
+        <div class="header-left">
+            <a href="/html/index.html" class="logo">
+                <img src="/assets/images/logoLoja.png" alt="Logo Power Rock" class="logo-img">
+            </a>
+            <div class="search-container">
+                <input type="search" placeholder="Encontre o produto ideal para você!" class="search-input">
+            </div>
+        </div>
+        <div class="header-right">
+            <button class="cart-link" id="cart-button">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-badge" id="cart-badge" style="display: none;">0</span>
+            </button>
+            <div class="user-dropdown">
+                <button class="user-icon-btn" aria-label="Conta">
+                    <i class="fas fa-user"></i>
+                </button>
+                <div class="dropdown-menu">
+                    <!-- Dropdown menu será preenchido via JavaScript -->
+                </div>
+            </div>
+            <button class="mobile-menu-btn" aria-label="Abrir menu">
+                <span class="menu-icon"></span>
+            </button>
+        </div>
+    </div>
+</header>
+
+ <!-- Subheader -->
+<section class="subheader">
+    <div class="container">
+        <nav class="subheader-nav">
+            <ul class="menu-list">
+                <li class="menu-item">
+                    <a href="/html/products.html" class="nav-link">
+                        Produtos
+                        <i class="fas fa-chevron-down" style="margin-left: 6px; font-size: 0.85em;"></i>
+                    </a>
+                    <ul class="submenu">
+                        <!-- Itens serão populados dinamicamente via JavaScript -->
+                    </ul>                   
+                </li>
+                <li class="menu-item">
+                    <a href="/html/goals.html" class="nav-link">Objetivos 
+                        <i class="fas fa-chevron-down" style="margin-left: 6px; font-size: 0.85em;"></i>
+                    </a>
+                    <ul class="submenu">
+                        <!-- Itens serão populados dinamicamente via JavaScript -->
+                    </ul>
+                </li>
+                <li class="menu-item">
+                    <a href="/html/accessories.html" class="nav-link">Acessórios
+                        <i class="fas fa-chevron-down" style="margin-left: 6px; font-size: 0.85em;"></i>
+                    </a>
+                    <ul class="submenu">
+                        <!-- Itens serão populados dinamicamente via JavaScript -->
+                    </ul>
+                </li>
+                <li class="menu-item">
+                    <a href="/html/brands.html" class="nav-link">Marcas
+                        <i class="fas fa-chevron-down" style="margin-left: 6px; font-size: 0.85em;"></i>
+                    </a>
+                    <ul class="submenu">
+                        <!-- Itens serão populados dinamicamente via JavaScript -->
+                    </ul>
+                </li>
+                <li class="menu-item">
+                    <a href="/html/contact.html" class="nav-link">Contato</a>                   
+                </li>
+                <li class="menu-item">
+                    <a href="/html/returns.html" class="nav-link">Trocas e Devoluções</a>                   
+                </li>
+            </ul>
+        </nav>
+    </div>
+</section>
+
+<!-- Main Content -->
+<main class="main">
+    <div class="container">
+        <!-- Loading State -->
+        <div id="checkout-loading" class="checkout-loading">
+            <div class="loading-spinner">
+                <i class="fas fa-spinner fa-spin"></i>
+            </div>
+            <p>Carregando informações do pedido...</p>
+        </div>
+
+        <!-- Checkout Container -->
+        <div id="checkout-container" class="checkout-container" style="display: none;">
+            <!-- Header -->
+            <div class="checkout-header">
+                <div class="breadcrumb">
+                    <a href="/html/index.html">
+                        <i class="fas fa-home"></i>
+                        Início
+                    </a>
+                    <i class="fas fa-chevron-right"></i>
+                    <a href="/html/products.html">Produtos</a>
+                    <i class="fas fa-chevron-right"></i>
+                    <span>Checkout</span>
+                </div>
+                <h1 class="page-title">
+                    <i class="fas fa-credit-card"></i>
+                    Finalizar Compra
+                </h1>
+                <div class="checkout-steps">
+                    <div class="step completed">
+                        <div class="step-circle">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <span class="step-label">Carrinho</span>
+                    </div>
+                    <div class="step-line"></div>
+                    <div class="step active">
+                        <div class="step-circle">2</div>
+                        <span class="step-label">Pagamento</span>
+                    </div>
+                    <div class="step-line"></div>
+                    <div class="step">
+                        <div class="step-circle">3</div>
+                        <span class="step-label">Confirmação</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div class="checkout-content">
+                <!-- Left Column - Forms -->
+                <div class="checkout-forms">
+                    <!-- Shipping Address -->
+                    <div class="form-section">
+                        <div class="section-header">
+                            <h2>
+                                <i class="fas fa-map-marker-alt"></i>
+                                Endereço de Entrega
+                            </h2>
+                            <button class="btn btn-primary" id="addAddressBtn">
+                                <i class="fas fa-plus"></i>
+                                Adicionar Endereço
+                            </button>
+                        </div>
+                        
+                        <div class="addresses-container" id="addresses-container">
+                            <!-- Endereços serão carregados dinamicamente -->
+                        </div>
+
+                        <div class="empty-addresses" id="empty-addresses" style="display: none;">
+                            <div class="empty-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <h3>Nenhum endereço cadastrado</h3>
+                            <p>Adicione um endereço para continuar</p>
+                            <button class="btn btn-primary" onclick="openAddressModal()">
+                                <i class="fas fa-plus"></i>
+                                Adicionar Primeiro Endereço
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Payment Method -->
+                    <div class="form-section">
+                        <div class="section-header">
+                            <h2>
+                                <i class="fas fa-credit-card"></i>
+                                Forma de Pagamento
+                            </h2>
+                        </div>
+                        
+                        <!-- Payment Tabs -->
+                        <div class="payment-tabs">
+                            <button class="payment-tab active" data-method="card">
+                                <i class="fas fa-credit-card"></i>
+                                <span>Cartão</span>
+                            </button>
+                            <button class="payment-tab" data-method="pix">
+                                <i class="fas fa-qrcode"></i>
+                                <span>PIX</span>
+                            </button>
+                        </div>
+
+                        <!-- Card Payment Form -->
+                        <div id="card-payment" class="payment-form active">
+                            <div id="card-element" class="stripe-element">
+                                <!-- Stripe Elements será inserido aqui -->
+                            </div>
+                            <div id="card-errors" class="payment-errors" role="alert"></div>
+                        </div>
+
+                        <!-- PIX Payment Form -->
+                        <div id="pix-payment" class="payment-form">
+                            <div class="pix-info">
+                                <div class="pix-icon">
+                                    <i class="fas fa-qrcode"></i>
+                                </div>
+                                <div class="pix-text">
+                                    <h3>Pagamento via PIX</h3>
+                                    <p>Após confirmar o pedido, você receberá o código PIX para pagamento instantâneo.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column - Order Summary -->
+                <div class="order-summary">
+                    <div class="summary-header">
+                        <h2>
+                            <i class="fas fa-shopping-bag"></i>
+                            Resumo do Pedido
+                        </h2>
+                    </div>
+
+                    <!-- Items -->
+                    <div class="summary-items" id="summary-items">
+                        <!-- Items serão carregados via JavaScript -->
+                    </div>
+
+                    <!-- Totals -->
+                    <div class="summary-totals">
+                        <div class="total-row">
+                            <span>Subtotal</span>
+                            <span id="subtotal-amount">R$ 0,00</span>
+                        </div>
+                        <div class="total-row">
+                            <span>Frete</span>
+                            <span id="shipping-amount">Grátis</span>
+                        </div>
+                        <div class="total-row discount" id="discount-row" style="display: none;">
+                            <span>Desconto</span>
+                            <span id="discount-amount">-R$ 0,00</span>
+                        </div>
+                        <div class="total-row final">
+                            <span>Total</span>
+                            <span id="total-amount">R$ 0,00</span>
+                        </div>
+                    </div>
+
+                    <!-- Action Button -->
+                    <button id="complete-purchase" class="btn-complete-purchase">
+                        <span class="btn-text">Finalizar Compra</span>
+                        <i class="fas fa-lock"></i>
+                    </button>
+
+                    <!-- Security Info -->
+                    <div class="security-info">
+                        <div class="security-item">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>Pagamento 100% seguro</span>
+                        </div>
+                        <div class="security-item">
+                            <i class="fas fa-truck"></i>
+                            <span>Frete grátis acima de R$ 199</span>
+                        </div>
+                        <div class="security-item">
+                            <i class="fas fa-undo"></i>
+                            <span>7 dias para troca</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Empty Cart State -->
+        <div id="empty-cart" class="empty-cart" style="display: none;">
+            <div class="empty-cart-content">
+                <i class="fas fa-shopping-cart"></i>
+                <h2>Seu carrinho está vazio</h2>
+                <p>Adicione produtos ao seu carrinho para continuar com a compra.</p>
+                <a href="/html/products.html" class="btn-primary">
+                    <i class="fas fa-shopping-bag"></i>
+                    Ver Produtos
+                </a>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- Address Modal -->
+<div class="modal-overlay" id="addressModalOverlay" style="display: none;">
+    <div class="modal" id="addressModal">
+        <div class="modal-header">
+            <h3 id="addressModalTitle">Adicionar Endereço</h3>
+            <button class="modal-close" id="closeAddressModal">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form id="addressForm" class="address-form">
+                <input type="hidden" id="addressId" name="addressId">
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="zipCode">CEP</label>
+                        <input type="text" id="zipCode" name="zipCode" placeholder="00000-000" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="street">Rua/Avenida</label>
+                        <input type="text" id="street" name="street" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="number">Número</label>
+                        <input type="text" id="number" name="number" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="complement">Complemento</label>
+                        <input type="text" id="complement" name="complement" placeholder="Apto, Bloco, etc.">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="neighborhood">Bairro</label>
+                        <input type="text" id="neighborhood" name="neighborhood" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="city">Cidade</label>
+                        <input type="text" id="city" name="city" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="state">Estado</label>
+                        <select id="state" name="state" required>
+                            <option value="">Selecione</option>
+                            <option value="0">Acre</option>
+                            <option value="1">Alagoas</option>
+                            <option value="2">Amapá</option>
+                            <option value="3">Amazonas</option>
+                            <option value="4">Bahia</option>
+                            <option value="5">Ceará</option>
+                            <option value="6">Distrito Federal</option>
+                            <option value="7">Espírito Santo</option>
+                            <option value="8">Goiás</option>
+                            <option value="9">Maranhão</option>
+                            <option value="10">Mato Grosso</option>
+                            <option value="11">Mato Grosso do Sul</option>
+                            <option value="12">Minas Gerais</option>
+                            <option value="13">Pará</option>
+                            <option value="14">Paraíba</option>
+                            <option value="15">Paraná</option>
+                            <option value="16">Pernambuco</option>
+                            <option value="17">Piauí</option>
+                            <option value="18">Rio de Janeiro</option>
+                            <option value="19">Rio Grande do Norte</option>
+                            <option value="20">Rio Grande do Sul</option>
+                            <option value="21">Rondônia</option>
+                            <option value="22">Roraima</option>
+                            <option value="23">Santa Catarina</option>
+                            <option value="24">São Paulo</option>
+                            <option value="25">Sergipe</option>
+                            <option value="26">Tocantins</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="mainAddress" class="checkbox-label">
+                            <input type="checkbox" id="mainAddress" name="mainAddress">
+                            Tornar este o endereço principal
+                        </label>
+                    </div>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-outline" id="cancelAddressBtn">
+                        Cancelar
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i>
+                        Salvar Endereço
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <!-- Division 1: Main Info -->
+            <div class="footer-division" id="footer-division-1">
+                <a class="logo">
+                    <span class="logo-power">Power Rock</span>
+                    <span class="logo-supps">Supplements</span>
+                </a>
+                <p class="footer-description">
+                    Sua loja especializada em suplementos de alta performance para atletas e entusiastas do fitness.
+                </p>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/profile.php?id=61575757384725" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/powerrocksupplements/" class="social-link"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+
+            <!-- Division 2: Links -->
+            <div class="footer-division" id="footer-division-2">
+                <div class="footer-column">
+                    <h3 class="footer-title">Categorias</h3>
+                    <ul class="footer-links">
+                        <li><a href="/html/products.html">Proteínas</a></li>
+                        <li><a href="/html/products.html">Pré-Treino</a></li>
+                        <li><a href="/html/products.html">Creatina</a></li>
+                        <li><a href="/html/products.html">Vitaminas</a></li>
+                        <li><a href="/html/accessories.html">Acessórios</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3 class="footer-title">Informações</h3>
+                    <ul class="footer-links">
+                        <li><a href="/about">Sobre Nós</a></li>
+                        <li><a href="/html/returns.html">Trocas e Devoluções</a></li>
+                        <li><a href="/privacy">Política de Privacidade</a></li>
+                        <li><a href="/terms">Termos e Condições</a></li>
+                        <li><a href="/html/contact.html">Contato</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3 class="footer-title">Contato</h3>
+                    <ul class="contact-info">
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>[ADICIONAR ENDEREÇO] - Londrina PR</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <span>ADD NUMERO</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <span>CRIAR EMAIL</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Division 3: Payment and Shipping -->
+            <div class="footer-division" id="footer-division-3">
+                <div class="payment-methods">
+                    <h4 class="payment-title">Formas de Pagamento</h4>
+                    <div class="payment-icons">
+                        <i class="fab fa-cc-visa"></i>
+                        <i class="fab fa-cc-mastercard"></i>
+                        <i class="fab fa-cc-amex"></i>
+                    </div>
+                </div>
+                <div class="shipping-methods">
+                    <h4 class="shipping-title">Meios de envio</h4>
+                    <div class="shipping-icons">
+                        <i class="fas fa-shipping-fast"></i>
+                        <i class="fas fa-hand-holding-heart"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            © 2025 Power Rock Supplements. Todos os direitos reservados.
+        </div>
+    </div>
+</footer>
+
+<!-- Scripts -->
+<script src="/js/navigation-enums.js"></script>
+<script src="/js/search-bar.js"></script>
+<script src="/js/whatsapp-button.js"></script>
+<script src="/js/cart-service.js"></script>
+<script src="/js/cart-ui.js"></script>
+<script src="https://js.stripe.com/v3/"></script>
+<script src="/js/checkout.js"></script>
+<!-- Scripts de autenticação - ORDEM IMPORTA! -->
+<script src="/js/auth-service.js"></script>
+<script src="/js/auth-notifications.js"></script>
+<script src="/js/auth-integration.js"></script>
+</body>
+</html>
