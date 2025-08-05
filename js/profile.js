@@ -39,7 +39,7 @@ function getAuthHeaders() {
 function checkAuthentication() {
   const token = getAuthToken()
   if (!token) {
-    window.location.href = "/html/login.html"
+    window.location.href = "/login.html"
     return false
   }
   return true
@@ -85,7 +85,7 @@ async function loadUserProfile() {
       if (response.status === 401) {
         localStorage.removeItem("authToken")
         sessionStorage.removeItem("authToken")
-        window.location.href = "/html/login.html"
+        window.location.href = "/login.html"
         return
       }
       throw new Error(`Erro ${response.status}: ${response.statusText}`)
@@ -599,7 +599,7 @@ document.addEventListener("DOMContentLoaded", () => {
     } finally {
       localStorage.removeItem("authToken")
       sessionStorage.removeItem("authToken")
-      window.location.href = "/html/login.html"
+      window.location.href = "/login.html"
     }
   })
 

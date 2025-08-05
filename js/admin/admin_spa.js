@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const userRole = window.authService.getUserRole()
     if (!isAuthenticated || userRole !== "Admin") {
       console.error("Access denied! User is not admin or not logged in.")
-      window.location.href = "/html/login.html"
+      window.location.href = "/login.html"
       if (window.authNotifications) {
         window.authNotifications.accessDenied("Acesso restrito a administradores.")
       }
@@ -124,7 +124,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         <p class="card-value" id="productCount">Carregando...</p>
                     </div>
                     <div class="card-action">
-                        <a href="/html/admin.html#products">Ver detalhes</a>
+                        <a href="/admin.html#products">Ver detalhes</a>
                     </div>
                 </div>
                 <div class="dashboard-card">
@@ -136,7 +136,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         <p class="card-value" id="userCount">Carregando...</p>
                     </div>
                     <div class="card-action">
-                        <a href="/html/admin.html#users">Ver detalhes</a>
+                        <a href="/admin.html#users">Ver detalhes</a>
                     </div>
                 </div>
                 <div class="dashboard-card">
@@ -148,7 +148,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         <p class="card-value" id="orderCount">Carregando...</p>
                     </div>
                     <div class="card-action">
-                        <a href="/html/admin.html#orders">Ver detalhes</a>
+                        <a href="/admin.html#orders">Ver detalhes</a>
                     </div>
                 </div>
                 <div class="dashboard-card">
@@ -160,7 +160,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         <p class="card-value" id="trackingCount">Carregando...</p>
                     </div>
                     <div class="card-action">
-                        <a href="/html/admin.html#tracking">Ver detalhes</a>
+                        <a href="/admin.html#tracking">Ver detalhes</a>
                     </div>
                 </div>
             </div>
@@ -1429,7 +1429,7 @@ document.addEventListener("DOMContentLoaded", () => {
       } else {
         console.error("Timeout: AuthService not loaded in time.")
         if (!window.location.pathname.includes("login.html")) {
-          window.location.href = "/html/login.html"
+          window.location.href = "/login.html"
         }
       }
     }

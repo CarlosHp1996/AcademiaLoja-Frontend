@@ -66,7 +66,7 @@
 //                 const objectiveName = getObjectiveNameById(objectiveId);
                 
 //                 // Redirecionar para a página de produtos com o filtro de objetivo e título
-//                 const url = `/html/products.html?ObjectiveIds=${objectiveId}&title=${encodeURIComponent(objectiveName)}`;
+//                 const url = `/products.html?ObjectiveIds=${objectiveId}&title=${encodeURIComponent(objectiveName)}`;
 //                 window.location.href = url;
 //             });
 //         }

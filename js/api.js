@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // Redireciona para login se não estiver na página de login
                 if (!window.location.pathname.includes('login.html')) {
-                    window.location.href = '/html/login.html';
+                    window.location.href = '/login.html';
                 }
             }
             
@@ -286,10 +286,10 @@ document.addEventListener('DOMContentLoaded', function() {
         // Atualiza links de conta
         document.querySelectorAll('.account-link').forEach(link => {
             if (isLoggedIn) {
-                link.href = '/html/account/my-account.html';
+                link.href = '/account/my-account.html';
                 link.textContent = `Olá, ${userData.name || 'Usuário'}`;
             } else {
-                link.href = '/html/login.html';
+                link.href = '/login.html';
                 link.textContent = 'Entrar';
             }
         });
@@ -314,7 +314,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Verifica páginas que requerem autenticação
         if (document.body.hasAttribute('data-auth-required')) {
             if (!window.isAuthenticated()) {
-                window.location.href = '/html/login.html?redirect=' + encodeURIComponent(window.location.pathname);
+                window.location.href = '/login.html?redirect=' + encodeURIComponent(window.location.pathname);
                 return;
             }
         }

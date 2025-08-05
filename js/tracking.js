@@ -44,7 +44,7 @@ function getAuthHeaders() {
 function checkAuthentication() {
   const token = getAuthToken()
   if (!token) {
-    window.location.href = "/html/login.html"
+    window.location.href = "/login.html"
     return false
   }
   return true
@@ -470,7 +470,7 @@ refreshTrackingBtn.addEventListener("click", () => {
 })
 
 contactSupportBtn.addEventListener("click", () => {
-  window.location.href = `/html/support.html?order=${orderId}`
+  window.location.href = `/support.html?order=${orderId}`
 })
 
 logoutBtn.addEventListener("click", async (e) => {
@@ -485,7 +485,7 @@ logoutBtn.addEventListener("click", async (e) => {
   } finally {
     localStorage.removeItem("authToken")
     sessionStorage.removeItem("authToken")
-    window.location.href = "/html/login.html"
+    window.location.href = "/login.html"
   }
 })
 

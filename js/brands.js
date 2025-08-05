@@ -31,7 +31,7 @@ function initializeBrandCards() {
             viewProductsBtn.addEventListener("click", function(e) {
                 e.preventDefault(); // Previne comportamento padrão do botão
                 // Redireciona para a página de produtos com o filtro de marca (BrandIds)
-                window.location.href = `/html/products.html?BrandIds=${brandId}`;
+                window.location.href = `/products.html?BrandIds=${brandId}`;
             });
         }
     });

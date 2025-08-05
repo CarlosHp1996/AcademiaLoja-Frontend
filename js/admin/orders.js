@@ -472,7 +472,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // View order details
 function viewOrder(id) {
-    window.location.href = `/html/admin/orders-detail.html?id=${id}`;
+    window.location.href = `/admin/orders-detail.html?id=${id}`;
 }
 
 // Edit order

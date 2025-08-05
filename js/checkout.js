@@ -39,7 +39,7 @@ class CheckoutService {
 
   async loadUserData() {
     if (!window.authService?.getToken()) {
-      window.location.href = "/html/login.html"
+      window.location.href = "/login.html"
       return
     }
 
@@ -354,7 +354,7 @@ class CheckoutService {
       }
 
       setTimeout(() => {
-        window.location.href = `/html/dashboard.html`;
+        window.location.href = `/dashboard.html`;
       }, 2000);
 
     } catch (error) {
@@ -386,7 +386,7 @@ class CheckoutService {
 
       // Redirecionar para página de PIX
       setTimeout(() => {
-        window.location.href = `/html/pix-payment.html?order=${this.currentOrder.orderId}&payment=${this.paymentIntent.paymentId}`
+        window.location.href = `/pix-payment.html?order=${this.currentOrder.orderId}&payment=${this.paymentIntent.paymentId}`
       }, 2000)
     } catch (error) {
       console.error("Erro no pagamento PIX:", error)

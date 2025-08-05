@@ -101,7 +101,7 @@ const BrandDisplayNames = {
 
 // Função para gerar URLs de filtro
 function generateFilterUrl(filterType, enumKey) {
-    const baseUrl = '/html/products.html';
+    const baseUrl = '/products.html';
     
     switch(filterType) {
         case 'category':

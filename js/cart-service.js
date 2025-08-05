@@ -334,7 +334,7 @@ class CartService {
 
       // Redireciona para a página de checkout após um breve delay
       setTimeout(() => {
-        window.location.href = "/html/checkout.html"
+        window.location.href = "/checkout.html"
       }, 1000)
     } else {
       // Usuário não autenticado - marcar para migração e redirecionar para registro
@@ -359,7 +359,7 @@ class CartService {
 
       // Redireciona para a página de login após um breve delay
       setTimeout(() => {
-        window.location.href = "/html/login.html"
+        window.location.href = "/login.html"
       }, 1500)
     }
   }

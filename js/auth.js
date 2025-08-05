@@ -179,14 +179,14 @@ async function handleLogin(event) {
             // Verifica se há uma URL de redirecionamento
             const urlParams = new URLSearchParams(window.location.search);
             // const redirectUrl = urlParams.get('redirect');
-            const redirectUrl = '/html/index.html';
+            const redirectUrl = '/index.html';
             
             // Aguarda um momento para mostrar a mensagem de sucesso
             setTimeout(() => {
                 if (redirectUrl) {
                     window.location.href = decodeURIComponent(redirectUrl);
                 } else {
-                    window.location.href = '/html/index.html';
+                    window.location.href = '/index.html';
                 }
             }, 1500);
         } else {
@@ -250,7 +250,7 @@ async function handleRegister(event) {
             
             // Aguarda um momento para mostrar a mensagem de sucesso
             setTimeout(() => {
-                window.location.href = '/html/login.html';
+                window.location.href = '/login.html';
             }, 2000);
         } else {
             showError(data.message || 'Erro ao criar conta');

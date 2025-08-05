@@ -29,22 +29,22 @@ function checkPageAccess() {
     }
     const currentPath = window.location.pathname;
     const userRestrictedPages = [
-        "/html/cart.html",
-        "/html/checkout.html",
-        "/html/dashboard.html",
-        "/html/order-details.html",
-        "/html/profile.html",
-        "/html/orders.html",
-        "/html/tracking.html",
-        "/html/account/my-account.html"
+        "/cart.html",
+        "/checkout.html",
+        "/dashboard.html",
+        "/order-details.html",
+        "/profile.html",
+        "/orders.html",
+        "/tracking.html",
+        "/account/my-account.html"
     ];
     const adminRestrictedPages = [
-        "/html/admin/index.html",
-        "/html/admin/orders.html",
-        "/html/admin/payments.html",
-        "/html/admin/products.html",
-        "/html/admin/tracking.html",
-        "/html/admin/users.html"
+        "/admin/index.html",
+        "/admin/orders.html",
+        "/admin/payments.html",
+        "/admin/products.html",
+        "/admin/tracking.html",
+        "/admin/users.html"
     ];
     const isUserRestricted = userRestrictedPages.some(page => currentPath.toLowerCase().includes(page.toLowerCase()));
     const isAdminRestricted = adminRestrictedPages.some(page => currentPath.toLowerCase().includes(page.toLowerCase()));
@@ -63,7 +63,7 @@ function checkPageAccess() {
     } else if (isUserRestricted) {
         if (!isAuthenticated) {
             console.log("Acesso negado: login necessário");
-            window.location.href = "/html/login.html?redirect=" + encodeURIComponent(currentPath);
+            window.location.href = "/login.html?redirect=" + encodeURIComponent(currentPath);
             if (window.authNotifications) window.authNotifications.loginRequired();
             return false;
         }

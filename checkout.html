@@ -3,13 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meu Perfil - Power Rock Supplements</title>
+    <title>Checkout - Power Rock Supplements</title>
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/checkout.css">
     <link rel="stylesheet" href="/css/profile.css">
     <link rel="stylesheet" href="/css/whatsapp-button.css">
+    <!-- Estilos para dropdown e notificações -->
     <link rel="stylesheet" href="/css/auth-dropdown.css">
     <link rel="stylesheet" href="/css/auth-notifications.css">
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="/css/cart-panel.css">
 </head>
@@ -18,7 +22,7 @@
 <header class="header">
     <div class="container">
         <div class="header-left">
-            <a href="/html/index.html" class="logo">
+            <a href="/index.html" class="logo">
                 <img src="/assets/images/logoLoja.png" alt="Logo Power Rock" class="logo-img">
             </a>
             <div class="search-container">
@@ -45,13 +49,13 @@
     </div>
 </header>
 
-<!-- Subheader -->
+ <!-- Subheader -->
 <section class="subheader">
     <div class="container">
         <nav class="subheader-nav">
             <ul class="menu-list">
                 <li class="menu-item">
-                    <a href="/html/products.html" class="nav-link">
+                    <a href="/products.html" class="nav-link">
                         Produtos
                         <i class="fas fa-chevron-down" style="margin-left: 6px; font-size: 0.85em;"></i>
                     </a>
@@ -60,7 +64,7 @@
                     </ul>                   
                 </li>
                 <li class="menu-item">
-                    <a href="/html/goals.html" class="nav-link">Objetivos 
+                    <a href="/goals.html" class="nav-link">Objetivos 
                         <i class="fas fa-chevron-down" style="margin-left: 6px; font-size: 0.85em;"></i>
                     </a>
                     <ul class="submenu">
@@ -68,7 +72,7 @@
                     </ul>
                 </li>
                 <li class="menu-item">
-                    <a href="/html/accessories.html" class="nav-link">Acessórios
+                    <a href="/accessories.html" class="nav-link">Acessórios
                         <i class="fas fa-chevron-down" style="margin-left: 6px; font-size: 0.85em;"></i>
                     </a>
                     <ul class="submenu">
@@ -76,7 +80,7 @@
                     </ul>
                 </li>
                 <li class="menu-item">
-                    <a href="/html/brands.html" class="nav-link">Marcas
+                    <a href="/brands.html" class="nav-link">Marcas
                         <i class="fas fa-chevron-down" style="margin-left: 6px; font-size: 0.85em;"></i>
                     </a>
                     <ul class="submenu">
@@ -84,10 +88,10 @@
                     </ul>
                 </li>
                 <li class="menu-item">
-                    <a href="/html/contact.html" class="nav-link">Contato</a>                   
+                    <a href="/contact.html" class="nav-link">Contato</a>                   
                 </li>
                 <li class="menu-item">
-                    <a href="/html/returns.html" class="nav-link">Trocas e Devoluções</a>                   
+                    <a href="/returns.html" class="nav-link">Trocas e Devoluções</a>                   
                 </li>
             </ul>
         </nav>
@@ -97,130 +101,62 @@
 <!-- Main Content -->
 <main class="main">
     <div class="container">
-        <div class="profile-container">
-            <div class="profile-sidebar">
-                <div class="user-info">
-                    <div class="user-avatar">
-                        <i class="fas fa-user"></i>
-                    </div>
-                    <h2 class="user-name" id="user-name">Carregando...</h2>
-                    <p class="user-email" id="user-email">Carregando...</p>
-                </div>
-                <nav class="profile-nav">
-                    <ul>
-                        <li class="active">
-                            <a href="/html/profile.html">
-                                <i class="fas fa-user-circle"></i>
-                                Meu Perfil
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/html/dashboard.html">
-                                <i class="fas fa-chart-line"></i>
-                                Meus Pedidos
-                            </a>
-                        </li>
-                        <li class="logout">
-                            <a href="#" id="logoutBtn">
-                                <i class="fas fa-sign-out-alt"></i>
-                                Sair
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
+        <!-- Loading State -->
+        <div id="checkout-loading" class="checkout-loading">
+            <div class="loading-spinner">
+                <i class="fas fa-spinner fa-spin"></i>
             </div>
-            <div class="profile-content">
-                <!-- Loading State -->
-                <div class="loading-container" id="loading-container">
-                    <div class="loading-spinner">
-                        <i class="fas fa-spinner fa-spin"></i>
-                        <p>Carregando informações do perfil...</p>
+            <p>Carregando informações do pedido...</p>
+        </div>
+
+        <!-- Checkout Container -->
+        <div id="checkout-container" class="checkout-container" style="display: none;">
+            <!-- Header -->
+            <div class="checkout-header">
+                <div class="breadcrumb">
+                    <a href="/index.html">
+                        <i class="fas fa-home"></i>
+                        Início
+                    </a>
+                    <i class="fas fa-chevron-right"></i>
+                    <a href="/products.html">Produtos</a>
+                    <i class="fas fa-chevron-right"></i>
+                    <span>Checkout</span>
+                </div>
+                <h1 class="page-title">
+                    <i class="fas fa-credit-card"></i>
+                    Finalizar Compra
+                </h1>
+                <div class="checkout-steps">
+                    <div class="step completed">
+                        <div class="step-circle">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <span class="step-label">Carrinho</span>
+                    </div>
+                    <div class="step-line"></div>
+                    <div class="step active">
+                        <div class="step-circle">2</div>
+                        <span class="step-label">Pagamento</span>
+                    </div>
+                    <div class="step-line"></div>
+                    <div class="step">
+                        <div class="step-circle">3</div>
+                        <span class="step-label">Confirmação</span>
                     </div>
                 </div>
+            </div>
 
-                <!-- Error State -->
-                <div class="error-state" id="error-state" style="display: none;">
-                    <div class="error-icon">
-                        <i class="fas fa-exclamation-triangle"></i>
-                    </div>
-                    <h3>Erro ao carregar perfil</h3>
-                    <p id="error-message">Ocorreu um erro ao carregar suas informações.</p>
-                    <button class="btn btn-primary" onclick="loadUserProfile()">
-                        <i class="fas fa-refresh"></i>
-                        Tentar Novamente
-                    </button>
-                </div>
-
-                <!-- Profile Content -->
-                <div class="profile-main-content" id="profile-main-content" style="display: none;">
-                    <div class="profile-header">
-                        <h1 class="profile-title">Meu Perfil</h1>
-                        <p class="profile-subtitle">Gerencie suas informações pessoais e endereços</p>
-                    </div>
-
-                    <!-- Success/Error Messages -->
-                    <div class="message-container" id="message-container"></div>
-
-                    <!-- Personal Information Section -->
-                    <div class="profile-section">
-                        <h2 class="section-title">
-                            <i class="fas fa-user"></i>
-                            Informações Pessoais
-                        </h2>
-                        <form id="profileForm" class="profile-form">
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label for="name">Nome</label>
-                                    <input type="text" id="name" name="name" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="cpf">CPF</label>
-                                    <input type="text" id="cpf" name="cpf" placeholder="000.000.000-00">
-                                </div>
-                            </div>
-
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label for="email">E-mail</label>
-                                    <input type="email" id="email" name="email" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="phone">Telefone</label>
-                                    <input type="tel" id="phone" name="phone" placeholder="(11) 99999-9999">
-                                </div>
-                            </div>
-
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label for="gender">Gênero</label>
-                                    <select id="gender" name="gender">
-                                        <option value="">Selecione</option>
-                                        <option value="0">Masculino</option>
-                                        <option value="1">Feminino</option>
-                                        <option value="2">Outro</option>
-                                        <option value="3">Prefiro não informar</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <!-- Espaço reservado para futuras expansões -->
-                                </div>
-                            </div>
-
-                            <div class="form-actions">
-                                <button type="submit" class="btn btn-primary">
-                                    <i class="fas fa-save"></i>
-                                    Salvar Alterações
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-
-                    <!-- Addresses Section -->
-                    <div class="profile-section">
+            <!-- Content -->
+            <div class="checkout-content">
+                <!-- Left Column - Forms -->
+                <div class="checkout-forms">
+                    <!-- Shipping Address -->
+                    <div class="form-section">
                         <div class="section-header">
-                            <h2 class="section-title">
+                            <h2>
                                 <i class="fas fa-map-marker-alt"></i>
-                                Meus Endereços
+                                Endereço de Entrega
                             </h2>
                             <button class="btn btn-primary" id="addAddressBtn">
                                 <i class="fas fa-plus"></i>
@@ -237,7 +173,7 @@
                                 <i class="fas fa-map-marker-alt"></i>
                             </div>
                             <h3>Nenhum endereço cadastrado</h3>
-                            <p>Adicione um endereço para facilitar suas compras</p>
+                            <p>Adicione um endereço para continuar</p>
                             <button class="btn btn-primary" onclick="openAddressModal()">
                                 <i class="fas fa-plus"></i>
                                 Adicionar Primeiro Endereço
@@ -245,52 +181,119 @@
                         </div>
                     </div>
 
-                    <!-- Password Section -->
-                    <div class="profile-section">
-                        <h2 class="section-title">
-                            <i class="fas fa-key"></i>
-                            Alterar Senha
-                        </h2>
-                        <form id="passwordForm" class="profile-form">
-                            <div class="form-group">
-                                <label for="currentPassword">Senha Atual</label>
-                                <div class="password-input">
-                                    <input type="password" id="currentPassword" name="currentPassword" required>
-                                    <button type="button" class="toggle-password">
-                                        <i class="fas fa-eye"></i>
-                                    </button>
+                    <!-- Payment Method -->
+                    <div class="form-section">
+                        <div class="section-header">
+                            <h2>
+                                <i class="fas fa-credit-card"></i>
+                                Forma de Pagamento
+                            </h2>
+                        </div>
+                        
+                        <!-- Payment Tabs -->
+                        <div class="payment-tabs">
+                            <button class="payment-tab active" data-method="card">
+                                <i class="fas fa-credit-card"></i>
+                                <span>Cartão</span>
+                            </button>
+                            <button class="payment-tab" data-method="pix">
+                                <i class="fas fa-qrcode"></i>
+                                <span>PIX</span>
+                            </button>
+                        </div>
+
+                        <!-- Card Payment Form -->
+                        <div id="card-payment" class="payment-form active">
+                            <div id="card-element" class="stripe-element">
+                                <!-- Stripe Elements será inserido aqui -->
+                            </div>
+                            <div id="card-errors" class="payment-errors" role="alert"></div>
+                        </div>
+
+                        <!-- PIX Payment Form -->
+                        <div id="pix-payment" class="payment-form">
+                            <div class="pix-info">
+                                <div class="pix-icon">
+                                    <i class="fas fa-qrcode"></i>
+                                </div>
+                                <div class="pix-text">
+                                    <h3>Pagamento via PIX</h3>
+                                    <p>Após confirmar o pedido, você receberá o código PIX para pagamento instantâneo.</p>
                                 </div>
                             </div>
-
-                            <div class="form-group">
-                                <label for="newPassword">Nova Senha</label>
-                                <div class="password-input">
-                                    <input type="password" id="newPassword" name="newPassword" required>
-                                    <button type="button" class="toggle-password">
-                                        <i class="fas fa-eye"></i>
-                                    </button>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="confirmNewPassword">Confirmar Nova Senha</label>
-                                <div class="password-input">
-                                    <input type="password" id="confirmNewPassword" name="confirmNewPassword" required>
-                                    <button type="button" class="toggle-password">
-                                        <i class="fas fa-eye"></i>
-                                    </button>
-                                </div>
-                            </div>
-
-                            <div class="form-actions">
-                                <button type="submit" class="btn btn-primary">
-                                    <i class="fas fa-key"></i>
-                                    Alterar Senha
-                                </button>
-                            </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
+
+                <!-- Right Column - Order Summary -->
+                <div class="order-summary">
+                    <div class="summary-header">
+                        <h2>
+                            <i class="fas fa-shopping-bag"></i>
+                            Resumo do Pedido
+                        </h2>
+                    </div>
+
+                    <!-- Items -->
+                    <div class="summary-items" id="summary-items">
+                        <!-- Items serão carregados via JavaScript -->
+                    </div>
+
+                    <!-- Totals -->
+                    <div class="summary-totals">
+                        <div class="total-row">
+                            <span>Subtotal</span>
+                            <span id="subtotal-amount">R$ 0,00</span>
+                        </div>
+                        <div class="total-row">
+                            <span>Frete</span>
+                            <span id="shipping-amount">Grátis</span>
+                        </div>
+                        <div class="total-row discount" id="discount-row" style="display: none;">
+                            <span>Desconto</span>
+                            <span id="discount-amount">-R$ 0,00</span>
+                        </div>
+                        <div class="total-row final">
+                            <span>Total</span>
+                            <span id="total-amount">R$ 0,00</span>
+                        </div>
+                    </div>
+
+                    <!-- Action Button -->
+                    <button id="complete-purchase" class="btn-complete-purchase">
+                        <span class="btn-text">Finalizar Compra</span>
+                        <i class="fas fa-lock"></i>
+                    </button>
+
+                    <!-- Security Info -->
+                    <div class="security-info">
+                        <div class="security-item">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>Pagamento 100% seguro</span>
+                        </div>
+                        <div class="security-item">
+                            <i class="fas fa-truck"></i>
+                            <span>Frete grátis acima de R$ 199</span>
+                        </div>
+                        <div class="security-item">
+                            <i class="fas fa-undo"></i>
+                            <span>7 dias para troca</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Empty Cart State -->
+        <div id="empty-cart" class="empty-cart" style="display: none;">
+            <div class="empty-cart-content">
+                <i class="fas fa-shopping-cart"></i>
+                <h2>Seu carrinho está vazio</h2>
+                <p>Adicione produtos ao seu carrinho para continuar com a compra.</p>
+                <a href="/products.html" class="btn-primary">
+                    <i class="fas fa-shopping-bag"></i>
+                    Ver Produtos
+                </a>
             </div>
         </div>
     </div>
@@ -308,17 +311,6 @@
         <div class="modal-body">
             <form id="addressForm" class="address-form">
                 <input type="hidden" id="addressId" name="addressId">
-
-                <div class="form-row">                    
-                    <div class="form-group">
-                        <label for="completName">Nome Completo</label>
-                        <input type="text" id="completName" name="completName" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="street">Rua/Avenida</label>
-                        <input type="text" id="street" name="street" required>
-                    </div>
-                </div>
                 
                 <div class="form-row">
                     <div class="form-group">
@@ -326,25 +318,35 @@
                         <input type="text" id="zipCode" name="zipCode" placeholder="00000-000" required>
                     </div>
                     <div class="form-group">
-                        <label for="number">Número</label>
-                        <input type="text" id="number" name="number" required>
-                    </div>                    
+                        <label for="street">Rua/Avenida</label>
+                        <input type="text" id="street" name="street" required>
+                    </div>
                 </div>
 
                 <div class="form-row">
-                    
+                    <div class="form-group">
+                        <label for="number">Número</label>
+                        <input type="text" id="number" name="number" required>
+                    </div>
                     <div class="form-group">
                         <label for="complement">Complemento</label>
                         <input type="text" id="complement" name="complement" placeholder="Apto, Bloco, etc.">
                     </div>
+                </div>
+
+                <div class="form-row">
                     <div class="form-group">
                         <label for="neighborhood">Bairro</label>
                         <input type="text" id="neighborhood" name="neighborhood" required>
                     </div>
+                    <div class="form-group">
+                        <label for="city">Cidade</label>
+                        <input type="text" id="city" name="city" required>
+                    </div>
                 </div>
 
                 <div class="form-row">
-                     <div class="form-group">
+                    <div class="form-group">
                         <label for="state">Estado</label>
                         <select id="state" name="state" required>
                             <option value="">Selecione</option>
@@ -377,16 +379,6 @@
                             <option value="26">Tocantins</option>
                         </select>
                     </div>
-                    
-                    <div class="form-group">
-                        <label for="city">Cidade</label>
-                        <input type="text" id="city" name="city" required>
-                    </div>
-                </div>
-
-                
-
-                <div class="form-row">
                     <div class="form-group">
                         <label for="mainAddress" class="checkbox-label">
                             <input type="checkbox" id="mainAddress" name="mainAddress">
@@ -433,21 +425,21 @@
                 <div class="footer-column">
                     <h3 class="footer-title">Categorias</h3>
                     <ul class="footer-links">
-                        <li><a href="/html/products.html">Proteínas</a></li>
-                        <li><a href="/html/products.html">Pré-Treino</a></li>
-                        <li><a href="/html/products.html">Creatina</a></li>
-                        <li><a href="/html/products.html">Vitaminas</a></li>
-                        <li><a href="/html/accessories.html">Acessórios</a></li>
+                        <li><a href="/products.html">Proteínas</a></li>
+                        <li><a href="/products.html">Pré-Treino</a></li>
+                        <li><a href="/products.html">Creatina</a></li>
+                        <li><a href="/products.html">Vitaminas</a></li>
+                        <li><a href="/accessories.html">Acessórios</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
                     <h3 class="footer-title">Informações</h3>
                     <ul class="footer-links">
                         <li><a href="/about">Sobre Nós</a></li>
-                        <li><a href="/html/returns.html">Trocas e Devoluções</a></li>
+                        <li><a href="/returns.html">Trocas e Devoluções</a></li>
                         <li><a href="/privacy">Política de Privacidade</a></li>
                         <li><a href="/terms">Termos e Condições</a></li>
-                        <li><a href="/html/contact.html">Contato</a></li>
+                        <li><a href="/contact.html">Contato</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
@@ -494,62 +486,17 @@
     </div>
 </footer>
 
-<!-- Cart Side Panel -->
-<div class="cart-overlay" id="cart-overlay"></div>
-<div class="cart-panel" id="cart-panel">
-    <div class="cart-header">
-        <h3>
-            <i class="fas fa-shopping-cart"></i>
-            Meu Carrinho
-        </h3>
-        <button class="cart-close" id="cart-close">
-            <i class="fas fa-times"></i>
-        </button>
-    </div>
-    
-    <div class="cart-content" id="cart-content">
-        <div class="cart-empty" id="cart-empty" style="display: none;">
-            <i class="fas fa-shopping-cart"></i>
-            <p>Seu carrinho está vazio</p>
-            <button class="btn-continue-shopping" id="continue-shopping">
-                Continuar Comprando
-            </button>
-        </div>
-        
-        <div class="cart-items" id="cart-items">
-            <!-- Items serão inseridos aqui via JavaScript -->
-        </div>
-    </div>
-    
-    <div class="cart-footer" id="cart-footer">
-        <div class="cart-summary">
-            <div class="cart-total">
-                <span>Total: </span>
-                <span class="total-amount" id="total-amount">R$ 0,00</span>
-            </div>
-            <div class="cart-actions">
-                <button class="btn-continue" id="btn-continue-shopping">
-                    <i class="fas fa-arrow-left"></i>
-                    Continuar Comprando
-                </button>
-                <button class="btn-checkout" id="btn-checkout">
-                    <span>Finalizar Compra</span>
-                    <i class="fas fa-arrow-right"></i>
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-
 <!-- Scripts -->
 <script src="/js/navigation-enums.js"></script>
 <script src="/js/search-bar.js"></script>
-<script src="/js/profile.js"></script>
+<script src="/js/whatsapp-button.js"></script>
 <script src="/js/cart-service.js"></script>
 <script src="/js/cart-ui.js"></script>
-<script src="/js/whatsapp-button.js"></script>
+<script src="https://js.stripe.com/v3/"></script>
+<script src="/js/checkout.js"></script>
+<!-- Scripts de autenticação - ORDEM IMPORTA! -->
 <script src="/js/auth-service.js"></script>
 <script src="/js/auth-notifications.js"></script>
 <script src="/js/auth-integration.js"></script>
 </body>
-</html>
+<>
