@@ -37,7 +37,7 @@ function initializeAccessoryCards() {
                 const accessoryName = getAccessoryNameById(accessoryId);
                 
                 // Redirecionar para a página de produtos com o filtro de acessório e título
-                const url = `/public/html/products.html?AccessoryIds=${accessoryId}&title=${encodeURIComponent(accessoryName)}`;
+                const url = `/html/products.html?AccessoryIds=${accessoryId}&title=${encodeURIComponent(accessoryName)}`;
                 window.location.href = url;
             });
         }
