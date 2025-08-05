@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Administrativo - Power Rock Supplements</title>
+    <!-- CSS Original -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <link rel="stylesheet" href="/css/whatsapp-button.css">
+    <link rel="stylesheet" href="/css/auth-dropdown.css">
+    <link rel="stylesheet" href="/css/auth-notifications.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/cart-panel.css">
+    <style>
+        /* Estilo para indicar carregamento */
+        #admin-content-area.loading::after {
+            content: 'Carregando...';
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 200px;
+            font-size: 1.2em;
+            color: #555;
+        }
+    </style>
+</head>
+<body data-required-role="Admin">
+<!-- Header (Mantido do original) -->
+<header class="header">
+    <div class="container">
+        <div class="header-left">
+            <a href="/html/index.html" class="logo">
+                <img src="/assets/images/logoLoja.png" alt="Logo Power Rock" class="logo-img">
+            </a>
+            <div class="search-container">
+                <input type="search" placeholder="Encontre o produto ideal para você!" class="search-input">
+            </div>
+        </div>
+        <div class="header-right">
+            <button class="cart-link" id="cart-button">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-badge" id="cart-badge" style="display: none;">0</span>
+            </button>
+            <div class="user-dropdown">
+                <button class="user-icon-btn" aria-label="Conta">
+                    <i class="fas fa-user"></i>
+                </button>
+                <div class="dropdown-menu">
+                    <!-- Dropdown menu será preenchido via JavaScript -->
+                </div>
+            </div>
+            <button class="mobile-menu-btn" aria-label="Abrir menu">
+                <span class="menu-icon"></span>
+            </button>
+        </div>
+    </div>
+</header>
+
+ <!-- Subheader -->
+<section class="subheader">
+    <div class="container">
+        <nav class="subheader-nav">
+            <ul class="menu-list">
+                <li class="menu-item">
+                    <a href="/html/products.html" class="nav-link">
+                        Produtos
+                        <i class="fas fa-chevron-down" style="margin-left: 6px; font-size: 0.85em;"></i>
+                    </a>
+                    <ul class="submenu">
+                        <!-- Itens serão populados dinamicamente via JavaScript -->
+                    </ul>                   
+                </li>
+                <li class="menu-item">
+                    <a href="/html/goals.html" class="nav-link">Objetivos 
+                        <i class="fas fa-chevron-down" style="margin-left: 6px; font-size: 0.85em;"></i>
+                    </a>
+                    <ul class="submenu">
+                        <!-- Itens serão populados dinamicamente via JavaScript -->
+                    </ul>
+                </li>
+                <li class="menu-item">
+                    <a href="/html/accessories.html" class="nav-link">Acessórios
+                        <i class="fas fa-chevron-down" style="margin-left: 6px; font-size: 0.85em;"></i>
+                    </a>
+                    <ul class="submenu">
+                        <!-- Itens serão populados dinamicamente via JavaScript -->
+                    </ul>
+                </li>
+                <li class="menu-item">
+                    <a href="/html/brands.html" class="nav-link">Marcas
+                        <i class="fas fa-chevron-down" style="margin-left: 6px; font-size: 0.85em;"></i>
+                    </a>
+                    <ul class="submenu">
+                        <!-- Itens serão populados dinamicamente via JavaScript -->
+                    </ul>
+                </li>
+                <li class="menu-item">
+                    <a href="/html/contact.html" class="nav-link">Contato</a>                   
+                </li>
+                <li class="menu-item">
+                    <a href="/html/returns.html" class="nav-link">Trocas e Devoluções</a>                   
+                </li>
+            </ul>
+        </nav>
+    </div>
+</section>
+
+<!-- Admin Content -->
+<div class="admin-container">
+        <aside id="adminSidebar" class="admin-sidebar">
+            <div class="sidebar-header">
+                <h3>Painel Admin</h3>
+                <button id="sidebarToggle" class="sidebar-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="#dashboard" data-section="dashboard"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a></li>
+                    <li><a href="#products" data-section="products"><i class="fas fa-box"></i> <span>Produtos</span></a></li>
+                    <li><a href="#users" data-section="users"><i class="fas fa-users"></i> <span>Usuários</span></a></li>
+                    <li><a href="#orders" data-section="orders"><i class="fas fa-shopping-cart"></i> <span>Pedidos</span></a></li>
+                    <li><a href="#payments" data-section="payments"><i class="fas fa-credit-card"></i> <span>Pagamentos</span></a></li>
+                    <li><a href="#tracking" data-section="tracking"><i class="fas fa-truck"></i> <span>Rastreios</span></a></li>
+                    <li><a href="/html/index.html"><i class="fas fa-store"></i> <span>Ver Loja</span></a></li>
+                </ul>
+            </nav>
+        </aside>
+        <main class="admin-main">
+            <header class="admin-header">
+                <h1>Dashboard</h1>
+                <div class="admin-user-info">
+                    <div class="admin-user-dropdown">
+                        
+                    </div>
+                </div>
+            </header>
+            <div id="admin-content-area"></div>
+        </main>
+    </div>
+
+<!-- Cart Side Panel -->
+<div class="cart-overlay" id="cart-overlay"></div>
+<div class="cart-panel" id="cart-panel">
+    <div class="cart-header">
+        <h3>
+            <i class="fas fa-shopping-cart"></i>
+            Meu Carrinho
+        </h3>
+        <button class="cart-close" id="cart-close">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+    
+    <div class="cart-content" id="cart-content">
+        <div class="cart-empty" id="cart-empty" style="display: none;">
+            <i class="fas fa-shopping-cart"></i>
+            <p>Seu carrinho está vazio</p>
+            <button class="btn-continue-shopping" id="continue-shopping">
+                Continuar Comprando
+            </button>
+        </div>
+        
+        <div class="cart-items" id="cart-items">
+            <!-- Items serão inseridos aqui via JavaScript -->
+        </div>
+    </div>
+    
+    <div class="cart-footer" id="cart-footer">
+        <div class="cart-summary">
+            <div class="cart-total">
+                <span>Total: </span>
+                <span class="total-amount" id="total-amount">R$ 0,00</span>
+            </div>
+            <div class="cart-actions">
+                <button class="btn-continue" id="btn-continue-shopping">
+                    <i class="fas fa-arrow-left"></i>
+                    Continuar Comprando
+                </button>
+                <button class="btn-checkout" id="btn-checkout">
+                    <span>Finalizar Compra</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modals (Serão carregados junto com o conteúdo principal) -->
+<div id="modalContainer"></div>
+
+<!-- Scripts -->
+<!-- Script de navegação - DEVE SER CARREGADO PRIMEIRO -->
+<script src="/js/navigation-enums.js"></script>
+<!-- Script da barra de pesquisa -->
+    <script src="/js/search-bar.js"></script>
+<!-- Scripts de autenticação e gerais (Mantidos do original) -->
+<script src="/js/auth-service.js"></script>
+<script src="/js/auth-notifications.js"></script>
+<script src="/js/auth-integration.js"></script>
+<script src="/js/cart-service.js"></script>
+<script src="/js/cart-ui.js"></script>
+<script src="/js/whatsapp-button.js"></script>
+<script src="/js/admin/admin.js"></script> <!-- Script original para sidebar toggle, etc -->
+<script src="/js/admin/admin_spa.js"></script>
+
+<!-- Novo Script para carregamento SPA -->
+<!-- <script src="/js/admin/admin_spa_loader.js"></script> -->
+
+</body>
+</html>
