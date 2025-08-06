@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
     paginationContainer.className = 'pagination';
     productsGrid.after(paginationContainer);
 
-    const API_BASE_URL = 'https://localhost:4242/api';
+    const API_BASE_URL = '/api'; // Caminho relativo para o Nginx principal proxyar
 
     // Estado dos filtros
     let filters = {
