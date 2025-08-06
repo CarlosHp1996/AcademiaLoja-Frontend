@@ -150,7 +150,7 @@ async function handleLogin(event) {
     submitButton.disabled = true;
 
     try {
-        const response = await fetch('https://localhost:4242/api/Auth/login', {
+        const response = await fetch('/api/Auth/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -231,7 +231,7 @@ async function handleRegister(event) {
     submitButton.disabled = true;
 
     try {
-        const response = await fetch('https://localhost:4242/api/Auth/create', {
+        const response = await fetch('/api/Auth/create', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
