@@ -1,117 +1,226 @@
 /* Estilos para o dropdown de autenticação */
 .user-dropdown {
-    position: relative;
-    margin-left: 20px;
+  position: relative;
+  margin-left: 20px;
+  overflow: visible;
+  z-index: 9999;
 }
 
 .user-icon-btn {
-    background: none;
-    border: none;
-    cursor: pointer;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
 }
 
 .user-icon-btn i {
-    font-size: 18px;
-    color: black; /* Ícone preto para contraste */
+  font-size: 18px;
+  color: black; /* Ícone preto para contraste */
 }
 
 .user-icon-btn:hover {
-    background-color: black;
+  background-color: black;
 }
 
 .user-icon-btn:hover i {
-    color: #fff; /* Ícone branco ao passar o mouse */
+  color: #fff; /* Ícone branco ao passar o mouse */
 }
 
 .user-icon-btn.authenticated {
-    background-color: #ff6600; /* Cor laranja secundária */
-    color: white;
+  background-color: #ff6600; /* Cor laranja secundária */
+  color: white;
 }
 
 .user-icon-btn.authenticated:hover {
-    background-color: black;
+  background-color: black;
 }
 
 .user-icon-btn i {
-    font-size: 18px;
-    color: white; /* Cor primária preta */
+  font-size: 18px;
+  color: white; /* Cor primária preta */
 }
 
 .user-icon-btn.authenticated i {
-    color: white;
+  color: white;
 }
 
 .dropdown-menu {
-    position: absolute;
-    top: 50px;
-    right: 0;
-    width: 220px;
-    background-color: black;
-    border-radius: 8px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    padding: 12px 0;
-    z-index: 1000;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-10px);
-    transition: all 0.3s ease;
+  position: absolute;
+  top: 50px;
+  right: 0; /* Default for desktop */
+  width: 220px; /* Default for desktop */
+  background-color: black;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  z-index: 999999;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
 }
 
 .dropdown-menu.active {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* Desktop adjustments */
+@media (min-width: 768px) {
+  .dropdown-menu {
+      width: 200px; /* Increased width for desktop */
+      right: 0; /* Keep aligned to the right */
+      left: auto; /* Ensure left is not set */
+      transform: translateY(-10px); /* Reset transform for desktop initial state */
+  }
+  .dropdown-menu.active {
+      transform: translateY(0); /* Reset transform for desktop active state */
+  }
+}
+
+/* --- Ajustes para Mobile --- */
+@media (max-width: 768px) {
+    /* Garante que o menu suspenso se posicione corretamente em relação ao seu contêiner pai */
+    .dropdown-menu {
+        top: 60px; /* Ajusta o espaçamento abaixo do ícone do usuário */
+        right: auto;
+        left: 50%;
+        transform: translateX(-50%);
+        min-width: 200px;
+        z-index: 10000;
+    }
+}
+
+/* Mobile adjustments */
+@media (max-width: 767px) {
+  .user-dropdown {
+        position: relative;
+        margin-left: 10px;
+        z-index: 999999;
+    }
+  .dropdown-menu {
+        position: fixed; /* Mudança para fixed para garantir sobreposição */
+        width: 200px; /* Largura fixa para melhor aparência */
+        right: 10px; /* Posicionamento fixo da direita */
+        left: auto;
+        top: 80px; /* Posiciona abaixo do header */
+        transform: translateY(10px);
+        z-index: 999999;
+    }
+  .dropdown-menu.active {
+      transform: translateY(0); /* Active state for mobile */
+    }
+    .header {
+        position: relative;
+        z-index: 9999;
+    }
+}
+
+/* Ajustes para os itens do dropdown no mobile */
+@media (max-width: 767px) {
+  .dropdown-menu {
+    margin-top: 5px; /* Espaço entre o ícone e o dropdown */
+  }
+  
+  .dropdown-menu a {
+    padding: 15px 20px; /* Aumenta a área clicável */
+    margin: 0; /* Remove margem entre os itens */
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 999999;
+    min-height: 50px; /* Garante altura mínima para área clicável */
+    line-height: 1.4;
+  }
+  
+  .dropdown-menu a i {
+    margin-right: 10px;
+    width: 20px;
+    text-align: center;
+  }
+  
+  /* Garante que o dropdown não fique cortado */
+  .header-right {
+    position: static;
+    overflow: visible;
+  }
+  
+  .user-dropdown {
+    position: relative;
+    margin-left: 10px;
+    z-index: 10002;
+    overflow: visible !important; /* Garante que o dropdown não seja cortado */
+  }
 }
 
 .dropdown-menu a {
-    display: block;
-    padding: 10px 20px;
-    color: #f97316;
-    text-decoration: none;
-    font-size: 14px;
-    transition: all 0.2s ease;
+  display: block;
+  padding: 20px 40px; 
+  color: #f97316;
+  text-decoration: none;
+  font-size: 15px;
+  transition: all 0.2s ease;
 }
 
 .dropdown-menu a:hover {
-    
-    color: #ff6600; /* Cor laranja secundária */
-    background-color: #f0f0f0;
-    border-radius: 8px; 
-    font-weight: 500;
-
-
+  color: #ff6600; /* Cor laranja secundária */
+  background-color: #f0f0f0;
+  border-radius: 8px; 
+  font-weight: 500;
 }
 
 .user-info {
-    padding: 12px 20px;
-    border-bottom: 1px solid #f0f0f0;
-    margin-bottom: 8px;
+  padding: 12px 20px;
+  border-bottom: 1px solid #f0f0f0;
+  margin-bottom: 8px;
 }
 
 .user-info span {
-    font-weight: 600;
-    color: #f97316;
-    font-size: 14px;
+  font-weight: 600;
+  color: #f97316;
+  font-size: 14px;
 }
 
 .dropdown-separator {
-    height: 1px;
-    background-color: #f0f0f0;
-    margin: 8px 0;
+  height: 1px;
+  background-color: #f0f0f0;
+  margin: 8px 0;
 }
 
 .logout-btn {
-    color: #ff3b30 !important;
-    font-weight: 500;
+  color: #ff3b30 !important;
+  font-weight: 500;
 }
 
 .logout-btn:hover {
-    background-color: #fff5f5 !important;
+  background-color: #fff5f5 !important;
+}
+
+@media (max-width: 767px) {
+  .header,
+  .container,
+  .header-right,
+  .user-dropdown {
+    overflow: visible !important;
+    position: relative !important;
+    z-index: 999 !important;
+  }
+
+  .dropdown-menu {
+    z-index: 999999 !important; /* Ensure it stays above other elements */
+  }
+  
+  /* Garante que o hero-container não interfira no dropdown */
+  .hero-container,
+  .hero-modern {
+    z-index: 1 !important;
+    position: relative !important;
+  }
 }
