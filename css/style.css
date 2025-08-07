@@ -61,7 +61,7 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  max-width: 100%;
+  /* max-width: 100%; */
 }
 
 /* ===== SISTEMA DE LARGURA UNIFICADO - CORRIGIDO ===== */
@@ -432,7 +432,7 @@ img {
 .header {
   position: sticky;
   top: 0;
-  z-index: 50;
+  z-index: 9999;
   width: 100%;
   border-bottom: 1px solid var(--color-zinc-800);
   background-color: var(--color-orange);
@@ -707,7 +707,7 @@ img {
 /* Hero Container */
 .hero-container {
   position: relative;
-  z-index: 10;
+  z-index: 1;
   display: grid;
   grid-template-columns: 1fr;
   gap: 2rem;
@@ -993,7 +993,7 @@ img {
   align-items: center;
   gap: 0.5rem;
   color: var(--color-zinc-400);
-  z-index: 10;
+  z-index: 1;
 }
 
 .scroll-text {
@@ -1032,7 +1032,7 @@ img {
   position: absolute;
   inset: 0;
   background: linear-gradient(to right, var(--color-black), transparent);
-  z-index: 10;
+  z-index: 1;
 }
 
 .hero-image {
@@ -1101,7 +1101,7 @@ img {
   position: absolute;
   inset: 0;
   background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
-  z-index: 10;
+  z-index: 1;
 }
 
 .category-image {
@@ -1717,7 +1717,7 @@ img {
   position: absolute;
   top: 0.5rem;
   right: 0.5rem;
-  z-index: 10;
+  z-index: 1;
   background-color: var(--color-orange);
   color: var(--color-white);
   padding: 0.25rem 0.5rem;
@@ -3147,7 +3147,7 @@ img {
   opacity: 0;
   transform: translateX(10px);
   transition: all 0.3s ease;
-  z-index: 10;
+  z-index: 1;
 }
 
 .product-card:hover .product-quick-actions {
@@ -3497,6 +3497,36 @@ img {
     padding: 0.2rem 0.5rem;
     font-size: 0.7rem;
   }
+}
+
+/* --- Ajustes para a área de clique no mobile --- */
+@media (max-width: 768px) {
+    .header .container {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    
+    .header-left {
+        flex-grow: 1;
+    }
+    
+    .header-right {
+        order: 1; /* Garante que os ícones da direita fiquem na ordem correta */
+        flex-grow: 1;
+        justify-content: flex-end; /* Alinha os ícones à direita */        
+    }
+
+    .logo {
+        flex-grow: 1;
+        text-align: center;
+        margin-right: 0;
+        z-index: 1;
+    }
+    
+    .logo-img {
+        width: 80px; /* Reduz o tamanho do logo para evitar sobreposição */
+        height: auto;
+    }
 }
 
 @media (min-width: 1024px) {
