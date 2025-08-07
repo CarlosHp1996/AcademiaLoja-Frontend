@@ -1,7 +1,7 @@
 // Cart Service - Gerenciamento do carrinho com migração de sessão
 class CartService {
   constructor() {
-    this.API_BASE_URL = "https://localhost:4242/api";
+    this.API_BASE_URL = "/api";
     this.cart = null;
     this.isLoading = false;
     // Apenas carrega o sessionId do localStorage, não cria um novo.

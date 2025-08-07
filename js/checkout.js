@@ -2,7 +2,7 @@
 
 class CheckoutService {
   constructor() {
-    this.API_BASE_URL = "https://localhost:4242/api"
+    this.API_BASE_URL = "/api"
     this.stripe = null
     this.cardElement = null
     this.cart = null

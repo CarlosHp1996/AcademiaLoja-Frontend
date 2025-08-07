@@ -199,7 +199,7 @@ function getUrlParams() {
 }
 
 // Função para construir URL da API com filtros
-function buildApiUrl(baseUrl = 'https://localhost:4242/api/Product/get') {
+function buildApiUrl(baseUrl = '/api/Product/get') {
     const params = getUrlParams();
     const queryParams = [];
     

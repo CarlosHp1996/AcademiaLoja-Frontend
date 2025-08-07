@@ -8,7 +8,7 @@ class AuthService {
     constructor() {
         this.token = localStorage.getItem('authToken') || '';
         this.userData = JSON.parse(localStorage.getItem('userData') || '{}');
-        this.apiBaseUrl = 'https://localhost:4242';
+        //this.apiBaseUrl = 'https://localhost:4242';
     }
 
     /**
@@ -144,7 +144,7 @@ class AuthService {
         try {
             // Tenta fazer logout no servidor
             if (this.token) {
-                await fetch(`${this.apiBaseUrl}/api/Auth/logout`, {
+                await fetch(`/api/Auth/logout`, {
                     method: 'POST',
                     headers: {
                         'Authorization': `Bearer ${this.token}`

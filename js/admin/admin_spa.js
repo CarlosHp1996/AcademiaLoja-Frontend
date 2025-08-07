@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const adminHeaderTitle = document.querySelector(".admin-header h1")
   const logoutBtn = document.getElementById("admin-logout-btn")
 
-  const API_BASE_URL_ADMIN = "https://localhost:4242/api"
+  const API_BASE_URL_ADMIN = "/api"
 
   let currentProduct = null
   let currentOrders = [] // Store orders for tracking management

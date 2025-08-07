@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", async () => {
-  const API_BASE_URL = "https://localhost:4242/api"
+  const API_BASE_URL = "/api"
 
   // Capturar o ID do produto da URL
   const urlParams = new URLSearchParams(window.location.search)
