@@ -3,7 +3,7 @@
  * Deve ser incluído em todas as páginas HTML após o auth-service.js
  */
 
-const API_BASE_URL_AUTH = "https://localhost:4242/api"; // Ajuste se necessário
+const API_BASE_URL_AUTH = "/api"; // Ajuste se necessário
 
 // Função para verificar e decodificar token JWT
 function decodeJWT(token) {

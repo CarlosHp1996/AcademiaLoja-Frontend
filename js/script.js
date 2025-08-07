@@ -125,7 +125,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Função para buscar produtos em destaque do backend
   async function fetchFeaturedProducts() {
-    const API_BASE_URL = "https://localhost:4242/api"
+    const API_BASE_URL = "/api"
 
     try {
       // Configurar headers
@@ -320,7 +320,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Função para buscar produtos da API baseado na categoria
   async function fetchProductsByCategory(categoryId, categoryKey) {
     try {
-      const apiUrl = `https://localhost:4242/api/Product/get?CategoryIds=${categoryId}`
+      const apiUrl = `/api/Product/get?CategoryIds=${categoryId}`
 
       console.log(`Buscando produtos para categoria: ${categoryKey} (ID: ${categoryId})`)
       console.log(`URL da API: ${apiUrl}`)

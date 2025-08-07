@@ -1,5 +1,5 @@
 // Configuração da API
-const API_BASE_URL = "https://localhost:4242/api"
+const API_BASE_URL = "/api"
 
 // Elementos do DOM
 const orderSearch = document.getElementById("orderSearch")
