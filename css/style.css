@@ -3729,3 +3729,16 @@ img {
     overflow-x: hidden;
   }
 }
+
+@media (max-width: 767px) {
+  .header {
+    z-index: 1000; /* Garante que o header fique acima do conteúdo */
+    position: relative;
+  }
+  
+  .main {
+    margin-top: 0;
+    position: relative;
+    z-index: 1;
+  }
+}
