@@ -278,3 +278,11 @@ input:-webkit-autofill:active {
     color: var(--color-white) !important;
     transition: background-color 5000s ease-in-out 0s;
 }
+
+@media (max-width: 767px) {
+  .auth-container {
+    position: relative;
+    z-index: 1;
+    margin-top: 20px; /* Espaço para o dropdown */
+  }
+}
