@@ -554,6 +554,7 @@ class CheckoutService {
     try {
       const addressData = {
         id: this.editingAddressId || "00000000-0000-0000-0000-000000000000",
+        completName: formData.get("completName"),
         street: formData.get("street"),
         city: formData.get("city"),
         state: Number.parseInt(formData.get("state")),
@@ -620,9 +621,8 @@ class CheckoutService {
       itemElement.className = "summary-item"
       itemElement.innerHTML = `
         <div class="item-image">
-          <img src="${item.productImage || "/placeholder.svg?height=60&width=60"}" 
-               alt="${item.productName}"
-               onerror="this.src='/placeholder.svg?height=60&width=60'">
+          <img src="${item.productImage}" 
+               alt="${item.productName}">
         </div>
         <div class="item-details">
           <div class="item-name">${item.productName}</div>
