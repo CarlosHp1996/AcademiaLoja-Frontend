@@ -1,147 +1,167 @@
 /* Estilos para a página de detalhes do produto */
-
 .product-title {
-    font-size: 3em; /* Tamanho da fonte aumentado para o título do produto */
-    font-weight: bold;
-    color: white;
-    margin-bottom: 15px;
+  font-size: 3em; /* Tamanho da fonte aumentado para o título do produto */
+  font-weight: bold;
+  color: white;
+  margin-bottom: 15px;
 }
 
 /* Estilos para os breadcrumbs */
 .breadcrumbs {
-    margin-top: 25px; /* Aumenta o espaçamento superior */
-    margin-bottom: 25px; /* Adiciona espaçamento inferior */
-    font-size: 1.1em; /* Aumenta o tamanho da fonte */
-    font-weight: 600; /* Deixa a fonte em negrito */
-    color: white;
-    display: flex;
-    align-items: center;
-    gap: 8px; /* Espaçamento entre os itens */
+  margin-top: 25px; /* Aumenta o espaçamento superior */
+  margin-bottom: 25px; /* Adiciona espaçamento inferior */
+  font-size: 1.1em; /* Aumenta o tamanho da fonte */
+  font-weight: 600; /* Deixa a fonte em negrito */
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Espaçamento entre os itens */
 }
 
 .breadcrumbs a {
-    text-decoration: none;
-    color: #f97316; /* Cor azul para links */
-    transition: color 0.3s ease;
+  text-decoration: none;
+  color: #f97316; /* Cor azul para links */
+  transition: color 0.3s ease;
 }
 
 .breadcrumbs a:hover {
-    color: white; /* Cor do link ao passar o mouse */
+  color: white; /* Cor do link ao passar o mouse */
 }
 
 .breadcrumbs .fa-chevron-right {
-    font-size: 0.8em;
-    color: white;
+  font-size: 0.8em;
+  color: white;
 }
 
 /* Estilos para a imagem principal do produto */
 .product-main-image {
-    max-width: 450px; /* Reduz a largura máxima da imagem principal */
-    margin: 0 auto; /* Centraliza a imagem */
-    border-radius: 8px;
-    overflow: hidden;
+  max-width: 450px; /* Reduz a largura máxima da imagem principal */
+  margin: 0 auto; /* Centraliza a imagem */
+  border-radius: 8px;
+  overflow: hidden;
 }
 
 .product-main-image img {
-    width: 100%;
-    height: auto;
-    display: block;
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
 /* Layout do produto */
 .product-detail {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 2rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+/* Estilo específico para o display de sabor como texto */
+.flavor-display {
+  padding: 0 1.2rem;
+  background: var(--color-orange);
+  border: none;
+  border-radius: 999px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #111;
+  height: 48px;
+  min-width: 250px;
+  max-width: 250px;
+  margin-top: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: none;
+  outline: none;
+  cursor: default;
 }
 
 @media (min-width: 768px) {
-    .product-detail {
-        grid-template-columns: 1fr 1fr;
-        align-items: flex-start;
-    }
+  .product-detail {
+    grid-template-columns: 1fr 1fr;
+    align-items: flex-start;
+  }
 
-    .product-header {
-        grid-column: 2 / 3; /* Coloca o cabeçalho na segunda coluna */
-        grid-row: 1 / 2; /* Coloca o cabeçalho na primeira linha */
-    }
+  .product-header {
+    grid-column: 2 / 3; /* Coloca o cabeçalho na segunda coluna */
+    grid-row: 1 / 2; /* Coloca o cabeçalho na primeira linha */
+  }
 
-    .product-images {
-        grid-column: 1 / 2; /* Coloca as imagens na primeira coluna */
-        grid-row: 1 / 3; /* Faz as imagens ocuparem duas linhas */
-    }
+  .product-images {
+    grid-column: 1 / 2; /* Coloca as imagens na primeira coluna */
+    grid-row: 1 / 3; /* Faz as imagens ocuparem duas linhas */
+  }
 
-    .product-info {
-        grid-column: 2 / 3; /* Coloca as informações na segunda coluna */
-        grid-row: 2 / 3; /* Coloca as informações na segunda linha */
-    }
+  .product-info {
+    grid-column: 2 / 3; /* Coloca as informações na segunda coluna */
+    grid-row: 2 / 3; /* Coloca as informações na segunda linha */
+  }
 
-    .product-options .flavor-options,
-    .product-options .size-select {
-        max-width: 250px;
-    }
+  .product-options,
+  .product-options .size-select {
+    max-width: 250px;
+  }
 
-    .quantity-selector {
-        display: flex;
-        width: 120px;
-    }
+  .quantity-selector {
+    display: flex;
+    width: 120px;
+  }
 
-    .quantity-selector .quantity-input {
-        width: 40px;
-        text-align: center;
-    }
+  .quantity-selector .quantity-input {
+    width: 40px;
+    text-align: center;
+  }
 
-    .add-to-cart-btn {
-        max-width: 200px; /* Reduz a largura do botão Comprar */
-        flex: none; /* Remove a propriedade flex que o expande */
-    }
+  .add-to-cart-btn {
+    max-width: 200px; /* Reduz a largura do botão Comprar */
+    flex: none; /* Remove a propriedade flex que o expande */
+  }
 }
 
 /* Reordenação para modo mobile */
 @media (max-width: 767px) {
-    .product-header {
-        order: -1; /* Move o cabeçalho do produto para cima da imagem */
-    }
+  .product-header {
+    order: -1; /* Move o cabeçalho do produto para cima da imagem */
+  }
 }
 
 /* Estilos para o carrossel de produtos relacionados */
 .related-products-carousel {
-    position: relative;
-    overflow: hidden;
+  position: relative;
+  overflow: hidden;
 }
 
 .carousel-wrapper {
-    overflow: hidden;
+  overflow: hidden;
 }
 
 .carousel-slides {
-    display: flex;
-    transition: transform 0.5s ease;
+  display: flex;
+  transition: transform 0.5s ease;
 }
 
 .related-product-card {
-    flex: 0 0 100%;
-    max-width: 180px; /* Tamanho menor para os cards */
-    margin: 0 10px;
+  flex: 0 0 100%;
+  max-width: 180px; /* Tamanho menor para os cards */
+  margin: 0 10px;
 }
 
 .carousel-prev,
 .carousel-next {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    z-index: 10;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 10;
 }
 
 .carousel-prev {
-    left: 0;
+  left: 0;
 }
 
 .carousel-next {
-    right: 0;
+  right: 0;
 }

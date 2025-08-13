@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         name: data.value.name,
         price: data.value.price,
         oldPrice: data.value.oldPrice,
-        image: data.value.imageUrl || "https://via.placeholder.com/500x500",
+        image: data.value.imageUrl,
         description: data.value.description,
         stockQuantity: data.value.stockQuantity || 0,
         attributes: data.value.attributes || [],
@@ -89,18 +89,19 @@ document.addEventListener("DOMContentLoaded", async () => {
       stockStatus.innerHTML = `<span class="out-of-stock">✗ Fora de estoque</span>`
     }
 
-    
-
     document.getElementById("product-description").textContent = product.description || "Descrição não disponível."
 
-    // Renderizar sabores baseado nos atributos do produto
-    renderFlavorOptions(product.attributes)
+    renderFlavorDisplay(product.attributes)
   }
 
-  // Função para renderizar opções de sabor (dropdown)
-  function renderFlavorOptions(attributes) {
+  function renderFlavorDisplay(attributes) {
     const flavorContainer = document.getElementById("flavor-options-container")
     const flavorOptionsDiv = document.getElementById("flavor-options")
+
+    if (!flavorContainer || !flavorOptionsDiv) {
+      console.error("Elementos de sabor não encontrados no DOM")
+      return
+    }
 
     let productFlavorString = null
     if (attributes && attributes.length > 0 && attributes[0].flavor) {
@@ -115,44 +116,21 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     if (!productFlavorString || isSemSabor) {
       flavorContainer.style.display = "none"
-      console.log("Flavor dropdown hidden.")
+      console.log("Flavor display hidden.")
       return
     }
 
-    // If not "SemSabor", show the container and create the dropdown
     flavorContainer.style.display = "block"
     flavorOptionsDiv.innerHTML = ""
-    console.log("Flavor dropdown shown.")
+    console.log("Flavor display shown.")
 
-    const selectElement = document.createElement("select")
-    selectElement.classList.add("flavor-options")
-    selectElement.id = "flavor-select"
+    // Criar um elemento de texto para mostrar o sabor
+    const flavorDisplay = document.createElement("div")
+    flavorDisplay.classList.add("flavor-display")
+    flavorDisplay.textContent = productFlavorString.replace(/([A-Z])/g, " $1").trim()
 
-    // Add a default "Selecione um sabor" option
-    const defaultOption = document.createElement("option")
-    defaultOption.value = ""
-    defaultOption.textContent = "Selecione um sabor"
-    defaultOption.disabled = true
-    defaultOption.selected = true
-    selectElement.appendChild(defaultOption)
-
-    // Populate dropdown with all flavors except "SemSabor"
-    for (const flavorId in FLAVOR_ENUM_TO_STRING) {
-      const flavorName = FLAVOR_ENUM_TO_STRING[flavorId]
-      if (flavorName !== "SemSabor") {
-        const option = document.createElement("option")
-        option.value = flavorId
-        option.textContent = flavorName.replace(/([A-Z])/g, " $1").trim()
-        if (flavorName === productFlavorString) {
-          option.selected = true
-        }
-        selectElement.appendChild(option)
-      }
-    }
-    flavorOptionsDiv.appendChild(selectElement)
+    flavorOptionsDiv.appendChild(flavorDisplay)
   }
-
-  
 
   // Função para alternar botão ativo
   function toggleActive(clickedElement, selector) {
@@ -296,7 +274,15 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   }
 
-  // Configurar carrinho - NOVA IMPLEMENTAÇÃO
+  // Função para renderizar as estrelas das avaliações
+  function renderStars(rating) {
+    let stars = ""
+    for (let i = 0; i < rating; i++) {
+      stars += "★"
+    }
+    return stars
+  }
+
   function setupAddToCart() {
     const addToCartBtn = document.getElementById("add-to-cart-btn")
 
@@ -307,19 +293,11 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
 
       const quantity = Number.parseInt(document.querySelector(".quantity-input").value)
-      const flavorSelect = document.getElementById("flavor-select")
+
       let flavor = "Sem sabor"
-
-      if (flavorSelect && flavorSelect.value) {
-        flavor = Number(flavorSelect.value)
-      } else if (document.getElementById("flavor-options-container").style.display === "none") {
-        flavor = "Sem sabor"
-      } else {
-        alert("Por favor, selecione um sabor!")
-        return
+      if (produto.attributes && produto.attributes.length > 0 && produto.attributes[0].flavor) {
+        flavor = produto.attributes[0].flavor
       }
-
-      if ((flavor = "Sem sabor")) flavor = FLAVOR_ENUM_TO_STRING[7]
 
       const size = document.querySelector(".size-select")?.value || "Padrão"
 
@@ -333,20 +311,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     })
   }
 
-  // Cálculo de Frete
+  // Função para configurar o calculador de frete
   function setupShippingCalculator() {
-    const shippingBtn = document.querySelector(".shipping-btn")
-    if (shippingBtn) {
-      shippingBtn.addEventListener("click", (e) => {
-        e.preventDefault()
-        const cep = document.querySelector(".shipping-input").value.trim()
-        if (cep && cep.length === 8) {
-          alert(`Calculando frete para o CEP: ${cep}\nFrete: R$15,90\nPrazo: 3-5 dias úteis`)
-        } else {
-          alert("Por favor, digite um CEP válido (8 dígitos).")
-        }
-      })
-    }
+    // Implementação do calculador de frete aqui
+    console.log("Setup Shipping Calculator")
   }
 
   // Função para buscar produtos relacionados
@@ -390,83 +358,30 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   // Função para renderizar produtos relacionados
-  async function renderRelatedProducts() {
-    console.log("Iniciando renderização de produtos relacionados...")
+  function renderRelatedProducts() {
+    fetchRelatedProducts().then((relatedProducts) => {
+      const relatedProductsContainer = document.getElementById("related-products-container")
+      relatedProductsContainer.innerHTML = ""
 
-    const relatedProducts = await fetchRelatedProducts()
+      relatedProducts.forEach((product) => {
+        const productDiv = document.createElement("div")
+        productDiv.classList.add("related-product")
 
-    console.log("Produtos relacionados retornados:", relatedProducts)
-    console.log("Quantidade de produtos relacionados:", relatedProducts.length)
+        const productImage = document.createElement("img")
+        productImage.src = product.image
+        productImage.alt = product.name
+        productDiv.appendChild(productImage)
 
-    if (relatedProducts.length === 0) {
-      console.log("Nenhum produto relacionado encontrado")
-      return
-    }
+        const productName = document.createElement("h5")
+        productName.textContent = product.name
+        productDiv.appendChild(productName)
 
-    // Criar a estrutura do carrossel
-    const relatedSection = document.createElement("div")
-    relatedSection.className = "related-products-section"
-    relatedSection.innerHTML = `
-            <h2 class="product-content">Para comprar com esse produto</h2>
-            <div class="related-products-carousel">
-                <button class="carousel-prev"><i class="fas fa-chevron-left"></i></button>
-                <div class="carousel-wrapper">
-                    <div class="carousel-slides" id="related-slides">
-                        <!-- Produtos serão inseridos aqui -->
-                    </div>
-                </div>
-                <button class="carousel-next"><i class="fas fa-chevron-right"></i></button>
-            </div>
-        `
+        const productPrice = document.createElement("p")
+        productPrice.textContent = `R$ ${product.price.toFixed(2)}`
+        productDiv.appendChild(productPrice)
 
-    // Inserir após as tabs
-    const tabsContainer = document.querySelector(".product-tabs")
-    if (tabsContainer) {
-      tabsContainer.insertAdjacentElement("afterend", relatedSection)
-    }
-
-    // Renderizar cada produto relacionado
-    const slidesContainer = document.getElementById("related-slides")
-    relatedProducts.forEach((product) => {
-      const productCard = document.createElement("div")
-      const priceDisplay =
-        product.price && typeof product.price === "number" ? `R$ ${product.price.toFixed(2)}` : "Preço não disponível"
-
-      productCard.className = "related-product-card"
-      productCard.innerHTML = `
-                <div class="relative">
-                    <img src="${product.imageUrl || "https://via.placeholder.com/200x200"}" alt="${product.name || "Produto sem nome"}">
-                </div>
-                <div class="related-product-info">
-                    <h3 class="related-product-name">${product.name || "Produto sem nome"}</h3>
-                    <div class="related-product-price">${priceDisplay}</div>
-                    <button class="related-product-btn" onclick="window.location.href='product-detail.html?id=${product.id}'">
-                        Ver Produto
-                    </button>
-                </div>
-            `
-      slidesContainer.appendChild(productCard)
-    })
-
-    // Lógica do carrossel
-    const prevButton = document.querySelector(".carousel-prev")
-    const nextButton = document.querySelector(".carousel-next")
-    const slides = document.querySelector(".carousel-slides")
-    const items = document.querySelectorAll(".related-product-card")
-    let index = 0
-
-    function updateCarousel() {
-        slides.style.transform = `translateX(${-index * 100}%)`
-    }
-
-    prevButton.addEventListener("click", () => {
-        index = (index - 1 + items.length) % items.length
-        updateCarousel()
-    })
-
-    nextButton.addEventListener("click", () => {
-        index = (index + 1) % items.length
-        updateCarousel()
+        relatedProductsContainer.appendChild(productDiv)
+      })
     })
   }
 

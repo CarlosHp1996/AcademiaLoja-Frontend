@@ -2648,66 +2648,6 @@ img {
   font-weight: 500;
 }
 
-/* Estilos para opções de sabor */
-.flavor-options {
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  border-radius: 999px;
-  min-width: 250px;
-  max-width: 250px;
-  height: 48px;
-  font-size: 1.1rem;
-  padding: 0 2.5rem 0 1.2rem;
-  background: var(--color-orange);
-  color: #111;
-  border: none;
-  cursor: pointer;
-  transition: border-color 0.2s;
-  font-weight: 600;
-  box-shadow: none;
-  outline: none;
-  width: 100%;
-}
-
-/* Container para posicionar a seta */
-#flavor-options {
-  position: relative;
-  display: inline-block;
-  width: 50%;
-}
-
-/* Seta customizada à direita */
-#flavor-options::after {
-  content: "▼";
-  position: absolute;
-  right: 22px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #111;
-  font-size: 1.1rem;
-  pointer-events: none;
-  z-index: 2;
-}
-
-/* Remove qualquer sombra ou botão atrás */
-.flavor-options:focus {
-  outline: none;
-  border: none;
-  box-shadow: none;
-  background: var(--color-orange);
-}
-
-#flavor-options select.flavor-options:focus {
-  border-color: none;
-  outline: none;
-}
-
-/* Garante que o cursor pointer aparece ao passar o mouse */
-#flavor-options select.flavor-options:hover {
-  cursor: pointer;
-}
-
 .flavor-btn {
   padding: 8px 16px;
   border: 2px solid #ddd;
@@ -3634,9 +3574,6 @@ img {
   .related-products-grid {
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 20px;
-  }
-  .flavor-options {
-    gap: 8px;
   }
   .flavor-btn {
     padding: 6px 12px;
