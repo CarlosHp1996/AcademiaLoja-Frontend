@@ -2496,22 +2496,6 @@ img {
   transform: translateX(0);
 }
 
-.cart-header {
-  padding: 1.5rem;
-  border-bottom: 1px solid var(--color-zinc-800);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.cart-header h3 {
-  font-size: 1.25rem;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
 .cart-close {
   background: none;
   border: none;
