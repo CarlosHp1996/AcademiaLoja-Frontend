@@ -219,7 +219,7 @@ class AuthService {
                 const adminLink = document.createElement('a');
                 adminLink.href = '/admin.html';
                 adminLink.className = 'dropdown-item admin-item';
-                adminLink.innerHTML = '<i class="fas fa-tachometer-alt"></i> Dashboard Admin';
+                adminLink.innerHTML = '<i class="fas fa-tachometer-alt"></i> Admin';
                 dropdownMenu.appendChild(adminLink);
             }
             
