@@ -75,6 +75,85 @@
   cursor: default;
 }
 
+/* Adicionando estilos para a seção de produtos relacionados */
+.related-products-section {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.related-products-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.related-products-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.related-product {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 10rem;
+}
+
+.related-product:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px #f97316;
+}
+
+.related-product-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  padding: 1rem;
+}
+
+.related-product-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 0.75rem;
+}
+
+.related-product-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.related-product-price {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #f97316;
+  margin: 0;
+}
+
+.no-related-products,
+.error-message {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.7);
+  font-style: italic;
+  padding: 2rem;
+  grid-column: 1 / -1;
+}
+
 @media (min-width: 768px) {
   .product-detail {
     grid-template-columns: 1fr 1fr;
@@ -114,6 +193,21 @@
   .add-to-cart-btn {
     max-width: 200px; /* Reduz a largura do botão Comprar */
     flex: none; /* Remove a propriedade flex que o expande */
+  }
+}
+
+@media (max-width: 768px) {
+  .related-products-container {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+  }
+
+  .related-product-image {
+    height: 140px;
+  }
+
+  .related-products-title {
+    font-size: 1.5rem;
   }
 }
 
