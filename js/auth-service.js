@@ -204,14 +204,14 @@ class AuthService {
             const profileLink = document.createElement('a');
             profileLink.href = '/profile.html';
             profileLink.className = 'dropdown-item';
-            profileLink.innerHTML = '<i class="fas fa-user"></i> Meu Perfil';
+            profileLink.innerHTML = '<i class="fas fa-user"></i> Perfil';
             dropdownMenu.appendChild(profileLink);
             
             // Adiciona link para pedidos
             const ordersLink = document.createElement('a');
             ordersLink.href = '/dashboard.html';
             ordersLink.className = 'dropdown-item';
-            ordersLink.innerHTML = '<i class="fas fa-shopping-bag"></i> Meus Pedidos';
+            ordersLink.innerHTML = '<i class="fas fa-shopping-bag"></i> Pedidos';
             dropdownMenu.appendChild(ordersLink);
             
             // Adiciona link para dashboard se for admin
