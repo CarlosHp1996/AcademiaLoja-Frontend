@@ -359,30 +359,44 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // Função para renderizar produtos relacionados
   function renderRelatedProducts() {
-    fetchRelatedProducts().then((relatedProducts) => {
-      const relatedProductsContainer = document.getElementById("related-products-container")
-      relatedProductsContainer.innerHTML = ""
+    fetchRelatedProducts()
+      .then((relatedProducts) => {
+        const relatedProductsContainer = document.getElementById("related-products-container")
 
-      relatedProducts.forEach((product) => {
-        const productDiv = document.createElement("div")
-        productDiv.classList.add("related-product")
+        if (!relatedProductsContainer) {
+          console.error("Elemento 'related-products-container' não encontrado no DOM")
+          return
+        }
 
-        const productImage = document.createElement("img")
-        productImage.src = product.image
-        productImage.alt = product.name
-        productDiv.appendChild(productImage)
+        relatedProductsContainer.innerHTML = ""
 
-        const productName = document.createElement("h5")
-        productName.textContent = product.name
-        productDiv.appendChild(productName)
+        if (relatedProducts.length === 0) {
+          relatedProductsContainer.innerHTML = "<p>Nenhum produto relacionado encontrado.</p>"
+          return
+        }
 
-        const productPrice = document.createElement("p")
-        productPrice.textContent = `R$ ${product.price.toFixed(2)}`
-        productDiv.appendChild(productPrice)
+        relatedProducts.forEach((product) => {
+          const productDiv = document.createElement("div")
+          productDiv.classList.add("related-product")
 
-        relatedProductsContainer.appendChild(productDiv)
+          productDiv.innerHTML = `
+          <a href="product-detail.html?id=${product.id}" class="related-product-link">
+            <img src="${product.imageUrl || product.image}" alt="${product.name}" class="related-product-image">
+            <h5 class="related-product-name">${product.name}</h5>
+            <p class="related-product-price">R$ ${product.price.toFixed(2)}</p>
+          </a>
+        `
+
+          relatedProductsContainer.appendChild(productDiv)
+        })
       })
-    })
+      .catch((error) => {
+        console.error("Erro ao renderizar produtos relacionados:", error)
+        const relatedProductsContainer = document.getElementById("related-products-container")
+        if (relatedProductsContainer) {
+          relatedProductsContainer.innerHTML = "<p>Erro ao carregar produtos relacionados.</p>"
+        }
+      })
   }
 
   // Chamar funções principais
