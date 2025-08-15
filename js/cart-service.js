@@ -471,10 +471,9 @@ class CartService {
 
     itemDiv.innerHTML = `
             <div class="cart-item-content">
-                <img src="${item.productImage || "/placeholder.svg?height=60&width=60"}" 
+                <img src="${item.productImage}" 
                      alt="${item.productName}" 
-                     class="cart-item-image"
-                     onerror="this.src='/placeholder.svg?height=60&width=60'">
+                     class="cart-item-image">
                 <div class="cart-item-details">
                     <div class="cart-item-name">${item.productName}</div>
                     ${variantText.length > 0 ? `<div class="cart-item-variant">${variantText.join(" • ")}</div>` : ""}
