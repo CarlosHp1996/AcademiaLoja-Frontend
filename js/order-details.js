@@ -82,8 +82,8 @@ document.addEventListener("DOMContentLoaded", () => {
       if (response.ok) {
         const result = await response.json()
         if (result.hasSuccess && result.value) {
-          userName.textContent = result.value.userName || "Usuário"
-          userEmail.textContent = result.value.email || ""
+          userName.textContent = result.value.user.userName || "Usuário"
+          userEmail.textContent = result.value.user.email || ""
         }
       }
     } catch (error) {

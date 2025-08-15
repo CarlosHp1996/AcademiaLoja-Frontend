@@ -643,15 +643,7 @@
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
-
-  .profile-sidebar {
-    order: 2;
-  }
-
-  .profile-content {
-    order: 1;
-  }
-
+  
   .profile-nav ul {
     flex-direction: row;
     flex-wrap: wrap;
@@ -811,16 +803,16 @@
 }
 
 .main-address {
-    border-color: var(--color-primary);
-    box-shadow: 0 0 15px rgba(249, 115, 22, 0.3);
+  border-color: var(--color-primary);
+  box-shadow: 0 0 15px rgba(249, 115, 22, 0.3);
 }
 
 .checkbox-label {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
 }
 
 .checkbox-label input {
-    margin-right: 8px;
+  margin-right: 8px;
 }
