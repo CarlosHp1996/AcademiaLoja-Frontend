@@ -146,7 +146,6 @@ function renderAddresses() {
                 <div class="address-icon">
                     <i class="fas fa-map-marker-alt"></i>
                 </div>
-                ${address.mainAddress ? '<span class="main-address-tag" style="margin-left:30%;">Principal</span>' : ''}
                 <div class="address-actions">
                     <button class="btn-icon" onclick="editAddress('${address.id}')" title="Editar">
                         <i class="fas fa-edit"></i>
