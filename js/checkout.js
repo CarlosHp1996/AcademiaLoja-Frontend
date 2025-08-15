@@ -432,7 +432,6 @@ class CheckoutService {
                 <div class="address-icon">
                     <i class="fas fa-map-marker-alt"></i>
                 </div>
-                ${address.mainAddress ? '<span class="main-address-tag" style="margin-left:65%">Principal</span>' : ''}
                 <div class="address-actions">
                     <button class="btn-icon" onclick="checkoutService.editAddress('${address.id}')" title="Editar">
                         <i class="fas fa-edit"></i>

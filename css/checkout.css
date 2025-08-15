@@ -524,7 +524,7 @@
   border-radius: 8px;
   font-weight: 600;
   transition: all 0.3s ease;
-  margin-left: auto; /* joga para a direita em containers flex ou grid */
+  margin-left: 0; /* joga para a direita em containers flex ou grid */
   margin-right: 0;
 }
 
