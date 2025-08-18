@@ -109,7 +109,7 @@ function showLogoutSuccess() {
 window.authNotifications = {
     show: showAuthNotification,
     accessDenied: showAccessDenied,
-    loginRequired: showLoginRequired,
-    loginSuccess: showLoginSuccess,
-    logoutSuccess: showLogoutSuccess
+    //loginRequired: showLoginRequired
+    //loginSuccess: showLoginSuccess,
+    //logoutSuccess: showLogoutSuccess
 };

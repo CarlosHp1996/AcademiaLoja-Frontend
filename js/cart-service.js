@@ -145,7 +145,6 @@ class CartService {
       if (response.ok && result.hasSuccess) {
         this.cart = result.value
         this.updateCartBadge()
-        this.showSuccessMessage("Produto adicionado ao carrinho!")
         return { success: true, cart: this.cart }
       } else {
         const errorMessage = result.errors?.[0] || "Erro ao adicionar produto ao carrinho"
@@ -212,7 +211,6 @@ class CartService {
         this.cart = result.value
         this.updateCartBadge()
         this.updateCartPanel()
-        this.showSuccessMessage("Item removido do carrinho")
         return { success: true, cart: this.cart }
       } else {
         const errorMessage = result.errors?.[0] || "Erro ao remover item"
