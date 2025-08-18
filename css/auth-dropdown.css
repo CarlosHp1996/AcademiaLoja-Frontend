@@ -210,7 +210,6 @@
   .user-dropdown {
     overflow: visible !important;
     position: relative !important;
-    z-index: 999 !important;
   }
 
   .dropdown-menu {

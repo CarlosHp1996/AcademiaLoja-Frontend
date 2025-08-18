@@ -306,21 +306,44 @@
   pointer-events: none;
 }
 
+.brands-section {
+  padding: 4rem 0;
+  scroll-margin-top: 100px;
+}
+
 .section-header {
   text-align: center;
   margin-bottom: 4rem;
   max-width: 100%;
-  margin-left: auto;
-  margin-right: auto;
+  width: 100%;
 }
 
 .section-title {
-  font-size: 3rem;
+  text-align: center;
+  font-size: 4rem;
   font-weight: 800;
   color: #fff;
   margin-bottom: 1rem;
-  line-height: 1.2;
+  position: relative;
+}
+
+.section-header,
+.section-title {
   text-align: center;
+  display: block;
+  width: 100%;
+}
+
+.section-title::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #f97316, #ff8c42);
+  border-radius: 2px;
 }
 
 .section-subtitle {
@@ -699,7 +722,7 @@
   }
 
   .section-title {
-    font-size: 2.5rem;
+    font-size: 3rem;
   }
 
   .brands-grid {
@@ -737,7 +760,7 @@
   }
 
   .section-title {
-    font-size: 2rem;
+    font-size: 2.25rem;
   }
 
   .brands-grid {
@@ -804,7 +827,7 @@
   }
 
   .section-title {
-    font-size: 1.75rem;
+    font-size: 3rem;
   }
 
   .section-subtitle {
