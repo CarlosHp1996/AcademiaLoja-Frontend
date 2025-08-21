@@ -97,6 +97,16 @@ class CheckoutService {
     }
   }
 
+  copyPixCode() {
+    const pixCode = "https://cobranca.c6pix.com.br/01K34JG9NR8WZCDXN20R7A5BXK";
+    navigator.clipboard.writeText(pixCode).then(() => {
+      this.showNotification("Código PIX copiado para a área de transferência!", "success");
+    }).catch((err) => {
+      console.error("Erro ao copiar código PIX:", err);
+      this.showNotification("Erro ao copiar o código PIX.", "error");
+    });
+  }
+
   setupUI() {
     // Configurar abas de pagamento
     const paymentTabs = document.querySelectorAll(".payment-tab")
@@ -220,7 +230,8 @@ class CheckoutService {
 
       if (activePaymentMethod === "card") {
         await this.processCardPayment()
-      } else if (activePaymentMethod === "pix") {
+      }
+       else if (activePaymentMethod === "pix") {
         await this.processPixPayment()
       }
     } catch (error) {
@@ -366,27 +377,27 @@ class CheckoutService {
   async processPixPayment() {
     try {
       // Para PIX, apenas criar o payment intent
-      const response = await fetch(`${this.API_BASE_URL}/Payment/create/${this.currentOrder.orderId}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${window.authService?.getToken()}`,
-        },
-      })
+      // const response = await fetch(`${this.API_BASE_URL}/Payment/create/${this.currentOrder.orderId}`, {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //     Authorization: `Bearer ${window.authService?.getToken()}`,
+      //   },
+      // })
 
-      const result = await response.json()
+      // const result = await response.json()
 
-      if (!response.ok || !result.hasSuccess) {
-        throw new Error(result.errors?.[0] || "Erro ao criar pagamento PIX")
-      }
+      // if (!response.ok || !result.hasSuccess) {
+      //   throw new Error(result.errors?.[0] || "Erro ao criar pagamento PIX")
+      // }
 
-      this.paymentIntent = result.value
+      // this.paymentIntent = result.value
 
       this.showNotification("Pedido criado! Redirecionando para pagamento PIX...", "success")
 
       // Redirecionar para página de PIX
       setTimeout(() => {
-        window.location.href = `/pix-payment.html?order=${this.currentOrder.orderId}&payment=${this.paymentIntent.paymentId}`
+        window.location.href = `/order-details.html?id=${this.currentOrder.orderId}`
       }, 2000)
     } catch (error) {
       console.error("Erro no pagamento PIX:", error)
@@ -395,6 +406,7 @@ class CheckoutService {
   }
 
   getShippingAddressObject() {
+    const activePaymentMethod = document.querySelector(".payment-tab.active").dataset.method
     const selectedAddress = this.currentAddresses.find(addr => addr.id === this.selectedAddressId)
     if (!selectedAddress) return null
 
@@ -408,6 +420,7 @@ class CheckoutService {
       Neighborhood: selectedAddress.neighborhood,
       City: selectedAddress.city,
       State: selectedAddress.state,
+      PaymentMethod: activePaymentMethod
     }
   }
 
