@@ -865,7 +865,10 @@ document.addEventListener("DOMContentLoaded", () => {
   // --- CRUD Pedidos ---
   async function fetchAndDisplayOrders() {
     const container = document.getElementById("order-list-container")
-    const result = await fetchData(`${API_BASE_URL_ADMIN}/Order/get`, {}, container)
+    
+    // Definir um PageSize alto para buscar todos os registros
+    const result = await fetchData(`${API_BASE_URL_ADMIN}/Order/get?PageSize=1000&Page=1`, {}, container)
+    
     if (result && result.hasSuccess && result.value && result.value.orders) {
       renderOrderTable(result.value.orders)
     } else if (result && result.errors) {
@@ -879,31 +882,144 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function renderOrderTable(orders) {
     const container = document.getElementById("order-list-container")
-    let tableHTML = `
-            <table class="admin-table">
-                <thead><tr><th>Nº Pedido</th><th>Usuário</th><th>Data</th><th>Total</th><th>Status</th><th>Ativo</th></tr></thead>
-                <tbody>`
-    orders.forEach((order) => {
-      const userIdentifier = order.user ? order.userName : order.userName || "Desconhecido"
-      tableHTML += `
-                <tr data-order-id="${order.id}">
-                    <td>${order.orderNumber}</td>
-                    <td>${userIdentifier}</td>
-                    <td>${formatDate(order.orderDate)}</td>
-                    <td>R$ ${order.totalAmount.toFixed(2).replace(".", ",")}</td>
-                    <td><span class="status status-${order.status?.toLowerCase()}">${order.status || "N/A"}</span></td>
-                    <td>
-                        <button class="btn btn-sm btn-toggle-active ${order.isActive ? "btn-success" : "btn-secondary"}" data-id="${order.id}" data-is-active="${order.isActive}">
-                            <i class="fas ${order.isActive ? "fa-check" : "fa-times"}"></i>
-                        </button>
-                    </td>
-                </tr>`
-    })
-    tableHTML += `</tbody></table>`
-    container.innerHTML = tableHTML
-    container
-      .querySelectorAll(".btn-toggle-active")
-      .forEach((btn) => btn.addEventListener("click", handleOrderIsActiveChange))
+    const itemsPerPage = 10
+    let currentPage = 1
+    
+    function renderPage(page) {
+      const startIndex = (page - 1) * itemsPerPage
+      const endIndex = startIndex + itemsPerPage
+      const paginatedOrders = orders.slice(startIndex, endIndex)
+      
+      let tableHTML = `
+        <div class="table-container">
+          <div class="table-header">
+            <h4>Total de pedidos: ${orders.length}</h4>
+          </div>
+          <table class="admin-table">
+            <thead><tr><th>Nº Pedido</th><th>Usuário</th><th>Data</th><th>Total</th><th>Status</th><th>Ativo</th></tr></thead>
+            <tbody>`
+      
+      if (paginatedOrders.length === 0) {
+        tableHTML += `
+          <tr>
+            <td colspan="6" class="text-center">Nenhum pedido encontrado nesta página.</td>
+          </tr>`
+      } else {
+        paginatedOrders.forEach((order) => {
+          const userIdentifier = order.user ? order.userName : order.userName || "Desconhecido"
+          tableHTML += `
+            <tr data-order-id="${order.id}">
+              <td>${order.orderNumber}</td>
+              <td>${userIdentifier}</td>
+              <td>${formatDate(order.orderDate)}</td>
+              <td>R$ ${order.totalAmount.toFixed(2).replace(".", ",")}</td>
+              <td><span class="status status-${order.status?.toLowerCase()}">${order.status || "N/A"}</span></td>
+              <td>
+                <button class="btn btn-sm btn-toggle-active ${order.isActive ? "btn-success" : "btn-secondary"}" data-id="${order.id}" data-is-active="${order.isActive}">
+                  <i class="fas ${order.isActive ? "fa-check" : "fa-times"}"></i>
+                </button>
+              </td>
+            </tr>`
+        })
+      }
+      
+      tableHTML += `</tbody></table></div>`
+      
+      // Adicionar controles de paginação
+      const totalPages = Math.ceil(orders.length / itemsPerPage)
+      if (totalPages > 1) {
+        tableHTML += `
+          <div class="pagination-container">
+            <div class="pagination-info">
+              <span>Página ${page} de ${totalPages}</span>
+              <span class="ml-3">Mostrando ${startIndex + 1}-${Math.min(endIndex, orders.length)} de ${orders.length} pedidos</span>
+            </div>
+            <div class="pagination-controls">`
+        
+        // Botão Primeira Página
+        if (page > 1) {
+          tableHTML += `<button class="btn btn-sm btn-outline-secondary pagination-btn" data-page="1" title="Primeira página">
+            <i class="fas fa-angle-double-left"></i>
+          </button>`
+        }
+        
+        // Botão Anterior
+        if (page > 1) {
+          tableHTML += `<button class="btn btn-sm btn-outline-secondary pagination-btn" data-page="${page - 1}" title="Página anterior">
+            <i class="fas fa-angle-left"></i>
+          </button>`
+        }
+        
+        // Botões de página (máximo 7 botões visíveis)
+        let startPage = Math.max(1, page - 3)
+        let endPage = Math.min(totalPages, startPage + 6)
+        
+        if (endPage - startPage < 6) {
+          startPage = Math.max(1, endPage - 6)
+        }
+        
+        if (startPage > 1) {
+          tableHTML += `<button class="btn btn-sm btn-outline-secondary pagination-btn" data-page="1">1</button>`
+          if (startPage > 2) {
+            tableHTML += `<span class="pagination-ellipsis">...</span>`
+          }
+        }
+        
+        for (let i = startPage; i <= endPage; i++) {
+          if (i === page) {
+            tableHTML += `<button class="btn btn-sm btn-primary pagination-btn active" data-page="${i}">${i}</button>`
+          } else {
+            tableHTML += `<button class="btn btn-sm btn-outline-secondary pagination-btn" data-page="${i}">${i}</button>`
+          }
+        }
+        
+        if (endPage < totalPages) {
+          if (endPage < totalPages - 1) {
+            tableHTML += `<span class="pagination-ellipsis">...</span>`
+          }
+          tableHTML += `<button class="btn btn-sm btn-outline-secondary pagination-btn" data-page="${totalPages}">${totalPages}</button>`
+        }
+        
+        // Botão Próximo
+        if (page < totalPages) {
+          tableHTML += `<button class="btn btn-sm btn-outline-secondary pagination-btn" data-page="${page + 1}" title="Próxima página">
+            <i class="fas fa-angle-right"></i>
+          </button>`
+        }
+        
+        // Botão Última Página
+        if (page < totalPages) {
+          tableHTML += `<button class="btn btn-sm btn-outline-secondary pagination-btn" data-page="${totalPages}" title="Última página">
+            <i class="fas fa-angle-double-right"></i>
+          </button>`
+        }
+        
+        tableHTML += `</div></div>`
+      }
+      
+      container.innerHTML = tableHTML
+      
+      // Event listeners para os botões de paginação
+      container.querySelectorAll(".pagination-btn").forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+          const newPage = parseInt(e.currentTarget.getAttribute("data-page"))
+          if (newPage !== currentPage) {
+            currentPage = newPage
+            renderPage(currentPage)
+            // Scroll para o topo da tabela
+            container.scrollIntoView({ behavior: 'smooth', block: 'start' })
+          }
+        })
+      })
+      
+      // Event listeners para os botões de ação
+      container.querySelectorAll(".btn-toggle-active").forEach((btn) => {
+        btn.addEventListener("click", handleOrderIsActiveChange)
+      })
+    }
+    
+    // Renderizar primeira página
+    renderPage(currentPage)
   }
 
   async function handleOrderIsActiveChange(event) {
