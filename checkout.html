@@ -209,12 +209,11 @@
                         <!-- PIX Payment Form -->
                         <div id="pix-payment" class="payment-form">
                             <div class="pix-info">
-                                <div class="pix-icon">
-                                    <i class="fas fa-qrcode"></i>
-                                </div>
+                                <img src="/assets/images/qrcode_pix.jpg" alt="QR Code PIX" class="pix-qrcode" style="width: 200px; height: 200px;">
                                 <div class="pix-text">
                                     <h3>Pagamento via PIX</h3>
-                                    <p>Após confirmar o pedido, você receberá o código PIX para pagamento instantâneo.</p>
+                                    <p>Escaneie o QR Code ou copie a linha digitável abaixo para realizar o pagamento</p>
+                                    <button class="btn btn-primary btn-copy-pix" onclick="checkoutService.copyPixCode()">Copiar Código</button>
                                 </div>
                             </div>
                         </div>
