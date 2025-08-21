@@ -177,25 +177,25 @@ document.addEventListener("DOMContentLoaded", () => {
       const trackingData = await fetchData(`${API_BASE_URL_ADMIN}/Tracking`)
 
       if (productData && productData.hasSuccess && productData.value && productData.value.products) {
-        document.getElementById("productCount").textContent = productData.value.products.length || 0
+        document.getElementById("productCount").textContent = productData.count || 0
       } else {
         document.getElementById("productCount").textContent = "Erro"
       }
 
       if (userData && userData.hasSuccess && userData.value && userData.value.users) {
-        document.getElementById("userCount").textContent = userData.value.users.length || 0
+        document.getElementById("userCount").textContent = userData.count || 0
       } else {
         document.getElementById("userCount").textContent = "Erro"
       }
 
       if (orderData && orderData.hasSuccess && orderData.value && orderData.value.orders) {
-        document.getElementById("orderCount").textContent = orderData.value.orders.length || 0
+        document.getElementById("orderCount").textContent = orderData.count || 0
       } else {
         document.getElementById("orderCount").textContent = "Erro"
       }
 
       if (trackingData && trackingData.hasSuccess && trackingData.value) {
-        document.getElementById("trackingCount").textContent = trackingData.value.length || 0
+        document.getElementById("trackingCount").textContent = trackingData.count || 0
       } else {
         document.getElementById("trackingCount").textContent = "Erro"
       }
@@ -376,7 +376,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // --- CRUD Produtos ---
   async function fetchAndDisplayProducts() {
     const container = document.getElementById("product-list-container")
-    const result = await fetchData(`${API_BASE_URL_ADMIN}/Product/get`, {}, container)
+    // Buscar todos os produtos sem paginação
+    const result = await fetchData(`${API_BASE_URL_ADMIN}/Product/get?PageSize=1000&Page=1`, {}, container)
     if (result && result.hasSuccess && result.value && result.value.products) {
       renderProductTable(result.value.products)
     } else if (result && result.errors) {
@@ -390,34 +391,72 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function renderProductTable(products) {
     const container = document.getElementById("product-list-container")
-    let tableHTML = `
-            <table class="admin-table">
-                <thead><tr><th>Nome</th><th>Preço</th><th>Estoque</th><th>Ativo</th><th>Ações</th></tr></thead>
-                <tbody>`
-    products.forEach((p) => {
-      tableHTML += `
-                <tr>
-                    <td>${p.name}</td>
-                    <td>R$ ${p.price.toFixed(2).replace(".", ",")}</td>
-                    <td>${p.stockQuantity}</td>
-                    <td><span class="status ${p.isActive ? "active" : "inactive"}">${p.isActive ? "Sim" : "Não"}</span></td>
-                    <td>
-                        <button class="btn btn-sm btn-edit" data-id="${p.id}"><i class="fas fa-edit"></i> Editar</button>
-                        <button class="btn btn-sm btn-delete-btn" data-id="${p.id}"><i class="fas fa-trash"></i> Excluir</button>
-                    </td>
-                </tr>`
-    })
-    tableHTML += `</tbody></table>`
-    container.innerHTML = tableHTML
-    // Re-enable event listeners for edit and delete buttons
-    container.querySelectorAll(".btn-edit").forEach((btn) => {
-      btn.removeEventListener("click", handleEditProduct) // Prevent duplicate listeners
-      btn.addEventListener("click", handleEditProduct)
-    })
-    container.querySelectorAll(".btn-delete-btn").forEach((btn) => {
-      btn.removeEventListener("click", handleDeleteProduct)
-      btn.addEventListener("click", handleDeleteProduct)
-    })
+    const itemsPerPage = 10
+    let currentPage = 1
+    
+    function renderPage(page) {
+      const startIndex = (page - 1) * itemsPerPage
+      const endIndex = startIndex + itemsPerPage
+      const paginatedProducts = products.slice(startIndex, endIndex)
+      
+      let tableHTML = `
+        <div class="table-container">
+          <div class="table-header">
+            <h4>Total de produtos: ${products.length}</h4>
+          </div>
+          <table class="admin-table">
+            <thead><tr><th>Nome</th><th>Preço</th><th>Estoque</th><th>Ativo</th><th>Ações</th></tr></thead>
+            <tbody>`
+      
+      if (paginatedProducts.length === 0) {
+        tableHTML += `
+          <tr>
+            <td colspan="5" class="text-center">Nenhum produto encontrado nesta página.</td>
+          </tr>`
+      } else {
+        paginatedProducts.forEach((p) => {
+          tableHTML += `
+            <tr>
+              <td>${p.name}</td>
+              <td>R$ ${p.price.toFixed(2).replace(".", ",")}</td>
+              <td>${p.stockQuantity}</td>
+              <td><span class="status ${p.isActive ? "active" : "inactive"}">${p.isActive ? "Sim" : "Não"}</span></td>
+              <td>
+                <button class="btn btn-sm btn-edit" data-id="${p.id}"><i class="fas fa-edit"></i> Editar</button>
+                <button class="btn btn-sm btn-delete-btn" data-id="${p.id}"><i class="fas fa-trash"></i> Excluir</button>
+              </td>
+            </tr>`
+        })
+      }
+      
+      tableHTML += `</tbody></table></div>`
+      
+      // Adicionar controles de paginação
+      const totalPages = Math.ceil(products.length / itemsPerPage)
+      if (totalPages > 1) {
+        tableHTML += generatePaginationControls(page, totalPages, startIndex, endIndex, products.length)
+      }
+      
+      container.innerHTML = tableHTML
+      
+      // Event listeners para paginação
+      addPaginationEventListeners(container, (newPage) => {
+        currentPage = newPage
+        renderPage(currentPage)
+      })
+      
+      // Re-enable event listeners for edit and delete buttons
+      container.querySelectorAll(".btn-edit").forEach((btn) => {
+        btn.removeEventListener("click", handleEditProduct)
+        btn.addEventListener("click", handleEditProduct)
+      })
+      container.querySelectorAll(".btn-delete-btn").forEach((btn) => {
+        btn.removeEventListener("click", handleDeleteProduct)
+        btn.addEventListener("click", handleDeleteProduct)
+      })
+    }
+    
+    renderPage(currentPage)
   }
 
   function showProductForm(product = null) {
@@ -674,7 +713,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // --- CRUD Usuários ---
   async function fetchAndDisplayUsers() {
     const container = document.getElementById("user-list-container")
-    const result = await fetchData(`${API_BASE_URL_ADMIN}/Auth/get`, {}, container)
+    // Buscar todos os usuários sem paginação
+    const result = await fetchData(`${API_BASE_URL_ADMIN}/Auth/get?PageSize=1000&Page=1`, {}, container)
     if (result && result.hasSuccess && result.value && result.value.users) {
       renderUserTable(result.value.users)
     } else if (result && result.errors) {
@@ -688,21 +728,59 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function renderUserTable(users) {
     const container = document.getElementById("user-list-container")
-    let tableHTML = `
-            <table class="admin-table">
-                <thead><tr><th>Nome</th><th>Email</th></tr></thead>
-                <tbody>`
-    users.forEach((user) => {
-      tableHTML += `
-                <tr>
-                    <td>${user.userName}</td>
-                    <td>${user.email}</td>                  
-                </tr>`
-    })
-    tableHTML += `</tbody></table>`
-    container.innerHTML = tableHTML
-    container.querySelectorAll(".btn-edit").forEach((btn) => btn.addEventListener("click", handleEditUser))
-    container.querySelectorAll(".btn-delete").forEach((btn) => btn.addEventListener("click", handleDeleteUser))
+    const itemsPerPage = 10
+    let currentPage = 1
+    
+    function renderPage(page) {
+      const startIndex = (page - 1) * itemsPerPage
+      const endIndex = startIndex + itemsPerPage
+      const paginatedUsers = users.slice(startIndex, endIndex)
+      
+      let tableHTML = `
+        <div class="table-container">
+          <div class="table-header">
+            <h4>Total de usuários: ${users.length}</h4>
+          </div>
+          <table class="admin-table">
+            <thead><tr><th>Nome</th><th>Email</th></tr></thead>
+            <tbody>`
+      
+      if (paginatedUsers.length === 0) {
+        tableHTML += `
+          <tr>
+            <td colspan="2" class="text-center">Nenhum usuário encontrado nesta página.</td>
+          </tr>`
+      } else {
+        paginatedUsers.forEach((user) => {
+          tableHTML += `
+            <tr>
+              <td>${user.userName}</td>
+              <td>${user.email}</td>                  
+            </tr>`
+        })
+      }
+      
+      tableHTML += `</tbody></table></div>`
+      
+      // Adicionar controles de paginação
+      const totalPages = Math.ceil(users.length / itemsPerPage)
+      if (totalPages > 1) {
+        tableHTML += generatePaginationControls(page, totalPages, startIndex, endIndex, users.length)
+      }
+      
+      container.innerHTML = tableHTML
+      
+      // Event listeners para paginação
+      addPaginationEventListeners(container, (newPage) => {
+        currentPage = newPage
+        renderPage(currentPage)
+      })
+      
+      container.querySelectorAll(".btn-edit").forEach((btn) => btn.addEventListener("click", handleEditUser))
+      container.querySelectorAll(".btn-delete").forEach((btn) => btn.addEventListener("click", handleDeleteUser))
+    }
+    
+    renderPage(currentPage)
   }
 
   function showUserForm(user = null) {
@@ -1065,7 +1143,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // --- Orders for Tracking Management ---
   async function fetchAndDisplayOrdersForTracking() {
     const container = document.getElementById("orders-for-tracking-container")
-    const result = await fetchData(`${API_BASE_URL_ADMIN}/Order/get`, {}, container)
+    // Buscar todos os pedidos sem paginação
+    const result = await fetchData(`${API_BASE_URL_ADMIN}/Order/get?PageSize=1000&Page=1`, {}, container)
     if (result && result.hasSuccess && result.value && result.value.orders) {
       currentOrders = result.value.orders
       renderOrdersForTrackingTable(result.value.orders)
@@ -1080,52 +1159,88 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function renderOrdersForTrackingTable(orders) {
     const container = document.getElementById("orders-for-tracking-container")
-    let tableHTML = `
-            <table class="admin-table">
-                <thead>
-                    <tr>
-                        <th>Nº Pedido</th>
-                        <th>Usuário</th>
-                        <th>Data</th>
-                        <th>Total</th>
-                        <th>Status</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody>`
+    const itemsPerPage = 10
+    let currentPage = 1
+    
+    function renderPage(page) {
+      const startIndex = (page - 1) * itemsPerPage
+      const endIndex = startIndex + itemsPerPage
+      const paginatedOrders = orders.slice(startIndex, endIndex)
+      
+      let tableHTML = `
+        <div class="table-container">
+          <div class="table-header">
+            <h4>Total de pedidos: ${orders.length}</h4>
+          </div>
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Nº Pedido</th>
+                <th>Usuário</th>
+                <th>Data</th>
+                <th>Total</th>
+                <th>Status</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody>`
 
-    orders.forEach((order) => {
-      const userIdentifier = order.user ? order.user.userName : order.userName || "Desconhecido"
-      tableHTML += `
-                <tr>
-                    <td>
-                        <span class="order-number">#${order.orderNumber}</span>
-                        <small class="order-id text-muted d-block">${order.id.substring(0, 8)}...</small>
-                    </td>
-                    <td>${userIdentifier}</td>
-                    <td>${formatDate(order.orderDate)}</td>
-                    <td>R$ ${order.totalAmount.toFixed(2).replace(".", ",")}</td>
-                    <td><span class="status status-${order.status?.toLowerCase()}">${order.status || "N/A"}</span></td>
-                    <td>
-                        <button class="btn btn-sm btn-primary btn-create-tracking" data-order-id="${order.id}" data-order-number="${order.orderNumber}">
-                            <i class="fas fa-plus"></i> Criar Rastreamento
-                        </button>
-                        <button class="btn btn-sm btn-info btn-view-tracking" data-order-id="${order.id}">
-                            <i class="fas fa-eye"></i> Ver Rastreamentos
-                        </button>
-                    </td>
-                </tr>`
-    })
-    tableHTML += `</tbody></table>`
-    container.innerHTML = tableHTML
+      if (paginatedOrders.length === 0) {
+        tableHTML += `
+          <tr>
+            <td colspan="6" class="text-center">Nenhum pedido encontrado nesta página.</td>
+          </tr>`
+      } else {
+        paginatedOrders.forEach((order) => {
+          const userIdentifier = order.user ? order.user.userName : order.userName || "Desconhecido"
+          tableHTML += `
+            <tr>
+              <td>
+                <span class="order-number">#${order.orderNumber}</span>
+                <small class="order-id text-muted d-block">${order.id.substring(0, 8)}...</small>
+              </td>
+              <td>${userIdentifier}</td>
+              <td>${formatDate(order.orderDate)}</td>
+              <td>R$ ${order.totalAmount.toFixed(2).replace(".", ",")}</td>
+              <td><span class="status status-${order.status?.toLowerCase()}">${order.status || "N/A"}</span></td>
+              <td>
+                <button class="btn btn-sm btn-primary btn-create-tracking" data-order-id="${order.id}" data-order-number="${order.orderNumber}">
+                  <i class="fas fa-plus"></i> Criar Rastreamento
+                </button>
+                <button class="btn btn-sm btn-info btn-view-tracking" data-order-id="${order.id}">
+                  <i class="fas fa-eye"></i> Ver Rastreamentos
+                </button>
+              </td>
+            </tr>`
+        })
+      }
+      
+      tableHTML += `</tbody></table></div>`
 
-    // Add event listeners
-    container.querySelectorAll(".btn-create-tracking").forEach((btn) => {
-      btn.addEventListener("click", handleCreateTrackingForOrder)
-    })
-    container.querySelectorAll(".btn-view-tracking").forEach((btn) => {
-      btn.addEventListener("click", handleViewTrackingForOrder)
-    })
+      // Adicionar controles de paginação
+      const totalPages = Math.ceil(orders.length / itemsPerPage)
+      if (totalPages > 1) {
+        tableHTML += generatePaginationControls(page, totalPages, startIndex, endIndex, orders.length)
+      }
+      
+      container.innerHTML = tableHTML
+
+      // Event listeners para paginação
+      addPaginationEventListeners(container, (newPage) => {
+        currentPage = newPage
+        renderPage(currentPage)
+      })
+
+      // Add event listeners
+      container.querySelectorAll(".btn-create-tracking").forEach((btn) => {
+        btn.addEventListener("click", handleCreateTrackingForOrder)
+      })
+      container.querySelectorAll(".btn-view-tracking").forEach((btn) => {
+        btn.addEventListener("click", handleViewTrackingForOrder)
+      })
+    }
+    
+    renderPage(currentPage)
   }
 
   async function handleCreateTrackingForOrder(event) {
@@ -1151,9 +1266,9 @@ document.addEventListener("DOMContentLoaded", () => {
   // --- CRUD Rastreios ---
   async function fetchAndDisplayTracking(filterOrderId = null) {
     const container = document.getElementById("tracking-list-container")
-    let url = `${API_BASE_URL_ADMIN}/Tracking`
+    let url = `${API_BASE_URL_ADMIN}/Tracking?PageSize=1000&Page=1`
     if (filterOrderId) {
-      url += `?orderId=${filterOrderId}`
+      url += `&orderId=${filterOrderId}`
     }
 
     const result = await fetchData(url, {}, container)
@@ -1170,101 +1285,121 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function renderTrackingTable(trackings, filterOrderId = null) {
     const container = document.getElementById("tracking-list-container")
+    const itemsPerPage = 10
+    let currentPage = 1
 
     const headerHTML = `
-            <div class="tracking-header">
-                ${
-                  filterOrderId
-                    ? `
-                    <div class="filter-info">
-                        <i class="fas fa-filter"></i> 
-                        Mostrando rastreamentos para o pedido: <strong>${filterOrderId.substring(0, 8)}...</strong>
-                        <button class="btn btn-sm btn-secondary ml-2" onclick="fetchAndDisplayTracking()">
-                            <i class="fas fa-times"></i> Limpar Filtro
-                        </button>
-                    </div>
-                `
-                    : ""
-                }
-            </div>
-        `
+      <div class="tracking-header">
+        ${filterOrderId ? `
+          <div class="filter-info">
+            <i class="fas fa-filter"></i> 
+            Mostrando rastreamentos para o pedido: <strong>${filterOrderId.substring(0, 8)}...</strong>
+            <button class="btn btn-sm btn-secondary ml-2" onclick="fetchAndDisplayTracking()">
+              <i class="fas fa-times"></i> Limpar Filtro
+            </button>
+          </div>
+        ` : ""}
+      </div>
+    `
 
-    let tableHTML = `
-            <table class="admin-table">
-                <thead>
-                    <tr>
-                        <th>Pedido</th>
-                        <th>Código Rastreamento</th>
-                        <th>Status</th>
-                        <th>Localização</th>
-                        <th>Data</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody>`
+    function renderPage(page) {
+      const startIndex = (page - 1) * itemsPerPage
+      const endIndex = startIndex + itemsPerPage
+      const paginatedTrackings = trackings.slice(startIndex, endIndex)
+      
+      let tableHTML = `
+        <div class="table-container">
+          <div class="table-header">
+            <h4>Total de rastreamentos: ${trackings.length}</h4>
+          </div>
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Pedido</th>
+                <th>Código Rastreamento</th>
+                <th>Status</th>
+                <th>Localização</th>
+                <th>Data</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody>`
 
-    if (trackings.length === 0) {
-      tableHTML += `
-                <tr>
-                    <td colspan="6" class="text-center">
-                        <div class="empty-state">
-                            <i class="fas fa-truck fa-3x text-muted mb-3"></i>
-                            <p>Nenhum rastreamento encontrado</p>
-                            ${
-                              filterOrderId
-                                ? `
-                                <button class="btn btn-primary btn-create-tracking" data-order-id="${filterOrderId}">
-                                    <i class="fas fa-plus"></i> Criar Primeiro Rastreamento
-                                </button>
-                            `
-                                : ""
-                            }
-                        </div>
-                    </td>
-                </tr>
-            `
-    } else {
-      trackings.forEach((t) => {
-        const orderInfo = currentOrders.find((o) => o.id === t.orderId)
-        const orderDisplay = orderInfo ? `#${orderInfo.orderNumber}` : t.orderId.substring(0, 8) + "..."
-
+      if (paginatedTrackings.length === 0) {
         tableHTML += `
-                    <tr>
-                        <td>
-                            <span class="order-number">${orderDisplay}</span>
-                            <small class="order-id text-muted d-block">${t.orderId.substring(0, 8)}...</small>
-                        </td>
-                        <td>
-                            <span class="tracking-number">${t.trackingNumber || "N/A"}</span>
-                        </td>
-                        <td><span class="status status-${t.status?.toLowerCase()}">${t.status}</span></td>
-                        <td>${t.location || "-"}</td>
-                        <td>${formatDate(t.eventDate)}</td>
-                        <td>
-                            <button class="btn btn-sm btn-edit btn-edit-tracking" data-id="${t.id}">
-                                <i class="fas fa-edit"></i> Editar
-                            </button>
-                            <button class="btn btn-sm btn-delete btn-delete-tracking" data-id="${t.id}">
-                                <i class="fas fa-trash"></i> Excluir
-                            </button>
-                        </td>
-                    </tr>`
+          <tr>
+            <td colspan="6" class="text-center">
+              <div class="empty-state">
+                <i class="fas fa-truck fa-3x text-muted mb-3"></i>
+                <p>Nenhum rastreamento encontrado</p>
+                ${filterOrderId ? `
+                  <button class="btn btn-primary btn-create-tracking" data-order-id="${filterOrderId}">
+                    <i class="fas fa-plus"></i> Criar Primeiro Rastreamento
+                  </button>
+                ` : ""}
+              </div>
+            </td>
+          </tr>
+        `
+      } else {
+        paginatedTrackings.forEach((t) => {
+          const orderInfo = currentOrders.find((o) => o.id === t.orderId)
+          const orderDisplay = orderInfo ? `#${orderInfo.orderNumber}` : t.orderId.substring(0, 8) + "..."
+
+          tableHTML += `
+            <tr>
+              <td>
+                <span class="order-number">${orderDisplay}</span>
+                <small class="order-id text-muted d-block">${t.orderId.substring(0, 8)}...</small>
+              </td>
+              <td>
+                <span class="tracking-number">${t.trackingNumber || "N/A"}</span>
+              </td>
+              <td><span class="status status-${t.status?.toLowerCase()}">${t.status}</span></td>
+              <td>${t.location || "-"}</td>
+              <td>${formatDate(t.eventDate)}</td>
+              <td>
+                <button class="btn btn-sm btn-edit btn-edit-tracking" data-id="${t.id}">
+                  <i class="fas fa-edit"></i> Editar
+                </button>
+                <button class="btn btn-sm btn-delete btn-delete-tracking" data-id="${t.id}">
+                  <i class="fas fa-trash"></i> Excluir
+                </button>
+              </td>
+            </tr>`
+        })
+      }
+
+      tableHTML += `</tbody></table></div>`
+
+      // Adicionar controles de paginação
+      const totalPages = Math.ceil(trackings.length / itemsPerPage)
+      if (totalPages > 1) {
+        tableHTML += generatePaginationControls(page, totalPages, startIndex, endIndex, trackings.length)
+      }
+      
+      const fullHTML = headerHTML + tableHTML
+      container.innerHTML = fullHTML
+
+      // Event listeners para paginação
+      addPaginationEventListeners(container, (newPage) => {
+        currentPage = newPage
+        renderPage(currentPage)
+      })
+
+      // Add event listeners
+      container.querySelectorAll(".btn-edit-tracking").forEach((btn) => {
+        btn.addEventListener("click", handleEditTracking)
+      })
+      container.querySelectorAll(".btn-delete-tracking").forEach((btn) => {
+        btn.addEventListener("click", handleDeleteTracking)
+      })
+      container.querySelectorAll(".btn-create-tracking").forEach((btn) => {
+        btn.addEventListener("click", handleCreateTrackingForOrder)
       })
     }
-
-    tableHTML += `</tbody></table>`
-    container.innerHTML = headerHTML + tableHTML
-
-    // Add event listeners
-    container.querySelectorAll(".btn-edit-tracking").forEach((btn) => {
-      btn.addEventListener("click", handleEditTracking)
-    })
-    container.querySelectorAll(".btn-delete-tracking").forEach((btn) => {
-      btn.addEventListener("click", handleDeleteTracking)
-    })
-    container.querySelectorAll(".btn-create-tracking").forEach((btn) => {
-      btn.addEventListener("click", handleCreateTrackingForOrder)
-    })
+    
+    renderPage(currentPage)
   }
 
   function showTrackingForm(tracking = null, orderId = null, orderNumber = null) {
@@ -1508,6 +1643,90 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
       console.error("AuthService não encontrado para logout.")
     }
+  }
+
+  // --- Funções Auxiliares para Paginação ---
+  function generatePaginationControls(currentPage, totalPages, startIndex, endIndex, totalItems) {
+    let paginationHTML = `
+      <div class="pagination-container">
+        <div class="pagination-info">
+          <span>Página ${currentPage} de ${totalPages}</span>
+          <span class="ml-3">Mostrando ${startIndex + 1}-${Math.min(endIndex, totalItems)} de ${totalItems} registros</span>
+        </div>
+        <div class="pagination-controls">`
+    
+    // Botão Primeira Página
+    if (currentPage > 1) {
+      paginationHTML += `<button class="btn btn-sm btn-outline-secondary pagination-btn" data-page="1" title="Primeira página">
+        <i class="fas fa-angle-double-left"></i>
+      </button>`
+    }
+    
+    // Botão Anterior
+    if (currentPage > 1) {
+      paginationHTML += `<button class="btn btn-sm btn-outline-secondary pagination-btn" data-page="${currentPage - 1}" title="Página anterior">
+        <i class="fas fa-angle-left"></i>
+      </button>`
+    }
+    
+    // Botões de página (máximo 7 botões visíveis)
+    let startPage = Math.max(1, currentPage - 3)
+    let endPage = Math.min(totalPages, startPage + 6)
+    
+    if (endPage - startPage < 6) {
+      startPage = Math.max(1, endPage - 6)
+    }
+    
+    if (startPage > 1) {
+      paginationHTML += `<button class="btn btn-sm btn-outline-secondary pagination-btn" data-page="1">1</button>`
+      if (startPage > 2) {
+        paginationHTML += `<span class="pagination-ellipsis">...</span>`
+      }
+    }
+    
+    for (let i = startPage; i <= endPage; i++) {
+      if (i === currentPage) {
+        paginationHTML += `<button class="btn btn-sm btn-primary pagination-btn active" data-page="${i}">${i}</button>`
+      } else {
+        paginationHTML += `<button class="btn btn-sm btn-outline-secondary pagination-btn" data-page="${i}">${i}</button>`
+      }
+    }
+    
+    if (endPage < totalPages) {
+      if (endPage < totalPages - 1) {
+        paginationHTML += `<span class="pagination-ellipsis">...</span>`
+      }
+      paginationHTML += `<button class="btn btn-sm btn-outline-secondary pagination-btn" data-page="${totalPages}">${totalPages}</button>`
+    }
+    
+    // Botão Próximo
+    if (currentPage < totalPages) {
+      paginationHTML += `<button class="btn btn-sm btn-outline-secondary pagination-btn" data-page="${currentPage + 1}" title="Próxima página">
+        <i class="fas fa-angle-right"></i>
+      </button>`
+    }
+    
+    // Botão Última Página
+    if (currentPage < totalPages) {
+      paginationHTML += `<button class="btn btn-sm btn-outline-secondary pagination-btn" data-page="${totalPages}" title="Última página">
+        <i class="fas fa-angle-double-right"></i>
+      </button>`
+    }
+    
+    paginationHTML += `</div></div>`
+    
+    return paginationHTML
+  }
+
+  function addPaginationEventListeners(container, onPageChange) {
+    container.querySelectorAll(".pagination-btn").forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        const newPage = parseInt(e.currentTarget.getAttribute("data-page"))
+        onPageChange(newPage)
+        // Scroll para o topo da tabela
+        container.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      })
+    })
   }
 
   // --- Inicialização ---
