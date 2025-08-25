@@ -31,7 +31,7 @@
     border-bottom-right-radius: 18px;
     overflow: hidden;
     transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1); /* Smoother easing */
-    position: fixed;
+    position: absolute;
     top: var(--header-height);
     left: 0;
     height: calc(100vh - var(--header-height));
