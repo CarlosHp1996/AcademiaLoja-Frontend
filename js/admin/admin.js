@@ -16,7 +16,8 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (sidebarToggle && adminSidebar) {
         sidebarToggle.addEventListener('click', function() {
-            adminSidebar.classList.toggle('collapsed');
+            adminSidebar.classList.toggle('show'); // mobile toggle
+            adminSidebar.classList.toggle('collapsed'); // desktop toggle
             if (adminMain) {
                 adminMain.style.transition = 'margin-left 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
                 adminMain.style.marginLeft = adminSidebar.classList.contains('collapsed') 
@@ -103,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // API base URL
-    window.apiBaseUrl = 'http://localhost:4242';
+    window.apiBaseUrl = '/api';
     
     // Helper function for API calls
     window.apiCall = async function(endpoint, method = 'GET', data = null) {
@@ -340,5 +341,28 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.body.style.overflow = '';
             }
         });
+    });
+
+    // Mobile sidebar toggle no admin-container
+    const mobileToggle = document.getElementById('admin-mobile-toggle');
+    if (mobileToggle && adminSidebar) {
+    mobileToggle.addEventListener('click', function() {
+        adminSidebar.classList.toggle('show');
+      });
+    }
+
+    // Fechar sidebar ao clicar em qualquer link do menu
+    adminSidebar.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+        adminSidebar.classList.remove('show');
+    });
+    });
+
+    // Fechar sidebar ao clicar fora dela
+    document.addEventListener('click', function (e) {
+    const isClickInside = adminSidebar.contains(e.target) || mobileToggle.contains(e.target);
+    if (!isClickInside && adminSidebar.classList.contains('show')) {
+        adminSidebar.classList.remove('show');
+    }
     });
 });

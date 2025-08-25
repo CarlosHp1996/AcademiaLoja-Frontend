@@ -254,12 +254,6 @@ body.admin-body {
   color: var(--admin-secondary-color);
 }
 
-.section-description {
-  margin: 0;
-  color: var(--admin-dark-gray);
-  font-size: 0.9em;
-}
-
 .order-info-banner {
   background-color: #e8f4fd;
   border: 1px solid #bee5eb;

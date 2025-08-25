@@ -862,24 +862,84 @@
     border-top: 1px solid var(--admin-color-border);
 }
 
+/* Estilo do hamburger no admin-container */
+.admin-mobile-toggle {
+  display: none; /* escondido no desktop */
+  position: absolute;
+  top: calc(var(--header-height) + var(--subheader-height, 50px) + 10px);
+  left: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 10000; /* acima da sidebar */
+}
+
+.admin-mobile-toggle .menu-icon {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background: var(--color-white);
+  position: relative;
+}
+
+.admin-mobile-toggle .menu-icon::before,
+.admin-mobile-toggle .menu-icon::after {
+  content: "";
+  position: absolute;
+  width: 25px;
+  height: 3px;
+  background: var(--color-white);
+  left: 0;
+  transition: 0.3s;
+}
+
+.admin-mobile-toggle .menu-icon::before {
+  top: -8px;
+}
+
+.admin-mobile-toggle .menu-icon::after {
+  top: 8px;
+}
+
+/* Mostra apenas no mobile */
+@media (max-width: 992px) {
+  .admin-mobile-toggle {
+    display: block;
+  }
+}
+
+
 /* Responsive */
 @media (max-width: 992px) {
     .admin-header {
         padding-left: 1rem;
         padding-right: 1rem;
     }
+
+    .admin-sidebar .sidebar-toggle {
+    display: none;
+    }
     
     .admin-sidebar {
         border-radius: 0 18px 18px 0;
         box-shadow: 2px 0 24px rgba(249, 115, 22, 0.13);
+        position: fixed;
+        top: calc(var(--header-height) + var(--subheader-height, 50px));
+        left: -100%;
+        width: var(--admin-sidebar-width);
+        height: calc(100vh - (var(--header-height) + var(--subheader-height, 50px)));
+        background: linear-gradient(180deg, #18181b 70%, #23232a 100%);
+        z-index: 9999;
+        transition: left 0.3s ease-in-out;
     }
     
     .admin-sidebar.show {
-        transform: translateX(0);
+        left: 0;
     }
     
     .admin-main {
         margin-left: 0;
+        margin-top: calc(var(--header-height) + var(--subheader-height, 50px));
     }
     
     .admin-sidebar.collapsed + .admin-main {
@@ -890,6 +950,30 @@
         grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     }
 }
+
+/* MOBILE FIX: Sidebar responsiva */
+@media (max-width: 992px) {
+  .admin-sidebar {
+    position: fixed;
+    top: calc(var(--header-height) + var(--subheader-height, 50px));
+    left: -100%; /* começa escondida fora da tela */
+    width: var(--admin-sidebar-width);
+    height: calc(100vh - (var(--header-height) + var(--subheader-height, 50px)));
+    z-index: 9999; /* acima do subheader */
+    transition: left 0.3s ease-in-out;
+  }
+
+  /* Quando abrir (classe .show), sidebar entra */
+  .admin-sidebar.show {
+    left: 0;
+  }
+
+  .admin-main {
+    margin-left: 0; /* não força largura extra no conteúdo */
+    margin-top: calc(var(--header-height) + var(--subheader-height, 50px));
+  }
+}
+
 
 @media (max-width: 768px) {
     .dashboard-cards {
