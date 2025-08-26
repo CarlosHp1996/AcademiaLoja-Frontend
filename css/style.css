@@ -120,6 +120,21 @@ body {
   padding-right: var(--container-padding-mobile);
 }
 
+/* Centralizar conteúdo da hero */
+.hero-modern.hero-compact {
+  display: flex;
+  align-items: center;     /* Centraliza verticalmente */
+  justify-content: center; /* Centraliza horizontalmente */
+  text-align: center;      /* Centraliza textos */
+}
+
+.hero-modern.hero-compact .hero-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 /* Containers específicos para hero sections */
 .hero-container,
 .goals-container,
@@ -807,11 +822,12 @@ img {
 
 /* Hero Title */
 .hero-title-modern {
-  font-size: clamp(2.5rem, 8vw, 4.5rem);
+  font-size: clamp(3rem, 9vw, 6rem);
   font-weight: 900;
   line-height: 1.1;
   margin-bottom: 1.5rem;
   letter-spacing: -0.02em;
+  text-align: center;
 }
 
 .hero-highlight {
