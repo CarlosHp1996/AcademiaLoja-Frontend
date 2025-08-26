@@ -169,15 +169,6 @@ body {
   margin: 0 auto;
 }
 
-/* Seções especiais que podem precisar de largura diferente */
-.featured-section,
-.cta-section {
-  max-width: var(--container-max-width-desktop);
-  width: 100%;
-  margin: 0 auto;
-}
-
-/* SOLUÇÃO RÁPIDA - Adicione esta classe ao HTML */
 .hero-compact {
   min-height: auto !important;
   padding: 3rem 0 !important;
