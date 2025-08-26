@@ -851,6 +851,7 @@ img {
   margin-bottom: 2rem;
   line-height: 1.6;
   font-weight: 400;
+  text-align: center;
 }
 
 /* Hero Stats */
@@ -891,6 +892,7 @@ img {
   gap: 1rem;
   margin-bottom: 3rem;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 /* Primary Button */
