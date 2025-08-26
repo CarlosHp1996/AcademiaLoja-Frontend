@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const logoutBtn = document.getElementById("admin-logout-btn")
 
   const API_BASE_URL_ADMIN = "/api"
+  //const API_BASE_URL_ADMIN = "https://localhost:4242/api"
 
   let currentProduct = null
   let currentOrders = [] // Store orders for tracking management
@@ -276,7 +277,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 <div id="orders-section" class="tracking-section">
                     <div class="section-header">
                         <h3><i class="fas fa-shopping-cart"></i> Pedidos Disponíveis</h3>
-                        <p class="section-description">Selecione um pedido para criar ou gerenciar seu rastreamento</p>
                     </div>
                     <div id="orders-for-tracking-container" class="table-responsive">
                         <div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i> Carregando pedidos...</div>
@@ -287,7 +287,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 <div id="trackings-section" class="tracking-section" style="display: none;">
                     <div class="section-header">
                         <h3><i class="fas fa-truck"></i> Rastreamentos Ativos</h3>
-                        <p class="section-description">Gerencie todos os rastreamentos existentes</p>
                     </div>
                     <div id="tracking-list-container" class="table-responsive">
                         <div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i> Carregando rastreamentos...</div>
@@ -974,7 +973,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <h4>Total de pedidos: ${orders.length}</h4>
           </div>
           <table class="admin-table">
-            <thead><tr><th>Nº Pedido</th><th>Usuário</th><th>Data</th><th>Total</th><th>Status</th><th>Ativo</th></tr></thead>
+            <thead><tr><th>Nº Pedido</th><th>Usuário</th><th>Data</th><th>Total</th><th>Status</th><th>Pagamento</th><th>Ativo</th></tr></thead>
             <tbody>`
       
       if (paginatedOrders.length === 0) {
@@ -992,6 +991,7 @@ document.addEventListener("DOMContentLoaded", () => {
               <td>${formatDate(order.orderDate)}</td>
               <td>R$ ${order.totalAmount.toFixed(2).replace(".", ",")}</td>
               <td><span class="status status-${order.status?.toLowerCase()}">${order.status || "N/A"}</span></td>
+              <td><span class="status status-${order.paymentMethod?.toLowerCase()}">${order.paymentMethod || "N/A"}</span></td>
               <td>
                 <button class="btn btn-sm btn-toggle-active ${order.isActive ? "btn-success" : "btn-secondary"}" data-id="${order.id}" data-is-active="${order.isActive}">
                   <i class="fas ${order.isActive ? "fa-check" : "fa-times"}"></i>
