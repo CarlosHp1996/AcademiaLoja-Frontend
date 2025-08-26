@@ -116,109 +116,6 @@
   font-size: 0.875rem;
 }
 
-/* Return Form Section */
-.return-form-section {
-  padding: 6rem 0;
-  background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
-  border-radius: 30px;
-  margin: 4rem 0;
-}
-
-.form-container {
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.form-header {
-  text-align: center;
-  margin-bottom: 3rem;
-}
-
-.form-header h2 {
-  font-size: 2.5rem;
-  font-weight: 800;
-  color: #fff;
-  margin-bottom: 1rem;
-}
-
-.form-header p {
-  font-size: 1.125rem;
-  color: #9ca3af;
-  line-height: 1.6;
-}
-
-.modern-return-form {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
-.form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-}
-
-.form-group {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-}
-
-.form-group.full-width {
-  grid-column: 1 / -1;
-}
-
-.form-group label {
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: #fff;
-  margin-bottom: 0.5rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.form-group input,
-.form-group select,
-.form-group textarea {
-  background: rgba(0, 0, 0, 0.5);
-  border: 2px solid #374151;
-  border-radius: 12px;
-  padding: 1rem 1rem 1rem 3rem;
-  font-size: 1rem;
-  color: #fff;
-  transition: all 0.3s ease;
-  resize: vertical;
-}
-
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
-  outline: none;
-  border-color: #f97316;
-  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.1);
-}
-
-.form-group textarea {
-  min-height: 100px;
-}
-
-.form-icon {
-  position: absolute;
-  top: 2.2rem;
-  left: 1rem;
-  color: #9ca3af;
-  font-size: 1rem;
-  pointer-events: none;
-  transition: color 0.3s ease;
-}
-
-.form-group input:focus + .form-icon,
-.form-group select:focus + .form-icon,
-.form-group textarea:focus + .form-icon {
-  color: #f97316;
-}
-
 .btn-submit-return {
   position: relative;
   display: inline-flex;
@@ -260,11 +157,6 @@
 
 .btn-submit-return:hover .btn-glow {
   opacity: 1;
-}
-
-/* FAQ Section */
-.faq-section {
-  padding: 6rem 0;
 }
 
 .faq-grid {
@@ -481,13 +373,7 @@
     grid-template-columns: 1fr;
   }
 
-  .form-row {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-
-  .process-steps-section,
-  .return-form-section {
+  .process-steps-section {
     padding: 4rem 2rem;
     margin: 3rem 0;
   }
@@ -524,10 +410,6 @@
     width: 60px;
     height: 60px;
     font-size: 1.5rem;
-  }
-
-  .form-container {
-    padding: 0 1rem;
   }
 
   .btn-submit-return {

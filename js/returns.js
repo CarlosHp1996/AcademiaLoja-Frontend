@@ -22,48 +22,6 @@ document.addEventListener("DOMContentLoaded", () => {
     })
   })
 
-  // Return form handling
-  const returnForm = document.querySelector(".modern-return-form")
-
-  if (returnForm) {
-    returnForm.addEventListener("submit", function (e) {
-      e.preventDefault()
-
-      // Get form data
-      const formData = new FormData(this)
-      const data = Object.fromEntries(formData)
-
-      // Simple validation
-      if (!data["order-number"] || !data["customer-email"] || !data["return-type"] || !data["return-reason"]) {
-        alert("Por favor, preencha todos os campos obrigatórios.")
-        return
-      }
-
-      // Validate order number format
-      const orderNumber = data["order-number"]
-      if (!orderNumber.startsWith("#") && !orderNumber.match(/^\d+$/)) {
-        alert("Por favor, insira um número de pedido válido (ex: #12345 ou 12345).")
-        return
-      }
-
-      // Simulate form submission
-      const submitBtn = this.querySelector(".btn-submit-return")
-      const originalText = submitBtn.querySelector(".btn-text").textContent
-
-      submitBtn.querySelector(".btn-text").textContent = "Processando..."
-      submitBtn.disabled = true
-
-      setTimeout(() => {
-        alert(
-          "Solicitação enviada com sucesso! Entraremos em contato em até 24 horas para dar continuidade ao processo.",
-        )
-        this.reset()
-        submitBtn.querySelector(".btn-text").textContent = originalText
-        submitBtn.disabled = false
-      }, 2000)
-    })
-  }
-
   // CTA buttons functionality
   const whatsappBtn = document.querySelector(".btn-whatsapp")
   const emailBtn = document.querySelector(".btn-email")
@@ -110,46 +68,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   };
 
-  if (primaryBtn) {
-    primaryBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      const formSection = document.querySelector(".return-form-section");
-      smoothScrollTo(formSection);
-    });
-  }
-
   if (secondaryBtn) {
     secondaryBtn.addEventListener("click", (e) => {
       e.preventDefault();
       const faqSection = document.querySelector(".faq-section");
       smoothScrollTo(faqSection);
     });
-  }
-
-  // Form input animations
-  const formInputs = document.querySelectorAll(".form-group input, .form-group select, .form-group textarea")
-
-  formInputs.forEach((input) => {
-    input.addEventListener("focus", function () {
-      this.parentElement.classList.add("focused")
-    })
-
-    input.addEventListener("blur", function () {
-      if (!this.value) {
-        this.parentElement.classList.remove("focused")
-      }
-    })
-  })
-
-  // Auto-format order number
-  const orderNumberInput = document.getElementById("order-number")
-  if (orderNumberInput) {
-    orderNumberInput.addEventListener("input", (e) => {
-      const value = e.target.value.replace(/[^\d]/g, "")
-      if (value && !value.startsWith("#")) {
-        e.target.value = "#" + value
-      }
-    })
   }
 
   // Step items hover effect
