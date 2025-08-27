@@ -522,7 +522,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             <option value="MaxTitanium" ${attributes.brand === "MaxTitanium" ? "selected" : ""}>Max Titanium</option>
                             <option value="Growth" ${attributes.brand === "Growth" ? "selected" : ""}>Growth</option>
                             <option value="IntegralMedica" ${attributes.brand === "IntegralMedica" ? "selected" : ""}>Integral Medica</option>
-                            <option value="Probiótica" ${attributes.brand === "Probiótica" ? "selected" : ""}>Probiótica</option>
+                            <option value="Probiotica" ${attributes.brand === "Probiotica" ? "selected" : ""}>Probiótica</option>
                             <option value="BlackSkull" ${attributes.brand === "BlackSkull" ? "selected" : ""}>Black Skull</option>
                             <option value="Ftw" ${attributes.brand === "Ftw" ? "selected" : ""}>Ftw</option>
                         </select>
