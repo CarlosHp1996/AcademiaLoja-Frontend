@@ -45,6 +45,7 @@
   width: 100%;
   height: auto;
   display: block;
+  background:#fff
 }
 
 /* Layout do produto */
@@ -91,7 +92,7 @@
 }
 
 .related-products-container {
-  display: grid;
+  display: flex;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1.5rem;
   margin-bottom: 2rem;
@@ -200,6 +201,7 @@
   .related-products-container {
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 1rem;
+    display: grid;
   }
 
   .related-product-image {
