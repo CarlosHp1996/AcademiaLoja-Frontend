@@ -13,9 +13,8 @@ document.addEventListener("DOMContentLoaded", () => {
   paginationContainer.className = "pagination"
   productsGrid.after(paginationContainer)
 
-  const API_BASE_URL = "/api" // Caminho relativo para o Nginx principal proxyar
+  const API_BASE_URL = "/api"
 
-  // Estado dos filtros
   let filters = {
     categories: [],
     flavors: [],
@@ -24,8 +23,8 @@ document.addEventListener("DOMContentLoaded", () => {
     accessories: [],
     price: { min: null, max: null },
     page: 1,
-    pageSize: 20,
-    name: null, // Novo parâmetro para busca por nome
+    pageSize: 10,
+    name: null,
   }
 
   // Debounce para evitar muitas requisições
@@ -142,7 +141,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const authToken = getAuthToken()
     if (authToken) {
       headers["Authorization"] = `Bearer ${authToken}`
-    }updateFilterOptions
+    }
 
     try {
       const response = await fetch(`${API_BASE_URL}/Product/get`, { headers })
@@ -252,100 +251,100 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Função para abrir modal de filtros no mobile (move para body para evitar stacking issues)
-  let overlay = null;
-  let filtersSidebarOriginalParent = null;
-  let filtersSidebarOriginalNextSibling = null;
-  let sortOptionsOriginalParent = null;
-  let sortOptionsOriginalNextSibling = null;
+  let overlay = null
+  let filtersSidebarOriginalParent = null
+  let filtersSidebarOriginalNextSibling = null
+  let sortOptionsOriginalParent = null
+  let sortOptionsOriginalNextSibling = null
 
   function openMobileFilters() {
-    const filtersSidebar = document.querySelector('.filters-sidebar');
+    const filtersSidebar = document.querySelector(".filters-sidebar")
     if (!filtersSidebar) {
-      console.error('Elemento .filters-sidebar não encontrado');
-      return;
+      console.error("Elemento .filters-sidebar não encontrado")
+      return
     }
 
-    filtersSidebarOriginalParent = filtersSidebar.parentNode;
-    filtersSidebarOriginalNextSibling = filtersSidebar.nextSibling;
-    document.body.appendChild(filtersSidebar);
-    filtersSidebar.classList.add('mobile-active');
-    filtersSidebar.style.zIndex = '1001'; // Forçar z-index
-    filtersSidebar.style.position = 'fixed'; // Garantir posicionamento
+    filtersSidebarOriginalParent = filtersSidebar.parentNode
+    filtersSidebarOriginalNextSibling = filtersSidebar.nextSibling
+    document.body.appendChild(filtersSidebar)
+    filtersSidebar.classList.add("mobile-active")
+    filtersSidebar.style.zIndex = "1001" // Forçar z-index
+    filtersSidebar.style.position = "fixed" // Garantir posicionamento
 
-    overlay = document.createElement('div');
-    overlay.className = 'overlay';
-    overlay.style.zIndex = '1000';
-    overlay.style.position = 'fixed';
-    overlay.style.top = '0';
-    overlay.style.left = '0';
-    overlay.style.width = '100%';
-    overlay.style.height = '100%';
-    overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
-    overlay.style.display = 'block';
-    document.body.appendChild(overlay);
-    console.log('Overlay criado:', overlay); // Depuração
-    overlay.addEventListener('click', closeMobileFilters);
+    overlay = document.createElement("div")
+    overlay.className = "overlay"
+    overlay.style.zIndex = "1000"
+    overlay.style.position = "fixed"
+    overlay.style.top = "0"
+    overlay.style.left = "0"
+    overlay.style.width = "100%"
+    overlay.style.height = "100%"
+    overlay.style.backgroundColor = "rgba(0, 0, 0, 0.5)"
+    overlay.style.display = "block"
+    document.body.appendChild(overlay)
+    console.log("Overlay criado:", overlay) // Depuração
+    overlay.addEventListener("click", closeMobileFilters)
   }
 
   function closeMobileFilters() {
-    const filtersSidebar = document.querySelector('.filters-sidebar');
-    if (filtersSidebar && filtersSidebar.classList.contains('mobile-active')) {
-      filtersSidebar.classList.remove('mobile-active');
-      filtersSidebar.style.zIndex = '';
-      filtersSidebar.style.position = '';
-      filtersSidebarOriginalParent.insertBefore(filtersSidebar, filtersSidebarOriginalNextSibling);
+    const filtersSidebar = document.querySelector(".filters-sidebar")
+    if (filtersSidebar && filtersSidebar.classList.contains("mobile-active")) {
+      filtersSidebar.classList.remove("mobile-active")
+      filtersSidebar.style.zIndex = ""
+      filtersSidebar.style.position = ""
+      filtersSidebarOriginalParent.insertBefore(filtersSidebar, filtersSidebarOriginalNextSibling)
     }
 
     if (overlay) {
-      overlay.removeEventListener('click', closeMobileFilters);
-      overlay.remove();
-      overlay = null;
+      overlay.removeEventListener("click", closeMobileFilters)
+      overlay.remove()
+      overlay = null
     }
   }
 
   // Função similar para ordenação
   function openMobileSort() {
-    const sortOptions = document.querySelector('.sort-options');
+    const sortOptions = document.querySelector(".sort-options")
     if (!sortOptions) {
-      console.error('Elemento .sort-options não encontrado');
-      return;
+      console.error("Elemento .sort-options não encontrado")
+      return
     }
 
-    sortOptionsOriginalParent = sortOptions.parentNode;
-    sortOptionsOriginalNextSibling = sortOptions.nextSibling;
-    document.body.appendChild(sortOptions);
-    sortOptions.classList.add('mobile-active');
-    sortOptions.style.zIndex = '1001';
-    sortOptions.style.position = 'fixed';
+    sortOptionsOriginalParent = sortOptions.parentNode
+    sortOptionsOriginalNextSibling = sortOptions.nextSibling
+    document.body.appendChild(sortOptions)
+    sortOptions.classList.add("mobile-active")
+    sortOptions.style.zIndex = "1001"
+    sortOptions.style.position = "fixed"
 
-    overlay = document.createElement('div');
-    overlay.className = 'overlay';
-    overlay.style.zIndex = '1000';
-    overlay.style.position = 'fixed';
-    overlay.style.top = '0';
-    overlay.style.left = '0';
-    overlay.style.width = '100%';
-    overlay.style.height = '100%';
-    overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
-    overlay.style.display = 'block';
-    document.body.appendChild(overlay);
-    console.log('Overlay criado:', overlay); // Depuração
-    overlay.addEventListener('click', closeMobileSort);
+    overlay = document.createElement("div")
+    overlay.className = "overlay"
+    overlay.style.zIndex = "1000"
+    overlay.style.position = "fixed"
+    overlay.style.top = "0"
+    overlay.style.left = "0"
+    overlay.style.width = "100%"
+    overlay.style.height = "100%"
+    overlay.style.backgroundColor = "rgba(0, 0, 0, 0.5)"
+    overlay.style.display = "block"
+    document.body.appendChild(overlay)
+    console.log("Overlay criado:", overlay) // Depuração
+    overlay.addEventListener("click", closeMobileSort)
   }
 
   function closeMobileSort() {
-    const sortOptions = document.querySelector('.sort-options');
-    if (sortOptions && sortOptions.classList.contains('mobile-active')) {
-      sortOptions.classList.remove('mobile-active');
-      sortOptions.style.zIndex = '';
-      sortOptions.style.position = '';
-      sortOptionsOriginalParent.insertBefore(sortOptions, sortOptionsOriginalNextSibling);
+    const sortOptions = document.querySelector(".sort-options")
+    if (sortOptions && sortOptions.classList.contains("mobile-active")) {
+      sortOptions.classList.remove("mobile-active")
+      sortOptions.style.zIndex = ""
+      sortOptions.style.position = ""
+      sortOptionsOriginalParent.insertBefore(sortOptions, sortOptionsOriginalNextSibling)
     }
 
     if (overlay) {
-      overlay.removeEventListener('click', closeMobileSort);
-      overlay.remove();
-      overlay = null;
+      overlay.removeEventListener("click", closeMobileSort)
+      overlay.remove()
+      overlay = null
     }
   }
 
@@ -353,373 +352,133 @@ document.addEventListener("DOMContentLoaded", () => {
   function reattachFilterEvents() {
     document.querySelectorAll('.filter-options input[type="checkbox"]').forEach((checkbox) => {
       checkbox.addEventListener("change", function () {
-        const filterType = this.name;
-        const filterValue = this.value;
+        const filterType = this.name
+        const filterValue = this.value
 
         if (this.checked) {
           switch (filterType) {
             case "category":
               if (!filters.categories.includes(filterValue)) {
-                filters.categories.push(filterValue);
+                filters.categories.push(filterValue)
               }
-              break;
+              break
             case "flavor":
               if (!filters.flavors.includes(filterValue)) {
-                filters.flavors.push(filterValue);
+                filters.flavors.push(filterValue)
               }
-              break;
+              break
             case "brand":
               if (!filters.brands.includes(filterValue)) {
-                filters.brands.push(filterValue);
+                filters.brands.push(filterValue)
               }
-              break;
+              break
             case "objective":
               if (!filters.objectives.includes(filterValue)) {
-                filters.objectives.push(filterValue);
+                filters.objectives.push(filterValue)
               }
-              break;
+              break
             case "accessory":
               if (!filters.accessories.includes(filterValue)) {
-                filters.accessories.push(filterValue);
+                filters.accessories.push(filterValue)
               }
-              break;
+              break
           }
         } else {
           switch (filterType) {
             case "category":
-              filters.categories = filters.categories.filter((item) => item !== filterValue);
-              break;
+              filters.categories = filters.categories.filter((item) => item !== filterValue)
+              break
             case "flavor":
-              filters.flavors = filters.flavors.filter((item) => item !== filterValue);
-              break;
+              filters.flavors = filters.flavors.filter((item) => item !== filterValue)
+              break
             case "brand":
-              filters.brands = filters.brands.filter((item) => item !== filterValue);
-              break;
+              filters.brands = filters.brands.filter((item) => item !== filterValue)
+              break
             case "objective":
-              filters.objectives = filters.objectives.filter((item) => item !== filterValue);
-              break;
+              filters.objectives = filters.objectives.filter((item) => item !== filterValue)
+              break
             case "accessory":
-              filters.accessories = filters.accessories.filter((item) => item !== filterValue);
-              break;
+              filters.accessories = filters.accessories.filter((item) => item !== filterValue)
+              break
           }
         }
 
-        if (document.querySelector('.filters-sidebar.mobile-active')) {
-          closeMobileFilters();
+        if (document.querySelector(".filters-sidebar.mobile-active")) {
+          closeMobileFilters()
         }
 
-        debounceApplyFilters();
-      });
-    });
+        debounceApplyFilters()
+      })
+    })
   }
 
   // Inicializar eventos (incluindo mobile buttons e outros)
   function initEvents() {
-    const mobileFilterBtn = document.querySelector('.btn-mobile-filter');
+    const mobileFilterBtn = document.querySelector(".btn-mobile-filter")
     if (mobileFilterBtn) {
-      mobileFilterBtn.addEventListener('click', openMobileFilters);
+      mobileFilterBtn.addEventListener("click", openMobileFilters)
     }
 
-    const mobileSortBtn = document.querySelector('.btn-mobile-sort');
+    const mobileSortBtn = document.querySelector(".btn-mobile-sort")
     if (mobileSortBtn) {
-      mobileSortBtn.addEventListener('click', openMobileSort);
+      mobileSortBtn.addEventListener("click", openMobileSort)
     }
 
-    const closePanelBtns = document.querySelectorAll('.btn-close-panel');
-    closePanelBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        if (document.querySelector('.filters-sidebar.mobile-active')) {
-          closeMobileFilters();
-        } else if (document.querySelector('.sort-options.mobile-active')) {
-          closeMobileSort();
+    const closePanelBtns = document.querySelectorAll(".btn-close-panel")
+    closePanelBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        if (document.querySelector(".filters-sidebar.mobile-active")) {
+          closeMobileFilters()
+        } else if (document.querySelector(".sort-options.mobile-active")) {
+          closeMobileSort()
         }
-      });
-    });
+      })
+    })
 
     if (sortBySelect) {
-      sortBySelect.addEventListener('change', () => {
-        if (document.querySelector('.sort-options.mobile-active')) {
-          closeMobileSort();
+      sortBySelect.addEventListener("change", () => {
+        if (document.querySelector(".sort-options.mobile-active")) {
+          closeMobileSort()
         }
-        filters.page = 1;
-        applyFilters();
-      });
+        filters.page = 1
+        applyFilters()
+      })
     }
 
     if (minPriceInput && maxPriceInput) {
-      minPriceInput.addEventListener('blur', () => {
-        filters.price.min = Number.parseFloat(minPriceInput.value) || null;
-        if (document.querySelector('.filters-sidebar.mobile-active')) {
-          closeMobileFilters();
+      minPriceInput.addEventListener("blur", () => {
+        filters.price.min = Number.parseFloat(minPriceInput.value) || null
+        if (document.querySelector(".filters-sidebar.mobile-active")) {
+          closeMobileFilters()
         }
-        debounceApplyFilters();
-      });
-      maxPriceInput.addEventListener('blur', () => {
-        filters.price.max = Number.parseFloat(maxPriceInput.value) || null;
-        if (document.querySelector('.filters-sidebar.mobile-active')) {
-          closeMobileFilters();
+        debounceApplyFilters()
+      })
+      maxPriceInput.addEventListener("blur", () => {
+        filters.price.max = Number.parseFloat(maxPriceInput.value) || null
+        if (document.querySelector(".filters-sidebar.mobile-active")) {
+          closeMobileFilters()
         }
-        debounceApplyFilters();
-      });
+        debounceApplyFilters()
+      })
     }
 
     if (applyPriceFilterBtn) {
-      applyPriceFilterBtn.addEventListener('click', () => {
-        filters.price.min = Number.parseFloat(minPriceInput.value) || null;
-        filters.price.max = Number.parseFloat(maxPriceInput.value) || null;
-        filters.page = 1;
-        applyFilters();
-      });
+      applyPriceFilterBtn.addEventListener("click", () => {
+        filters.price.min = Number.parseFloat(minPriceInput.value) || null
+        filters.price.max = Number.parseFloat(maxPriceInput.value) || null
+        filters.page = 1
+        applyFilters()
+      })
     }
 
     if (applyFiltersBtn) {
-      applyFiltersBtn.addEventListener('click', applyFilters);
+      applyFiltersBtn.addEventListener("click", applyFilters)
     }
 
     if (clearFiltersBtn) {
-      clearFiltersBtn.addEventListener('click', clearFilters);
+      clearFiltersBtn.addEventListener("click", clearFilters)
     }
   }
-
-  // Reanexar eventos aos checkboxes com aplicação em tempo real
-  // function reattachFilterEvents() {
-  //   document.querySelectorAll('.filter-options input[type="checkbox"]').forEach((checkbox) => {
-  //     checkbox.addEventListener("change", function () {
-  //       const filterType = this.name
-  //       const filterValue = this.value
-
-  //       if (this.checked) {
-  //         switch (filterType) {
-  //           case "category":
-  //             if (!filters.categories.includes(filterValue)) {
-  //               filters.categories.push(filterValue)
-  //             }
-  //             break
-  //           case "flavor":
-  //             if (!filters.flavors.includes(filterValue)) {
-  //               filters.flavors.push(filterValue)
-  //             }
-  //             break
-  //           case "brand":
-  //             if (!filters.brands.includes(filterValue)) {
-  //               filters.brands.push(filterValue)
-  //             }
-  //             break
-  //           case "objective":
-  //             if (!filters.objectives.includes(filterValue)) {
-  //               filters.objectives.push(filterValue)
-  //             }
-  //             break
-  //           case "accessory":
-  //             if (!filters.accessories.includes(filterValue)) {
-  //               filters.accessories.push(filterValue)
-  //             }
-  //             break
-  //         }
-  //       } else {
-  //         switch (filterType) {
-  //           case "category":
-  //             filters.categories = filters.categories.filter((item) => item !== filterValue)
-  //             break
-  //           case "flavor":
-  //             filters.flavors = filters.flavors.filter((item) => item !== filterValue)
-  //             break
-  //           case "brand":
-  //             filters.brands = filters.brands.filter((item) => item !== filterValue)
-  //             break
-  //           case "objective":
-  //             filters.objectives = filters.objectives.filter((item) => item !== filterValue)
-  //             break
-  //           case "accessory":
-  //             filters.accessories = filters.accessories.filter((item) => item !== filterValue)
-  //             break
-  //         }
-  //       }
-
-  //       // Aplicar filtros em tempo real
-  //       debounceApplyFilters()
-  //     })
-  //   })
-  // }
-
-  // Inicializar eventos
-  // function initEvents() {
-  //   const mobileFilterBtn = document.getElementById("mobile-filter-btn")
-  //   const mobileSortBtn = document.getElementById("mobile-sort-btn")
-  //   const filtersSidebar = document.querySelector(".filters-sidebar")
-  //   const sortOptions = document.querySelector(".sort-options")
-  //   let overlay = null
-
-  //   const closeFilterBtn = document.getElementById("close-filter-btn")
-  //   const closeSortBtn = document.getElementById("close-sort-btn")
-
-  //   if (closeFilterBtn) {
-  //     closeFilterBtn.addEventListener("click", closeMobilePanels)
-  //   }
-
-  //   if (closeSortBtn) {
-  //     closeSortBtn.addEventListener("click", closeMobilePanels)
-  //   }
-
-  //   function createOverlay() {
-  //     if (document.querySelector(".overlay")) return
-  //     overlay = document.createElement("div")
-  //     overlay.className = "overlay"
-  //     overlay.style.zIndex = "1000"
-  //     overlay.style.position = "fixed"
-  //     overlay.style.top = "0"
-  //     overlay.style.left = "0"
-  //     overlay.style.width = "100%"
-  //     overlay.style.height = "100%"
-  //     overlay.style.background = "rgba(0, 0, 0, 0.7)"
-  //     overlay.style.pointerEvents = "auto"
-  //     document.body.appendChild(overlay)
-  //     overlay.addEventListener("click", closeMobilePanels)
-  //   }
-
-  //   function showOverlay() {
-  //     if (!overlay) createOverlay()
-  //     overlay.classList.remove("closing")
-  //     // Forçando reflow para garantir que a animação funcione
-  //     overlay.offsetHeight
-  //   }
-
-  //   function hideOverlay() {
-  //     if (overlay) {
-  //       overlay.classList.add("closing")
-  //       setTimeout(() => {
-  //         // Removendo overlay do DOM após animação
-  //         if (overlay && overlay.parentNode) {
-  //           overlay.parentNode.removeChild(overlay)
-  //           overlay = null
-  //         }
-  //       }, 300)
-  //     }
-  //   }
-
-  //   function closeMobilePanels() {
-  //     if (filtersSidebar && filtersSidebar.classList.contains("mobile-active")) {
-  //       filtersSidebar.classList.add("mobile-closing")
-  //       setTimeout(() => {
-  //         filtersSidebar.classList.remove("mobile-active", "mobile-closing")
-  //         filtersSidebar.style.zIndex = ""
-  //       }, 300)
-  //     }
-
-  //     if (sortOptions && sortOptions.classList.contains("mobile-active")) {
-  //       sortOptions.classList.add("mobile-closing")
-  //       setTimeout(() => {
-  //         sortOptions.classList.remove("mobile-active", "mobile-closing")
-  //         sortOptions.style.zIndex = ""
-  //       }, 300)
-  //     }
-
-  //     hideOverlay()
-  //   }
-
-  //   // Evento para inputs de preço - aplicar em tempo real com debounce
-  //   if (minPriceInput) {
-  //     minPriceInput.addEventListener("input", function () {
-  //       const minPrice = this.value ? Number.parseFloat(this.value.replace(",", ".")) : null
-  //       filters.price.min = minPrice
-  //       debounceApplyFilters(500) // Delay maior para inputs de preço
-  //     })
-  //   }
-
-  //   if (maxPriceInput) {
-  //     maxPriceInput.addEventListener("input", function () {
-  //       const maxPrice = this.value ? Number.parseFloat(this.value.replace(",", ".")) : null
-  //       filters.price.max = maxPrice
-  //       debounceApplyFilters(500) // Delay maior para inputs de preço
-  //     })
-  //   }
-
-  //   // Manter o botão de aplicar preço para quem preferir clicar
-  //   if (applyPriceFilterBtn) {
-  //     applyPriceFilterBtn.addEventListener("click", () => {
-  //       const minPrice = minPriceInput.value ? Number.parseFloat(minPriceInput.value.replace(",", ".")) : null
-  //       const maxPrice = maxPriceInput.value ? Number.parseFloat(maxPriceInput.value.replace(",", ".")) : null
-  //       filters.price.min = minPrice
-  //       filters.price.max = maxPrice
-  //       filters.page = 1
-  //       applyFilters()
-  //     })
-  //   }
-
-  //   // Manter o botão aplicar filtros (agora pode ser usado para refresh manual)
-  //   if (applyFiltersBtn) {
-  //     applyFiltersBtn.addEventListener("click", () => {
-  //       filters.page = 1
-  //       applyFilters()
-  //     })
-  //   }
-
-  //   // Eventos para botões de visualização
-  //   viewButtons.forEach((button) => {
-  //     button.addEventListener("click", function () {
-  //       const view = this.getAttribute("data-view")
-  //       viewButtons.forEach((btn) => btn.classList.remove("active"))
-  //       this.classList.add("active")
-  //       if (view === "grid") {
-  //         productsGrid.classList.remove("list-view")
-  //         productsGrid.classList.add("grid-view")
-  //       } else {
-  //         productsGrid.classList.remove("grid-view")
-  //         productsGrid.classList.add("list-view")
-  //       }
-  //     })
-  //   })
-
-  //   if (mobileFilterBtn) {
-  //     mobileFilterBtn.addEventListener("click", () => {
-  //       // Fechar painel de ordenação se estiver aberto
-  //       if (sortOptions && sortOptions.classList.contains("mobile-active")) {
-  //         closeMobilePanels()
-  //         setTimeout(() => {
-  //           showOverlay()
-  //           if (filtersSidebar) {
-  //             filtersSidebar.style.zIndex = "1001"
-  //             filtersSidebar.classList.add("mobile-active")
-  //           }
-  //         }, 300)
-  //       } else {
-  //         showOverlay()
-  //         if (filtersSidebar) {
-  //           filtersSidebar.style.zIndex = "1001"
-  //           filtersSidebar.classList.add("mobile-active")
-  //         }
-  //       }
-  //     })
-  //   }
-
-  //   if (mobileSortBtn) {
-  //     mobileSortBtn.addEventListener("click", () => {
-  //       // Fechar painel de filtros se estiver aberto
-  //       if (filtersSidebar && filtersSidebar.classList.contains("mobile-active")) {
-  //         closeMobilePanels()
-  //         setTimeout(() => {
-  //           showOverlay()
-  //           if (sortOptions) {
-  //             sortOptions.style.zIndex = "1001"
-  //             sortOptions.classList.add("mobile-active")
-  //           }
-  //         }, 300)
-  //       } else {
-  //         showOverlay()
-  //         if (sortOptions) {
-  //           sortOptions.style.zIndex = "1001"
-  //           sortOptions.classList.add("mobile-active")
-  //         }
-  //       }
-  //     })
-  //   }
-
-  //   document.addEventListener("keydown", (event) => {
-  //     if (event.key === "Escape") {
-  //       closeMobilePanels()
-  //     }
-  //   })
-  // }
 
   // Aplicar filtros e buscar produtos da API
   async function applyFilters() {
@@ -832,7 +591,7 @@ document.addEventListener("DOMContentLoaded", () => {
       accessories: [],
       price: { min: null, max: null },
       page: 1,
-      pageSize: 20,
+      pageSize: 10, // alterado de 20 para 10 conforme solicitado
       name: "",
     }
 
@@ -907,19 +666,28 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const { currentPage, pageSize, totalItems, totalPages } = pagination
+
+    const startItem = (currentPage - 1) * pageSize + 1
+    const endItem = Math.min(currentPage * pageSize, totalItems)
+
     paginationContainer.innerHTML = `
-            <div class="pagination-pages">
-                ${Array.from({ length: totalPages }, (_, i) => i + 1)
-                  .map(
-                    (page) => `
-                    <button class="pagination-page ${page === currentPage ? "active" : ""}" data-page="${page}">${page}</button>
-                `,
-                  )
-                  .join("")}
-            </div>
-            <button class="pagination-btn" ${currentPage === 1 ? "disabled" : ""} data-action="prev">«</button>
-            <button class="pagination-btn" ${currentPage === totalPages ? "disabled" : ""} data-action="next">»</button>
-        `
+      <div class="pagination-info">
+        <span class="items-count">${startItem}-${endItem} de ${totalItems} produtos</span>
+      </div>
+      <div class="pagination-controls">
+        <button class="pagination-btn" ${currentPage === 1 ? "disabled" : ""} data-action="prev">«</button>
+        <div class="pagination-pages">
+          ${Array.from({ length: totalPages }, (_, i) => i + 1)
+            .map(
+              (page) => `
+              <button class="pagination-page ${page === currentPage ? "active" : ""}" data-page="${page}">${page}</button>
+          `,
+            )
+            .join("")}
+        </div>
+        <button class="pagination-btn" ${currentPage === totalPages ? "disabled" : ""} data-action="next">»</button>
+      </div>
+    `
 
     // Anexar eventos aos botões de paginação
     document.querySelectorAll(".pagination-page").forEach((button) => {
@@ -1003,20 +771,20 @@ document.addEventListener("DOMContentLoaded", () => {
     if (loadingIndicator) loadingIndicator.style.display = "none"
   }
 
-  // function showNotification(message, type) {
-  //   const existingNotification = document.querySelector(".notification")
-  //   if (existingNotification) existingNotification.remove()
+  function showNotification(message, type) {
+    const existingNotification = document.querySelector(".notification")
+    if (existingNotification) existingNotification.remove()
 
-  //   const notification = document.createElement("div")
-  //   notification.className = `notification ${type}`
-  //   notification.innerHTML = `<div class="notification-content"><i class="fas ${type === "success" ? "fa-check-circle" : type === "error" ? "fa-exclamation-circle" : "fa-info-circle"}"></i><span>${message}</span></div>`
-  //   document.body.appendChild(notification)
+    const notification = document.createElement("div")
+    notification.className = `notification ${type}`
+    notification.innerHTML = `<div class="notification-content"><i class="fas ${type === "success" ? "fa-check-circle" : type === "error" ? "fa-exclamation-circle" : "fa-info-circle"}"></i><span>${message}</span></div>`
+    document.body.appendChild(notification)
 
-  //   setTimeout(() => {
-  //     notification.classList.add("fade-out")
-  //     setTimeout(() => notification.remove(), 300)
-  //   }, 3000)
-  // }
+    setTimeout(() => {
+      notification.classList.add("fade-out")
+      setTimeout(() => notification.remove(), 300)
+    }, 3000)
+  }
 
   // Adicionar estilos para notificações
   if (!document.getElementById("notification-styles")) {

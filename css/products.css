@@ -237,13 +237,13 @@
 }
 
 .product-card {
-  display: flex;                  /* Torna o card um flex container vertical */
-  flex-direction: column;         /* Empilha imagem e info verticalmente */
+  display: flex; /* Torna o card um flex container vertical */
+  flex-direction: column; /* Empilha imagem e info verticalmente */
   justify-content: space-between; /* Distribui espaço, empurrando o fundo para baixo */
-  height: 100%;                   /* Garante que todos os cards tenham altura igual no grid */
-  min-height: 400px;              /* Altura mínima fixa para consistência (ajuste conforme necessário, baseado em h-48 + padding + conteúdo típico) */
-  max-width: 220px;               /* Mantém o max-width existente */
-  background: #1a1a1a;            /* Fundo escuro, como no CSS original */
+  height: 100%; /* Garante que todos os cards tenham altura igual no grid */
+  min-height: 400px; /* Altura mínima fixa para consistência (ajuste conforme necessário, baseado em h-48 + padding + conteúdo típico) */
+  max-width: 220px; /* Mantém o max-width existente */
+  background: #1a1a1a; /* Fundo escuro, como no CSS original */
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
@@ -251,48 +251,51 @@
   border: 1px solid rgba(255, 102, 0, 0.2);
 }
 
-.product-card .relative {         /* Seção da imagem */
-  flex: 0 0 auto;                 /* Não cresce, mantém altura fixa */
-  position: relative;             /* Mantém posicionamento relativo para badges */
+.product-card .relative {
+  /* Seção da imagem */
+  flex: 0 0 auto; /* Não cresce, mantém altura fixa */
+  position: relative; /* Mantém posicionamento relativo para badges */
 }
 
 .product-card .relative img {
   width: 100%;
-  height: 192px;                  /* Equivalente a h-48 no Tailwind, para consistência */
-  object-fit: cover;              /* Garante que imagens preencham sem distorção */
+  height: 192px; /* Equivalente a h-48 no Tailwind, para consistência */
+  object-fit: cover; /* Garante que imagens preencham sem distorção */
 }
 
-.product-card .p-4 {              /* Seção de info (ajuste a classe se não for exatamente 'p-4'; no JS é 'p-4') */
+.product-card .p-4 {
+  /* Seção de info (ajuste a classe se não for exatamente 'p-4'; no JS é 'p-4') */
   display: flex;
   flex-direction: column;
   justify-content: space-between; /* Empurra o botão para o fundo da seção */
-  flex: 1;                        /* Ocupa todo o espaço restante no card */
-  padding: 1rem;                  /* Padding consistente (equivalente a p-4 no Tailwind) */
+  flex: 1; /* Ocupa todo o espaço restante no card */
+  padding: 1rem; /* Padding consistente (equivalente a p-4 no Tailwind) */
 }
 
 .product-card .product-title {
   font-size: 0.9rem;
   line-height: 1.3;
-  margin-bottom: 0.5rem;          /* Espaçamento consistente */
-  overflow: hidden;               /* Previne overflow */
-  text-overflow: ellipsis;        /* Melhora o truncate */
-  white-space: nowrap;            /* Força uma linha só */
+  margin-bottom: 0.5rem; /* Espaçamento consistente */
+  overflow: hidden; /* Previne overflow */
+  text-overflow: ellipsis; /* Melhora o truncate */
+  white-space: nowrap; /* Força uma linha só */
 }
 
-.product-card .text-sm {          /* Marca do produto */
+.product-card .text-sm {
+  /* Marca do produto */
   font-size: 0.8rem;
-  margin-bottom: 0.75rem;         /* Espaçamento fixo para alinhar preços */
+  margin-bottom: 0.75rem; /* Espaçamento fixo para alinhar preços */
 }
 
 /* Ajustes para fixar o botão 'COMPRAR' no fundo do card */
 .product-card {
-  display: flex;                  /* Torna o card um flex container vertical */
-  flex-direction: column;         /* Empilha imagem e info verticalmente */
+  display: flex; /* Torna o card um flex container vertical */
+  flex-direction: column; /* Empilha imagem e info verticalmente */
   justify-content: space-between; /* Distribui espaço, empurrando o fundo para baixo */
-  height: 100%;                   /* Garante que todos os cards tenham altura igual no grid */
-  min-height: 400px;              /* Altura mínima fixa para consistência (ajuste conforme necessário, baseado em h-48 + padding + conteúdo típico) */
-  max-width: 220px;               /* Mantém o max-width existente */
-  background: #1a1a1a;            /* Fundo escuro, como no CSS original */
+  height: 100%; /* Garante que todos os cards tenham altura igual no grid */
+  min-height: 400px; /* Altura mínima fixa para consistência (ajuste conforme necessário, baseado em h-48 + padding + conteúdo típico) */
+  max-width: 220px; /* Mantém o max-width existente */
+  background: #1a1a1a; /* Fundo escuro, como no CSS original */
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
@@ -300,45 +303,50 @@
   border: 1px solid rgba(255, 102, 0, 0.2);
 }
 
-.product-card .relative {         /* Seção da imagem */
-  flex: 0 0 auto;                 /* Não cresce, mantém altura fixa */
-  position: relative;             /* Mantém posicionamento relativo para badges */
+.product-card .relative {
+  /* Seção da imagem */
+  flex: 0 0 auto; /* Não cresce, mantém altura fixa */
+  position: relative; /* Mantém posicionamento relativo para badges */
 }
 
 .product-card .relative img {
   width: 100%;
-  height: 192px;                  /* Equivalente a h-48 no Tailwind, para consistência */
-  object-fit: cover;              /* Garante que imagens preencham sem distorção */
+  height: 192px; /* Equivalente a h-48 no Tailwind, para consistência */
+  object-fit: cover; /* Garante que imagens preencham sem distorção */
 }
 
-.product-card .p-4 {              /* Seção de info (ajuste a classe se não for exatamente 'p-4'; no JS é 'p-4') */
+.product-card .p-4 {
+  /* Seção de info (ajuste a classe se não for exatamente 'p-4'; no JS é 'p-4') */
   display: flex;
   flex-direction: column;
   justify-content: space-between; /* Empurra o botão para o fundo da seção */
-  flex: 1;                        /* Ocupa todo o espaço restante no card */
-  padding: 1rem;                  /* Padding consistente (equivalente a p-4 no Tailwind) */
+  flex: 1; /* Ocupa todo o espaço restante no card */
+  padding: 1rem; /* Padding consistente (equivalente a p-4 no Tailwind) */
 }
 
 .product-card .product-title {
   font-size: 0.9rem;
   line-height: 1.3;
-  margin-bottom: 0.5rem;          /* Espaçamento consistente */
-  overflow: hidden;               /* Previne overflow */
-  text-overflow: ellipsis;        /* Melhora o truncate */
-  white-space: nowrap;            /* Força uma linha só */
+  margin-bottom: 0.5rem; /* Espaçamento consistente */
+  overflow: hidden; /* Previne overflow */
+  text-overflow: ellipsis; /* Melhora o truncate */
+  white-space: nowrap; /* Força uma linha só */
 }
 
-.product-card .text-sm {          /* Marca do produto */
+.product-card .text-sm {
+  /* Marca do produto */
   font-size: 0.8rem;
-  margin-bottom: 0.75rem;         /* Espaçamento fixo para alinhar preços */
+  margin-bottom: 0.75rem; /* Espaçamento fixo para alinhar preços */
 }
 
-.product-card .flex {             /* Container de preços */
-  margin-bottom: 1rem;            /* Espaçamento fixo antes do botão */
+.product-card .flex {
+  /* Container de preços */
+  margin-bottom: 1rem; /* Espaçamento fixo antes do botão */
 }
 
-.product-card .add-to-cart {      /* Botão 'COMPRAR' */
-  margin-top: auto;               /* Empurra para o fundo da seção flex */
+.product-card .add-to-cart {
+  /* Botão 'COMPRAR' */
+  margin-top: auto; /* Empurra para o fundo da seção flex */
   width: 100%;
   padding: 0.75rem;
   border: none;
@@ -527,10 +535,30 @@
 /* Paginação */
 .pagination {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+/* Adicionado estilo para informações de paginação */
+.pagination-info {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.items-count {
+  color: #ccc;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.pagination-controls {
+  display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  margin-top: 2rem;
 }
 
 .pagination-btn {
@@ -585,6 +613,33 @@
 
 .pagination-page:not(.active):hover {
   background: #333;
+}
+
+/* Responsividade para paginação */
+@media (max-width: 768px) {
+  .pagination {
+    gap: 0.75rem;
+  }
+
+  .pagination-controls {
+    flex-wrap: wrap;
+    gap: 0.25rem;
+  }
+
+  .pagination-pages {
+    gap: 0.25rem;
+  }
+
+  .pagination-btn,
+  .pagination-page {
+    width: 32px;
+    height: 32px;
+    font-size: 0.8rem;
+  }
+
+  .items-count {
+    font-size: 0.8rem;
+  }
 }
 
 /* Responsividade */
@@ -727,7 +782,6 @@
 }
 
 @media (max-width: 480px) {
-
   .container {
     padding-left: 1rem;
     padding-right: 1rem;
@@ -735,7 +789,6 @@
 }
 
 @media (max-width: 320px) {
-
   .container {
     padding-left: 0.5rem;
     padding-right: 0.5rem;
