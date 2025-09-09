@@ -153,7 +153,7 @@ async function handleLogin(event) {
 
   try {
     const response = await fetch(
-      "https://academialoja-production.up.railway.app/api/Auth/login",
+      "https://academialoja-production.up.railway.apphttps://academialoja-production.up.railway.app/api/Auth/login",
       {
         method: "POST",
         headers: {
@@ -242,17 +242,20 @@ async function handleRegister(event) {
   submitButton.disabled = true;
 
   try {
-    const response = await fetch("/api/Auth/create", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: formData.get("name"),
-        email: formData.get("email"),
-        password: formData.get("password"),
-      }),
-    });
+    const response = await fetch(
+      "https://academialoja-production.up.railway.app/api/Auth/create",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: formData.get("name"),
+          email: formData.get("email"),
+          password: formData.get("password"),
+        }),
+      }
+    );
 
     const data = await response.json();
 

@@ -2,167 +2,187 @@
 
 class CheckoutService {
   constructor() {
-    this.API_BASE_URL = "/api"
-    this.stripe = null
-    this.cardElement = null
-    this.cart = null
-    this.currentOrder = null
-    this.paymentIntent = null
-    this.currentUser = null
-    this.currentAddresses = []
-    this.editingAddressId = null
-    this.selectedAddressId = null
+    this.API_BASE_URL = "https://academialoja-production.up.railway.app/api";
+    this.stripe = null;
+    this.cardElement = null;
+    this.cart = null;
+    this.currentOrder = null;
+    this.paymentIntent = null;
+    this.currentUser = null;
+    this.currentAddresses = [];
+    this.editingAddressId = null;
+    this.selectedAddressId = null;
 
-    this.init()
+    this.init();
   }
 
   async init() {
     try {
       // Inicializar Stripe
-      this.stripe = Stripe("pk_test_51R7kMyQ3UBH6KXI9pei6vdGfFCpoHgJXddLYT71GH9n0PRaxcHBdq5vmNMOxiZvgR9cxDMfjJ4MMm7DJjO1E9NmG00vIJfQ2KX") // Substitua pela sua chave pública
+      this.stripe = Stripe(
+        "pk_test_51R7kMyQ3UBH6KXI9pei6vdGfFCpoHgJXddLYT71GH9n0PRaxcHBdq5vmNMOxiZvgR9cxDMfjJ4MMm7DJjO1E9NmG00vIJfQ2KX"
+      ); // Substitua pela sua chave pública
 
       // Carregar dados do usuário e do carrinho
-      await this.loadUserData()
-      await this.loadCartData()
+      await this.loadUserData();
+      await this.loadCartData();
 
       // Configurar interface
-      this.setupUI()
-      this.setupEventListeners()
+      this.setupUI();
+      this.setupEventListeners();
 
       // Configurar Stripe Elements
-      this.setupStripeElements()
+      this.setupStripeElements();
     } catch (error) {
-      console.error("Erro ao inicializar checkout:", error)
-      this.showNotification("Erro ao carregar página de checkout", "error")
+      console.error("Erro ao inicializar checkout:", error);
+      this.showNotification("Erro ao carregar página de checkout", "error");
     }
   }
 
   async loadUserData() {
     if (!window.authService?.getToken()) {
-      window.location.href = "/login.html"
-      return
+      window.location.href = "/login.html";
+      return;
     }
 
     try {
-      const userId = window.authService.getUserId()
+      const userId = window.authService.getUserId();
       const response = await fetch(`${this.API_BASE_URL}/Auth/get/${userId}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${window.authService.getToken()}`,
         },
-      })
+      });
 
       if (!response.ok) {
-        throw new Error("Erro ao carregar dados do usuário")
+        throw new Error("Erro ao carregar dados do usuário");
       }
 
-      const result = await response.json()
+      const result = await response.json();
       if (result.hasSuccess && result.value) {
-        this.currentUser = result.value
-        this.currentAddresses = result.value.user.addresses || []
-        this.renderAddresses()
+        this.currentUser = result.value;
+        this.currentAddresses = result.value.user.addresses || [];
+        this.renderAddresses();
       } else {
-        throw new Error(result.errors?.[0] || "Erro ao carregar dados do usuário")
+        throw new Error(
+          result.errors?.[0] || "Erro ao carregar dados do usuário"
+        );
       }
     } catch (error) {
-      console.error("Erro ao carregar dados do usuário:", error)
-      this.showNotification(error.message, "error")
+      console.error("Erro ao carregar dados do usuário:", error);
+      this.showNotification(error.message, "error");
     }
   }
 
   async loadCartData() {
     try {
-      this.showLoading(true)
+      this.showLoading(true);
 
       // Carregar carrinho do CartService
       if (window.cartService) {
-        await window.cartService.loadCart()
-        this.cart = window.cartService.getCart()
+        await window.cartService.loadCart();
+        this.cart = window.cartService.getCart();
       }
 
       if (!this.cart || !this.cart.items || this.cart.items.length === 0) {
-        this.showEmptyCart()
-        return
+        this.showEmptyCart();
+        return;
       }
 
       // Renderizar dados do carrinho
-      this.renderOrderSummary()
-      this.showCheckout()
+      this.renderOrderSummary();
+      this.showCheckout();
     } catch (error) {
-      console.error("Erro ao carregar carrinho:", error)
-      this.showNotification("Erro ao carregar dados do carrinho", "error")
+      console.error("Erro ao carregar carrinho:", error);
+      this.showNotification("Erro ao carregar dados do carrinho", "error");
     } finally {
-      this.showLoading(false)
+      this.showLoading(false);
     }
   }
 
   copyPixCode() {
     const pixCode = "https://cobranca.c6pix.com.br/01K34JG9NR8WZCDXN20R7A5BXK";
-    navigator.clipboard.writeText(pixCode).then(() => {
-      this.showNotification("Código PIX copiado para a área de transferência!", "success");
-    }).catch((err) => {
-      console.error("Erro ao copiar código PIX:", err);
-      this.showNotification("Erro ao copiar o código PIX.", "error");
-    });
+    navigator.clipboard
+      .writeText(pixCode)
+      .then(() => {
+        this.showNotification(
+          "Código PIX copiado para a área de transferência!",
+          "success"
+        );
+      })
+      .catch((err) => {
+        console.error("Erro ao copiar código PIX:", err);
+        this.showNotification("Erro ao copiar o código PIX.", "error");
+      });
   }
 
   setupUI() {
     // Configurar abas de pagamento
-    const paymentTabs = document.querySelectorAll(".payment-tab")
-    const paymentForms = document.querySelectorAll(".payment-form")
+    const paymentTabs = document.querySelectorAll(".payment-tab");
+    const paymentForms = document.querySelectorAll(".payment-form");
 
     paymentTabs.forEach((tab) => {
       tab.addEventListener("click", () => {
-        const method = tab.dataset.method
+        const method = tab.dataset.method;
 
         // Remover classe ativa
-        paymentTabs.forEach((t) => t.classList.remove("active"))
-        paymentForms.forEach((f) => f.classList.remove("active"))
+        paymentTabs.forEach((t) => t.classList.remove("active"));
+        paymentForms.forEach((f) => f.classList.remove("active"));
 
         // Adicionar classe ativa
-        tab.classList.add("active")
-        document.getElementById(`${method}-payment`).classList.add("active")
-      })
-    })
+        tab.classList.add("active");
+        document.getElementById(`${method}-payment`).classList.add("active");
+      });
+    });
   }
 
   setupEventListeners() {
     // Botão finalizar compra
-    const completeBtn = document.getElementById("complete-purchase")
+    const completeBtn = document.getElementById("complete-purchase");
     if (completeBtn) {
-      completeBtn.addEventListener("click", () => this.handleCompletePurchase())
+      completeBtn.addEventListener("click", () =>
+        this.handleCompletePurchase()
+      );
     }
 
     // Botões do modal de endereço
     document.getElementById("addAddressBtn").addEventListener("click", () => {
-      this.openAddressModal()
-    })
+      this.openAddressModal();
+    });
 
-    document.getElementById("closeAddressModal").addEventListener("click", () => this.closeAddressModal())
-    document.getElementById("cancelAddressBtn").addEventListener("click", () => this.closeAddressModal())
+    document
+      .getElementById("closeAddressModal")
+      .addEventListener("click", () => this.closeAddressModal());
+    document
+      .getElementById("cancelAddressBtn")
+      .addEventListener("click", () => this.closeAddressModal());
 
     // Fechar modal ao clicar no overlay
-    document.getElementById("addressModalOverlay").addEventListener("click", (e) => {
-      if (e.target === document.getElementById("addressModalOverlay")) {
-        this.closeAddressModal()
-      }
-    })
+    document
+      .getElementById("addressModalOverlay")
+      .addEventListener("click", (e) => {
+        if (e.target === document.getElementById("addressModalOverlay")) {
+          this.closeAddressModal();
+        }
+      });
 
     // Formulário de endereço
-    document.getElementById("addressForm").addEventListener("submit", async (e) => {
-      e.preventDefault()
-      const formData = new FormData(e.target)
-      const submitBtn = e.target.querySelector('button[type="submit"]')
+    document
+      .getElementById("addressForm")
+      .addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const submitBtn = e.target.querySelector('button[type="submit"]');
 
-      submitBtn.classList.add("loading")
-      await this.saveAddress(formData)
-      submitBtn.classList.remove("loading")
-    })
+        submitBtn.classList.add("loading");
+        await this.saveAddress(formData);
+        submitBtn.classList.remove("loading");
+      });
   }
 
   setupStripeElements() {
-    if (!this.stripe) return
+    if (!this.stripe) return;
 
     const elements = this.stripe.elements({
       appearance: {
@@ -177,7 +197,7 @@ class CheckoutService {
           borderRadius: "8px",
         },
       },
-    })
+    });
 
     // Criar elemento do cartão
     this.cardElement = elements.create("card", {
@@ -190,22 +210,22 @@ class CheckoutService {
           },
         },
       },
-    })
+    });
 
     // Montar elemento
-    const cardElementContainer = document.getElementById("card-element")
+    const cardElementContainer = document.getElementById("card-element");
     if (cardElementContainer) {
-      this.cardElement.mount("#card-element")
+      this.cardElement.mount("#card-element");
 
       // Escutar mudanças
       this.cardElement.on("change", (event) => {
-        const displayError = document.getElementById("card-errors")
+        const displayError = document.getElementById("card-errors");
         if (event.error) {
-          displayError.textContent = event.error.message
+          displayError.textContent = event.error.message;
         } else {
-          displayError.textContent = ""
+          displayError.textContent = "";
         }
-      })
+      });
     }
   }
 
@@ -213,105 +233,123 @@ class CheckoutService {
     try {
       // Validar seleção de endereço
       if (!this.selectedAddressId) {
-        this.showNotification("Por favor, selecione um endereço de entrega.", "error")
-        return
+        this.showNotification(
+          "Por favor, selecione um endereço de entrega.",
+          "error"
+        );
+        return;
       }
 
       // Desabilitar botão
-      const completeBtn = document.getElementById("complete-purchase")
-      completeBtn.disabled = true
-      completeBtn.classList.add("btn-loading")
+      const completeBtn = document.getElementById("complete-purchase");
+      completeBtn.disabled = true;
+      completeBtn.classList.add("btn-loading");
 
       // Criar pedido usando o CartService
-      await this.createOrderFromCart()
+      await this.createOrderFromCart();
 
       // Processar pagamento
-      const activePaymentMethod = document.querySelector(".payment-tab.active").dataset.method
+      const activePaymentMethod = document.querySelector(".payment-tab.active")
+        .dataset.method;
 
       if (activePaymentMethod === "card") {
-        await this.processCardPayment()
-      }
-       else if (activePaymentMethod === "pix") {
-        await this.processPixPayment()
+        await this.processCardPayment();
+      } else if (activePaymentMethod === "pix") {
+        await this.processPixPayment();
       }
     } catch (error) {
-      console.error("Erro ao finalizar compra:", error)
-      this.showNotification("Erro ao processar pagamento. Tente novamente.", "error")
+      console.error("Erro ao finalizar compra:", error);
+      this.showNotification(
+        "Erro ao processar pagamento. Tente novamente.",
+        "error"
+      );
     } finally {
       // Reabilitar botão
-      const completeBtn = document.getElementById("complete-purchase")
-      completeBtn.disabled = false
-      completeBtn.classList.remove("btn-loading")
+      const completeBtn = document.getElementById("complete-purchase");
+      completeBtn.disabled = false;
+      completeBtn.classList.remove("btn-loading");
     }
   }
 
   async createOrderFromCart() {
     try {
-      const shippingAddress = this.getShippingAddressObject()
+      const shippingAddress = this.getShippingAddressObject();
 
       // Verificar se o usuário está autenticado
       if (!window.authService?.getToken()) {
-        throw new Error("Você precisa estar logado para finalizar a compra")
+        throw new Error("Você precisa estar logado para finalizar a compra");
       }
 
-      const token = window.authService.getToken()
+      const token = window.authService.getToken();
 
       // Usar o CartService para converter carrinho em pedido
       const response = await fetch(`${this.API_BASE_URL}/Cart/checkout`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(shippingAddress),
-      })
+      });
 
       if (!response.ok) {
         const errorText = await response.text();
-        console.error("Erro na resposta do servidor:", response.status, response.statusText, errorText);
-        
+        console.error(
+          "Erro na resposta do servidor:",
+          response.status,
+          response.statusText,
+          errorText
+        );
+
         if (response.status === 401) {
           throw new Error("Sessão expirada. Por favor, faça login novamente.");
         }
-        
-        throw new Error(`O servidor respondeu com um erro (${response.status}). Veja o console para detalhes.`);
+
+        throw new Error(
+          `O servidor respondeu com um erro (${response.status}). Veja o console para detalhes.`
+        );
       }
 
-      const result = await response.json()
+      const result = await response.json();
 
       if (!result.hasSuccess) {
-        throw new Error(result.errors?.[0] || "Erro ao criar pedido")
+        throw new Error(result.errors?.[0] || "Erro ao criar pedido");
       }
 
-      this.currentOrder = { orderId: result.value }
+      this.currentOrder = { orderId: result.value };
     } catch (error) {
-      console.error("Erro ao criar pedido:", error)
-      throw error
+      console.error("Erro ao criar pedido:", error);
+      throw error;
     }
   }
 
   async processCardPayment() {
     try {
       // 1. Criar payment intent no backend
-      const createResponse = await fetch(`${this.API_BASE_URL}/Payment/create/${this.currentOrder.orderId}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${window.authService?.getToken()}`,
-        },
-      });
+      const createResponse = await fetch(
+        `${this.API_BASE_URL}/Payment/create/${this.currentOrder.orderId}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${window.authService?.getToken()}`,
+          },
+        }
+      );
 
       const createResult = await createResponse.json();
 
       if (!createResponse.ok || !createResult.hasSuccess) {
-        throw new Error(createResult.errors?.[0] || "Erro ao criar intenção de pagamento");
+        throw new Error(
+          createResult.errors?.[0] || "Erro ao criar intenção de pagamento"
+        );
       }
 
       this.paymentIntent = createResult.value;
 
       // 2. Criar PaymentMethod no frontend com Stripe.js
       const { error, paymentMethod } = await this.stripe.createPaymentMethod({
-        type: 'card',
+        type: "card",
         card: this.cardElement,
         billing_details: {
           name: this.currentUser.user.userName,
@@ -324,37 +362,47 @@ class CheckoutService {
       }
 
       // 3. Confirmar o pagamento no backend
-      const confirmResponse = await fetch(`${this.API_BASE_URL}/Payment/confirm`, {
+      const confirmResponse = await fetch(
+        `${this.API_BASE_URL}/Payment/confirm`,
+        {
           method: "POST",
           headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${window.authService?.getToken()}`,
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${window.authService?.getToken()}`,
           },
           body: JSON.stringify({
-              paymentIntentId: this.paymentIntent.transactionId,
-              paymentMethodId: paymentMethod.id,
+            paymentIntentId: this.paymentIntent.transactionId,
+            paymentMethodId: paymentMethod.id,
           }),
-      });
+        }
+      );
 
       const confirmResult = await confirmResponse.json();
 
       if (!confirmResponse.ok || !confirmResult.hasSuccess) {
-          throw new Error(confirmResult?.errors?.[0] || "Erro ao confirmar o pagamento.");
+        throw new Error(
+          confirmResult?.errors?.[0] || "Erro ao confirmar o pagamento."
+        );
       }
 
       // 4. Verificar o pagamento no backend
-      const verifyResponse = await fetch(`${this.API_BASE_URL}/Payment/verify/${this.paymentIntent.paymentId}`, {
+      const verifyResponse = await fetch(
+        `${this.API_BASE_URL}/Payment/verify/${this.paymentIntent.paymentId}`,
+        {
           method: "GET",
           headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${window.authService?.getToken()}`,
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${window.authService?.getToken()}`,
           },
-      });
+        }
+      );
 
       const verifyResult = await verifyResponse.json();
 
       if (!verifyResponse.ok || !verifyResult.hasSuccess) {
-          throw new Error(verifyResult.errors?.[0] || "Erro ao verificar o pagamento.");
+        throw new Error(
+          verifyResult.errors?.[0] || "Erro ao verificar o pagamento."
+        );
       }
 
       // 5. Sucesso
@@ -367,7 +415,6 @@ class CheckoutService {
       setTimeout(() => {
         window.location.href = `/dashboard.html`;
       }, 2000);
-
     } catch (error) {
       console.error("Erro no pagamento com cartão:", error);
       this.showNotification(error.message, "error");
@@ -393,22 +440,28 @@ class CheckoutService {
 
       // this.paymentIntent = result.value
 
-      this.showNotification("Pedido criado! Redirecionando para pagamento PIX...", "success")
+      this.showNotification(
+        "Pedido criado! Redirecionando para pagamento PIX...",
+        "success"
+      );
 
       // Redirecionar para página de PIX
       setTimeout(() => {
-        window.location.href = `/order-details.html?id=${this.currentOrder.orderId}`
-      }, 2000)
+        window.location.href = `/order-details.html?id=${this.currentOrder.orderId}`;
+      }, 2000);
     } catch (error) {
-      console.error("Erro no pagamento PIX:", error)
-      throw error
+      console.error("Erro no pagamento PIX:", error);
+      throw error;
     }
   }
 
   getShippingAddressObject() {
-    const activePaymentMethod = document.querySelector(".payment-tab.active").dataset.method
-    const selectedAddress = this.currentAddresses.find(addr => addr.id === this.selectedAddressId)
-    if (!selectedAddress) return null
+    const activePaymentMethod = document.querySelector(".payment-tab.active")
+      .dataset.method;
+    const selectedAddress = this.currentAddresses.find(
+      (addr) => addr.id === this.selectedAddressId
+    );
+    if (!selectedAddress) return null;
 
     return {
       Id: selectedAddress.id,
@@ -420,36 +473,42 @@ class CheckoutService {
       Neighborhood: selectedAddress.neighborhood,
       City: selectedAddress.city,
       State: selectedAddress.state,
-      PaymentMethod: activePaymentMethod
-    }
+      PaymentMethod: activePaymentMethod,
+    };
   }
 
   renderAddresses() {
-    const addressesContainer = document.getElementById("addresses-container")
-    const emptyAddresses = document.getElementById("empty-addresses")
+    const addressesContainer = document.getElementById("addresses-container");
+    const emptyAddresses = document.getElementById("empty-addresses");
 
     if (!this.currentAddresses || this.currentAddresses.length === 0) {
-      addressesContainer.style.display = "none"
-      emptyAddresses.style.display = "flex"
-      return
+      addressesContainer.style.display = "none";
+      emptyAddresses.style.display = "flex";
+      return;
     }
 
-    addressesContainer.style.display = "grid"
-    emptyAddresses.style.display = "none"
+    addressesContainer.style.display = "grid";
+    emptyAddresses.style.display = "none";
 
     addressesContainer.innerHTML = this.currentAddresses
       .map(
         (address) => `
-        <div class="address-card ${address.mainAddress ? 'main-address' : ''} ${this.selectedAddressId === address.id ? 'selected' : ''}" data-address-id="${address.id}">
+        <div class="address-card ${address.mainAddress ? "main-address" : ""} ${
+          this.selectedAddressId === address.id ? "selected" : ""
+        }" data-address-id="${address.id}">
             <div class="address-header">
                 <div class="address-icon">
                     <i class="fas fa-map-marker-alt"></i>
                 </div>
                 <div class="address-actions">
-                    <button class="btn-icon" onclick="checkoutService.editAddress('${address.id}')" title="Editar">
+                    <button class="btn-icon" onclick="checkoutService.editAddress('${
+                      address.id
+                    }')" title="Editar">
                         <i class="fas fa-edit"></i>
                     </button>
-                    <button class="btn-icon btn-danger" onclick="checkoutService.deleteAddress('${address.id}')" title="Excluir">
+                    <button class="btn-icon btn-danger" onclick="checkoutService.deleteAddress('${
+                      address.id
+                    }')" title="Excluir">
                         <i class="fas fa-trash"></i>
                     </button>
                 </div>
@@ -457,7 +516,11 @@ class CheckoutService {
             <div class="address-content">
                 <div class="address-main">
                     <strong>${address.street}, ${address.number}</strong>
-                    ${address.complement ? `<span class="complement">${address.complement}</span>` : ""}
+                    ${
+                      address.complement
+                        ? `<span class="complement">${address.complement}</span>`
+                        : ""
+                    }
                 </div>
                 <div class="address-details">
                     <span>${address.neighborhood}</span>
@@ -465,101 +528,116 @@ class CheckoutService {
                     <span>CEP: ${this.formatZipCode(address.zipCode)}</span>
                 </div>
             </div>
-            <button class="btn btn-primary btn-select-address" onclick="checkoutService.selectAddress('${address.id}')">
-                ${this.selectedAddressId === address.id ? '<i class="fas fa-check-circle"></i> Endereço Selecionado' : 'Usar este Endereço'}
+            <button class="btn btn-primary btn-select-address" onclick="checkoutService.selectAddress('${
+              address.id
+            }')">
+                ${
+                  this.selectedAddressId === address.id
+                    ? '<i class="fas fa-check-circle"></i> Endereço Selecionado'
+                    : "Usar este Endereço"
+                }
             </button>
         </div>
-    `,
+    `
       )
-      .join("")
+      .join("");
   }
 
   selectAddress(addressId) {
-    this.selectedAddressId = addressId
-    this.renderAddresses()
+    this.selectedAddressId = addressId;
+    this.renderAddresses();
   }
 
   editAddress(addressId) {
-    this.openAddressModal(addressId)
+    this.openAddressModal(addressId);
   }
 
   async deleteAddress(addressId) {
     if (!confirm("Tem certeza que deseja excluir este endereço?")) {
-      return
+      return;
     }
 
     try {
-      const updatedAddresses = this.currentAddresses.filter((addr) => addr.id !== addressId)
+      const updatedAddresses = this.currentAddresses.filter(
+        (addr) => addr.id !== addressId
+      );
 
       const updateData = {
         id: this.currentUser.user.id,
         addresses: updatedAddresses,
-      }
+      };
 
-      const response = await fetch(`${this.API_BASE_URL}/Auth/update?id=${this.currentUser.user.id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${window.authService.getToken()}`,
-        },
-        body: JSON.stringify(updateData),
-      })
+      const response = await fetch(
+        `${this.API_BASE_URL}/Auth/update?id=${this.currentUser.user.id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${window.authService.getToken()}`,
+          },
+          body: JSON.stringify(updateData),
+        }
+      );
 
       if (!response.ok) {
-        throw new Error("Erro ao excluir endereço")
+        throw new Error("Erro ao excluir endereço");
       }
 
-      const result = await response.json()
+      const result = await response.json();
 
       if (result.hasSuccess) {
-        this.currentAddresses = result.value.user.addresses || []
-        this.renderAddresses()
-        this.showNotification("Endereço excluído com sucesso!", "success")
+        this.currentAddresses = result.value.user.addresses || [];
+        this.renderAddresses();
+        this.showNotification("Endereço excluído com sucesso!", "success");
       } else {
-        throw new Error(result.errors?.[0] || "Erro ao excluir endereço")
+        throw new Error(result.errors?.[0] || "Erro ao excluir endereço");
       }
     } catch (error) {
-      console.error("Erro ao excluir endereço:", error)
-      this.showNotification(error.message, "error")
+      console.error("Erro ao excluir endereço:", error);
+      this.showNotification(error.message, "error");
     }
   }
 
   openAddressModal(addressId = null) {
-    this.editingAddressId = addressId
-    const addressModalTitle = document.getElementById("addressModalTitle")
-    const addressForm = document.getElementById("addressForm")
-    const addressIdInput = document.getElementById("addressId")
-    const mainAddressCheckbox = document.getElementById("mainAddress")
+    this.editingAddressId = addressId;
+    const addressModalTitle = document.getElementById("addressModalTitle");
+    const addressForm = document.getElementById("addressForm");
+    const addressIdInput = document.getElementById("addressId");
+    const mainAddressCheckbox = document.getElementById("mainAddress");
 
     if (addressId) {
-      const address = this.currentAddresses.find((addr) => addr.id === addressId)
+      const address = this.currentAddresses.find(
+        (addr) => addr.id === addressId
+      );
       if (address) {
-        addressModalTitle.textContent = "Editar Endereço"
-        addressIdInput.value = address.id
-        document.getElementById("zipCode").value = this.formatZipCode(address.zipCode)
-        document.getElementById("street").value = address.street
-        document.getElementById("number").value = address.number
-        document.getElementById("complement").value = address.complement || ""
-        document.getElementById("neighborhood").value = address.neighborhood
-        document.getElementById("city").value = address.city
-        document.getElementById("state").value = address.state.toString()
-        mainAddressCheckbox.checked = address.mainAddress
+        addressModalTitle.textContent = "Editar Endereço";
+        addressIdInput.value = address.id;
+        document.getElementById("zipCode").value = this.formatZipCode(
+          address.zipCode
+        );
+        document.getElementById("street").value = address.street;
+        document.getElementById("number").value = address.number;
+        document.getElementById("complement").value = address.complement || "";
+        document.getElementById("neighborhood").value = address.neighborhood;
+        document.getElementById("city").value = address.city;
+        document.getElementById("state").value = address.state.toString();
+        mainAddressCheckbox.checked = address.mainAddress;
       }
     } else {
-      addressModalTitle.textContent = "Adicionar Endereço"
-      addressForm.reset()
-      addressIdInput.value = ""
+      addressModalTitle.textContent = "Adicionar Endereço";
+      addressForm.reset();
+      addressIdInput.value = "";
     }
 
-    document.getElementById("addressModalOverlay").style.display = "flex"
-    document.body.style.overflow = "hidden"
+    document.getElementById("addressModalOverlay").style.display = "flex";
+    document.body.style.overflow = "hidden";
   }
 
   closeAddressModal() {
-    document.getElementById("addressModalOverlay").style.display = "none"
-    document.body.style.overflow = "auto"
-    this.editingAddressId = null
-    document.getElementById("addressForm").reset()
+    document.getElementById("addressModalOverlay").style.display = "none";
+    document.body.style.overflow = "auto";
+    this.editingAddressId = null;
+    document.getElementById("addressForm").reset();
   }
 
   async saveAddress(formData) {
@@ -575,62 +653,72 @@ class CheckoutService {
         number: formData.get("number"),
         complement: formData.get("complement") || "",
         mainAddress: formData.get("mainAddress") === "on",
-      }
+      };
 
-      let updatedAddresses
+      let updatedAddresses;
       if (this.editingAddressId) {
-        updatedAddresses = this.currentAddresses.map((addr) => (addr.id === this.editingAddressId ? addressData : addr))
+        updatedAddresses = this.currentAddresses.map((addr) =>
+          addr.id === this.editingAddressId ? addressData : addr
+        );
       } else {
-        updatedAddresses = [...this.currentAddresses, addressData]
+        updatedAddresses = [...this.currentAddresses, addressData];
       }
 
       const updateData = {
         id: this.currentUser.user.id,
         addresses: updatedAddresses,
-      }
+      };
 
-      const response = await fetch(`${this.API_BASE_URL}/Auth/update?id=${this.currentUser.user.id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${window.authService.getToken()}`,
-        },
-        body: JSON.stringify(updateData),
-      })
+      const response = await fetch(
+        `${this.API_BASE_URL}/Auth/update?id=${this.currentUser.user.id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${window.authService.getToken()}`,
+          },
+          body: JSON.stringify(updateData),
+        }
+      );
 
       if (!response.ok) {
-        throw new Error("Erro ao salvar endereço")
+        throw new Error("Erro ao salvar endereço");
       }
 
-      const result = await response.json()
+      const result = await response.json();
 
       if (result.hasSuccess) {
-        this.currentAddresses = result.value.user.addresses || []
-        this.renderAddresses()
-        this.closeAddressModal()
-        this.showNotification(this.editingAddressId ? "Endereço atualizado com sucesso!" : "Endereço adicionado com sucesso!", "success")
+        this.currentAddresses = result.value.user.addresses || [];
+        this.renderAddresses();
+        this.closeAddressModal();
+        this.showNotification(
+          this.editingAddressId
+            ? "Endereço atualizado com sucesso!"
+            : "Endereço adicionado com sucesso!",
+          "success"
+        );
       } else {
-        throw new Error(result.errors?.[0] || "Erro ao salvar endereço")
+        throw new Error(result.errors?.[0] || "Erro ao salvar endereço");
       }
     } catch (error) {
-      console.error("Erro ao salvar endereço:", error)
-      this.showNotification(error.message, "error")
+      console.error("Erro ao salvar endereço:", error);
+      this.showNotification(error.message, "error");
     }
   }
 
   renderOrderSummary() {
-    const summaryItems = document.getElementById("summary-items")
-    const subtotalAmount = document.getElementById("subtotal-amount")
-    const totalAmount = document.getElementById("total-amount")
+    const summaryItems = document.getElementById("summary-items");
+    const subtotalAmount = document.getElementById("subtotal-amount");
+    const totalAmount = document.getElementById("total-amount");
 
-    if (!summaryItems || !this.cart) return
+    if (!summaryItems || !this.cart) return;
 
     // Renderizar itens
-    summaryItems.innerHTML = ""
+    summaryItems.innerHTML = "";
 
     this.cart.items.forEach((item) => {
-      const itemElement = document.createElement("div")
-      itemElement.className = "summary-item"
+      const itemElement = document.createElement("div");
+      itemElement.className = "summary-item";
       itemElement.innerHTML = `
         <div class="item-image">
           <img src="${item.productImage}" 
@@ -638,23 +726,33 @@ class CheckoutService {
         </div>
         <div class="item-details">
           <div class="item-name">${item.productName}</div>
-          ${item.flavor && item.flavor !== "Sem sabor" ? `<div class="item-variant">Sabor: ${item.flavor}</div>` : ""}
+          ${
+            item.flavor && item.flavor !== "Sem sabor"
+              ? `<div class="item-variant">Sabor: ${item.flavor}</div>`
+              : ""
+          }
           <div class="item-price">
             <span class="item-quantity">${item.quantity}x</span>
-            <span class="item-amount">R$ ${item.totalPrice.toFixed(2).replace(".", ",")}</span>
+            <span class="item-amount">R$ ${item.totalPrice
+              .toFixed(2)
+              .replace(".", ",")}</span>
           </div>
         </div>
-      `
-      summaryItems.appendChild(itemElement)
-    })
+      `;
+      summaryItems.appendChild(itemElement);
+    });
 
     // Atualizar totais
     if (subtotalAmount) {
-      subtotalAmount.textContent = `R$ ${this.cart.totalAmount.toFixed(2).replace(".", ",")}`
+      subtotalAmount.textContent = `R$ ${this.cart.totalAmount
+        .toFixed(2)
+        .replace(".", ",")}`;
     }
 
     if (totalAmount) {
-      totalAmount.textContent = `R$ ${this.cart.totalAmount.toFixed(2).replace(".", ",")}`
+      totalAmount.textContent = `R$ ${this.cart.totalAmount
+        .toFixed(2)
+        .replace(".", ",")}`;
     }
   }
 
@@ -669,51 +767,51 @@ class CheckoutService {
   // }
 
   formatZipCode(zipCode) {
-    if (!zipCode) return ""
-    return zipCode.replace(/(\d{5})(\d{3})/, "$1-$2")
+    if (!zipCode) return "";
+    return zipCode.replace(/(\d{5})(\d{3})/, "$1-$2");
   }
 
   showLoading(show) {
-    const loading = document.getElementById("checkout-loading")
-    const container = document.getElementById("checkout-container")
+    const loading = document.getElementById("checkout-loading");
+    const container = document.getElementById("checkout-container");
 
     if (show) {
-      loading.style.display = "flex"
-      container.style.display = "none"
+      loading.style.display = "flex";
+      container.style.display = "none";
     } else {
-      loading.style.display = "none"
-      container.style.display = "block"
+      loading.style.display = "none";
+      container.style.display = "block";
     }
   }
 
   showCheckout() {
-    document.getElementById("checkout-container").style.display = "block"
-    document.getElementById("empty-cart").style.display = "none"
+    document.getElementById("checkout-container").style.display = "block";
+    document.getElementById("empty-cart").style.display = "none";
   }
 
   showEmptyCart() {
-    document.getElementById("checkout-container").style.display = "none"
-    document.getElementById("empty-cart").style.display = "flex"
+    document.getElementById("checkout-container").style.display = "none";
+    document.getElementById("empty-cart").style.display = "flex";
   }
 
   showNotification(message, type = "info") {
     // Remover notificação existente
-    const existing = document.querySelector(".checkout-notification")
+    const existing = document.querySelector(".checkout-notification");
     if (existing) {
-      existing.remove()
+      existing.remove();
     }
 
     // Criar nova notificação
-    const notification = document.createElement("div")
-    notification.className = `checkout-notification ${type}`
-    notification.textContent = message
+    const notification = document.createElement("div");
+    notification.className = `checkout-notification ${type}`;
+    notification.textContent = message;
 
-    document.body.appendChild(notification)
+    document.body.appendChild(notification);
 
     // Remover após 5 segundos
     setTimeout(() => {
-      notification.remove()
-    }, 5000)
+      notification.remove();
+    }, 5000);
   }
 }
 
@@ -722,11 +820,11 @@ document.addEventListener("DOMContentLoaded", () => {
   // Aguardar serviços estarem disponíveis
   function waitForServices() {
     if (window.authService && window.cartService) {
-      window.checkoutService = new CheckoutService()
+      window.checkoutService = new CheckoutService();
     } else {
-      setTimeout(waitForServices, 100)
+      setTimeout(waitForServices, 100);
     }
   }
 
-  waitForServices()
-})
+  waitForServices();
+});

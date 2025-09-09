@@ -1,15 +1,15 @@
 // Configuração da API
-const API_BASE_URL = "/api"
+const API_BASE_URL = "https://academialoja-production.up.railway.app/api";
 
 document.addEventListener("DOMContentLoaded", () => {
-  const forgotPasswordLink = document.querySelector(".forgot-password")
-  const loginForm = document.getElementById("loginForm")
+  const forgotPasswordLink = document.querySelector(".forgot-password");
+  const loginForm = document.getElementById("loginForm");
 
   if (forgotPasswordLink) {
     forgotPasswordLink.addEventListener("click", (e) => {
-      e.preventDefault()
-      openForgotPasswordModal()
-    })
+      e.preventDefault();
+      openForgotPasswordModal();
+    });
   }
 
   function openForgotPasswordModal() {
@@ -28,105 +28,109 @@ document.addEventListener("DOMContentLoaded", () => {
                     </form>
                 </div>
             </div>
-        `
+        `;
 
-    document.body.insertAdjacentHTML("beforeend", modalHTML)
+    document.body.insertAdjacentHTML("beforeend", modalHTML);
 
-    const modal = document.getElementById("forgotPasswordModal")
-    const closeModal = document.getElementById("closeModal")
-    const forgotPasswordForm = document.getElementById("forgotPasswordForm")
+    const modal = document.getElementById("forgotPasswordModal");
+    const closeModal = document.getElementById("closeModal");
+    const forgotPasswordForm = document.getElementById("forgotPasswordForm");
 
-    closeModal.addEventListener("click", () => modal.remove())
+    closeModal.addEventListener("click", () => modal.remove());
     modal.addEventListener("click", (e) => {
       if (e.target === modal) {
-        modal.remove()
+        modal.remove();
       }
-    })
+    });
 
     forgotPasswordForm.addEventListener("submit", async (e) => {
-      e.preventDefault()
-      const email = forgotPasswordForm.email.value
+      e.preventDefault();
+      const email = forgotPasswordForm.email.value;
       try {
-        const response = await fetch(`${API_BASE_URL}/Auth/forgout-password?email=${email}`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(email),
-        })
+        const response = await fetch(
+          `${API_BASE_URL}/Auth/forgout-password?email=${email}`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(email),
+          }
+        );
 
         if (response.ok) {
-          alert("E-mail de redefinição de senha enviado com sucesso!")
-          modal.remove()
+          alert("E-mail de redefinição de senha enviado com sucesso!");
+          modal.remove();
         } else {
-          alert("Erro ao enviar e-mail de redefinição de senha.")
+          alert("Erro ao enviar e-mail de redefinição de senha.");
         }
       } catch (error) {
-        console.error("Erro:", error)
-        alert("Ocorreu um erro. Tente novamente mais tarde.")
+        console.error("Erro:", error);
+        alert("Ocorreu um erro. Tente novamente mais tarde.");
       }
-    })
+    });
   }
 
   // MODIFICAÇÃO: Lógica para a página de redefinição de senha
-  const resetPasswordForm = document.getElementById("resetPasswordForm")
+  const resetPasswordForm = document.getElementById("resetPasswordForm");
   if (resetPasswordForm) {
     // Funcionalidade de mostrar/ocultar senha
-    const togglePasswordButtons = document.querySelectorAll(".toggle-password")
+    const togglePasswordButtons = document.querySelectorAll(".toggle-password");
     togglePasswordButtons.forEach((button) => {
       button.addEventListener("click", () => {
-        const passwordInput = button.previousElementSibling
-        const icon = button.querySelector("i")
+        const passwordInput = button.previousElementSibling;
+        const icon = button.querySelector("i");
         if (passwordInput.type === "password") {
-          passwordInput.type = "text"
-          icon.classList.remove("fa-eye")
-          icon.classList.add("fa-eye-slash")
+          passwordInput.type = "text";
+          icon.classList.remove("fa-eye");
+          icon.classList.add("fa-eye-slash");
         } else {
-          passwordInput.type = "password"
-          icon.classList.remove("fa-eye-slash")
-          icon.classList.add("fa-eye")
+          passwordInput.type = "password";
+          icon.classList.remove("fa-eye-slash");
+          icon.classList.add("fa-eye");
         }
-      })
-    })
+      });
+    });
 
     // MODIFICAÇÃO: Extrair email da URL e validar
-    const urlParams = new URLSearchParams(window.location.search)
-    const userEmail = urlParams.get("email")
+    const urlParams = new URLSearchParams(window.location.search);
+    const userEmail = urlParams.get("email");
 
     if (!userEmail) {
-      alert("Link de redefinição inválido. O email não foi encontrado na URL.")
-      window.location.href = "login.html"
-      return
+      alert("Link de redefinição inválido. O email não foi encontrado na URL.");
+      window.location.href = "login.html";
+      return;
     }
 
     // Mostrar o email na interface (opcional)
-    const emailDisplay = document.createElement("p")
-    emailDisplay.style.cssText = "color: #666; font-size: 14px; margin-bottom: 20px; text-align: center;"
-    emailDisplay.textContent = `Redefinindo senha para: ${userEmail}`
-    resetPasswordForm.insertBefore(emailDisplay, resetPasswordForm.firstChild)
+    const emailDisplay = document.createElement("p");
+    emailDisplay.style.cssText =
+      "color: #666; font-size: 14px; margin-bottom: 20px; text-align: center;";
+    emailDisplay.textContent = `Redefinindo senha para: ${userEmail}`;
+    resetPasswordForm.insertBefore(emailDisplay, resetPasswordForm.firstChild);
 
     resetPasswordForm.addEventListener("submit", async (e) => {
-      e.preventDefault()
+      e.preventDefault();
 
-      const password = resetPasswordForm.password.value
-      const confirmPassword = resetPasswordForm.confirmPassword.value
+      const password = resetPasswordForm.password.value;
+      const confirmPassword = resetPasswordForm.confirmPassword.value;
 
       if (password !== confirmPassword) {
-        alert("As senhas não coincidem.")
-        return
+        alert("As senhas não coincidem.");
+        return;
       }
 
       // Validação básica de senha
       if (password.length < 6) {
-        alert("A senha deve ter pelo menos 6 caracteres.")
-        return
+        alert("A senha deve ter pelo menos 6 caracteres.");
+        return;
       }
 
       const requestBody = {
         email: userEmail, // Usar o email da URL
         password: password,
         isPasswordRecovery: true, // Indicar que é recuperação de senha
-      }
+      };
 
       try {
         // MODIFICAÇÃO: Chamar a API sem ID (será null)
@@ -136,19 +140,25 @@ document.addEventListener("DOMContentLoaded", () => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(requestBody),
-        })
+        });
 
         if (response.ok) {
-          alert("Senha redefinida com sucesso! Você será redirecionado para a página de login.")
-          window.location.href = "login.html"
+          alert(
+            "Senha redefinida com sucesso! Você será redirecionado para a página de login."
+          );
+          window.location.href = "login.html";
         } else {
-          const errorData = await response.json()
-          alert(`Erro ao redefinir a senha: ${errorData.message || "Tente novamente."}`)
+          const errorData = await response.json();
+          alert(
+            `Erro ao redefinir a senha: ${
+              errorData.message || "Tente novamente."
+            }`
+          );
         }
       } catch (error) {
-        console.error("Erro ao redefinir a senha:", error)
-        alert("Ocorreu um erro de conexão. Tente novamente mais tarde.")
+        console.error("Erro ao redefinir a senha:", error);
+        alert("Ocorreu um erro de conexão. Tente novamente mais tarde.");
       }
-    })
+    });
   }
-})
+});
