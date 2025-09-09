@@ -153,7 +153,7 @@ async function handleLogin(event) {
 
   try {
     const response = await fetch(
-      "https://academialoja-production.up.railway.apphttps://academialoja-production.up.railway.app/api/Auth/login",
+      "https://academialoja-production.up.railway.app/api/Auth/login",
       {
         method: "POST",
         headers: {
